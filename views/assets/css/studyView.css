@@ -290,3 +290,74 @@ button.comment-input-button {
 ul.comment-list {
     width: 100%;
 }
+
+li.comment {
+    display: flex;
+    flex-direction: column;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid #e1e1e1;
+}
+
+section.comment-info-wrap {
+    display: flex;
+    justify-content: space-between;
+}
+
+div.comment-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+div.comment-info img {
+    display: block;
+    width: 52px;
+    height: 52px;
+    margin-right: 16px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+div.comment-title-wrap, div.comment-title {
+    display: flex;
+    flex-direction: column;
+}
+
+div.comment-user {
+    color: #333;
+    font-weight: 700;
+}
+
+div.comment-registered-date {
+    font-size: 14px;
+    line-height: 126.5%;
+    letter-spacing: -.005em;
+    color: #9f9f9f;
+}
+
+section.comment-button-wrap {
+    display: flex;
+    justify-content: flex-end;
+}
+
+button.comment-button {
+    font-size: 16px;
+    color: #444;
+}
+
+section.comment-content-wrap {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    letter-spacing: -.004em;
+    word-break: break-all;
+    overflow-wrap: break-word;
+}
+
+p.comment-content {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    letter-spacing: -.004em;
+    word-break: break-all;
+    overflow-wrap: break-word;
+}
