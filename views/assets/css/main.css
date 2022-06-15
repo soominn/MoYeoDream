@@ -55,10 +55,57 @@ header{
     cursor: pointer;
 }
 
+.headerNoti{
+    position: relative;
+}
+
 .headerNoti img{
     height : 25px;
     padding-top: 3px;
     cursor: pointer;
+}
+
+.notiHidden{
+    display : none;
+    position: absolute;
+    width : 350px;
+    height : 480px;
+    background-color: white;
+    box-shadow: 0 5px 25px rgb(0 0 0 / 15%);
+    top: 45px;
+    left: -325px;
+    overflow-y: scroll;
+}
+
+.notiBoxTop{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #d7e2eb;
+}
+
+.notiText{
+    display: inline-block;
+    margin: 0;
+    margin-left: 20px;
+}
+
+.notiHidden p{
+    display: inline-block;
+}
+
+.notiXbtn{
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.notiXbtn:hover{
+    background-color: rgb(0 0 0 / 10%);
+}
+
+.notiZero{
+    text-align: center;
+    color: #4a5275;
 }
 
 .headerIcon {
@@ -73,10 +120,10 @@ header{
 
 .headerIcon svg{
     line-height: 24px;
-}
+}   
 
 .iconHidden{
-    visibility: hidden;
+    display: none;
     position: absolute;
     background-color: white;
     z-index: 100;
@@ -87,11 +134,11 @@ header{
     font-weight: 400;
 }
 
-.iconOpen{
-    visibility: visible;
+.hidden{
+    display: none;
 }
 
-.iconOpen div{
+.iconHidden div{
     display: flex;
     align-items: center;
     width : 100%;
@@ -99,7 +146,12 @@ header{
     background-color: inherit;
 }
 
-.iconOpen p{
+.iconHidden div:hover{
+    background-color: rgb(0 0 0 / 10%);
+}
+
+
+.iconHidden p{
     margin-left: 20px;
 }
 
