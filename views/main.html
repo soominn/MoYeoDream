@@ -5,11 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MoYeoDream!</title>
+    <link rel="stylesheet" href="assets/css/header.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
+    <!-- 헤더 시작 -->
     <header>
         <div class="headerWrap">
             <div class="headerLeft">
@@ -18,7 +20,14 @@
                 </div>
             </div>
             <div class="headerRight">
-                <button>새 글 쓰기</button>
+                <div class="write">
+                    <button class="writeBtn">새 글 쓰기</button>
+                    <div class="writeHidden">
+                        <div><p>스터디 • 프로젝트</p></div>
+                        <div><p>채용 공고</p></div>
+                        <div><p>자유 게시판</p></div>
+                    </div>
+                </div>
                 <div class="headerNoti">
                     <img src="assets/img/notification.svg">
                     <div class="notiHidden">
@@ -45,6 +54,7 @@
             </div>
         </div>
     </header>
+    <!-- 헤더 끝 -->
     <section>
         <!-- 메인배너 -->
         <div class="banner">
@@ -334,5 +344,6 @@
     </section>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="assets/js/header.js"></script>
 <script src="assets/js/maiin.js"></script>
 </html>
