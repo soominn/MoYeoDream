@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoYeoDream!</title>
+    <link href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="assets/css/jobPostingCreate.css">
+</head>
+<body>
+    <div class="main-container">
+        <section class="top">
+            <div class="study-info-title">
+                <span>1</span>
+                <h2>채용 공고를 하나씩 채워주세요.</h2>
+            </div>
+            <ul class="study-info-list">
+                <li class="study-info-item">
+                    <label for="enterprise-input">기업 소개</label>
+                    <div class="input">
+                        <input type="text" name="enterpriseInput" id="enterprise-input" placeholder="기업 이름을 입력해주세요!">
+                        <label for="enterprise-img">
+                            <img src="assets/img/fileImg.png">
+                        </label>
+                        <input type="file" name="enterpriseImg" id="enterprise-img">
+                    </div>
+                </li>
+                <li class="study-info-item">
+                    <label for="start-date">접수 기간</label>
+                    <div class="input">
+                        <input type="date" name="startDate" id="start-date" value="2022-06-14">
+                        <h3>~</h3>
+                        <input type="date" name="endDate" id="end-date" value="2022-06-14">
+                    </div>
+                </li>
+            </ul>
+            <ul class="study-info-list">
+                <li class="study-info-item">
+                    <label for="employment-time-input">채용 형태</label>
+                    <div class="input">
+                        <input type="text" name="employmentTimeInput" id="employment-time-input" placeholder="신입 / 경력">
+                        <input type="text" name="employmentRegularInput" id="employment-regular-input" placeholder="정규직 / 비정규직">
+                    </div>
+                </li>
+                <li class="study-info-item">
+                    <label for="qualification-select">지원 자격</label>
+                    <div class="select">
+                        <select name="qualification" id="qualification-select">
+                            <option value="none">학력 무관</option>
+                            <option value="college">2·3년제 졸업 이상</option>
+                            <option value="university">4년제 졸업 이상</option>
+                        </select>
+                    </div>
+                </li>
+            </ul>
+            <ul class="study-info-list">
+                <li class="study-info-item">
+                    <label for="region-input">근무 지역</label>
+                    <div class="input">
+                        <input type="text" name="regionInput" id="region-input" placeholder="서울">
+                    </div>
+                </li>
+                <li class="study-info-item">
+                    <label for="site-input">기업 사이트</label>
+                    <div class="input">
+                        <input type="text" name="siteInput" id="site-input" placeholder="사이트 url을 입력해주세요!">
+                    </div>
+                </li>
+            </ul>
+        </section>
+        <section class="bottom">
+            <div class="study-title">
+                <span>2</span>
+                <h2>채용 공고에 대해 자세히 소개해주세요.</h2>
+            </div>
+            <section class="study-title-input">
+                <label for="title-input">제목</label>
+                <input type="text" name="titleInput" id="title-input" placeholder="글 제목을 입력해주세요!">
+                <!-- 썸머노트 자리 -->
+                <div class="summernote">
+                    <h3>썸머노트 자리</h3>
+                </div>
+            </section>
+            <section class="study-button">
+                <button class="cancel">취소</button>
+                <button class="register">등록</button>
+            </section>
+        </section>
+    </div>
+</body>
+</html>
