@@ -175,6 +175,11 @@ section{
     font-weight: 450;
 }
 
+.cateChildLi:hover{
+    transform: scale(1.03);
+    transition: transform 0.3s;
+}
+
 .disabled{
     opacity: .3;
 }
@@ -308,6 +313,11 @@ input[type="checkbox"]{
     border: 2px solid #d1d1d1;
     border-radius: 30px;
     cursor: pointer;
+}
+
+.contentListChild:hover{
+    transform: scale(1.03);
+    transition: transform 0.3s;
 }
 
 .contentDate{
