@@ -310,11 +310,20 @@ button{
     stroke-width: 0;
 }
 
-.user-info-box input{
+.user-info-box-nickName{
     border-radius: 4px;
     border: 1px solid #ccc;
-    font-size: large;
-    width: 15rem;
+    font-size: medium;
+    width: 23.5rem;
+    min-height: 1rem;
+    padding: 1rem;
+}
+
+.user-info-box-introduce{
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: smaller;
+    width: 23.5rem;
     min-height: 1rem;
     padding: 1rem;
 }
@@ -344,15 +353,49 @@ button{
     background: #ff3217;
 }
 
+.open-select:hover{
+    color: black;
+}
+
+.delete-all-select:hover{
+    color: black;
+}
 
 
+.select-box{
+    position: absolute;
+    background: white;
+    width: 498px;
+    border: 1px solid;
+    margin-top: 6px;
+    max-height: 120px;
+    overflow-y: scroll;
+    border-radius: 5px;
+    display: none;
+}
 
+.select-box2{
+    list-style: none;
+    margin: 0;
+    margin-left: -40px;
+}
 
+.select-value{
+    padding: 9px 0;
+    padding-left: 18px;
+}
 
+.select-value:hover{
+    background-color: powderblue;
+}
 
+.button-withdraw:hover{
+    box-shadow: 0 0 8px rgb(0 0 0 / 18%);
+}
 
-
-
+.button-fin:hover{
+    box-shadow: 0 0 8px rgb(0 0 0 / 18%);
+}
 
 
 

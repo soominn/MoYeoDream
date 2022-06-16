@@ -1,3 +1,5 @@
+/* 상단 메뉴 변환 */
+
 var selectCategory = document.getElementsByClassName("select-category");
 
       function handleClick(event) {
@@ -28,3 +30,34 @@ var selectCategory = document.getElementsByClassName("select-category");
       }
 
       init();
+
+/* ----------------------------------------------------------------------- */
+/* 상단 메뉴 누르면 하단 내용 변환 */
+
+      $(function(){
+        $(".my-create").click(function(){
+            $(".main-box").hide();
+            $(".my-create-box").css('display', 'flex').show();
+        });
+        $(".my-activity").click(function(){
+            $(".main-box").hide();
+            $(".my-activity-box").css('display', 'flex').show();
+        });
+        $(".my-favorite").click(function(){
+            $(".main-box").hide();
+            $(".my-favorite-box").css('display', 'flex').show();
+        });
+        $(".my-waiting").click(function(){
+            $(".main-box").hide();
+            $(".my-waiting-box").css('display', 'flex').show();
+        });
+        
+      });
+
+/* -------------------------------------------------------------------------- */
+
+
+
+
+
+

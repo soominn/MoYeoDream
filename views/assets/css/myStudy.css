@@ -87,6 +87,7 @@ p{
     display: flex;
     flex-direction: column;
     margin: 0 auto;
+    display: none;
 }
 
 .main-box2{
@@ -223,6 +224,10 @@ p{
 
 .select-subject{
     color:#333;
+}
+
+.my-create-box{
+    display: flex;
 }
 
 
