@@ -78,16 +78,10 @@ section{
     flex-direction: column;
 }
 
-.introWrap p{
-    display: inline-block;
-    margin-bottom: 6px;
-    color: #333;
-    font-weight: 500;
-}
-
 .selectWrap{
     display: flex;
     width : 100%;
+    margin-bottom : 30px;
 }
 
 .selectChild{   /* 각각의 비율을 동일하게 1로 줄것, 여백도 동등한 비율로 가져가기 위해 */
@@ -96,21 +90,44 @@ section{
     margin-right: 20px;
 }
 
+.selectChild p{
+    display: inline-block;
+    margin-bottom: 6px;
+    color: #333;
+    font-weight: 500;
+}
+
 .selectBox{
     position: relative;
     display: inline-block;
     width : 100%;
-    border : 1px solid;
+    height: 56px;
+    background-color: white;
+    box-sizing: border-box;
+    border : 1px solid rgb(204, 204, 204);
+    border-radius: 4px;
+}
+
+.selectBox:hover{
+    border :2px solid #ffcd00;
 }
 
 .selected {
     display: flex;
     justify-content: space-between;
-    padding: 8px 5px;
+    align-items: center;
+    padding: 8px 13px;
+    height: 56px;
+    box-sizing: border-box;
+    color: rgb(128, 128, 128);
 }
 
 .selectedValue{
+    display: flex;
+    align-items: center;
     max-width : 75%;
+    height: 56px;
+    color: #333;
 }
 
 .arrow{
@@ -120,20 +137,24 @@ section{
 .selectBox ul{ /* .optionWrap */
     display: none;
     width : 100%;
-    border : 1px solid;
+    border : 1px solid rgb(204, 204, 204);
+    border-radius: 4px;
     position: absolute;
     background-color: white;
-    border-top : none;
     cursor : pointer;
-    margin: 1px 0 0 -1px;
+    margin: 3px 0 0 -1px;
+    z-index: 100;
 }
 
 .selectBox.active ul{
     display : block;
+    background-color: white;
 }
 
 .option{
-    padding : 8px 5px;
+    padding : 11px 13px;
+    color: #333;
+    background-color: white;
 }
 
 .option:hover{
