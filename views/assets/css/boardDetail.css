@@ -325,3 +325,14 @@ p.comment-content {
   word-break: break-all;
   overflow-wrap: break-word;
 }
+
+section.change-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+button.change-button {
+  font-size: 16px;
+  color: #444;
+}

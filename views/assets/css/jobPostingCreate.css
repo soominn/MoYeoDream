@@ -35,7 +35,6 @@ input {
     width: 20rem;
     height: 2.5rem;
     outline: none;
-    font-size: 1rem;
     padding: 0 1rem;
     border: 3px solid #4482f7;
     border-radius: 0.5rem;
@@ -168,8 +167,8 @@ section.study-button button {
     border: none;
     border-radius: 4px;
     padding: 0 1.25rem;
-    height: 2rem;
-    font-size: 1rem;
+    width: 72px;
+    height: 32px;
 }
 
 button.cancel {
@@ -206,13 +205,6 @@ input#enterprise-input {
     width: 86.5%;
 }
 
-/* 임시 */
-div.summernote {
-    display: flex;
-    width: 992px;
-    height: 523px;
-    background-color: #e7e7e7;
-    justify-content: center;
-    align-items: center;
-    margin-top: 16px;
+div.note-editor {
+    margin-top: 36px;
 }
