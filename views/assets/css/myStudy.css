@@ -63,7 +63,7 @@ p{
 .select-category{
     display: flex;
     font-weight: 700;
-    font-size: 26px;
+    font-size: 23px;
     line-height: 126.5%;
     color: #848484;
     cursor: pointer;
@@ -108,8 +108,8 @@ p{
     flex-direction: column;
     justify-content: center;
     padding: 48px 26px 26px 34px;
-    width: 275px;
-    height: 318px;
+    width: 209px;
+    height: 253px;
     background: #fff;
     border: 2px solid #d1d1d1;
     border-radius: 30px;
@@ -124,18 +124,18 @@ p{
 
 .study-schedule{
     display: flex;
-    font-size: 18px;
+    font-size: 15px;
     grid-gap: 10px;
     gap: 10px;
     color: rgba(0,0,0,.4);
 }
 
 .study-scheduleTitle{
-    font-size: 18px;
+    font-size: 15px;
 }
 
 .study-title{
-    font-size: 24px;
+    font-size: 21px;
     min-height: 76px;
     line-height: 36px;
     font-weight: 400;
@@ -152,14 +152,14 @@ p{
     display: flex;
     grid-gap: 5px;
     gap: 5px;
-    font-size: 18px;
+    font-size: 15px;
     color: rgba(0,0,0,.4);
     min-height: 30px;
     margin-bottom: 40px;
 }
 
 .study-void-box{
-    margin-bottom: 42px;
+    margin-bottom: 4px;
     padding: 0;
     display: flex;
     grid-gap: 12px;
@@ -169,7 +169,7 @@ p{
 
 .study-info{
     display: flex;
-    font-size: 18px;
+    font-size: 15px;
     justify-content: space-between;
     border-top: 2px solid #f2f2f2;
     padding-top: 16px;
@@ -194,7 +194,7 @@ p{
 }
 
 .avatar-userName{
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 400;
 }
 

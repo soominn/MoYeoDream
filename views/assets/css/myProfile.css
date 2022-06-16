@@ -77,11 +77,11 @@ button{
     padding-bottom: 5rem;
 }
 
-.userImageUpload-image{
+.img-input{
     display: flex;
 }
 
-.userImageUpload-userImg{
+.img-example{
     display: block;
     height: 10rem;
     width: 10rem;
@@ -92,7 +92,7 @@ button{
     margin: 40px 0;
 }
 
-.userImageUpload-imageControl{
+.img-controller{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -100,7 +100,7 @@ button{
     margin-left: 10px;
 }
 
-.userImageUpload-customLabelFileUpload{
+.img-choose{
     background-color: #262626;
     color: #fff;
     border-radius: 4px;
@@ -114,11 +114,11 @@ button{
     margin: 5px;
 }
 
-.userImageUpload-imageControl input[type=file]{
+.img-controller input[type=file]{
     display: none;
 }
 
-.userImageUpload-buttonImageDelete{
+.img-delete{
     width: 7.5rem;
     height: 2rem;
     font-size: 1rem;
@@ -397,5 +397,8 @@ button{
     box-shadow: 0 0 8px rgb(0 0 0 / 18%);
 }
 
-
+.choice-box-value-remove:hover{
+    cursor: pointer;
+    color: gray;
+}
 
