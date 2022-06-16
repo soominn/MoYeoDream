@@ -1,16 +1,24 @@
 const nicknameNext = document.querySelector("button.nickname-next");
+const interestNext = document.querySelector("button.interest-next");
 const joinSuccess = document.querySelector("button.join-success");
 
 const loginContent = document.querySelector("div.login-content");
 const nicknameContent = document.querySelector("div.nickname-content");
+const interestContent = document.querySelector("div.interest-content");
 const imgContent = document.querySelector("div.img-content");
 const joinOk = document.querySelector("div.join-ok");
 
 const nicknameImg = document.querySelector("img.nickname");
+const interestImg = document.querySelector("img.interest");
 const imgImg = document.querySelector("img.img");
 
 nicknameNext.addEventListener("click", function() {
 	nicknameContent.style.display = "none";
+	interestContent.style.display = "flex";
+});
+
+interestNext.addEventListener("click", function() {
+	interestContent.style.display = "none";
 	imgContent.style.display = "flex";
 });
 
@@ -24,8 +32,13 @@ nicknameImg.addEventListener("click", function() {
 	nicknameContent.style.display = "none";
 });
 
-imgImg.addEventListener("click", function() {
+interestImg.addEventListener("click", function() {
 	nicknameContent.style.display = "flex";
+	interestContent.style.display = "none";
+});
+
+imgImg.addEventListener("click", function() {
+	interestContent.style.display = "flex";
 	imgContent.style.display = "none";
 });
 
@@ -76,37 +89,4 @@ function kakaoLogin() {
             console.log(error);
         },
     });
-}
-
-// 구글 로그인 API
-// 처음 실행하는 함수
-function init() {
-	gapi.load('auth2', function() {
-		gapi.auth2.init();
-		options = new gapi.auth2.SigninOptionsBuilder();
-		options.setAppPackageName('com.example.app');
-		options.setPrompt('select_account');
-		options.setScope('email');
-		gapi.auth2.getAuthInstance().attachClickHandler('googleLogin', options, onSignIn, onSignInFailure);
-	});
-}
-
-function onSignIn(googleUser) {
-	let access_token = googleUser.getAuthResponse().access_token;
-	$.ajax({
-		url: 'https://people.googleapis.com/v1/people/me', 
-		data: {personFields:'emailAddresses', key:'AIzaSyBHaP1X9sCZIuZ_HZd96k2v6FUStx_MaW8', 'access_token': access_token}, 
-		method:'GET'
-	})
-	.done(function(e){
-		let profile = googleUser.getBasicProfile();
-		console.log(profile.getEmail());
-	})
-	.fail(function(e){
-		console.log(e);
-	});
-}
-
-function onSignInFailure(t){		
-	console.log(t);
 }

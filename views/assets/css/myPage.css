@@ -346,7 +346,7 @@ body>div{
     margin-bottom: 4px;
     margin-left: -1px;
     color: rgba(55, 53, 47, 0.5);
-    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: "Spoqa Han Sans Neo",-apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
     height: 24px;
     pointer-events: auto;
 }
@@ -395,7 +395,7 @@ body>div{
     word-break: break-word;
     caret-color: transparent;
     padding: 3px 2px;
-    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: "Spoqa Han Sans Neo",-apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
     font-weight: 600;
     line-height: 1.3;
 }
