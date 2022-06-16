@@ -8,6 +8,7 @@
     
     <link rel="stylesheet" href="assets/css/header.css">
     <link rel="stylesheet" href="assets/css/myProfile.css">
+    <!-- <link href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css" rel="stylesheet" type="text/css"> -->
 </head>
 <body>
     <div id="root">
@@ -30,6 +31,9 @@
                             <div><p>자유 게시판</p></div>
                         </div>
                     </div>
+                    <div class="qna">
+                        <button class="qnaBtn">문의하기</button>
+                    </div>
                     <div class="headerNoti">
                         <img src="assets/img/notification.svg">
                         <div class="notiHidden">
@@ -49,7 +53,7 @@
                         <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"></path></svg>
                         <div class="iconHidden">
                             <div><p>내 작성글</p></div>
-                            <div><p>설정</p></div>
+                            <div><p>마이페이지</p></div>
                             <div><p>로그아웃</p></div>
                         </div>
                     </div>
@@ -61,16 +65,14 @@
 
         <div class="main-box">
             <h1>내 정보 수정</h1>
-            <div class="userImageUpload-image">
-                <img class="userImageUpload-userImg" src="https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG" alt="user avatar">
-                <div class="userImageUpload-imageControl">
-                    <label class="userImageUpload-customLabelFileUpload">
+            <div class="img-input">
+                <img class="img-example" src="https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG" alt="user avatar">
+                <div class="img-controller">
+                    <label class="img-choose">
                         이미지 선택
                         <input id="imageUpload" type="file" accept="image/*">
                     </label>
-                    <button class="userImageUpload-buttonImageDelete">
-                        이미지 제거
-                    </button>
+                    <button class="img-delete">이미지 제거</button>
                 </div>
             </div>
             <div class="user-info-box">
@@ -99,7 +101,7 @@
                             <div class="choice-box-result choice-box-result--is-multi choice-box-result--has-value choice-box-result2">
                                 <div class="choice-box-result3 choice-box-value">
                                     <div class="choice-value choice-box-value-label">
-                                        JavaScript
+                                        스포츠 • 레저
                                     </div>
                                     <div class="choice-value-cancel choice-box-value-remove">
                                         <svg height="14" width="14" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class="all-svg">
@@ -107,6 +109,7 @@
                                         </svg>
                                     </div>
                                 </div>
+                                
                                 <div class="css-1g6gooi">
                                     <div class="select__input" style="display: inline-block;">
                                         <input autocapitalize="none" autocomplete="off" autocorrect="off" id="react-select-4-input" spellcheck="false" tabindex="0" type="text" aria-autocomplete="list" value="" style="box-sizing: content-box; width: 2px; background: 0px center; border: 0px; font-size: inherit; opacity: 1; outline: 0px; padding: 0px; color: inherit;">
@@ -131,14 +134,16 @@
                         </div>
                         <div class="select-box">
                             <ul class="select-box2">
-                                <li class="select-value">JavaScript</li>
-                                <li class="select-value">배우가 되는 법</li>
-                                <li class="select-value">닌자가 되는 법</li>
-                                <li class="select-value">청소기가 되는 법</li>
-                                <li class="select-value">세탁기가 되는 법</li>
-                                <li class="select-value">그릇이 되는 법</li>
-                                <li class="select-value">원빈이 되는 법</li>
-                                <li class="select-value">이나영이 되는 법</li>
+                                <li class="select-value">문화 • 예술</li>
+                                <li class="select-value">스포츠 • 레저</li>
+                                <li class="select-value">컴퓨터 • 프로그래밍</li>
+                                <li class="select-value">외국어 • 토익 • 토플</li>
+                                <li class="select-value">인문 • 과학</li>
+                                <li class="select-value">경제 • 금융</li>
+                                <li class="select-value">정치 • 사회</li>
+                                <li class="select-value">자격증</li>
+                                <li class="select-value">공무원</li>
+                                <li class="select-value">취업 • 면접</li>
                             </ul>
                         </div>
                     </div>
