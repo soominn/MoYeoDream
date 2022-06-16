@@ -220,7 +220,6 @@ a.kakao-openchatting img {
 }
 
 section.middle {
-    margin-top: 132px;
     font-size: 1.125rem;
     word-break: break-all;
     line-height: 1.7;
@@ -231,18 +230,21 @@ div.study-introduction-wrap {
     margin-top: 132px;
 }
 
-h2.user-introduction, h2.study-introduction {
-    margin: 0;
+h2.user-introduction {
+    margin: 24px auto 0;
     color: #333;
     font-size: 26px;
     font-weight: 700;
     padding-bottom: 24px;
     border-bottom: 3px solid #f2f2f2;
+
 }
 
-div.user-introduction, div.study-introduction {
+div.user-introduction {
     width: 100%;
-    margin: 40px auto 0;
+    border-bottom: 3px solid #f2f2f2;
+    margin: 32px auto 0;
+    padding-bottom: 32px;
 }
 
 section.study-comment-wrap {
