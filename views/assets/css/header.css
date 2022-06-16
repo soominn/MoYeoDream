@@ -29,7 +29,7 @@ header{
 }
 
 .headerRight{
-    width : 235px;
+    width : fit-content;
     height : 100%;
     display: flex;
     justify-content: space-between;
@@ -38,6 +38,7 @@ header{
 
 .write{
     position: relative;
+    margin-right: 15px;
 }
 
 .writeBtn{
@@ -80,8 +81,22 @@ header{
     margin-left: 20px;
 }
 
+.qna{
+    margin-right: 15px;
+}
+
+.qnaBtn{
+    outline: none;
+    background-color: transparent;
+    border : none;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
 .headerNoti{
     position: relative;
+    margin-right: 15px;
 }
 
 .headerNoti img{

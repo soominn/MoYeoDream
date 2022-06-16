@@ -18,6 +18,11 @@ button {
     appearance: none;
   }
 
+ul{
+    list-style: none;
+    padding: 0;
+}
+
 li{
     list-style: none;
 }
@@ -78,6 +83,61 @@ section{
     margin-bottom: 6px;
     color: #333;
     font-weight: 500;
+}
+
+.selectWrap{
+    display: flex;
+    width : 100%;
+}
+
+.selectChild{   /* 각각의 비율을 동일하게 1로 줄것, 여백도 동등한 비율로 가져가기 위해 */
+    flex-grow: 1;
+    flex-shrink: 1;
+    margin-right: 20px;
+}
+
+.selectBox{
+    position: relative;
+    display: inline-block;
+    width : 100%;
+    border : 1px solid;
+}
+
+.selected {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 5px;
+}
+
+.selectedValue{
+    max-width : 75%;
+}
+
+.arrow{
+    width : 24px;
+}
+
+.selectBox ul{ /* .optionWrap */
+    display: none;
+    width : 100%;
+    border : 1px solid;
+    position: absolute;
+    background-color: white;
+    border-top : none;
+    cursor : pointer;
+    margin: 1px 0 0 -1px;
+}
+
+.selectBox.active ul{
+    display : block;
+}
+
+.option{
+    padding : 8px 5px;
+}
+
+.option:hover{
+    background-color:rgba(255, 229, 121, 0.7);
 }
 
 .contentTitle{
