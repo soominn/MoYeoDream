@@ -290,7 +290,7 @@ input[type="checkbox"]{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center
+    justify-content: space-around;
 }
 
 .contentListChild{
@@ -299,10 +299,11 @@ input[type="checkbox"]{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin : 0px 15px 30px 15px;
-    padding: 45px 26px 26px 34px;
+    margin : 15px 0;
+    padding: 35px 26px 30px 34px;
     width: 370px;
-    height: 450px;
+    height: 400px;
+    box-sizing: border-box;
     background: #fff;
     border: 2px solid #d1d1d1;
     border-radius: 30px;
@@ -333,6 +334,7 @@ input[type="checkbox"]{
     display: flex;
     padding: 0;
     margin-bottom: 36px;
+    min-height: 78px;
 }
 
 .hashList li{

@@ -1,7 +1,9 @@
+
 /* 새 글 쓰기 */
 const $writeBtn = $(".writeBtn");
 const $writeBox = $(".writeHidden");
 let writeCheck = false;
+
 
 $writeBtn.click(function(){
     $writeBox.toggle();
