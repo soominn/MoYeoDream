@@ -90,3 +90,45 @@ function kakaoLogin() {
         },
     });
 }
+
+// 관심분야 태그 부분
+$(function() {
+    $(".open-select").click(function() {
+        $(".select-box").toggle();
+    });
+});
+
+// 세부 카테고리
+const $cateChildLiArr = $(".select-value");
+// cateChildLi (카테고리) 개수
+let $cateChildLength = $cateChildLiArr.length;
+// 카테고리 클릭시 나오는 block
+const $cateBlockArr = $(".cateBlock");
+// 모두 지우기 버튼
+const $clear = $(".delete-all-select");
+// 해당 카테고리 지우기
+const $deleteOneArr = $(".choice-box-value-remove");
+
+$cateChildLiArr.each(function() {
+	$(this).click(function(i) {
+		let $liValue = $(this).attr("value");
+        $cateBlockArr.each(function() {
+			if($(this).attr("value") == $liValue){
+				$(this).show();
+			}
+		});
+		$(".select-box").toggle();
+	});
+});
+
+// 해당 카테고리 삭제
+$cateBlockArr.each(function() {
+	$cateBlockArr.children($deleteOneArr).click(function() {
+		$(this).parent(".cateBlock").hide();
+	})
+});
+
+// 전체 카테고리 삭제
+$clear.click(function() {
+	$cateBlockArr.hide();
+});

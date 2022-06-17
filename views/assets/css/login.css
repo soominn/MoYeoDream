@@ -344,3 +344,265 @@ div.join-ok button {
 div.img-content, div.join-ok, div.nickname-content, div.interest-content {
     display: none;
 }
+
+/* 관심분야 태그 부분 */
+.user-info-box4{
+    width: 488px;
+    height: 54px;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.css-7pg0cj-a11yText{
+    z-index: 9999;
+    border: 0px;
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    width: 1px;
+    position: absolute;
+    overflow: hidden;
+    padding: 0px;
+    white-space: nowrap;
+}
+
+.choice-box{
+    -webkit-box-align: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    border-color: rgb(204, 204, 204);
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    cursor: default;
+    display: flex;
+    flex-wrap: wrap;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    min-height: 3rem;
+    position: relative;
+    transition: all 100ms ease 0s;
+    box-sizing: border-box;
+    max-width: 500px;
+    width: 488px;
+    outline: 0px !important;
+}
+
+.choice-box-result2{
+    -webkit-box-align: center;
+    align-items: center;
+    display: flex;
+    flex: 1 1 0%;
+    padding: 2px 8px;
+    position: relative;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+}
+
+.choice-box-result3{
+    background-color: rgb(230, 230, 230);
+    border-radius: 2px;
+    display: flex;
+    margin: 2px;
+    min-width: 0px;
+    box-sizing: border-box;
+}
+
+.choice-value{
+    border-radius: 2px;
+    color: rgb(51, 51, 51);
+    font-size: 85%;
+    overflow: hidden;
+    padding: 3px 3px 3px 6px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+
+.choice-value-cancel{
+    -webkit-box-align: center;
+    align-items: center;
+    border-radius: 2px;
+    display: flex;
+    padding-left: 4px;
+    padding-right: 4px;
+    box-sizing: border-box;
+}
+
+.all-svg{
+    display: inline-block;
+    fill: currentcolor;
+    line-height: 1;
+    stroke: currentcolor;
+    stroke-width: 0;
+}
+
+.css-1g6gooi{
+    margin: 2px;
+    padding-bottom: 2px;
+    padding-top: 2px;
+    visibility: visible;
+    color: rgb(51, 51, 51);
+    box-sizing: border-box;
+}
+
+.css-1wy0on6{
+    -webkit-box-align: center;
+    align-items: center;
+    align-self: stretch;
+    display: flex;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+.css-tlfecz-indicatorContainer{
+    color: rgb(204, 204, 204);
+    display: flex;
+    padding: 8px;
+    transition: color 150ms ease 0s;
+    box-sizing: border-box;
+}
+
+.all-svg{
+    display: inline-block;
+    fill: currentcolor;
+    line-height: 1;
+    stroke: currentcolor;
+    stroke-width: 0;
+}
+
+.css-1okebmr-indicatorSeparator{
+    align-self: stretch;
+    background-color: rgb(204, 204, 204);
+    margin-bottom: 8px;
+    margin-top: 8px;
+    width: 1px;
+    box-sizing: border-box;
+}
+
+.css-tlfecz-indicatorContainer{
+    color: rgb(204, 204, 204);
+    display: flex;
+    padding: 8px;
+    transition: color 150ms ease 0s;
+    box-sizing: border-box;
+}
+
+.all-svg{
+    display: inline-block;
+    fill: currentcolor;
+    line-height: 1;
+    stroke: currentcolor;
+    stroke-width: 0;
+}
+
+.user-info-box-nickName{
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: medium;
+    width: 23.5rem;
+    min-height: 1rem;
+    padding: 1rem;
+}
+
+.user-info-box-introduce{
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: smaller;
+    width: 23.5rem;
+    min-height: 1rem;
+    padding: 1rem;
+}
+
+.info-1{
+    margin-top: .875rem;
+    color: #868e96;
+    font-size: .875rem;
+}
+
+.button-css{
+    font-weight: 700;
+    color: #fff;
+    border-radius: 4px;
+    width: 100px;
+    margin-right: 10px;
+    height: 2rem;
+    font-size: 1rem;
+}
+
+.button-fin{
+    margin-top: 1.5rem;
+    background-color: #262626;
+}
+
+.button-withdraw{
+    background: #ff3217;
+}
+
+.open-select:hover{
+    color: black;
+}
+
+.delete-all-select:hover{
+    color: black;
+}
+
+
+.select-box{
+    position: absolute;
+    background: white;
+    width: 488px;
+    border: 1px solid;
+    margin-top: 6px;
+    max-height: 120px;
+    overflow-y: scroll;
+    border-radius: 5px;
+    display: none;
+}
+
+.select-box2{
+    list-style: none;
+    margin: 0;
+    margin-left: -40px;
+}
+
+.select-value{
+    padding: 9px 0;
+    padding-left: 18px;
+}
+
+.select-value:hover{
+    background-color: powderblue;
+}
+
+.button-withdraw:hover{
+    box-shadow: 0 0 8px rgb(0 0 0 / 18%);
+}
+
+.button-fin:hover{
+    box-shadow: 0 0 8px rgb(0 0 0 / 18%);
+}
+
+.choice-box-value-remove:hover{
+    cursor: pointer;
+    color: gray;
+}
+
+.cate-all-list{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-width: 98%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cateBlock{
+    display: none;
+}
+
+.select-nonono{
+    font-size: 13px;
+    color: #868e96;
+    margin-left: 10px;
+}

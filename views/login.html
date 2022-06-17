@@ -35,44 +35,208 @@
                 </section>
             </div>
 
-            <div class="nickname-content">
-                <img src="https://holaworld.io/images/info/arrow-left.png" class="nickname">
-                <h1>모여드림에 처음 오셨군요!<br>우선, 사용하실 닉네임을 설정해 볼까요?</h1>
-                <div class="nickname-input">
-                    <h3>닉네임</h3>
-                    <input type="text" name="nicknameInput">
-                </div>
-                <button class="nickname-next">다음</button>
-            </div>
-
-            <div class="interest-content">
-                <img src="https://holaworld.io/images/info/arrow-left.png" class="interest">
-                <h1><span>닉네임</span>님, 반가워요.<br>분야에 관심이 있는지 알려주세요!</h1>
-                <div>관심 분야를 기반으로 소식을 추천해드려요.</div>
-                <div class="set-interest">
-                    <h3>관심 분야</h3>
-                    <input type="text" placeholder="임시로 넣어뒀습니다.">
-                </div>
-                <button class="interest-next">다음</button>
-            </div>
-
-            <div class="img-content">
-                <img src="https://holaworld.io/images/info/arrow-left.png" class="img">
-                <h1><span>닉네임</span>님만의 특별한 이미지를 설정해 보세요.<br>물론, 언제든지 변경할 수 있어요!</h1>
-                <div>미 업로드시 기본 이미지로 자동 설정됩니다.</div>
-                <div class="img-input">
-                    <img src="https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG" class="img-example">
-                    <div class="img-controller">
-                        <label for="img-choose">
-                            이미지 선택
-                            <input type="file" name="userImg" id="img-choose" accept="image/*">
-                        </label>
-                        <button class="img-delete">이미지 제거</button>
+            <form action="">
+                <div class="nickname-content">
+                    <img src="https://holaworld.io/images/info/arrow-left.png" class="nickname">
+                    <h1>모여드림에 처음 오셨군요!<br>우선, 사용하실 닉네임을 설정해 볼까요?</h1>
+                    <div class="nickname-input">
+                        <h3>닉네임</h3>
+                        <input type="text" name="nicknameInput">
                     </div>
+                    <button class="nickname-next">다음</button>
                 </div>
-                <button class="join-success">가입 완료</button>
-            </div>
 
+                <div class="interest-content">
+                    <img src="https://holaworld.io/images/info/arrow-left.png" class="interest">
+                    <h1><span>닉네임</span>님, 반가워요.<br>어떤 분야에 관심이 있는지 알려주세요!</h1>
+                    <div>관심 분야를 기반으로 소식을 추천해드려요.</div>
+                    <div class="set-interest">
+                        <h3>관심 분야 태그</h3>
+                        <div class="user-info-box4">
+                            <div class="select-control choice-box">
+                                <div class="choice-box-result choice-box-result--is-multi choice-box-result--has-value choice-box-result2">
+                                    <ul class="cate-all-list">
+
+                                        <li class="cateBlock" value="culture">
+                                            <div class="choice-box-result3 choice-box-value">
+                                                <div class="choice-value choice-box-value-label">
+                                                    문화 • 예술
+                                                </div>
+                                                <div class="choice-value-cancel choice-box-value-remove">
+                                                    <svg height="14" width="14" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class="all-svg">
+                                                        <path d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="cateBlock" value="sports">
+                                            <div class="choice-box-result3 choice-box-value">
+                                                <div class="choice-value choice-box-value-label">
+                                                    스포츠 • 레저
+                                                </div>
+                                                <div class="choice-value-cancel choice-box-value-remove">
+                                                    <svg height="14" width="14" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class="all-svg">
+                                                        <path d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="cateBlock" value="programming">
+                                            <div class="choice-box-result3 choice-box-value">
+                                                <div class="choice-value choice-box-value-label">
+                                                    컴퓨터 • 프로그래밍
+                                                </div>
+                                                <div class="choice-value-cancel choice-box-value-remove">
+                                                    <svg height="14" width="14" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class="all-svg">
+                                                        <path d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="cateBlock" value="foreign">
+                                            <div class="choice-box-result3 choice-box-value">
+                                                <div class="choice-value choice-box-value-label">
+                                                    외국어 • 토익 • 토플
+                                                </div>
+                                                <div class="choice-value-cancel choice-box-value-remove">
+                                                    <svg height="14" width="14" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class="all-svg">
+                                                        <path d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="cateBlock" value="science">
+                                            <div class="choice-box-result3 choice-box-value">
+                                                <div class="choice-value choice-box-value-label">
+                                                    인문 • 과학
+                                                </div>
+                                                <div class="choice-value-cancel choice-box-value-remove">
+                                                    <svg height="14" width="14" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class="all-svg">
+                                                        <path d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="cateBlock" value="finance">
+                                            <div class="choice-box-result3 choice-box-value">
+                                                <div class="choice-value choice-box-value-label">
+                                                    경제 • 금융
+                                                </div>
+                                                <div class="choice-value-cancel choice-box-value-remove">
+                                                    <svg height="14" width="14" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class="all-svg">
+                                                        <path d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="cateBlock" value="politics">
+                                            <div class="choice-box-result3 choice-box-value">
+                                                <div class="choice-value choice-box-value-label">
+                                                    정치 • 사회
+                                                </div>
+                                                <div class="choice-value-cancel choice-box-value-remove">
+                                                    <svg height="14" width="14" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class="all-svg">
+                                                        <path d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="cateBlock" value="certificate">
+                                            <div class="choice-box-result3 choice-box-value">
+                                                <div class="choice-value choice-box-value-label">
+                                                    자격증
+                                                </div>
+                                                <div class="choice-value-cancel choice-box-value-remove">
+                                                    <svg height="14" width="14" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class="all-svg">
+                                                        <path d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="cateBlock" value="officiary">
+                                            <div class="choice-box-result3 choice-box-value">
+                                                <div class="choice-value choice-box-value-label">
+                                                    공무원
+                                                </div>
+                                                <div class="choice-value-cancel choice-box-value-remove">
+                                                    <svg height="14" width="14" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class="all-svg">
+                                                        <path d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="cateBlock" value="employment">
+                                            <div class="choice-box-result3 choice-box-value">
+                                                <div class="choice-value choice-box-value-label">
+                                                    취업 • 면접
+                                                </div>
+                                                <div class="choice-value-cancel choice-box-value-remove">
+                                                    <svg height="14" width="14" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class="all-svg">
+                                                        <path d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    
+                                    <div class="css-1g6gooi">
+                                        <div class="select__input" style="display: inline-block;">
+                                            <input autocapitalize="none" autocomplete="off" autocorrect="off" id="react-select-4-input" spellcheck="false" tabindex="0" type="text" aria-autocomplete="list" value="" style="box-sizing: content-box; width: 2px; background: 0px center; border: 0px; font-size: inherit; opacity: 1; outline: 0px; padding: 0px; color: inherit;">
+                                            <div style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 16px; font-family: Arial; font-weight: 400; font-style: normal; letter-spacing: normal; text-transform: none;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="select__indicators css-1wy0on6">
+                                    <div class="select__indicator select__clear-indicator css-tlfecz-indicatorContainer delete-all-select" aria-hidden="true">
+                                        <svg height="20" width="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class="all-svg">
+                                            <path d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"></path>
+                                        </svg>
+                                    </div>
+                                    <span class="select__indicator-separator css-1okebmr-indicatorSeparator"></span>
+                                    <div class="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer open-select" aria-hidden="true">
+                                        <svg height="20" width="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class="all-svg">
+                                            <path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="select-box">
+                                <ul class="select-box2">
+                                    <li class="select-value" value="culture" >문화 • 예술</li>
+                                    <li class="select-value" value="sports">스포츠 • 레저</li>
+                                    <li class="select-value" value="programming">컴퓨터 • 프로그래밍</li>
+                                    <li class="select-value" value="foreign">외국어 • 토익 • 토플</li>
+                                    <li class="select-value" value="science">인문 • 과학</li>
+                                    <li class="select-value" value="finance">경제 • 금융</li>
+                                    <li class="select-value" value="politics">정치 • 사회</li>
+                                    <li class="select-value" value="certificate">자격증</li>
+                                    <li class="select-value" value="officiary">공무원</li>
+                                    <li class="select-value" value="employment">취업 • 면접</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="interest-next">다음</button>
+                </div>
+
+                <div class="img-content">
+                    <img src="https://holaworld.io/images/info/arrow-left.png" class="img">
+                    <h1><span>닉네임</span>님만의 특별한 이미지를 설정해 보세요.<br>물론, 언제든지 변경할 수 있어요!</h1>
+                    <div>미 업로드시 기본 이미지로 자동 설정됩니다.</div>
+                    <div class="img-input">
+                        <img src="https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG" class="img-example">
+                        <div class="img-controller">
+                            <label for="img-choose">
+                                이미지 선택
+                                <input type="file" name="userImg" id="img-choose" accept="image/*">
+                            </label>
+                            <button class="img-delete">이미지 제거</button>
+                        </div>
+                    </div>
+                    <button class="join-success">가입 완료</button>
+                </div>
+            </form>
             <div class="join-ok">
                 <h1>축하드려요! 가입되었습니다.<br>Hola에서 당신의 꿈을 코딩하세요!</h1>
                 <img src="https://holaworld.io/images/logo/hola_logo_y.png">
