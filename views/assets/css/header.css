@@ -1,3 +1,7 @@
+button{
+    font-family: inherit;
+}
+
 header{
     width : 100%;
     font-family: "Spoqa Han Sans Neo",-apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
@@ -79,6 +83,7 @@ header{
 
 
 .writeHidden p{
+    margin:0;
     margin-left: 20px;
 }
 
@@ -129,7 +134,7 @@ header{
 
 .notiText{
     display: inline-block;
-    margin: 0;
+    margin: 20px 0;
     margin-left: 20px;
 }
 
@@ -149,6 +154,10 @@ header{
 .notiZero{
     text-align: center;
     color: #4a5275;
+}
+
+.notiZero p{
+    margin: 20px 0;
 }
 
 .headerIcon {
@@ -175,6 +184,10 @@ header{
     left: -25px;
     box-shadow: 0 5px 25px rgb(0 0 0 / 15%);
     font-weight: 400;
+}
+
+.iconHidden p{
+    margin: 20px 0;
 }
 
 .open{

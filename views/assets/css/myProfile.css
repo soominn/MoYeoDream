@@ -206,11 +206,11 @@ button{
     align-items: center;
     display: flex;
     flex: 1 1 0%;
-    flex-wrap: wrap;
     padding: 2px 8px;
     position: relative;
-    overflow: hidden;
+    overflow-x: hidden;
     box-sizing: border-box;
+    flex-wrap: wrap;
 }
 
 .choice-box-result3{
@@ -401,4 +401,24 @@ button{
     cursor: pointer;
     color: gray;
 }
+
+.cate-all-list{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-width: 98%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cateBlock{
+    display: none;
+}
+
+.select-nonono{
+    font-size: 13px;
+    color: #868e96;
+    margin-left: 10px;
+}
+
 

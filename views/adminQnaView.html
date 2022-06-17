@@ -16,7 +16,7 @@
         <div class="headerWrap">
             <div class="headerLeft">
                 <div class="headerLogo">
-                    <img src="assets/img/logo.png">
+                    <img src="assets/img/adminLogo.png">
                 </div>
             </div>
             <div class="headerRight">
@@ -106,15 +106,23 @@
                     <div class="commentTitle"><p>답변</p></div>
                     <ul class="commentPrintWrap">
                         <li>
-                            <div class="commentPrint">
-                                <p>답변 내용이 들어갑니다.</p>
-                            </div>
-                            <div class="commentManageBtn">
-                                <div>
-                                    <button type="button" class="modifyBtn">수정</button>
-                                    <button type="button" class="deleteBtn">삭제</button>
+                            <form>
+                                <div class="commentPrint">
+                                    <p class="">답변 내용이 들어갑니다.</p>
+                                    <div class="commentModify">
+                                        <textarea class="modifyInput" name="" id="" cols="30" rows="10" >답변 내용이 들어갑니다.</textarea>
+                                        <div>
+                                            <button type="button" class="modifyOk">수정</button>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                                <div class="commentManageBtn">
+                                    <div>
+                                        <button type="button" class="modifyBtn">수정</button>
+                                        <button type="button" class="deleteBtn">삭제</button>
+                                    </div>
+                                </div>
+                            </form>
                         </li>
                     </ul>
                 </div>
@@ -122,14 +130,16 @@
             <div class="qnaCommentWrap">
                 <div>
                     <div class="commentInputTitle"><p>답변 입력</p></div>
-                    <div class="commentInput">
-                        <textarea name="" id="" cols="30" rows="10"></textarea>
-                    </div>
-                    <div class="btnWrap">  
-                        <div>
-                            <button type="button" class="confirm">등록</button>
+                    <form>
+                        <div class="commentInput">
+                            <textarea name="" id="" cols="30" rows="10"></textarea>
                         </div>
-                    </div>
+                        <div class="btnWrap">  
+                            <div>
+                                <button type="button" class="confirm">등록</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -137,5 +147,5 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="assets/js/adminNav.js"></script>
-<script src="assets/js/adminStudyView.js"></script>
+<script src="assets/js/adminQnaView.js"></script>
 </html>

@@ -3,12 +3,23 @@ body {
     padding : 0;
     font-family: "Spoqa Han Sans Neo",-apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
     min-width: 500px;
+    font-size: 16px;
 }
 
 select{
     -webkit-appearance: none;  /* 네이티브 외형 감추기 */
     -moz-appearance: none;
     appearance: none;
+}
+
+input{
+    border: none;
+    outline: none;
+}
+
+.qnaBtn{
+    font-size: 18px;
+    font-weight : 600;
 }
 
 /* 버튼 기본디자인 삭제 */
@@ -29,6 +40,7 @@ li{
 
 section{
     width : 100%;
+    margin-bottom: 200px;
 }
 
 .sectionWrap{
@@ -64,6 +76,8 @@ section{
 
 .infoTitle h2{
     margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 600;
 }
 
 .introTitle{
@@ -73,9 +87,20 @@ section{
     margin-bottom: 25px;
 }
 
+.introTitle h2{
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.infoWrap{
+    margin: 50px 0;
+}
+
 .introWrap{
     display: flex;
     flex-direction: column;
+    margin: 40px 0;
 }
 
 .selectWrap{
@@ -88,6 +113,8 @@ section{
     flex-grow: 1;
     flex-shrink: 1;
     margin-right: 20px;
+    width : 500px;
+    box-sizing: border-box;
 }
 
 .selectChild p{
@@ -97,19 +124,33 @@ section{
     font-weight: 500;
 }
 
+#startDate{
+    border: none;
+    font-family: inherit;
+    width: 480px;
+    color: #333;
+    font-size: 16px;
+    font-weight: 400;
+}
+
 .selectBox{
     position: relative;
     display: inline-block;
     width : 100%;
     height: 56px;
+    box-sizing: border-box;
     background-color: white;
     box-sizing: border-box;
     border : 1px solid rgb(204, 204, 204);
     border-radius: 4px;
+    color: #333;
+    font-size: 16px;
+    font-weight: 400;
 }
 
 .selectBox:hover{
     border :2px solid #ffcd00;
+    box-sizing: border-box;
 }
 
 .selected {
@@ -159,6 +200,33 @@ section{
 
 .option:hover{
     background-color:rgba(255, 229, 121, 0.7);
+}
+
+
+.communicationInput{
+    position: relative;
+    display: inline-block;
+    width : 100%;
+    height: 56px;
+    background-color: white;
+    box-sizing: border-box;
+    border : 1px solid rgb(204, 204, 204);
+    border-radius: 4px;
+    margin-top: 5px;
+}
+
+.communicationInput:hover{
+    border :2px solid #ffcd00;
+}
+
+.communicationInput input {
+    width : 100%;
+    height : 100%;
+    box-sizing: border-box;
+    padding: 0 10px;
+    text-align: left;
+    font-size: 16px;
+    font-family: inherit;
 }
 
 .contentTitle{
@@ -227,3 +295,4 @@ button:hover{
 .submitBtn:hover{
     background-color:rgba(255, 229, 121, 0.7);
 }
+

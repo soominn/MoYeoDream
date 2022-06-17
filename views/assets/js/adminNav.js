@@ -45,11 +45,13 @@ $headerIcon.click(function(){
 
 let $studyParent = $(".studyParent");
 let $studyChild = $(".studyChild");
+let $studyArrow = $studyParent.find("svg");
 
 $studyParent.click(function(e){
     if(!$(this).hasClass("toggleYellow")){
         $(this).addClass("toggleYellow");
         $studyChild.addClass("toggleMenu");
+
     } else{
         $(this).removeClass("toggleYellow");
         $studyChild.removeClass("toggleMenu");
