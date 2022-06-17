@@ -7,7 +7,7 @@
     <title>MYDM | 관리자 센터</title>
     <link href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css" rel="stylesheet" type="text/css">
     <link href="assets/css/adminNav.css" rel="stylesheet">
-    <link href="assets/css/adminPostManage.css" rel="stylesheet">
+    <link href="assets/css/adminQnaView.css" rel="stylesheet">
 
 </head>
 <body>
@@ -69,81 +69,73 @@
     </nav>
     <!-- 여기까지 adminNav -->
     <section>
-        <di class="sectionWrap">
+        <div class="sectionWrap">
             <div class="topTitle">  
-                <h1>채용공고 관리</h1>
+                <h1>문의글 상세보기</h1>
             </div>
-            <div class="search">
-                
+            <div class="contentWrap">
+                <div class="backBtn">
+                    <div>
+                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" color="808080" cursor="pointer" height="30" width="30" xmlns="http://www.w3.org/2000/svg" style="color: rgb(128, 128, 128);"><path d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z"></path></svg>
+                    </div>
+                </div>
+                <div class="qnaTitle">
+                    <h1>스프링 개설 문의</h1>
+                </div>
+                <div class="writerWrap">
+                    <div class="writerImg">
+                        <img src="assets/img/mainicon.png">
+                    </div>
+                    <div class="writerName">
+                        <p>컴알못</p>
+                    </div>
+                    <div class="registerDate">
+                        <p>2022-06-17</p>
+                    </div>
+                </div>
+                <div class="pnaIntro">
+                </div>
+                <div class="pnaIntroDetail">
+                    <p>
+                        문의내용이 들어올 부분입니다.
+                    </p>
+                </div>
             </div>
-            <div class="tableWrap">
-                <table class="postList">
-                    <tr>
-                        <th width="8%" class="tableNum">NO</th>
-                        <th width="30%">공고 제목</th>
-                        <th width="13%">작성회사</th>
-                        <th width="13%">공고 종료일</th>
-                        <th width="13%">작성일</th>
-                        <th width="13%" class="status">상태</th>
-                        <th width="10%"></th>
-                    </tr>
-                    <tr>
-                        <td class="tableNum">26</td>
-                        <td>신입 및 경력직원 채용 공고_IT부문</td>
-                        <td>IT회사</td>
-                        <td>2022-07-07</td>
-                        <td>2020-06-17</td>
-                        <td class="status">승인대기</td>
-                        <td><button type="button" class="viewBtn">상세보기</button></td>
-                    </tr>
-                    <tr>
-                        <td class="tableNum">26</td>
-                        <td>신입 및 경력직원 채용 공고_IT부문</td>
-                        <td>IT회사</td>
-                        <td>2022-07-07</td>
-                        <td>2020-06-17</td>
-                        <td class="status">승인대기</td>
-                        <td><button type="button" class="viewBtn">상세보기</button></td>
-                    </tr>
-                </table>
+            <div class="qnaPrintWrap">
+                <div>
+                    <div class="commentTitle"><p>답변</p></div>
+                    <ul class="commentPrintWrap">
+                        <li>
+                            <div class="commentPrint">
+                                <p>답변 내용이 들어갑니다.</p>
+                            </div>
+                            <div class="commentManageBtn">
+                                <div>
+                                    <button type="button" class="modifyBtn">수정</button>
+                                    <button type="button" class="deleteBtn">삭제</button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div>
-                <div class="pageNumWrap">
-					<div class="numberBtns">
-						<button type="button">
-							<span>
-								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-									<path fill-rule="evenodd" d="M15.5 5.5l-6 6.5 6 6.5L14 20l-7.5-8L14 4l1.5 1.5z" fill="#1a1a1a"></path>
-								</svg>
-							</span>
-						</button>
-						<button type="button" class="numBtn selected">
-							<span>
-								1
-							</span>
-						</button>
-						<div id="newInquiryButton">
-						<button type="button" class="numBtn">
-							<span id="helpNumber">
-								2
-							</span>
-						</button>
-						</div>
-						<div id="newInquiryButton2"></div>
-						<button type="button">
-							<span>
-								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-									<path fill-rule="evenodd" d="M8.5 18.5l6-6.5-6-6.5L10 4l7.5 8-7.5 8-1.5-1.5z" fill="#1a1a1a"></path>
-								</svg>
-							</span>
-						</button>
-					</div>
-				</div>
+            <div class="qnaCommentWrap">
+                <div>
+                    <div class="commentInputTitle"><p>답변 입력</p></div>
+                    <div class="commentInput">
+                        <textarea name="" id="" cols="30" rows="10"></textarea>
+                    </div>
+                    <div class="btnWrap">  
+                        <div>
+                            <button type="button" class="confirm">등록</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="assets/js/adminNav.js"></script>
-<script src="assets/js/adminStudyManage.js"></script>
+<script src="assets/js/adminStudyView.js"></script>
 </html>
