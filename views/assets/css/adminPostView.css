@@ -50,8 +50,16 @@ body {
     width : 1500px;
 }
 
-.studyTitle{
+.postTitle{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     font-size: 30px;
+}
+
+.postImg{
+    width : 400px;
+    height : fit-content;
 }
 
 .writerWrap{
@@ -118,14 +126,14 @@ div.openLink{
     padding-left: 10px;
 }
 
-.studyIntro{
+.postIntro{
     padding-left: 30px;
     font-size: 25px;
     font-weight: 600;
     border-bottom: 3px solid #f2f2f2;
 }
 
-.studyIntroDetail p{
+.postIntroDetail p{
     font-size: 17px;
 }
 

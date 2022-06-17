@@ -7,7 +7,7 @@
     <title>MYDM | 관리자 센터</title>
     <link href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css" rel="stylesheet" type="text/css">
     <link href="assets/css/adminNav.css" rel="stylesheet">
-    <link href="assets/css/adminStudyManage.css" rel="stylesheet">
+    <link href="assets/css/adminPostView.css" rel="stylesheet">
 
 </head>
 <body>
@@ -69,84 +69,81 @@
     </nav>
     <!-- 여기까지 adminNav -->
     <section>
-        <di class="sectionWrap">
+        <div class="sectionWrap">
             <div class="topTitle">  
-                <h1>스터디 관리</h1>
+                <h1>채용공고 상세보기</h1>
             </div>
-            <div class="search">
-                
+            <div class="contentWrap">
+                <div class="backBtn">
+                    <div>
+                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" color="808080" cursor="pointer" height="30" width="30" xmlns="http://www.w3.org/2000/svg" style="color: rgb(128, 128, 128);"><path d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z"></path></svg>
+                    </div>
+                </div>
+                <div class="postTitle">
+                    <h1>신입 및 경력직원 채용 공고_IT부문</h1>
+                    <div class="postImg">
+                        <img src="assets/img/fileImg.png">
+                    </div>
+                </div>
+                <div class="writerWrap">
+                    <div class="writerImg">
+                        <img src="assets/img/mainicon.png">
+                    </div>
+                    <div class="writerName">
+                        <p>IT회사</p>
+                    </div>
+                    <div class="registerDate">
+                        <p>2022-06-17</p>
+                    </div>
+                </div>
+                <div class="basicInfoWrap">
+                    <div class="">
+                        <p class="infoQ">근무 지역</p>
+                        <p class="infoA">서울</p>
+                    </div>
+                    <div class="">
+                        <p class="infoQ">접수 기간</p>
+                        <p class="infoA">2022-06-27</p>
+                        <p class="infoA">&nbsp ~ &nbsp</p>
+                        <p class="infoA">2022-07-07</p>
+                    </div>
+                    <div class="">
+                        <p class="infoQ">채용 형태</p>
+                        <p class="infoA">신입</p>
+                        <p class="infoA">&nbsp / &nbsp</p>
+                        <p class="infoA">정규직</p>
+                    </div>
+                    <div class="">
+                        <p class="infoQ">지원 자격</p>
+                        <p class="infoA">학력무관</p>
+                    </div>
+                    <div class="">
+                        <p class="infoQ">기업 사이트</p>
+                        <div class="openLink">
+                            <p class="infoA">hhtml:////</p>
+                            <img src="assets/img/openLink.svg">
+                        </div>
+                    </div>
+                </div>
+                <div class="postIntro">
+                    <p>기업 소개</p>
+                </div>
+                <div class="postIntroDetail">
+                    <p>
+                        기업사이트가 들어올 부분입니다
+                    </p>
+                </div>
             </div>
-            <div class="tableWrap">
-                <table class="studyList">
-                    <tr>
-                        <th width="5%" class="tableNum">NO</th>
-                        <th width="24%">스터디 제목</th>
-                        <th width="14%">카테고리</th>
-                        <th width="13%">시작 예정일</th>
-                        <th width="13%">작성자</th>
-                        <th width="13%">작성일</th>
-                        <th width="10%" class="status">상태</th>
-                        <th width="8%"></th>
-                    </tr>
-                    <tr>
-                        <td class="tableNum">1</td>
-                        <td>왕초보 스프링 스터디</td>
-                        <td>프로그래밍</td>
-                        <td>2022-07-07</td>
-                        <td>스프링뿌셔</td>
-                        <td>2020-06-17</td>
-                        <td class="status">승인대기</td>
-                        <td><button type="button" class="viewBtn">상세보기</button></td>
-                    </tr>
-                    <tr>
-                        <td class="tableNum">1</td>
-                        <td>왕초보 스프링 스터디</td>
-                        <td>프로그래밍</td>
-                        <td>2022-07-07</td>
-                        <td>스프링뿌셔</td>
-                        <td>2020-06-17</td>
-                        <td class="status">승인대기</td>
-                        <td><button type="button" class="viewBtn">상세보기</button></td>
-                    </tr>
-                </table>
-            </div>
-            <div>
-                <div class="pageNumWrap">
-					<div class="numberBtns">
-						<button type="button">
-							<span>
-								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-									<path fill-rule="evenodd" d="M15.5 5.5l-6 6.5 6 6.5L14 20l-7.5-8L14 4l1.5 1.5z" fill="#1a1a1a"></path>
-								</svg>
-							</span>
-						</button>
-						<button type="button" class="numBtn selected">
-							<span>
-								1
-							</span>
-						</button>
-						<div id="newInquiryButton">
-						<button type="button" class="numBtn">
-							<span id="helpNumber">
-								2
-							</span>
-						</button>
-						</div>
-						<div id="newInquiryButton2"></div>
-						<button type="button">
-							<span>
-								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-									<path fill-rule="evenodd" d="M8.5 18.5l6-6.5-6-6.5L10 4l7.5 8-7.5 8-1.5-1.5z" fill="#1a1a1a"></path>
-								</svg>
-							</span>
-						</button>
-					</div>
-				</div>
+            <div class="btnWrap">  
+                <div>
+                    <button type="button" class="confirm">승인</button>
+                    <button type="button" class="refuse">반려</button>
+                </div>
             </div>
         </div>
     </section>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="assets/js/adminNav.js"></script>
-<script src="assets/js/adminStudyManage.js"></script>
+<script src="assets/js/adminStudyView.js"></script>
 </html>
