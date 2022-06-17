@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MoYeoDream!</title>
     
-    <link rel="stylesheet" href="assets/css/header.css">
-    <link rel="stylesheet" href="assets/css/myComment.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/myPost.css">
     <link href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -19,7 +19,7 @@
             <div class="headerWrap">
                 <div class="headerLeft">
                     <div class="headerLogo">
-                        <img src="assets/img/logo.png">
+                        <img src="/img/logo.png">
                     </div>
                 </div>
                 <div class="headerRight">
@@ -35,7 +35,7 @@
                         <button class="qnaBtn">문의하기</button>
                     </div>
                     <div class="headerNoti">
-                        <img src="assets/img/notification.svg">
+                        <img src="/img/notification.svg">
                         <div class="notiHidden">
                             <div class="notiBoxTop">
                                 <div>
@@ -49,7 +49,7 @@
                         </div>
                     </div>
                     <div class="headerIcon">
-                        <img src="assets/img/mainicon.png">
+                        <img src="/img/mainicon.png">
                         <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"></path></svg>
                         <div class="iconHidden">
                             <div><p>내 작성글</p></div>
@@ -62,6 +62,9 @@
         </header>
         <!-- 헤더 끝 -->
 
+
+
+
         <section class="myPosts_pageWrapper__2qXu7">
             <div class="myPosts_myLikes__2p117">
                 <main class="myPosts_main__2wLL_">
@@ -71,13 +74,13 @@
                                 <path d="M448 360V24c0-13.3-10.7-24-24-24H96C43 0 0 43 0 96v320c0 53 43 96 96 96h328c13.3 0 24-10.7 24-24v-16c0-7.5-3.5-14.3-8.9-18.7-4.2-15.4-4.2-59.3 0-74.7 5.4-4.3 8.9-11.1 8.9-18.6zM128 134c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm0 64c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm253.4 250H96c-17.7 0-32-14.3-32-32 0-17.6 14.4-32 32-32h285.4c-1.9 17.1-1.9 46.9 0 64z"></path>
                             </svg>
                             <span class="myPosts_text__nTd81">
-                                댓글 작성 목록
+                                게시글 작성 목록
                             </span>
                         </div>
                     </section>
                     
                     <div>
-                        <h3 class="info-read">게시글 별 작성한 댓글입니다.</h3>
+                        <h3 class="info-read">내가 작성한 글입니다.</h3>
                         <span class="delete-button">삭제하기</span>
                         <span class="not-delete-button">취소</span>
                         <span class="all-delete-button">전체선택</span>
@@ -96,21 +99,20 @@
                                         <div class="question__info">
                                             <div class="question__title">
                                                 <h3 class="title__text">
-                                                    mbti가 뭐예요?
+                                                    게시글 제목이 궁금합니다.
                                                 </h3>
                                             </div>
-                                            작성한 댓글 &nbsp&nbsp
-                                            <span class="question__body">심리유형론을 바탕으로 한 성격 유형 검사입니다.</span>
+                                            <p class="question__body">이 게시물의 내용은 무엇입니까?</p>
                                             <div class="question__tags"></div>
                                             <div class="question__info-footer">
                                                 <span>홍길동</span>
                                                 <span>&nbsp;·&nbsp;</span>
-                                                17분 전 · 초2 받아쓰기 과정
+                                                17분 전 · 한식조리기능사 과정
                                             </div>
                                         </div>
                                         <div class="question__additional-info">
                                             <div class="question__comment">
-                                                <span class="comment__count">1</span>
+                                                <span class="comment__count">0</span>
                                                 <span class="comment__description">답변</span>
                                             </div>
                                             <button class="ac-button is-md is-text question__like e-like ">
@@ -127,7 +129,39 @@
 
 
 
-                            
+                            <li class="question-container">
+                                <a href="">
+                                    <div class="question">
+                                        <div class="question__info">
+                                            <div class="question__title">
+                                                <h3 class="title__text">
+                                                    있잖아, 내가 말이야
+                                                </h3>
+                                            </div>
+                                            <p class="question__body">말이야</p>
+                                            <div class="question__tags"></div>
+                                            <div class="question__info-footer">
+                                                <span>김말</span>
+                                                <span>&nbsp;·&nbsp;</span>
+                                                1시간 전 · 승마 초급 과정
+                                            </div>
+                                        </div>
+                                        <div class="question__additional-info">
+                                            <div class="question__comment">
+                                                <span class="comment__count">0</span>
+                                                <span class="comment__description">답변</span>
+                                            </div>
+                                            <button class="ac-button is-md is-text question__like e-like ">
+                                                <svg width="16" xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 16 16">
+                                                    <path fill="#616568" d="M9.333 13.605c-.328.205-.602.365-.795.473-.102.057-.205.113-.308.168h-.002c-.143.074-.313.074-.456 0-.105-.054-.208-.11-.31-.168-.193-.108-.467-.268-.795-.473-.655-.41-1.53-1.007-2.408-1.754C2.534 10.382.667 8.22.667 5.676c0-2.308 1.886-4.01 3.824-4.01 1.529 0 2.763.818 3.509 2.07.746-1.252 1.98-2.07 3.509-2.07 1.938 0 3.824 1.702 3.824 4.01 0 2.545-1.867 4.706-3.592 6.175-.878.747-1.753 1.344-2.408 1.754z"></path>
+                                                </svg>
+                                                1004 
+                                            </button>
+                                        </div>
+                                        <input type="checkbox" class="delete-checkbox" name="chk">
+                                    </div>
+                                </a>
+                            </li>
 
 
 
@@ -155,6 +189,6 @@
     </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="assets/js/header.js"></script>
-<script src="assets/js/myComment.js"></script>
+<script src="/js/header.js"></script>
+<script src="/js/myPost.js"></script>
 </html>
