@@ -177,8 +177,8 @@ header{
     font-weight: 400;
 }
 
-.hidden{
-    display: none;
+.open{
+    display: block;
 }
 
 .iconHidden div{
