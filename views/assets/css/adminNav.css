@@ -7,6 +7,7 @@ body {
 }
 
 header{
+    position: fixed;
     width : 100%;
     background-color: white;
     border-bottom: 1px solid #d0d0d0;;
@@ -93,10 +94,12 @@ header{
 
 nav{
     position : fixed; /* 왼쪽으로 고정하기 위함 */
+    margin-top: 86px;
     width : 300px;
     height : 100%;
     background-color: white;
     border-right : 1px solid #d0d0d0;
+    overflow: hidden;
 }
 
 .navWrap{
