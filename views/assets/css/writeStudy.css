@@ -79,9 +79,14 @@ section{
     margin-bottom: 25px;
 }
 
+.infoWrap{
+    margin: 50px 0;
+}
+
 .introWrap{
     display: flex;
     flex-direction: column;
+    margin: 40px 0;
 }
 
 .selectWrap{
@@ -105,19 +110,33 @@ section{
     font-weight: 500;
 }
 
+#startDate{
+    border: none;
+    font-family: inherit;
+    width: 480px;
+    color: #333;
+    font-size: 16px;
+    font-weight: 400;
+}
+
 .selectBox{
     position: relative;
     display: inline-block;
     width : 100%;
     height: 56px;
+    box-sizing: border-box;
     background-color: white;
     box-sizing: border-box;
     border : 1px solid rgb(204, 204, 204);
     border-radius: 4px;
+    color: #333;
+    font-size: 16px;
+    font-weight: 400;
 }
 
 .selectBox:hover{
     border :2px solid #ffcd00;
+    box-sizing: border-box;
 }
 
 .selected {
@@ -263,6 +282,3 @@ button:hover{
     background-color:rgba(255, 229, 121, 0.7);
 }
 
-#startDate{
-    border :1px solid rgb(128, 128, 128);
-}
