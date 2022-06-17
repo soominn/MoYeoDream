@@ -5,10 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MoYeoDream!</title>
+    <link href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css" rel="stylesheet" type="text/css">
+    <!-- 썸머노트 -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/header.css">
     <link rel="stylesheet" href="assets/css/writeStudy.css">
-    <link href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css" rel="stylesheet" type="text/css">
-
 </head>
 <body>
     <!-- 헤더 시작 -->
@@ -23,7 +25,7 @@
                 <div class="write">
                     <button class="writeBtn">새 글 쓰기</button>
                     <div class="writeHidden">
-                        <div><p>스터디 • 프로젝트</p></div>
+                        <div><p>스터디</p></div>
                         <div><p>채용 공고</p></div>
                         <div><p>자유 게시판</p></div>
                     </div>
@@ -118,13 +120,13 @@
                                         <label for="startDate">
                                             <div class="selectBox">
                                                 <div class="selected"> 
-                                                    <div class="selectedValue">시작 예정일 선택</div>
+                                                    <!-- <div class="selectedValue">시작 예정일 선택</div>
                                                     <div class="arrow">
                                                         <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="CalendarIcon"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"></path></svg>
-                                                    </div>
-                                                 </div>
-                                             </div>
-                                             <input type="date" name="startDate" id="startDate">
+                                                    </div> -->
+                                                    <input type="date" name="startDate" id="startDate">
+                                                </div>
+                                            </div>
                                         </label>
                                     </li>
                                     <li class="selectChild">
@@ -210,7 +212,7 @@
                     <div class="introWrap">
                         <p>제목</p>
                         <input type="text" class="contentTitle" name="title" placeholder="글 제목을 입력해주세요!">
-                        <textarea name="content" placeholder="프로젝트에 대해 소개해주세요! (썸머노트로 대체예정)"></textarea>
+                        <textarea id="summernote" name="content"></textarea>
                     </div>
                 </div>
                 <div class="btnWrap">
@@ -222,6 +224,11 @@
     </section>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- 썸머노트 -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<script src="https://github.com/summernote/summernote/tree/master/lang/summernote-ko-KR.js"></script>
+<!--  -->
 <script src="assets/js/header.js"></script>
 <script src="assets/js/writeStudy.js"></script>
 </html>
