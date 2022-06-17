@@ -76,6 +76,8 @@ section{
 
 .infoTitle h2{
     margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 600;
 }
 
 .introTitle{
@@ -83,6 +85,11 @@ section{
     align-items: center;
     border-bottom: 3px solid #f2f2f2;
     margin-bottom: 25px;
+}
+
+.introTitle h2{
+    font-size: 24px;
+    font-weight: 600;
 }
 
 .infoWrap{
