@@ -406,3 +406,129 @@ input[type="checkbox"]{
 .contentReaction div p{
     color: #999;
 }
+
+.modalWrap{
+    position: fixed;
+    top : 0 ;
+    left: 0 ;
+    bottom: 0;
+    right: 0;
+    display: block;
+    width : 100%;
+    height : 100%;
+    z-index: 1998;
+}
+
+.modalBack{
+    position: fixed;
+    top : 0 ;
+    left: 0 ;
+    bottom: 0;
+    right: 0;
+    width : 100%;
+    height : 100%;
+    background: rgba(77, 77, 77, 0.5);
+    z-index: 1999;
+}
+
+.modalContent{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width : 800px;
+    height : 555px;
+    box-sizing: border-box;
+    background-color: white;
+    z-index: 2000;
+}
+
+.modalTop{
+    width : 100%;
+    height : 48px;
+    box-sizing: border-box; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding : 0 15px;
+    background: #f8f9fa;
+    border-radius: 8px 8px 0 0;
+}
+
+.modalTop img{
+    height : 35px;
+    width: fit-content;
+}
+
+.modalBottom{
+    width : 100%;
+    height : 507px;
+    border-radius: 0 0 8px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start
+}
+
+.welcomeText{
+    margin-top : 15px;
+}
+
+.welcomeText p{
+    font-size: 32px;
+    color: #333;
+    font-family: inherit;
+    font-weight: 800;
+}
+
+button{
+    outline : none;
+    border : none;
+}
+
+.loginBtnWrap{
+    width : 60%;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    margin-top: 30px;
+}
+
+.loginBtnWrap div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.loginBtn{
+    width: 8rem;
+    height: 8rem;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    transition: all .125s ease-in 0s;
+    color: #fff;
+    box-shadow: 0 5px 25px rgb(0 0 0 / 15%);
+    cursor: pointer;
+}
+
+.loginBtnWrap div p{
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    color : #333;
+}
+
+.google{
+    background-color: white;
+}
+
+.github{
+    background-color: #272e33;
+}
+
+.kakao{
+    background-color: #fae100;
+}
