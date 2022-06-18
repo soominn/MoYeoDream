@@ -5,20 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>커뮤니티</title>
-    <link rel="stylesheet" href="assets/css/borderWrite.css" />
-    <link rel="stylesheet" href="assets/css/header.css" />
+    <link rel="stylesheet" href="/css/boardEdit.css" />
+    <link rel="stylesheet" href="/css/header.css" />
     <link
       href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css"
       rel="stylesheet"
       type="text/css"
-    />
-    <link
-      href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"
-      rel="stylesheet"
-    />
-    <link
-      href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css"
-      rel="stylesheet"
     />
   </head>
   <body>
@@ -27,7 +19,7 @@
         <div class="headerWrap">
           <div class="headerLeft">
             <div class="headerLogo">
-              <img src="assets/img/logo.png" />
+              <img src="/img/logo.png" />
             </div>
           </div>
           <div class="headerRight">
@@ -43,7 +35,7 @@
               <button class="qnaBtn">문의하기</button>
             </div>
             <div class="headerNoti">
-              <img src="assets/img/notification.svg" />
+              <img src="/img/notification.svg" />
               <div class="notiHidden">
                 <div class="notiBoxTop">
                   <div>
@@ -72,7 +64,7 @@
               </div>
             </div>
             <div class="headerIcon">
-              <img src="assets/img/mainicon.png" />
+              <img src="/img/mainicon.png" />
               <svg
                 stroke="currentColor"
                 fill="currentColor"
@@ -97,43 +89,34 @@
         <section>
           <div class="boardPost_ContentWrapper">
             <span class="post_Circle"></span>
-            <h2 class="boardPost_text">자유롭게 글을 작성해주세요.</h2>
+            <h2 class="boardPost_text">글을 수정해주세요.</h2>
           </div>
         </section>
         <section>
-          <!-- 게시판 글쓰기 카테고리 -->
-          <div class="board-category">
-            <label for="category-select">카테고리</label>
-            <div class="select">
-              <select name="category" id="category-select">
-                <option value="free-talking">자유주제</option>
-                <option value="qna">질문&답변</option>
-                <option value="study-review">스터디 후기</option>
-                <option value="interview-review">기업면접 후기</option>
-              </select>
-            </div>
-          </div>
-          <!-- 게시판 글쓰기 카테고리 -->
           <label for="input" class="input_labelText">제목</label>
           <input
             type="text"
             class="input_box"
             id="input"
-            placeholder="글 제목을 입력해주세요!"
-            value
+            placeholder="글 제목"
+            value="오류가 났는데 해결이 안됩니다."
           />
-          <div class="summernote"></div>
+          <div class="postText_box">
+            <textarea
+              class="comment-input"
+              placeholder="욕설/비방/비하 게시물은 삭제처리 될 수 있습니다."
+            >
+프로젝트를 진행하던 중에 오류가 났습니다. 구글링해서 찾아봤는데도 답이 안나오네요 도와주세요 이것저것 건들여도 해결이 안됩니다. 유튜브에 영상있길래 따라 해봤는데 해결이 되지 않네요 혹시 아시는 분 있을까요?</textarea
+            >
+          </div>
         </section>
         <section class="register_button">
-          <button class="write_register">글 등록</button>
-          <button class="write_cancel">취소</button>
+          <button class="write_register">수정하기</button>
+          <button class="write_cancel">취소하기</button>
         </section>
       </div>
     </div>
   </body>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
-  <script src="assets/js/boardWrite.js"></script>
-  <script src="assets/js/header.js"></script>
+  <script src="/js/header.js"></script>
 </html>
