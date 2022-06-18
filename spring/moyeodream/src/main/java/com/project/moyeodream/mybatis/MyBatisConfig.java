@@ -42,6 +42,7 @@ public class MyBatisConfig {
         sqlSessionFactoryBean.setDataSource(hikariDataSource());
 //        SQL 쿼리를 작성할 mapper.xml 경로 설정
         sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath*:/mapper/*.xml"));
+        sqlSessionFactoryBean.setConfigLocation(applicationContext.getResource("classpath:/config/config.xml"));
         try {
 //            위에서 설정한 세션 팩토리 빈을 통해 세션 팩토리 생성
             SqlSessionFactory sqlSessionFactory = sqlSessionFactoryBean.getObject();
