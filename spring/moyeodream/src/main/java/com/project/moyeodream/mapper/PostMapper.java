@@ -10,14 +10,14 @@ import java.util.List;
 public interface PostMapper {
     // 전체 자유 게시판 목록
     public List<PostVO> getList();
-    // 자유 게시판 조회
-    public JobpostingVO read(PostVO PostVO);
+    // 자유 게시판 상세 조회
+    public PostVO read(int postNumber);
     // 내 자유 게시판 글 확인
-    public JobpostingVO myPost(int postNumber);
+    public PostVO myPost(int memberNumber);
     // 자유 게시판 작성
-    public void insert(PostVO PostVO);
+    public void insert(PostVO postVO);
     // 자유 게시판 수정
-    public int update(PostVO PostVO);
+    public int update(PostVO postVO);
     // 자유 게시판 삭제
     public int delete(int postNumber);
 }

@@ -12,7 +12,7 @@ public interface JobpostingMapper {
     // 승인된 채용 공고 목록
     public List<JobpostingVO> getApproveList();
     // 채용 공고 상세 조회
-    public JobpostingVO read(JobpostingVO jobpostingVO);
+    public JobpostingVO read(int jobpostingNumber);
     // 채용 공고 작성
     public void insert(JobpostingVO jobpostingVO);
     // 채용 공고 수정

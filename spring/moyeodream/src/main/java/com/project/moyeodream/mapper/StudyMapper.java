@@ -1,6 +1,5 @@
 package com.project.moyeodream.mapper;
 
-import com.project.moyeodream.domain.vo.JobpostingVO;
 import com.project.moyeodream.domain.vo.StudyVO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -12,12 +11,12 @@ public interface StudyMapper {
     public List<StudyVO> getList();
     // 승인된 스터디 목록
     public List<StudyVO> getApproveList();
-    // 스터디 조회
-    public JobpostingVO read(StudyVO studyVO);
+    // 스터디 상세 조회
+    public StudyVO read(int studyNumber);
     // 내가 만든 스터디 목록
-    public List<JobpostingVO> CratedList(int userNumber);
+    public List<StudyVO> CratedList(int userNumber);
     // 내가 참여중인 스터디 목록
-    public List<JobpostingVO> participatingList(int userNumber);
+    public List<StudyVO> participatingList(int userNumber);
     // 스터디 작성
     public void insert(StudyVO studyVO);
     // 스터디 수정
@@ -25,7 +24,7 @@ public interface StudyMapper {
     // 스터디 삭제
     public int delete(int studyNumber);
     // 카테고리 별 스터디
-    public List<JobpostingVO> getCategoryList(String studyCategory);
+    public List<StudyVO> getCategoryList(String studyCategory);
     // 스터디 승인
     public int approve(int studyNumber);
     // 스터디 거절
