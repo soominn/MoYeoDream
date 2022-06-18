@@ -19,7 +19,7 @@ public class CommentController {
 
     // 내 댓글 목록
     @GetMapping("list")
-    public String myComment(){
+    public String myComment(Integer postNumber){
         return "myPage/myComment";
     }
 }
