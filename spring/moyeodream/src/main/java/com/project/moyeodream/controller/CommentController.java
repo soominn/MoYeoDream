@@ -25,7 +25,7 @@ public class CommentController {
     @GetMapping("remove")
     public void commentRemove(Integer commentNumber){ }
 
-    // 내 댓글 목록
+    // 내 댓글 목록 조회
     @GetMapping("list")
     public void myComment(Integer postNumber){ }
 }

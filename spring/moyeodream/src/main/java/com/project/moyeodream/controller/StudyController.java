@@ -60,9 +60,9 @@ public class StudyController {
 
     // 스터디 모집 작성
     @GetMapping("studyCreate")
-    public void studyCreate() {}
+    public void studyCreate(){}
 
     // 스터디 모집 상세보기
     @GetMapping("studyView")
-    public void studyView() {}
+    public void studyView(){}
 }

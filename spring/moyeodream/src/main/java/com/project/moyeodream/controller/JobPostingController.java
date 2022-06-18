@@ -52,7 +52,7 @@ public class JobPostingController {
     @GetMapping("jobPostingCreate")
     public void jobPostingCreate() {}
 
-    // 채용 공고 상세보기
+    // 채용 공고 상세 보기
     @GetMapping("jobPostingView")
     public void jobPostingView() {}
 }

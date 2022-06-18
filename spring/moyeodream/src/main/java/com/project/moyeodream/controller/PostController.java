@@ -43,16 +43,16 @@ public class PostController {
     // 게시판 메인
     @GetMapping("board")
     public String board(){ return "board/board";}
-    // 게시판 세부사항
 
+    // 게시판 세부사항
     @GetMapping("boardDetail")
     public String boardDetail(){ return "board/boardDetail";}
-    // 게시판 글쓰기
 
+    // 게시판 글쓰기
     @GetMapping("boardWrite")
     public String boardWrite(){ return "board/boardWrite";}
-    // 게시판 수정
 
+    // 게시판 수정
     @GetMapping("boardEdit")
     public String boardEdit(){ return "board/boardEdit";}
 }

@@ -40,9 +40,11 @@ public class InquiryController {
         @GetMapping("inquiryCreate")
         public void inquiryCreate(){}
 
+        // 문의 목록
         @GetMapping("inquiryList")
         public void inquiryList(){}
 
+        // 문의 상세보기
         @GetMapping("inquiryView")
         public void inquiryView(){}
 }

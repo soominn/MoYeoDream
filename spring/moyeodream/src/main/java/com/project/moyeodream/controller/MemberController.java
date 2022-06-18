@@ -39,20 +39,20 @@ public class MemberController {
     // 내 정보
     @GetMapping("myPage")
     public String myPage(){ return "myPage/myPage"; }
-    // 내 정보수정
 
+    // 내 정보수정
     @GetMapping("myProfile")
     public String myProfile(){ return "myPage/myProfile"; }
-    // 내 스터디
 
+    // 내 스터디
     @GetMapping("myStudy")
     public String myStudy(){ return "myPage/myStudy"; }
-    //내 게시글
 
+    //내 게시글
     @GetMapping("myPost")
     public String myPost(){ return "myPage/myPost"; }
-    //내 댓글
 
+    //내 댓글
     @GetMapping("myComment")
     public String myComment(){ return "myPage/myComment"; }
 }
