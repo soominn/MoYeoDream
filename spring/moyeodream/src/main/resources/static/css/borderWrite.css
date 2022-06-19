@@ -92,7 +92,6 @@ div.select select {
   font-size: 16px;
   font-weight: 500;
   color: #333;
-  margin-bottom: 15px;
 }
 .postText_box {
   margin-top: 16px;
@@ -123,4 +122,8 @@ div.select select {
 .write_cancel {
   background-color: #e9ecef;
   color: #495057;
+}
+
+div.note-editor {
+  margin-top: 36px;
 }

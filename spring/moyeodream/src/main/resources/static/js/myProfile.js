@@ -32,9 +32,6 @@ imgDelete.addEventListener("click", function() {
 /* 세부 카테고리 */
 const $cateChildLiArr = $(".select-value");
 
-// cateChildLi (카테고리) 개수
-let $cateChildLength = $cateChildLiArr.length;
-
 // 카테고리 클릭시 나오는 block
 const $cateBlockArr = $(".cateBlock");
 
