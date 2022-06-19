@@ -132,3 +132,23 @@ $cateBlockArr.each(function() {
 $clear.click(function() {
 	$cateBlockArr.hide();
 });
+
+const $loginBtn = $("button.loginBtn");
+const $loginBg = $("div.login-bg");
+const $loginMain = $("div.login-main");
+const $xDiv = $("div.login-exit");
+
+$xDiv.on("click", function () {
+	$loginBg.css("display", "none");
+	$loginMain.css("display", "none");
+	$(loginContent).css("display", "flex");
+	$(nicknameContent).css("display", "none");
+	$(interestContent).css("display", "none");
+	$(imgContent).css("display", "none");
+	$(joinOk).css("display", "none");
+});
+
+$loginBtn.on("click", function () {
+	$loginBg.css("display", "block");
+	$loginMain.css("display", "block");
+});
