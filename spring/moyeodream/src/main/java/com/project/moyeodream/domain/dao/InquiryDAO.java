@@ -39,6 +39,6 @@ public class InquiryDAO {
 
     // 문의하기 답변
     public void answer(InquiryVO inquiryVO){
-
+        inquiryMapper.answer(inquiryVO);
     }
 }
