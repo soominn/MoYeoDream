@@ -15,7 +15,7 @@ body {
     max-width: 1200px;
     width: 100%;
     padding: 0 15px;
-    margin: 70px auto;
+    margin: 30px auto;
 }
 
 ul {
@@ -100,7 +100,7 @@ p{
     gap: 35px;
     flex-wrap: wrap;
     padding: 0;
-    margin-bottom: 10rem;
+    margin-bottom: 3rem;
 }
 
 .study-box{
@@ -228,6 +228,31 @@ p{
 
 .my-create-box{
     display: flex;
+    margin-bottom: 10rem;
 }
 
+.myCreateChildren {
+    display: flex;
+    align-items: center;
+    /*border-bottom: 3px solid #f2f2f2;*/
+}
 
+.myCreateChildren span{
+    margin-right: 17px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background:#ffe579;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+}
+
+.myCreateChildren p {
+    font-size: 23px;
+    font-weight: 700;
+    color: #333;
+}
