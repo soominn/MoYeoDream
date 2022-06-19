@@ -16,6 +16,32 @@ button {
     cursor: pointer;
 }
 
+div.login-bg {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top:0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 999;
+    transition: all .5s ease-in-out;
+}
+
+div.login-main {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 550px;
+    z-index: 1000;
+    transition: all .5s ease-in-out;
+}
+
 div.login-wrap {
     width: 800px;
     height: 550px;
@@ -606,3 +632,4 @@ div.img-content, div.join-ok, div.nickname-content, div.interest-content {
     color: #868e96;
     margin-left: 10px;
 }
+
