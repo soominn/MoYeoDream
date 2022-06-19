@@ -12,6 +12,10 @@ section{
     width : 100%;
 }
 
+p {
+    margin: 0;
+}
+
 .banner{
     width : 100%;
     height: 330px;
@@ -132,7 +136,7 @@ section{
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
-    padding : 0 20px;
+    margin-bottom: 2rem;
 }
 
 .typeWrap{
@@ -143,7 +147,7 @@ section{
 }
 
 .typeWrap div{
-    margin: 0 10px;
+    margin-right: 1.5rem;
 }
 
 .typeLi{
@@ -172,7 +176,7 @@ section{
     margin-top: 15px;
     margin-right: 20px;
     font-size: 20px;
-    font-weight: 450;
+    font-weight: 500;
 }
 
 .cateChildLi:hover{
@@ -290,47 +294,40 @@ input[type="checkbox"]{
 }
 
 .contentList3Wrap{
-    margin: 0;
-    padding: 0;
     display: flex;
-    flex-direction: row;
+    grid-gap: 35px;
+    gap: 35px;
     flex-wrap: wrap;
-    justify-content: space-around;
+    padding: 0;
+    margin-bottom: 3rem;
 }
 
 .contentListChild{
-    list-style: none;
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin : 15px 0;
-    padding: 35px 26px 30px 34px;
+    padding: 70px 26px 26px 34px;
     width: 370px;
-    height: 400px;
-    box-sizing: border-box;
+    height: 450px;
     background: #fff;
     border: 2px solid #d1d1d1;
     border-radius: 30px;
+    position: relative;
     cursor: pointer;
+    transition: .2s ease-in;
+    box-sizing: border-box;
 }
 
 .contentListChild:hover{
-    transform: scale(1.03);
-    transition: transform 0.3s;
+    transform: scale(1.02);
 }
 
 .contentDate{
     display: flex;
     font-size: 18px;
+    grid-gap: 10px;
+    gap: 10px;
     color: rgba(0,0,0,.4);
-}
-
-.dateText::after{
-    height : 18px;
-    border : 1px solid rgba(0,0,0,.2);
-    content : "";
-    margin : 0 10px;
 }
 
 .contentListChild h2{
@@ -370,10 +367,10 @@ input[type="checkbox"]{
 
 .contentBottom{
     display: flex;
+    font-size: 18px;
     justify-content: space-between;
-    align-items: center;
-    margin-top: 30px;
     border-top: 2px solid #f2f2f2;
+    padding-top: 16px;
 }
 
 .contentLeader{
@@ -382,14 +379,17 @@ input[type="checkbox"]{
 }
 
 .contentLeader img{
-    width : 40px;
-    height : 40px;
+    display: block;
+    width: 36px;
+    height: 36px;
+    margin-right: 10px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .contentLeader p{
     font-size: 18px;
     font-weight: 400;
-    margin-left: 7px;
 }
 
 .contentReaction{

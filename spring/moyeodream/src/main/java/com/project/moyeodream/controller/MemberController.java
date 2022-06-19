@@ -36,6 +36,10 @@ public class MemberController {
 
     // ----- 프론트 -----
 
+    // 메인
+    @GetMapping("main")
+    public String main(){ return "main"; }
+
     // 내 정보
     @GetMapping("myPage")
     public String myPage(){ return "myPage/myPage"; }

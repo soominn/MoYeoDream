@@ -107,9 +107,9 @@ p{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 48px 26px 26px 34px;
-    width: 209px;
-    height: 253px;
+    padding: 70px 26px 26px 34px;
+    width: 370px;
+    height: 450px;
     background: #fff;
     border: 2px solid #d1d1d1;
     border-radius: 30px;
@@ -118,32 +118,34 @@ p{
     transition: .2s ease-in;
 }
 
+.study-box:hover {
+    transform: scale(1.02);
+}
+
 .study-box2{
     opacity: 1;
 }
 
 .study-schedule{
     display: flex;
-    font-size: 15px;
+    font-size: 18px;
     grid-gap: 10px;
     gap: 10px;
     color: rgba(0,0,0,.4);
 }
 
 .study-scheduleTitle{
-    font-size: 15px;
+    font-size: 18px;
 }
 
 .study-title{
-    font-size: 21px;
+    font-size: 24px;
     min-height: 76px;
     line-height: 36px;
     font-weight: 400;
     letter-spacing: -.04em;
     margin: 16px 0;
     display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
     word-break: break-all;
     overflow: hidden;
 }
@@ -152,10 +154,11 @@ p{
     display: flex;
     grid-gap: 5px;
     gap: 5px;
-    font-size: 15px;
+    font-size: 18px;
     color: rgba(0,0,0,.4);
-    min-height: 30px;
-    margin-bottom: 40px;
+    margin-bottom: 36px;
+    min-height: 78px;
+    padding: 0;
 }
 
 .study-void-box{
@@ -169,7 +172,7 @@ p{
 
 .study-info{
     display: flex;
-    font-size: 15px;
+    font-size: 18px;
     justify-content: space-between;
     border-top: 2px solid #f2f2f2;
     padding-top: 16px;
@@ -194,7 +197,7 @@ p{
 }
 
 .avatar-userName{
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 400;
 }
 

@@ -42,6 +42,12 @@ imgImg.addEventListener("click", function() {
 	imgContent.style.display = "none";
 });
 
+joinOk.addEventListener("click", function() {
+	$loginBg.css("display", "none");
+	$loginContainer.css("display", "none");
+	$("body").css("overflow", "visible");
+});
+
 const imgThumbnail = document.querySelector("img.img-example");
 const imgFile = document.querySelector("input[id='img-choose']");
 const imgDelete = document.querySelector("button.img-delete");
@@ -65,55 +71,49 @@ imgDelete.addEventListener("click", function() {
 	imgThumbnail.src = "https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG";
 });
 
-// 카카오 로그인 API
-Kakao.init('ef4b848b330c9b997a796ac0ae5e7e3f'); // 발급 받은 키 중 javascript키를 사용해준다.
-console.log(Kakao.isInitialized()); // sdk 초기화 여부 판단
+const $loginBtn = $("button.loginBtn");
+const $loginBg = $("div.login-bg");
+const $loginContainer = $("div.login-container");
+const $xDiv = $("div.login-exit");
 
-// 카카오 로그인
-function kakaoLogin() {
-    Kakao.Auth.login({
-        success: function (response) {
-            Kakao.API.request({
-                url: '/v2/user/me',
-                success: function (response) {
-                    console.log(response);
-					loginContent.style.display = "none";
-					nicknameContent.style.display = "flex";
-                },
-                fail: function (error) {
-                    console.log(error);
-                },
-            });
-        },
-        fail: function (error) {
-            console.log(error);
-        },
-    });
-}
+$xDiv.on("click", function () {
+	$loginBg.css("display", "none");
+	$loginContainer.css("display", "none");
+	$(loginContent).css("display", "flex");
+	$(nicknameContent).css("display", "none");
+	$(interestContent).css("display", "none");
+	$(imgContent).css("display", "none");
+	$(joinOk).css("display", "none");
+	$("body").css("overflow", "visible");
+});
+
+$loginBtn.on("click", function () {
+	$loginBg.css("display", "block");
+	$loginContainer.css("display", "block");
+	$("body").css("overflow", "hidden");
+});
 
 // 관심분야 태그 부분
 $(function() {
-    $(".open-select").click(function() {
-        $(".select-box").toggle();
-    });
+	$(".open-select").click(function() {
+		$(".select-box").toggle();
+	});
 });
 
 // 세부 카테고리
-const $cateChildLiArr = $(".select-value");
-// cateChildLi (카테고리) 개수
-let $cateChildLength = $cateChildLiArr.length;
+const $cateChildLiAr = $(".select-value");
 // 카테고리 클릭시 나오는 block
-const $cateBlockArr = $(".cateBlock");
+const $cateBlockAr = $(".cate-block");
 // 모두 지우기 버튼
-const $clear = $(".delete-all-select");
+const $clearAll = $(".delete-all-select");
 // 해당 카테고리 지우기
-const $deleteOneArr = $(".choice-box-value-remove");
+const $deleteOneAr = $(".choice-box-value-remove");
 
-$cateChildLiArr.each(function() {
-	$(this).click(function(i) {
-		let $liValue = $(this).attr("value");
-        $cateBlockArr.each(function() {
-			if($(this).attr("value") == $liValue){
+$cateChildLiAr.each(function() {
+	$(this).click(function() {
+		let $value = $(this).attr("value");
+		$cateBlockAr.each(function() {
+			if($(this).attr("value") == $value){
 				$(this).show();
 			}
 		});
@@ -122,33 +122,39 @@ $cateChildLiArr.each(function() {
 });
 
 // 해당 카테고리 삭제
-$cateBlockArr.each(function() {
-	$cateBlockArr.children($deleteOneArr).click(function() {
-		$(this).parent(".cateBlock").hide();
-	})
+$cateBlockAr.each(function() {
+	$cateBlockAr.children($deleteOneAr).click(function() {
+		$(this).parent(".cate-block").hide();
+	});
 });
 
 // 전체 카테고리 삭제
-$clear.click(function() {
-	$cateBlockArr.hide();
+$clearAll.click(function() {
+	$cateBlockAr.hide();
 });
 
-const $loginBtn = $("button.loginBtn");
-const $loginBg = $("div.login-bg");
-const $loginMain = $("div.login-main");
-const $xDiv = $("div.login-exit");
+// 카카오 로그인 API
+// 참고 사이트 : https://tyrannocoding.tistory.com/49
+Kakao.init('ef4b848b330c9b997a796ac0ae5e7e3f');
+console.log(Kakao.isInitialized());
 
-$xDiv.on("click", function () {
-	$loginBg.css("display", "none");
-	$loginMain.css("display", "none");
-	$(loginContent).css("display", "flex");
-	$(nicknameContent).css("display", "none");
-	$(interestContent).css("display", "none");
-	$(imgContent).css("display", "none");
-	$(joinOk).css("display", "none");
-});
-
-$loginBtn.on("click", function () {
-	$loginBg.css("display", "block");
-	$loginMain.css("display", "block");
-});
+function kakaoLogin() {
+	Kakao.Auth.login({
+		success: function (response) {
+			Kakao.API.request({
+				url: '/v2/user/me',
+				success: function (response) {
+					console.log(response);
+					loginContent.style.display = "none";
+					nicknameContent.style.display = "flex";
+				},
+				fail: function (error) {
+					console.log(error);
+				},
+			});
+		},
+		fail: function (error) {
+			console.log(error);
+		},
+	});
+}
