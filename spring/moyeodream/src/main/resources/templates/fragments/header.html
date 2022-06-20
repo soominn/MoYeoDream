@@ -1,17 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MoYeoDream!</title>
-    <link href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="/css/header.css">
-    <link rel="stylesheet" type="text/css" href="/css/login.css">
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
-</head>
-<body>
-    <header>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <header th:fragment="header">
         <div class="headerWrap">
             <div class="headerLeft">
                 <div class="headerLogo">
@@ -30,9 +19,14 @@
                 <div class="qna">
                     <button class="qnaBtn">문의하기</button>
                 </div>
+                <div class="header-post">
+                    <button class="postBtn">자유게시판</button>
+                </div>
+                <!-- 로그인되기 전 -->
                 <div class="login">
                     <button class="loginBtn">로그인</button>
                 </div>
+                <!-- 로그인된 후 -->
                 <div class="logout">
                     <div class="headerNoti">
                         <img src="/img/notification.svg">
@@ -298,6 +292,4 @@
         </div>
         <!-- 로그인 끝 -->
     </header>
-</body>
 </html>
-
