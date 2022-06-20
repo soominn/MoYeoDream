@@ -21,6 +21,11 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
+    public List<PostVO> getCategoryList(String postCategory) {
+        return postDAO.getCategoryList(postCategory);
+    }
+
+    @Override
     public PostVO postRead(int postNumber) {
         return postDAO.postRead(postNumber);
     }

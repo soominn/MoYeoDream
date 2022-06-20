@@ -9,6 +9,8 @@ import java.util.List;
 public interface PostService {
     public List<PostVO> getList();
 
+    public List<PostVO> getCategoryList(String postCategory);
+
     public PostVO postRead(int postNumber);
 
     public PostVO myPost(int postNumber);
