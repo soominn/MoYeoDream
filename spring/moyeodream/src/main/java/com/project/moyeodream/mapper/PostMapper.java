@@ -2,6 +2,7 @@ package com.project.moyeodream.mapper;
 
 import com.project.moyeodream.domain.vo.JobpostingVO;
 import com.project.moyeodream.domain.vo.PostVO;
+import com.project.moyeodream.domain.vo.StudyVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -10,6 +11,8 @@ import java.util.List;
 public interface PostMapper {
     // 전체 자유 게시판 목록
     public List<PostVO> getList();
+    // 카테고리 별 스터디
+    public List<PostVO> getCategoryList(String postCategory);
     // 자유 게시판 상세 조회
     public PostVO read(int postNumber);
     // 내 자유 게시판 글 확인
