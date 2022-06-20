@@ -19,6 +19,11 @@ public class PostDAO {
         return postMapper.getList();
     }
 
+    // 카테고리 별 스터디
+    public List<PostVO> getCategoryList(String postCategory){
+        return postMapper.getCategoryList(postCategory);
+    }
+
     // 자유 게시판 조회
     public PostVO postRead(int postNumber){
         return postMapper.read(postNumber);
