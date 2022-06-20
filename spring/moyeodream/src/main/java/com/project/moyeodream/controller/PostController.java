@@ -22,6 +22,10 @@ public class PostController {
     @GetMapping("read")
     public void postRead(Integer boardNumber){}
 
+    // 카테고리별 자유 게시판 조회
+    @GetMapping("readCategory")
+    public void readCategory(String postCategory){}
+
     // 내 자유 게시판 글 확인
     @GetMapping("myPost")
     public void myPost(Integer memberNumber){}
