@@ -12,16 +12,35 @@ $cateListArr.each(function(i){
 
 
 /* 타입 선택 */
-let $typeArr = $(".typeLi");
+const $studyClick = $(".study-click");
+const $jobClick = $(".job-click");
+const $studyContent = $(".study-content");
+const $jobContent = $(".job-content");
 
-$typeArr.each(function(i){
-    $(this).click(function(){
-        if(!$(this).hasClass('typeSelect')){
-            $typeArr.not($(this)).removeClass('typeSelect');
-            $(this).addClass('typeSelect');
-        }
-    });
+$studyClick.on("click", function () {
+    $studyContent.show();
+    $jobContent.hide();
+    $jobClick.removeClass('typeSelect');
+    $studyClick.addClass('typeSelect');
 });
+
+$jobClick.on("click", function () {
+    $jobContent.show();
+    $studyContent.hide();
+    $studyClick.removeClass('typeSelect');
+    $jobClick.addClass('typeSelect');
+});
+
+// let $typeArr = $(".typeLi");
+//
+// $typeArr.each(function(i){
+//     $(this).click(function(){
+//         if(!$(this).hasClass('typeSelect')){
+//             $typeArr.not($(this)).removeClass('typeSelect');
+//             $(this).addClass('typeSelect');
+//         }
+//     });
+// });
 
 /* 토글스위치 */
 let $toggleCheck = $("#switchInput"); 

@@ -113,6 +113,19 @@ header{
     cursor: pointer;
 }
 
+.header-post{
+    margin-right: 15px;
+}
+
+.postBtn{
+    outline: none;
+    background-color: transparent;
+    border : none;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
 .headerNoti{
     position: relative;
     margin-right: 15px;
