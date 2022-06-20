@@ -51,8 +51,4 @@ public class PostController {
     // 게시판 글쓰기
     @GetMapping("boardWrite")
     public String boardWrite(){ return "board/boardWrite";}
-
-    // 게시판 수정
-    @GetMapping("boardEdit")
-    public String boardEdit(){ return "board/boardEdit";}
 }

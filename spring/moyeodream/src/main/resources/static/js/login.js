@@ -77,6 +77,7 @@ const $loginContainer = $("div.login-container");
 const $xDiv = $("div.login-exit");
 
 $xDiv.on("click", function () {
+	tagCount = 0;
 	$loginBg.css("display", "none");
 	$loginContainer.css("display", "none");
 	$(loginContent).css("display", "flex");
@@ -88,6 +89,7 @@ $xDiv.on("click", function () {
 });
 
 $loginBtn.on("click", function () {
+	tagCount = 0;
 	$loginBg.css("display", "block");
 	$loginContainer.css("display", "block");
 	$("body").css("overflow", "hidden");
@@ -109,12 +111,24 @@ const $clearAll = $(".delete-all-select");
 // 해당 카테고리 지우기
 const $deleteOneAr = $(".choice-box-value-remove");
 
+// 선택된 태그의 개수
+let tagCount = 0;
+
 $cateChildLiAr.each(function() {
 	$(this).click(function() {
 		let $value = $(this).attr("value");
 		$cateBlockAr.each(function() {
 			if($(this).attr("value") == $value){
-				$(this).show();
+				if($(this).css("display") == "none") {
+					tagCount++;
+				}
+				if(tagCount > 5) {
+					alert("최대 5개까지만 선택해 주세요!");
+					tagCount--;
+				}
+				else {
+					$(this).show();
+				}
 			}
 		});
 		$(".select-box").toggle();
@@ -128,9 +142,14 @@ $cateBlockAr.each(function() {
 	});
 });
 
+$deleteOneAr.on("click", function() {
+	tagCount--;
+});
+
 // 전체 카테고리 삭제
 $clearAll.click(function() {
 	$cateBlockAr.hide();
+	tagCount = 0;
 });
 
 // 카카오 로그인 API
