@@ -158,12 +158,12 @@ button{
     width: 20rem;
 }
 
-.user-info-box3{
+.user-info-box33{
     width: 25.5rem;
     min-height: 1rem;
 }
 
-.user-info-box4{
+.user-info-box44{
     position: relative;
     box-sizing: border-box;
 }
@@ -180,7 +180,7 @@ button{
     white-space: nowrap;
 }
 
-.choice-box{
+.choice-boxx{
     -webkit-box-align: center;
     align-items: center;
     background-color: rgb(255, 255, 255);
@@ -193,7 +193,8 @@ button{
     flex-wrap: wrap;
     -webkit-box-pack: justify;
     justify-content: space-between;
-    min-height: 3rem;
+    min-height: 52px
+;
     position: relative;
     transition: all 100ms ease 0s;
     box-sizing: border-box;
@@ -202,7 +203,7 @@ button{
     outline: 0px !important;
 }
 
-.choice-box-result2{
+.choice-box-result22{
     -webkit-box-align: center;
     align-items: center;
     display: flex;
@@ -214,7 +215,7 @@ button{
     flex-wrap: wrap;
 }
 
-.choice-box-result3{
+.choice-box-result33{
     background-color: rgb(230, 230, 230);
     border-radius: 2px;
     display: flex;
@@ -223,7 +224,7 @@ button{
     box-sizing: border-box;
 }
 
-.choice-value{
+.choice-valuee{
     border-radius: 2px;
     color: rgb(51, 51, 51);
     font-size: 85%;
@@ -234,7 +235,7 @@ button{
     box-sizing: border-box;
 }
 
-.choice-value-cancel{
+.choice-value-cancell{
     -webkit-box-align: center;
     align-items: center;
     border-radius: 2px;
@@ -244,7 +245,7 @@ button{
     box-sizing: border-box;
 }
 
-.all-svg{
+.all-svgg{
     display: inline-block;
     fill: currentcolor;
     line-height: 1;
@@ -252,7 +253,7 @@ button{
     stroke-width: 0;
 }
 
-.css-1g6gooi{
+.css-1g6gooii{
     margin: 2px;
     padding-bottom: 2px;
     padding-top: 2px;
@@ -270,7 +271,7 @@ button{
     box-sizing: border-box;
 }
 
-.css-tlfecz-indicatorContainer{
+.css-tlfecz-indicatorContainerr{
     color: rgb(204, 204, 204);
     display: flex;
     padding: 8px;
@@ -278,15 +279,7 @@ button{
     box-sizing: border-box;
 }
 
-.all-svg{
-    display: inline-block;
-    fill: currentcolor;
-    line-height: 1;
-    stroke: currentcolor;
-    stroke-width: 0;
-}
-
-.css-1okebmr-indicatorSeparator{
+.css-1okebmr-indicatorSeparatorr{
     align-self: stretch;
     background-color: rgb(204, 204, 204);
     margin-bottom: 8px;
@@ -295,27 +288,11 @@ button{
     box-sizing: border-box;
 }
 
-.css-tlfecz-indicatorContainer{
-    color: rgb(204, 204, 204);
-    display: flex;
-    padding: 8px;
-    transition: color 150ms ease 0s;
-    box-sizing: border-box;
-}
-
-.all-svg{
-    display: inline-block;
-    fill: currentcolor;
-    line-height: 1;
-    stroke: currentcolor;
-    stroke-width: 0;
-}
-
 .user-info-box-nickName{
     border-radius: 4px;
     border: 1px solid #ccc;
     font-size: medium;
-    width: 23.5rem;
+    width: 25.5rem;
     min-height: 1rem;
     padding: 1rem;
 }
@@ -354,19 +331,19 @@ button{
     background: #ff3217;
 }
 
-.open-select:hover{
+.open-selectt:hover{
     color: black;
 }
 
-.delete-all-select:hover{
+.delete-all-selectt:hover{
     color: black;
 }
 
 
-.select-box{
+.select-boxx{
     position: absolute;
     background: white;
-    width: 498px;
+    width: 408px;
     border: 1px solid;
     margin-top: 6px;
     max-height: 120px;
@@ -375,18 +352,18 @@ button{
     display: none;
 }
 
-.select-box2{
+.select-box22{
     list-style: none;
     margin: 0;
     margin-left: -40px;
 }
 
-.select-value{
+.select-valuee{
     padding: 9px 0;
     padding-left: 18px;
 }
 
-.select-value:hover{
+.select-valuee:hover{
     background-color: powderblue;
 }
 
@@ -398,12 +375,12 @@ button{
     box-shadow: 0 0 8px rgb(0 0 0 / 18%);
 }
 
-.choice-box-value-remove:hover{
+.choice-box-value-removee:hover{
     cursor: pointer;
     color: gray;
 }
 
-.cate-all-list{
+.cate-all-listt{
     list-style: none;
     margin: 0;
     padding: 0;
@@ -412,14 +389,6 @@ button{
     flex-wrap: wrap;
 }
 
-.cateBlock{
+.cateBlockk{
     display: none;
 }
-
-.select-nonono{
-    font-size: 13px;
-    color: #868e96;
-    margin-left: 10px;
-}
-
-

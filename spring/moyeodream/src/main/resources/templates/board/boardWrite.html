@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>커뮤니티</title>
+  <title>MoYeoDream!</title>
   <link
     href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css"
     rel="stylesheet"
@@ -18,7 +18,7 @@
     href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="/css/borderWrite.css" />
+  <link rel="stylesheet" href="/css/boardWrite.css">
   <link rel="stylesheet" type="text/css" href="/css/header.css">
   <link rel="stylesheet" type="text/css" href="/css/login.css">
 </head>
@@ -315,14 +315,14 @@
     <div class="board_Post">
       <section>
         <div class="boardPost_ContentWrapper">
-          <span class="post_Circle"></span>
+          <span class="post_Circle">1</span>
           <h2 class="boardPost_text">자유롭게 글을 작성해주세요.</h2>
         </div>
       </section>
       <section>
         <!-- 게시판 글쓰기 카테고리 -->
         <div class="board-category">
-          <label for="category-select">카테고리</label>
+          <label for="category-select" class="labels">카테고리</label>
           <div class="select">
             <select name="category" id="category-select">
               <option value="free-talking">자유주제</option>
@@ -333,7 +333,7 @@
           </div>
         </div>
         <!-- 게시판 글쓰기 카테고리 -->
-        <label for="input" class="input_labelText">제목</label>
+        <label for="input" class="input_labelText labels">제목</label>
         <input
           type="text"
           class="input_box"
@@ -344,8 +344,8 @@
         <div class="summernote"></div>
       </section>
       <section class="register_button">
-        <button class="write_register">글 등록</button>
         <button class="write_cancel">취소</button>
+        <button class="write_register">등록</button>
       </section>
     </div>
   </div>
