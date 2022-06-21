@@ -22,7 +22,6 @@ public class PostController {
     // 모든 자유 게시판 목록
     @GetMapping("list")
     public String postList(){
-
         return "/board/board";
     }
 
@@ -61,18 +60,18 @@ public class PostController {
     public String boardDetail(){ return "board/boardDetail";}
 
     // 게시판 글쓰기
-    @GetMapping("boardWrite")
-    public String boardWrite(){
-        return "board/boardWrite";}
+    @GetMapping("postRegister")
+    public String postRegister(){
+        return "/board/boardWrite";}
 
     /* 게시판 등록 완료*/
-    @PostMapping("boardWrite")
-    public String boardWrite(PostVO postVO, RedirectAttributes rttr){
+    @PostMapping("postRegister")
+    public String register(PostVO postVO, RedirectAttributes rttr){
         log.info("--------------------------------------------------");
-        log.info("post Insert ........");
+        log.info("post Register ........" + postVO);
         log.info("--------------------------------------------------");
 
-        postService.postInsert(postVO);
+        postService.postRegister(postVO);
         rttr.addFlashAttribute("postNumber", postVO.getPostNumber());
 
         return "/board/board";

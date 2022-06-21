@@ -15,7 +15,7 @@ public interface PostService {
 
     public PostVO myPost(int postNumber);
 
-    public void postInsert(PostVO postVO);
+    public void postRegister(PostVO postVO);
 
     public boolean postUpdate(PostVO postVO);
 

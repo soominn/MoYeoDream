@@ -13,7 +13,7 @@ import java.util.List;
 @Qualifier("post")
 public class PostServiceImpl implements PostService{
 
-    private PostDAO postDAO;
+    private final PostDAO postDAO;
 
     @Override
     public List<PostVO> getList() {
@@ -37,8 +37,8 @@ public class PostServiceImpl implements PostService{
 
     /* 게시판 등록 완료 */
     @Override
-    public void postInsert(PostVO postVO) {
-        postDAO.postInsert(postVO);
+    public void postRegister(PostVO postVO) {
+        postDAO.postRegister(postVO);
     }
 
     @Override

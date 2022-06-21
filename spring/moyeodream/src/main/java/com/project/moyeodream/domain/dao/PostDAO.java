@@ -4,12 +4,14 @@ import com.project.moyeodream.domain.vo.JobpostingVO;
 import com.project.moyeodream.domain.vo.PostVO;
 import com.project.moyeodream.mapper.PostMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
+@Slf4j
 public class PostDAO {
 
     private PostMapper postMapper;
@@ -34,9 +36,11 @@ public class PostDAO {
         return postMapper.myPost(postNumber);
     }
 
-    // 자유 게시판 작성
-    public void postInsert(PostVO postVO){
+    // 자유 게시판 작성 완료
+    public void postRegister(PostVO postVO){
+        log.info("postDAO 들어옴");
         postMapper.insert(postVO);
+        log.info(postVO.getPostNumber().toString());
     }
 
     // 자유 게시판 수정
