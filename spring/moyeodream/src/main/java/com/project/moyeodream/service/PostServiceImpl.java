@@ -35,6 +35,7 @@ public class PostServiceImpl implements PostService{
         return postDAO.myPost(postNumber);
     }
 
+    /* 게시판 등록 완료 */
     @Override
     public void postInsert(PostVO postVO) {
         postDAO.postInsert(postVO);
