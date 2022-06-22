@@ -27,40 +27,45 @@
     <header th:replace="~{/fragments/header::header}"></header>
     <!-- 헤더 부분 ↑ -->
     <div class="board_Post">
-      <section>
-        <div class="boardPost_ContentWrapper">
-          <span class="post_Circle">1</span>
-          <h2 class="boardPost_text">자유롭게 글을 작성해주세요.</h2>
-        </div>
-      </section>
-      <section>
-        <!-- 게시판 글쓰기 카테고리 -->
-        <div class="board-category">
-          <label for="category-select" class="labels">카테고리</label>
-          <div class="select">
-            <select name="category" id="category-select">
-              <option value="free-talking">자유주제</option>
-              <option value="qna">질문&답변</option>
-              <option value="study-review">스터디 후기</option>
-              <option value="interview-review">기업면접 후기</option>
-            </select>
+      <form action="/post/postRegister" method="post" name="postForm">
+        <section>
+          <div class="boardPost_ContentWrapper">
+            <span class="post_Circle">1</span>
+            <h2 class="boardPost_text">자유롭게 글을 작성해주세요.</h2>
           </div>
-        </div>
-        <!-- 게시판 글쓰기 카테고리 -->
-        <label for="input" class="input_labelText labels">제목</label>
-        <input
-          type="text"
-          class="input_box"
-          id="input"
-          placeholder="글 제목을 입력해주세요!"
-          value
-        />
-        <div class="summernote"></div>
-      </section>
-      <section class="register_button">
-        <button class="write_cancel">취소</button>
-        <button class="write_register">등록</button>
-      </section>
+        </section>
+        <section>
+          <!-- 게시판 글쓰기 카테고리 -->
+          <div class="board-category">
+            <label for="category-select" class="labels">카테고리</label>
+            <div class="select">
+              <select name="postCategory" id="category-select">
+                <option value="free-talking">자유주제</option>
+                <option value="qna">질문&답변</option>
+                <option value="study-review">스터디 후기</option>
+                <option value="interview-review">기업면접 후기</option>
+              </select>
+            </div>
+          </div>
+          <!-- 게시판 글쓰기 카테고리 -->
+          <label for="input" class="input_labelText labels">제목</label>
+          <input
+                  name="postTitle"
+                  type="text"
+                  class="input_box"
+                  id="input"
+                  placeholder="글 제목을 입력해주세요!"
+                  value
+
+          />
+          <div class="summernote" name="postContent"></div>
+          <textarea id="summernote" name="postContent"></textarea>
+        </section>
+        <section class="register_button">
+          <button class="write_cancel">취소</button>
+          <button type="submit" class="write_register">등록</button>
+        </section>
+      </form>
     </div>
   </div>
 </body>

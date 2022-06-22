@@ -1,8 +1,6 @@
 package com.project.moyeodream.mapper;
 
-import com.project.moyeodream.domain.vo.JobpostingVO;
 import com.project.moyeodream.domain.vo.PostVO;
-import com.project.moyeodream.domain.vo.StudyVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

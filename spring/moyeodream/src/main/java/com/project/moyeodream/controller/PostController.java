@@ -1,22 +1,29 @@
 package com.project.moyeodream.controller;
 
 import com.project.moyeodream.domain.vo.PostVO;
+import com.project.moyeodream.service.PostService;
+import com.project.moyeodream.service.PostServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/post/*")
 public class PostController {
+    private final PostServiceImpl postService;
 
     // 모든 자유 게시판 목록
     @GetMapping("list")
-    public void postList(){}
+    public String postList(){
+        return "/board/board";
+    }
 
     // 자유 게시판 조회
     @GetMapping("read")
@@ -53,6 +60,20 @@ public class PostController {
     public String boardDetail(){ return "board/boardDetail";}
 
     // 게시판 글쓰기
-    @GetMapping("boardWrite")
-    public String boardWrite(){ return "board/boardWrite";}
+    @GetMapping("postRegister")
+    public String postRegister(){
+        return "/board/boardWrite";}
+
+    /* 게시판 등록 완료*/
+    @PostMapping("postRegister")
+    public String register(PostVO postVO, RedirectAttributes rttr){
+        log.info("--------------------------------------------------");
+        log.info("post Register ........" + postVO);
+        log.info("--------------------------------------------------");
+
+        postService.postRegister(postVO);
+        rttr.addFlashAttribute("postNumber", postVO.getPostNumber());
+
+        return "/board/board";
+    }
 }
