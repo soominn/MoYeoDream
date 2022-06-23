@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping("/comment/*")
+@RequestMapping("/studycomment/*")
 public class StudyCommentController {
     // 댓글 작성
     @PostMapping("register")
