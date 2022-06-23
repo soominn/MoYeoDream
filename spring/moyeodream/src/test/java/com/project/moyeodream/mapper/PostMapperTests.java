@@ -1,5 +1,6 @@
 package com.project.moyeodream.mapper;
 
+import com.project.moyeodream.domain.vo.Criteria;
 import com.project.moyeodream.domain.vo.PostDTO;
 import com.project.moyeodream.domain.vo.PostVO;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +25,8 @@ public class PostMapperTests {
         log.info("mapper getList...........");
         log.info("-----------------------------------------");
 
-        List<PostDTO> list = postMapper.getList();
+        Criteria criteria = new Criteria();
+        List<PostDTO> list = postMapper.getList(criteria);
         log.info(list.toString());
     }
 

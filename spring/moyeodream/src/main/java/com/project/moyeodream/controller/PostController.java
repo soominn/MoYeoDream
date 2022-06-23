@@ -1,5 +1,7 @@
 package com.project.moyeodream.controller;
 
+import com.project.moyeodream.domain.vo.Criteria;
+import com.project.moyeodream.domain.vo.PageDTO;
 import com.project.moyeodream.domain.vo.PostVO;
 import com.project.moyeodream.service.PostService;
 import com.project.moyeodream.service.PostServiceImpl;
@@ -21,12 +23,16 @@ public class PostController {
 
     // 모든 자유 게시판 목록
     @GetMapping("list")
-    public String postList(Model model){
+    public String postList(Model model, Criteria criteria){
         log.info("--------------------------------------------------");
         log.info("getList Controller...............");
+        log.info("Criteria............." + criteria);
         log.info("--------------------------------------------------");
 
-        model.addAttribute("postList",postService.getList());
+        PageDTO pageDTO = new PageDTO(criteria, postService.getTotal());
+        model.addAttribute("postList",postService.getList(criteria));
+        model.addAttribute("pageDTO", pageDTO );
+        log.info(pageDTO.toString());
 
         return "/board/board";
     }
@@ -72,7 +78,7 @@ public class PostController {
 
     /* 게시판 등록 완료*/
     @PostMapping("postRegister")
-    public String register(PostVO postVO, Model model){
+    public String register(PostVO postVO, Model model, Criteria criteria){
         log.info("--------------------------------------------------");
         log.info("post Register ........" + postVO);
         log.info("--------------------------------------------------");
@@ -80,7 +86,8 @@ public class PostController {
         postService.postRegister(postVO);
         log.info("새로 등록한 게시글 번호" + postVO.getPostNumber());
         model.addAttribute("postNumber", postVO.getPostNumber());
+        model.addAttribute(criteria);
 
-        return postList(model);
+        return postList(model, criteria);
     }
 }

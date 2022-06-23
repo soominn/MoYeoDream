@@ -101,14 +101,13 @@
               ><<</a
             >
           </li>
+          <th:block th:each="num:${#numbers.sequence(pageDTO.startPage, pageDTO.endPage)}">
           <li>
-            <a
-              class="pagination-link is-current"
-              href=""
-              aria-label="1 페이지로 이동"
-              >1</a
-            >
+            <span class="pagination-link"
+                  aria-label="1 페이지로 이동"
+                  th:text="${num}"></span>
           </li>
+          </th:block>
           <li>
             <a class="pagination-next" href="" aria-label="다음 페이지로 이동"
               >>></a
@@ -131,7 +130,8 @@
 <script th:inline="javascript">
   let postNumber = [[${postNumber}]];
   let $pageForm = $("form[name='pageForm']");
-  let params = [[${pageDTO.criteria.listLink}]];
+  // let params = [[${pageDTO.criteria.listLink}]];
+  let $changePage = $(".pagination-link");
 
   if(postNumber != null){
     alert(postNumber + "번 게시글이 등록되었습니다.");
@@ -141,6 +141,18 @@
     e.preventDefault();
     $pageForm.find("input[name=pageNum]").val($(this).attr("href"));
     $pageForm.submit();
+  });
+
+  /* 페이징버튼 - 디폴트 : 첫번째 번호가 is-current */
+  $(document).ready(function(){
+    console.log($changePage.first());
+    $changePage.first().addClass("is-current");
+  });
+
+  /* 페이징 버튼 클릭시 - css 변화 */
+  $changePage.on("click",function(){
+    $changePage.not($(this)).removeClass("is-current");
+    $(this).addClass("is-current");
   });
 </script>
 </html>

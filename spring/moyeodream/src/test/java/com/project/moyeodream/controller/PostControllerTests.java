@@ -1,5 +1,6 @@
 package com.project.moyeodream.controller;
 
+import com.project.moyeodream.domain.vo.Criteria;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -42,7 +43,10 @@ public class PostControllerTests {
     @Test
     public void getListTest() throws Exception{
         log.info(
-          mockMvc.perform(MockMvcRequestBuilders.get("/post/list")).andReturn().getModelAndView().getModel().toString()
+          mockMvc.perform(MockMvcRequestBuilders.get("/post/list")
+          .param("pageNum", "1")
+          .param("amount", "10"))
+                  .andReturn().getModelAndView().getModel().toString()
         );
     }
 

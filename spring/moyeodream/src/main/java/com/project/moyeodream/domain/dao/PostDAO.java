@@ -1,5 +1,6 @@
 package com.project.moyeodream.domain.dao;
 
+import com.project.moyeodream.domain.vo.Criteria;
 import com.project.moyeodream.domain.vo.JobpostingVO;
 import com.project.moyeodream.domain.vo.PostDTO;
 import com.project.moyeodream.domain.vo.PostVO;
@@ -18,8 +19,13 @@ public class PostDAO {
     private final PostMapper postMapper;
 
     // 전체 자유 게시판 목록
-    public List<PostDTO> getList(){
-        return postMapper.getList();
+    public List<PostDTO> getList(Criteria criteria){
+        return postMapper.getList(criteria);
+    }
+
+    // 게시판 글 개수
+    public int getTotal(){
+        return postMapper.getTotal();
     }
 
     // 카테고리 별 스터디
