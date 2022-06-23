@@ -8,5 +8,5 @@ import org.springframework.stereotype.Service;
 public interface AdminService {
 
     // 관리자 로그인
-    public int Login(AdminVO adminVO);
+    public int login(AdminVO adminVO);
 }
