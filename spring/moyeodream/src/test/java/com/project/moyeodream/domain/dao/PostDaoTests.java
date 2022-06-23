@@ -14,7 +14,7 @@ public class PostDaoTests {
     private PostDAO postDAO;
 
     /* 게시글 추가 */
-    @Test
+//    @Test
     public void registerTest(){
         PostVO postVO = new PostVO();
         postVO.setPostTitle("테스트 제목");
@@ -23,6 +23,16 @@ public class PostDaoTests {
 
         postDAO.postRegister(postVO);
         log.info("새롭게 추가된 게시글 번호 : "+ postVO.getPostNumber());
+    }
+
+    /* 게시판 전체 목록 */
+    @Test
+    public void getListTest(){
+        log.info("---------------------------------------------");
+        log.info("DAO get List........................");
+        log.info("---------------------------------------------");
+
+        postDAO.getList();
     }
 
 }

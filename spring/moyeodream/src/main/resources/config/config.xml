@@ -9,6 +9,7 @@
         <typeAlias type="com.project.moyeodream.domain.vo.JobpostingVO" alias="jobpostingVO"/>
         <typeAlias type="com.project.moyeodream.domain.vo.MemberVO" alias="memberVO"/>
         <typeAlias type="com.project.moyeodream.domain.vo.PostVO" alias="postVO"/>
+        <typeAlias type="com.project.moyeodream.domain.vo.PostDTO" alias="postDTO"/>
         <typeAlias type="com.project.moyeodream.domain.vo.StudyVO" alias="studyVO"/>
         <typeAlias type="com.project.moyeodream.domain.vo.AdminVO" alias="adminVO"/>
     </typeAliases>
