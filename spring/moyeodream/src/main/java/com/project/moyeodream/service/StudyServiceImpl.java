@@ -12,8 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Qualifier("study")
 public class StudyServiceImpl implements StudyService{
-
-    private StudyDAO studyDAO;
+    private final StudyDAO studyDAO;
 
     @Override
     public List<StudyVO> getList() {
@@ -41,18 +40,18 @@ public class StudyServiceImpl implements StudyService{
     }
 
     @Override
-    public void studyCreate(StudyVO studyVO) {
-        studyDAO.studyCreate(studyVO);
+    public void register(StudyVO studyVO) {
+        studyDAO.register(studyVO);
     }
 
     @Override
-    public boolean studyModify(StudyVO studyVO) {
-        return studyDAO.studyModify(studyVO);
+    public boolean modify(StudyVO studyVO) {
+        return studyDAO.update(studyVO);
     }
 
     @Override
-    public boolean studyDelete(int studyNumber) {
-        return studyDAO.studyDelete(studyNumber);
+    public boolean remove(int studyNumber) {
+        return studyDAO.delete(studyNumber);
     }
 
     @Override
