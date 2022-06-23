@@ -130,7 +130,8 @@
 <script src="/js/board.js"></script>
 <script th:inline="javascript">
   let postNumber = [[${postNumber}]];
-  let params = [[]]
+  let $pageForm = $("form[name='pageForm']");
+  let params = [[${pageDTO.criteria.listLink}]];
 
   if(postNumber != null){
     alert(postNumber + "번 게시글이 등록되었습니다.");
@@ -138,7 +139,8 @@
 
   $("a.pagination-link").on("click",function(){
     e.preventDefault();
-    location.href= "/post/list
+    $pageForm.find("input[name=pageNum]").val($(this).attr("href"));
+    $pageForm.submit();
   });
 </script>
 </html>

@@ -17,7 +17,7 @@
         FROM TBL_POST tp JOIN TBL_MEMBER tm
         ON tp.POST_MEMBER_NUMBER = tm.MEMBER_NUMBER
         <![CDATA[
-        WHERE ROWNUM < 10
+        WHERE ROWNUM >=
         ]]>
     </select>
 
