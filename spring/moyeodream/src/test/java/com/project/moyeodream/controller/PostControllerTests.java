@@ -24,7 +24,8 @@ public class PostControllerTests {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
-    @Test
+    /* 게시글 등록 */
+//    @Test
     public void registerTest() throws Exception{
         log.info(
                 mockMvc.perform(MockMvcRequestBuilders.post("/post/postRegister")
@@ -34,6 +35,14 @@ public class PostControllerTests {
                         .param("postMemberNumber","0"))
                         .andReturn().getFlashMap().toString()
                                     /* flashMap 에 postNumber 담아온 것 확인 */
+        );
+    }
+
+    /* 게시글 목록 가져오기 */
+    @Test
+    public void getListTest() throws Exception{
+        log.info(
+          mockMvc.perform(MockMvcRequestBuilders.get("/post/list")).andReturn().getModelAndView().getModel().toString()
         );
     }
 

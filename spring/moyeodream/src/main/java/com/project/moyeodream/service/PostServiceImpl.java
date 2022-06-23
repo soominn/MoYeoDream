@@ -1,6 +1,7 @@
 package com.project.moyeodream.service;
 
 import com.project.moyeodream.domain.dao.PostDAO;
+import com.project.moyeodream.domain.vo.PostDTO;
 import com.project.moyeodream.domain.vo.PostVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,7 +17,7 @@ public class PostServiceImpl implements PostService{
     private final PostDAO postDAO;
 
     @Override
-    public List<PostVO> getList() {
+    public List<PostDTO> getList() {
         return postDAO.getList();
     }
 
@@ -35,7 +36,7 @@ public class PostServiceImpl implements PostService{
         return postDAO.myPost(postNumber);
     }
 
-    /* 게시판 등록 완료 */
+    /* 게시글 등록 완료 */
     @Override
     public void postRegister(PostVO postVO) {
         postDAO.postRegister(postVO);

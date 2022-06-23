@@ -1,6 +1,7 @@
 package com.project.moyeodream.domain.dao;
 
 import com.project.moyeodream.domain.vo.JobpostingVO;
+import com.project.moyeodream.domain.vo.PostDTO;
 import com.project.moyeodream.domain.vo.PostVO;
 import com.project.moyeodream.mapper.PostMapper;
 import lombok.RequiredArgsConstructor;
@@ -14,10 +15,10 @@ import java.util.List;
 @Slf4j
 public class PostDAO {
 
-    private PostMapper postMapper;
+    private final PostMapper postMapper;
 
     // 전체 자유 게시판 목록
-    public List<PostVO> getList(){
+    public List<PostDTO> getList(){
         return postMapper.getList();
     }
 
@@ -38,9 +39,7 @@ public class PostDAO {
 
     // 자유 게시판 작성 완료
     public void postRegister(PostVO postVO){
-        log.info("postDAO 들어옴");
         postMapper.insert(postVO);
-        log.info(postVO.getPostNumber().toString());
     }
 
     // 자유 게시판 수정

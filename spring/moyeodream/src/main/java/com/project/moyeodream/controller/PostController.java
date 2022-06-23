@@ -21,7 +21,13 @@ public class PostController {
 
     // 모든 자유 게시판 목록
     @GetMapping("list")
-    public String postList(){
+    public String postList(Model model){
+        log.info("--------------------------------------------------");
+        log.info("getList Controller...............");
+        log.info("--------------------------------------------------");
+
+        model.addAttribute("postList",postService.getList());
+
         return "/board/board";
     }
 
@@ -66,14 +72,15 @@ public class PostController {
 
     /* 게시판 등록 완료*/
     @PostMapping("postRegister")
-    public String register(PostVO postVO, RedirectAttributes rttr){
+    public String register(PostVO postVO, Model model){
         log.info("--------------------------------------------------");
         log.info("post Register ........" + postVO);
         log.info("--------------------------------------------------");
 
         postService.postRegister(postVO);
-        rttr.addFlashAttribute("postNumber", postVO.getPostNumber());
+        log.info("새로 등록한 게시글 번호" + postVO.getPostNumber());
+        model.addAttribute("postNumber", postVO.getPostNumber());
 
-        return "/board/board";
+        return postList(model);
     }
 }
