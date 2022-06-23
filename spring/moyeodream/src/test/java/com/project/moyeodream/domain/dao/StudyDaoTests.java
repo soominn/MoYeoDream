@@ -29,4 +29,18 @@ public class StudyDaoTests {
         studyDAO.register(studyVO);
         log.info("추가된 게시글 번호 : " + studyVO.getStudyNumber());
     }
+
+    @Test
+    public void selectTest() {
+        log.info("---------------------------------------------------------");
+        log.info("찾아낸 스터디 제목 : " + studyDAO.read(1).getStudyTitle());
+        log.info("---------------------------------------------------------");
+    }
+
+    @Test
+    public void selectNicknameTest() {
+        log.info("---------------------------------------------------------");
+        log.info("member의 nickname : " + studyDAO.findNickName(1));
+        log.info("---------------------------------------------------------");
+    }
 }

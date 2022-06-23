@@ -1,5 +1,6 @@
 package com.project.moyeodream.domain.dao;
 
+import com.project.moyeodream.domain.vo.StudyDTO;
 import com.project.moyeodream.domain.vo.StudyVO;
 import com.project.moyeodream.mapper.StudyMapper;
 import lombok.RequiredArgsConstructor;
@@ -23,19 +24,20 @@ public class StudyDAO {
     }
 
     // 스터디 조회
-    public StudyVO studyRead(int studyNumber){
-        return studyMapper.read(studyNumber);
+    public StudyDTO read(int studyNumber) {
+        return studyMapper.select(studyNumber);
+    }
+
+    // 스터디 만든 회원의 닉네임 찾기
+    public String findNickName(int studyMemberNumber) {
+        return studyMapper.selectNickName(studyMemberNumber);
     }
 
     // 내가 만든 스터디 목록
-    public List<StudyVO> CratedList(int userNumber){
-        return studyMapper.CratedList(userNumber);
-    }
+    public List<StudyVO> CratedList(int userNumber) { return studyMapper.CratedList(userNumber); }
 
     // 내가 참여중인 스터디 목록
-    public List<StudyVO> participatingList(int userNumber){
-        return studyMapper.participatingList(userNumber);
-    }
+    public List<StudyVO> participatingList(int userNumber) {  return studyMapper.participatingList(userNumber); }
 
     // 스터디 작성
     public void register(StudyVO studyVO) {

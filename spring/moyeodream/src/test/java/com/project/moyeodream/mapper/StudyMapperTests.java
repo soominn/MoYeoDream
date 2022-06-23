@@ -31,4 +31,18 @@ public class StudyMapperTests {
         log.info("추가된 스터디 번호 : " + studyVO.getStudyNumber());
         log.info("---------------------------------------------------------");
     }
+
+    @Test
+    public void selectTest() {
+        log.info("---------------------------------------------------------");
+        log.info("찾아낸 스터디 제목 : " + studyMapper.select(1).getStudyTitle());
+        log.info("---------------------------------------------------------");
+    }
+
+    @Test
+    public void selectNicknameTest() {
+        log.info("---------------------------------------------------------");
+        log.info("member의 nickname : " + studyMapper.selectNickName(1));
+        log.info("---------------------------------------------------------");
+    }
 }
