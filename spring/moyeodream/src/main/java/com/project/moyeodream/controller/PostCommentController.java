@@ -1,6 +1,6 @@
 package com.project.moyeodream.controller;
 
-import com.project.moyeodream.domain.vo.CommentVO;
+import com.project.moyeodream.domain.vo.PostCommentVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -12,20 +12,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/comment/*")
-public class CommentController {
+public class PostCommentController {
     // 댓글 작성
     @PostMapping("register")
-    public void commentWrite(CommentVO commentVO){ }
+    public void postCommentWrite(PostCommentVO postCommentVO){ }
 
     // 댓글 수정
     @PostMapping("modify")
-    public void commentUpdate(CommentVO commentVO){ }
+    public void postCommentUpdate(PostCommentVO postCommentVO){ }
 
     // 댓글 삭제
     @GetMapping("remove")
-    public void commentRemove(Integer commentNumber){ }
+    public void postCommentRemove(Integer postCommentNumber){ }
+
+    // 전체 댓글 목록 조회
+    @GetMapping("list")
+    public void postComment(Integer postCommentPostNumber){ }
 
     // 내 댓글 목록 조회
-    @GetMapping("list")
-    public void myComment(Integer postNumber){ }
+    @GetMapping("myList")
+    public void myPostComment(Integer postCommentMemberNumber){ }
 }
