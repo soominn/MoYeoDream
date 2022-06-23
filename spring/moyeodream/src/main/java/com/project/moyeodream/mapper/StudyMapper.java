@@ -14,9 +14,9 @@ public interface StudyMapper {
     // 스터디 상세 조회
     public StudyVO read(int studyNumber);
     // 내가 만든 스터디 목록
-    public List<StudyVO> CratedList(int userNumber);
+    public List<StudyVO> CratedList(int studyMemberNumber);
     // 내가 참여중인 스터디 목록
-    public List<StudyVO> participatingList(int userNumber);
+    public List<StudyVO> participatingList(int studyMemberNumber);
     // 스터디 작성
     public void insert(StudyVO studyVO);
     // 스터디 수정

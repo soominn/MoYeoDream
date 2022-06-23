@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.moyeodream.mapper.StudyMapper">
-
+    <insert id="insert">
+        <selectKey keyProperty="studyNumber" order="BEFORE" resultType="_int">
+            SELECT SEQ_STUDY.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO TBL_STUDY (STUDY_NUMBER, STUDY_CATEGORY, STUDY_PROCESS, STUDY_PERSONNEL, STUDY_START, STUDY_COMMUNICATION, STUDY_PERIOD, STUDY_CHIEF, STUDY_TITLE, STUDY_CONTENT, STUDY_MEMBER_NUMBER)
+        VALUES (#{studyNumber}, #{studyCategory}, #{studyProcess}, #{studyPersonnel}, #{studyStart}, #{studyCommunication}, #{studyPeriod}, #{studyChief}, #{studyTitle}, #{studyContent}, #{studyMemberNumber})
+    </insert>
 </mapper>

@@ -18,11 +18,11 @@ public interface StudyService {
 
     public List<StudyVO> participatingList(int userNumber);
 
-    public void studyCreate(StudyVO studyVO);
+    public void register(StudyVO studyVO);
 
-    public boolean studyModify(StudyVO studyVO);
+    public boolean modify(StudyVO studyVO);
 
-    public boolean studyDelete(int studyNumber);
+    public boolean remove(int studyNumber);
 
     public List<StudyVO> getCategoryList(String studyCategory);
 

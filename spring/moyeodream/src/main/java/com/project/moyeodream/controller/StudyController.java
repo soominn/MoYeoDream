@@ -1,18 +1,25 @@
 package com.project.moyeodream.controller;
 
 import com.project.moyeodream.domain.vo.StudyVO;
+import com.project.moyeodream.service.StudyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/study/*")
 public class StudyController {
+    private final StudyService studyService;
 
     // 모든 스터디 목록
     @GetMapping("list")
@@ -24,7 +31,9 @@ public class StudyController {
 
     // 스터디 조회
     @GetMapping("read")
-    public void studyRead(Integer studyNumber){}
+    public void studyRead(Integer studyNumber) {
+
+    }
 
     // 내가 만든 스터디 목록
     @GetMapping("createdList")
@@ -35,8 +44,30 @@ public class StudyController {
     public void participationList(Integer memberNumber){}
 
     // 스터디 작성(Post)
-   @PostMapping("register")
-    public void studyRegister(StudyVO studyVO){}
+    @PostMapping("register")
+    public RedirectView studyRegister(StudyVO studyVO, RedirectAttributes rttr, HttpServletRequest req) {
+        log.info("----------------------------");
+        log.info("studyRegister............. : " + studyVO);
+        log.info("----------------------------");
+
+        // 이 부분은 세션에 로그인된 회원 정보가 들어오고부터 사용할 수 있음
+        // HttpSession session = req.getSession();
+        // Integer memberNumber = (Integer)session.getAttribute("memberNumber");
+        // studyVO.setStudyMemberNumber(memberNumber);
+
+        // 테스트용
+        studyVO.setStudyMemberNumber(1);
+
+        studyService.register(studyVO);
+
+        rttr.addFlashAttribute("studyNumber", studyVO.getStudyNumber());
+
+        // 원래
+        // return new RedirectView("/study/read");
+
+        // 테스트용
+        return new RedirectView("/study/studyCreate");
+    }
 
     // 스터디 수정
     @PostMapping("modify")
@@ -60,9 +91,9 @@ public class StudyController {
 
     // 스터디 모집 작성
     @GetMapping("studyCreate")
-    public void studyCreate(){}
+    public void studyCreate() {}
 
     // 스터디 모집 상세보기
     @GetMapping("studyView")
-    public void studyView(){}
+    public void studyView() {}
 }
