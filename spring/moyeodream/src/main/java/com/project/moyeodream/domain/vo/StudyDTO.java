@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Data
-public class StudyVO {
+public class StudyDTO {
     private Integer studyNumber;                  // 스터디 공고 고유번호(DB SEQUENCE 사용)
     private String studyCategory;                 // 스터디 카테고리
     private String studyProcess;                  // 스터디 진행 방식
@@ -21,4 +21,5 @@ public class StudyVO {
     private String studyRegisterDate;             // 스터디 작성날짜(DB SYSDATE 사용)
     private String studyUpdateDate;               // 스터디 수정날짜(DB SYSDATE 사용)
     private Integer studyMemberNumber;            // 스터디 멤버 넘버(FK)    -   스터디 작성자 정보 가져오기 위해
+    private String memberNickname;                // 스터디 멤버의 닉네임
 }

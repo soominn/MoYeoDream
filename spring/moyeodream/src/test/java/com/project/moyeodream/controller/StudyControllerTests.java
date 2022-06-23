@@ -38,4 +38,11 @@ public class StudyControllerTests {
                 .param("studyContent", "스터디 소개 테스트")
                 .param("studyMemberNumber", "1")).andReturn().getFlashMap().toString());
     }
+
+    @Test
+    public void readTest() throws Exception {
+        log.info(mockMvc.perform(MockMvcRequestBuilders.get("/study/read")
+                .param("studyNumber", "1")
+                .param("studyMemberNumber", "1")).andReturn().getModelAndView().getModelMap().toString());
+    }
 }

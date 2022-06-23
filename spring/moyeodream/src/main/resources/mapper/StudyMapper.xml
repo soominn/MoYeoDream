@@ -8,4 +8,14 @@
         INSERT INTO TBL_STUDY (STUDY_NUMBER, STUDY_CATEGORY, STUDY_PROCESS, STUDY_PERSONNEL, STUDY_START, STUDY_COMMUNICATION, STUDY_PERIOD, STUDY_CHIEF, STUDY_TITLE, STUDY_CONTENT, STUDY_MEMBER_NUMBER)
         VALUES (#{studyNumber}, #{studyCategory}, #{studyProcess}, #{studyPersonnel}, #{studyStart}, #{studyCommunication}, #{studyPeriod}, #{studyChief}, #{studyTitle}, #{studyContent}, #{studyMemberNumber})
     </insert>
+
+    <select id="select" resultType="studyDTO">
+        SELECT STUDY_NUMBER, STUDY_CATEGORY, STUDY_PROCESS, STUDY_PERSONNEL, STUDY_START, STUDY_COMMUNICATION, STUDY_PERIOD, STUDY_CHIEF, STUDY_TITLE, STUDY_CONTENT, STUDY_REGISTER_DATE, STUDY_MEMBER_NUMBER FROM TBL_STUDY
+        WHERE STUDY_NUMBER = #{studyNumber}
+    </select>
+
+    <select id="selectNickName" resultType="string">
+        SELECT MEMBER_NICKNAME FROM TBL_MEMBER
+        WHERE MEMBER_NUMBER = #{studyMemberNumber}
+    </select>
 </mapper>

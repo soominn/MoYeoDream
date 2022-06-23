@@ -1,5 +1,6 @@
 package com.project.moyeodream.service;
 
+import com.project.moyeodream.domain.vo.StudyDTO;
 import com.project.moyeodream.domain.vo.StudyVO;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ public interface StudyService {
 
     public List<StudyVO> getApproveList();
 
-    public StudyVO studyRead(int studyNumber);
+    public StudyDTO read(int studyNumber, int studyMemberNumber);
 
     public List<StudyVO> CratedList(int userNumber);
 

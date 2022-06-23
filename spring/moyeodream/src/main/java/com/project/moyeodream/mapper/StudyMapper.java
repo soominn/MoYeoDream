@@ -1,5 +1,6 @@
 package com.project.moyeodream.mapper;
 
+import com.project.moyeodream.domain.vo.StudyDTO;
 import com.project.moyeodream.domain.vo.StudyVO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -12,7 +13,9 @@ public interface StudyMapper {
     // 승인된 스터디 목록
     public List<StudyVO> getApproveList();
     // 스터디 상세 조회
-    public StudyVO read(int studyNumber);
+    public StudyDTO select(int studyNumber);
+    // 스터디 만든 회원의 닉네임 찾기
+    public String selectNickName(int studyMemberNumber);
     // 내가 만든 스터디 목록
     public List<StudyVO> CratedList(int studyMemberNumber);
     // 내가 참여중인 스터디 목록

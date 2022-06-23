@@ -1,6 +1,7 @@
 package com.project.moyeodream.service;
 
 import com.project.moyeodream.domain.dao.StudyDAO;
+import com.project.moyeodream.domain.vo.StudyDTO;
 import com.project.moyeodream.domain.vo.StudyVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -25,8 +26,10 @@ public class StudyServiceImpl implements StudyService{
     }
 
     @Override
-    public StudyVO studyRead(int studyNumber) {
-        return studyDAO.studyRead(studyNumber);
+    public StudyDTO read(int studyNumber, int studyMemberNumber) {
+        StudyDTO studyDTO = studyDAO.read(studyNumber);
+        studyDTO.setMemberNickname(studyDAO.findNickName(studyMemberNumber));
+        return studyDTO;
     }
 
     @Override
