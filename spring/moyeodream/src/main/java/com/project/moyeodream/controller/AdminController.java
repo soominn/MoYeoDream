@@ -1,5 +1,6 @@
 package com.project.moyeodream.controller;
 
+import com.project.moyeodream.domain.vo.MemberVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -16,7 +17,9 @@ public class AdminController {
 
     // 관리자 로그인
     @PostMapping("login")
-    public void adminLogin(String memberId){}
+    public int adminLogin(MemberVO memberVO){
+        return memberVO.getMemberNumber();
+    }
 
 
     // ---- 프론트 ----

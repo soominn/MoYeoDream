@@ -5,6 +5,7 @@ import com.project.moyeodream.service.StudyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,13 +32,17 @@ public class StudyController {
 
     // 스터디 조회
     @GetMapping("read")
-    public void studyRead(Integer studyNumber) {
-
+    public String read(Integer studyNumber, Integer studyMemberNumber, Model model) {
+        log.info("----------------------------");
+        log.info("studyRead............. : " + studyMemberNumber);
+        log.info("----------------------------");
+        model.addAttribute("study", studyService.read(studyNumber, studyMemberNumber));
+        return "/study/studyView";
     }
 
     // 내가 만든 스터디 목록
     @GetMapping("createdList")
-    public void studyCreateList(Integer memberNumber){ }
+    public void studyCreateList(Integer memberNumber){}
 
     // 내가 참여 중인 스터디 목록
     @GetMapping("participationList")
@@ -45,7 +50,7 @@ public class StudyController {
 
     // 스터디 작성(Post)
     @PostMapping("register")
-    public RedirectView studyRegister(StudyVO studyVO, RedirectAttributes rttr, HttpServletRequest req) {
+    public RedirectView register(StudyVO studyVO, RedirectAttributes rttr, HttpServletRequest req) {
         log.info("----------------------------");
         log.info("studyRegister............. : " + studyVO);
         log.info("----------------------------");
@@ -66,16 +71,16 @@ public class StudyController {
         // return new RedirectView("/study/read");
 
         // 테스트용
-        return new RedirectView("/study/studyCreate");
+        return new RedirectView("/study/register");
     }
 
     // 스터디 수정
     @PostMapping("modify")
-    public void studyModify(StudyVO studyVO){}
+    public void modify(StudyVO studyVO){}
 
     // 스터디 삭제
     @GetMapping("remove")
-    public void studyRemove(Integer studyNumber){}
+    public void remove(Integer studyNumber){}
 
     // 카테고리별 스터디
     @GetMapping("categoryList")
@@ -90,8 +95,10 @@ public class StudyController {
     public void studyRefuse(Integer studyNumber){}
 
     // 스터디 모집 작성
-    @GetMapping("studyCreate")
-    public void studyCreate() {}
+    @GetMapping("register")
+    public String register() {
+        return "/study/studyCreate";
+    }
 
     // 스터디 모집 상세보기
     @GetMapping("studyView")

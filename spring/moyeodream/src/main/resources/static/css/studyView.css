@@ -219,6 +219,10 @@ a.kakao-openchatting img {
     height: 16px;
 }
 
+a.kakao-openchatting span {
+    cursor: pointer;
+}
+
 section.middle {
     margin-top: 132px;
     font-size: 1.125rem;
