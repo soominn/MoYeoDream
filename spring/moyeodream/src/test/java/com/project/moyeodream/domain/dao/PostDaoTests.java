@@ -1,5 +1,6 @@
 package com.project.moyeodream.domain.dao;
 
+import com.project.moyeodream.domain.vo.Criteria;
 import com.project.moyeodream.domain.vo.PostVO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -32,7 +33,9 @@ public class PostDaoTests {
         log.info("DAO get List........................");
         log.info("---------------------------------------------");
 
-        postDAO.getList();
+        Criteria criteria = new Criteria();
+
+        postDAO.getList(criteria);
     }
 
 }

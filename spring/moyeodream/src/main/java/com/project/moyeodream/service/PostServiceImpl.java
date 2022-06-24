@@ -1,6 +1,7 @@
 package com.project.moyeodream.service;
 
 import com.project.moyeodream.domain.dao.PostDAO;
+import com.project.moyeodream.domain.vo.Criteria;
 import com.project.moyeodream.domain.vo.PostDTO;
 import com.project.moyeodream.domain.vo.PostVO;
 import lombok.RequiredArgsConstructor;
@@ -16,11 +17,17 @@ public class PostServiceImpl implements PostService{
 
     private final PostDAO postDAO;
 
+    // 게시판 전체 목록
     @Override
-    public List<PostDTO> getList() {
-        return postDAO.getList();
+    public List<PostDTO> getList(Criteria criteria) {
+        return postDAO.getList(criteria);
     }
 
+    // 게시판 글 개수
+    @Override
+    public int getTotal() {
+        return postDAO.getTotal();
+    }
     @Override
     public List<PostVO> getCategoryList(String postCategory) {
         return postDAO.getCategoryList(postCategory);
@@ -36,7 +43,7 @@ public class PostServiceImpl implements PostService{
         return postDAO.myPost(postNumber);
     }
 
-    /* 게시글 등록 완료 */
+    // 게시글 등록 완료
     @Override
     public void postRegister(PostVO postVO) {
         postDAO.postRegister(postVO);

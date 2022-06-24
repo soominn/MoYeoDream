@@ -189,3 +189,8 @@ span {
   color: #000;
   font-weight: 600;
 }
+
+.board{
+  width: 700px;
+  height: 150px;
+}
