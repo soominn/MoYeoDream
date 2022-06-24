@@ -46,7 +46,7 @@ public class PostController {
 
     // 게시글 상세 조회
     @GetMapping("read")
-    public String postRead(Integer postNumber, HttpServletRequest req, Criteria criteria, Model model){
+    public String postRead(Integer postNumber, Criteria criteria, Model model){
         log.info("--------------------------------------------------");
         log.info("read Controller...............");
         log.info("Criteria............." + criteria);
@@ -90,18 +90,19 @@ public class PostController {
 
     // 자유게시판 수정 완료
     @PostMapping("modify")
-    public RedirectView postModify(PostVO postVO, Criteria criteria, RedirectAttributes rttr, Model model){
+    public RedirectView postModify(PostVO postVO, Criteria criteria, RedirectAttributes rttr){
         log.info("---------------------------------------------------");
         log.info("modifyOk controller..................");
+        log.info("criteria..........................."+ criteria);
         log.info("---------------------------------------------------");
 
         log.info(" 받아온 컨텐츠 내용 : " + postVO.getPostContent());
         postService.postUpdate(postVO);
 
-        rttr.addAttribute("criteria",criteria);
-        rttr.addAttribute("model", model);
+        rttr.addAttribute("postNumber", postVO.getPostNumber());
+        rttr.addFlashAttribute("criteria", criteria);
 
-        return new RedirectView("/board/list");
+        return new RedirectView("/post/read");
     }
 
     // 자유게시판 삭제
