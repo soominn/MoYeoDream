@@ -75,11 +75,14 @@ public class PostControllerTests {
     // 게시글 수정 완료
     @Test
     public void modifyOkTest() throws Exception{
-        mockMvc.perform(MockMvcRequestBuilders.post("/post/modify")
-                .param("postTitle", "수정완료 컨트롤러 단위테스트")
-                .param("postTitle", "modifyOk controller 단위테스트")
-                .param("postNumber", "130"))
-                .andReturn().get
+        log.info(
+            mockMvc.perform(MockMvcRequestBuilders.post("/post/modify")
+                    .param("postTitle", "수정완료 컨트롤러 단위테스트")
+                    .param("postContent", "modifyOk controller 단위테스트")
+                    .param("postNumber", "130")
+                    .param("criteria", new Criteria().toString()))
+                    .andReturn().getModelAndView().getModel().toString()
+        );
     }
 
 }

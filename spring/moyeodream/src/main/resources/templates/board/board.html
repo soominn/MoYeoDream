@@ -52,9 +52,9 @@
                   <div class="board-title">
                     <h3 class="title_text" th:text="*{postTitle}"></h3>
                   </div>
-                  <p class="board_body" th:text="*{postContent}">
-
+                  <p class="board_body postContentP" th:text="*{postContent}">
                   </p>
+                  <input type="hidden" th:text="*{postContent}">
                   <div class="board_info-footer">
                     <span th:text="*{memberNickname}"></span>
                     <span>&nbsp;&nbsp;</span>
@@ -138,6 +138,7 @@
   let params = [[${pageDTO.criteria.listLink}]];
   let pageNum = [[${criteria.pageNum}]];
   let $pageNums = $(".pagination-link"); /* css 변화를 위함 */
+  let postList = [[${postList}]];
 
   if(postNumber != null){
     alert(postNumber + "번 게시글이 등록되었습니다.");
@@ -149,22 +150,22 @@
       if($(this).text() == pageNum ){
         $pageNums.not($(this)).remove("is-current");
         $(this).addClass("is-current");
-        console.log($(this).text());
       }
-    })
+    });
+
+    console.log(postList);
+    console.log('[[${postList}]]'[0]);
   });
 
   /* 페이징 버튼 클릭시 - 페이지 이동 */
   $(".changePage").on("click", function(e){
     e.preventDefault();
-
     $pageForm.find("input[name=pageNum]").val($(this).attr("href"));
     $pageForm.submit();
   });
 
   /* 게시글 상세보기로 이동 */
   $("#goRead").on("click",function(e){
-    console.log(e.target);
     e.preventDefault();
     let postNumber = $(this).attr("href");
     location.href = "/post/read" + params + "&postNumber=" + postNumber;

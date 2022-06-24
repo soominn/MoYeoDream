@@ -39,6 +39,7 @@
                 </div>
             </section>
             <section th:object="${post}">
+                <input type="hidden" th:field="*{postNumber}">
                 <!-- 게시판 글쓰기 카테고리 -->
                 <div class="board-category">
                     <label for="category-select" class="labels" >카테고리</label>
@@ -62,7 +63,7 @@
                         value
 
                 />
-                <div class="summernote"></div>
+                <textarea id="summernote" name="content"></textarea>
                 <input type="hidden" th:field="*{postContent}">
             </section>
             <section class="register_button">
@@ -83,7 +84,7 @@
 <script th:inline="javascript">
     let content = [[${post.postContent}]];
     // 불러온 postContent
-    let category = [[${post.category}]];
+    let category = [[${post.postCategory}]];
 
     $(document).ready(function(){
         $("option").each(function(){
@@ -91,7 +92,7 @@
                 alert("해당 카테고리 : " + $(this).val());
                 $(this).prop("selected");
             }
-        };
+        });
     });
 
     //------------board Write 공통 내용------------------------------//
@@ -100,8 +101,8 @@
     let $postForm = $("form[name= postForm]");
 
     function saveContent(){
-        let $value = $(".summernote").summernote('code');
-        alert("전달할 컨텐츠 : "+$value);
+        let $value = $("#summernote").summernote('code');
+        alert("전달할 컨텐츠 : "+ $value);
         inputContent.value = $value;
         $postForm.submit();
     }
