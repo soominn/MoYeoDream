@@ -500,20 +500,6 @@ button{
     justify-content: center;
 }
 
-.loginBtn{
-    width: 8rem;
-    height: 8rem;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    outline: none;
-    transition: all .125s ease-in 0s;
-    color: #fff;
-    box-shadow: 0 5px 25px rgb(0 0 0 / 15%);
-    cursor: pointer;
-}
-
 .loginBtnWrap div p{
     font-size: 16px;
     font-weight: 600;
