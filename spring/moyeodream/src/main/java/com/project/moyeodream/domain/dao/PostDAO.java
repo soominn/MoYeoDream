@@ -34,7 +34,7 @@ public class PostDAO {
     }
 
     // 자유 게시판 조회
-    public PostVO postRead(int postNumber){
+    public PostDTO postRead(int postNumber){
         return postMapper.read(postNumber);
     }
 

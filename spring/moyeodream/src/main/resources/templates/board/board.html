@@ -45,8 +45,8 @@
     <section class="board-list-container">
       <ul class="board-list">
         <th:block th:each="post:${postList}">
-          <li class="board-container" th:object="${post}">
-            <a href="./boardDetail.html">
+          <li class="board-container" id ="goRead" th:object="${post}" th:href="${post.postNumber}">
+            <a href="">
               <div class="board">
                 <div class="board_info">
                   <div class="board-title">
@@ -82,7 +82,7 @@
                         d="M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 0 0 0 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"
                       ></path>
                     </svg>
-                    <p>1004</p>
+                    <p th:text="*{postViews}"></p>
                   </div>
                 </div>
               </div>
@@ -96,27 +96,32 @@
         aria-label="pagination"
       >
         <ul class="pagination-list">
-          <li>
-            <a class="pagination-prev" href="" aria-label="이전 페이지로 이동"
-              ><<</a
+          <li th:if="${pageDTO.prev == true}">
+            <a class="pagination-prev changePage" href="" aria-label="이전 페이지로 이동"
+              th:href="${pageDTO.startPage -1}"><<</a
             >
           </li>
           <th:block th:each="num:${#numbers.sequence(pageDTO.startPage, pageDTO.endPage)}">
           <li>
-            <span class="pagination-link"
+            <span class="pagination-link changePage"
                   aria-label="1 페이지로 이동"
-                  th:text="${num}"></span>
+                  th:if="${pageDTO.criteria.pageNum == num}" th:text="${num}"></span>
+            <a class="pagination-link changePage"
+               aria-label="1 페이지로 이동"
+               th:unless="${pageDTO.criteria.pageNum == num}" th:href="${num}"><span th:text="${num}"></span></a>
           </li>
           </th:block>
-          <li>
-            <a class="pagination-next" href="" aria-label="다음 페이지로 이동"
-              >>></a
+          <li th:if="${pageDTO.next}">
+            <a class="pagination-next changePage" href="" aria-label="다음 페이지로 이동"
+              th:href="${pageDTO.endPage + 1}">>></a
             >
           </li>
         </ul>
-        <form action="/post/list" name="pageForm">
-          <input type="hidden" name="pageNum">
-          <input type="hidden" name="amount">
+        <form action="/post/list" name="pageForm" th:object="${criteria}">
+          <input type="hidden" th:field="*{pageNum}">
+          <input type="hidden" th:field="*{amount}">
+          <input type="hidden" th:filed="*{type}">
+          <input type="hidden" th:fleld="*{keyword}">
         </form>
       </nav>
     </section>
@@ -130,29 +135,40 @@
 <script th:inline="javascript">
   let postNumber = [[${postNumber}]];
   let $pageForm = $("form[name='pageForm']");
-  // let params = [[${pageDTO.criteria.listLink}]];
-  let $changePage = $(".pagination-link");
+  let params = [[${pageDTO.criteria.listLink}]];
+  let pageNum = [[${criteria.pageNum}]];
+  let $pageNums = $(".pagination-link"); /* css 변화를 위함 */
 
   if(postNumber != null){
     alert(postNumber + "번 게시글이 등록되었습니다.");
   }
 
-  $("a.pagination-link").on("click",function(){
+  /* 페이징버튼 css : 해당 페이지 번호가 is-current */
+  $(document).ready(function(){
+    $pageNums.each(function(){
+      if($(this).text() == pageNum ){
+        $pageNums.not($(this)).remove("is-current");
+        $(this).addClass("is-current");
+        console.log($(this).text());
+      }
+    })
+  });
+
+  /* 페이징 버튼 클릭시 - 페이지 이동 */
+  $(".changePage").on("click", function(e){
     e.preventDefault();
+
     $pageForm.find("input[name=pageNum]").val($(this).attr("href"));
     $pageForm.submit();
   });
 
-  /* 페이징버튼 - 디폴트 : 첫번째 번호가 is-current */
-  $(document).ready(function(){
-    console.log($changePage.first());
-    $changePage.first().addClass("is-current");
+  /* 게시글 상세보기로 이동 */
+  $("#goRead").on("click",function(e){
+    console.log(e.target);
+    e.preventDefault();
+    let postNumber = $(this).attr("href");
+    location.href = "/post/read" + params + "&postNumber=" + postNumber;
   });
 
-  /* 페이징 버튼 클릭시 - css 변화 */
-  $changePage.on("click",function(){
-    $changePage.not($(this)).removeClass("is-current");
-    $(this).addClass("is-current");
-  });
 </script>
 </html>

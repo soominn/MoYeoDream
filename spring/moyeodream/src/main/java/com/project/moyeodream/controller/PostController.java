@@ -2,6 +2,7 @@ package com.project.moyeodream.controller;
 
 import com.project.moyeodream.domain.vo.Criteria;
 import com.project.moyeodream.domain.vo.PageDTO;
+import com.project.moyeodream.domain.vo.PostDTO;
 import com.project.moyeodream.domain.vo.PostVO;
 import com.project.moyeodream.service.PostService;
 import com.project.moyeodream.service.PostServiceImpl;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @Slf4j
@@ -32,14 +36,32 @@ public class PostController {
         PageDTO pageDTO = new PageDTO(criteria, postService.getTotal());
         model.addAttribute("postList",postService.getList(criteria));
         model.addAttribute("pageDTO", pageDTO );
+
+        log.info("-------------------------------------------------");
+        log.info(pageDTO.getCriteria().getListLink());
         log.info(pageDTO.toString());
 
         return "/board/board";
     }
 
-    // 자유 게시판 조회
+    // 게시글 상세 조회
     @GetMapping("read")
-    public void postRead(Integer boardNumber){}
+    public String postRead(Integer postNumber, HttpServletRequest req, Criteria criteria, Model model){
+        log.info("--------------------------------------------------");
+        log.info("read Controller...............");
+        log.info("Criteria............." + criteria);
+        log.info("--------------------------------------------------");
+
+        // 상세보기 들어오면 조회수 1 UP
+        log.info("클릭 전 조회수 : " + postService.postRead(postNumber).getPostViews());
+        int views = postService.postRead(postNumber).getPostViews() + 1;
+        postService.postRead(postNumber).setPostViews(views);
+
+        model.addAttribute("post",postService.postRead(postNumber));
+        log.info("클릭 후 조회수 : " + postService.postRead(postNumber).getPostViews());
+
+        return "/board/boardDetail";
+    }
 
     // 카테고리별 자유 게시판 조회
     @GetMapping("readCategory")
@@ -53,9 +75,34 @@ public class PostController {
     @PostMapping("register")
     public void postRegister(PostVO postVO){}
 
-    // 자유게시판 수정
+    // 자유게시판 수정화면 불러오기
+    @GetMapping("modify")
+    public String goModify(Criteria criteria, Integer postNumber, Model model){
+        log.info("-----------------------------------------------");
+        log.info("go Modify Controller........................");
+        log.info("criteria ........" + criteria);
+        log.info("-----------------------------------------------");
+
+        model.addAttribute("post",postService.postRead(postNumber));
+
+        return "/board/boardModify";
+    }
+
+    // 자유게시판 수정 완료
     @PostMapping("modify")
-    public void postModify(PostVO postVO){}
+    public RedirectView postModify(PostVO postVO, Criteria criteria, RedirectAttributes rttr, Model model){
+        log.info("---------------------------------------------------");
+        log.info("modifyOk controller..................");
+        log.info("---------------------------------------------------");
+
+        log.info(" 받아온 컨텐츠 내용 : " + postVO.getPostContent());
+        postService.postUpdate(postVO);
+
+        rttr.addAttribute("criteria",criteria);
+        rttr.addAttribute("model", model);
+
+        return new RedirectView("/board/list");
+    }
 
     // 자유게시판 삭제
     @GetMapping("remove")
