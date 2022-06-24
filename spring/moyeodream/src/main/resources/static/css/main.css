@@ -172,7 +172,7 @@ section{
     margin-top: 15px;
     margin-right: 20px;
     font-size: 20px;
-    font-weight: 450;
+    font-weight: 500;
 }
 
 .cateChildLi:hover{
@@ -295,7 +295,6 @@ input[type="checkbox"]{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
 }
 
 .contentListChild{
@@ -313,6 +312,11 @@ input[type="checkbox"]{
     border: 2px solid #d1d1d1;
     border-radius: 30px;
     cursor: pointer;
+    margin-right: 35px;
+}
+
+.contentListChild:nth-child(3n) {
+    margin-right: 0px;
 }
 
 .contentListChild:hover{
@@ -326,11 +330,8 @@ input[type="checkbox"]{
     color: rgba(0,0,0,.4);
 }
 
-.dateText::after{
-    height : 18px;
-    border : 1px solid rgba(0,0,0,.2);
-    content : "";
-    margin : 0 10px;
+.contentDate p:nth-child(2) {
+    margin-left: 5px;
 }
 
 .contentListChild h2{
@@ -500,20 +501,6 @@ button{
     justify-content: center;
 }
 
-.loginBtn{
-    width: 8rem;
-    height: 8rem;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    outline: none;
-    transition: all .125s ease-in 0s;
-    color: #fff;
-    box-shadow: 0 5px 25px rgb(0 0 0 / 15%);
-    cursor: pointer;
-}
-
 .loginBtnWrap div p{
     font-size: 16px;
     font-weight: 600;
@@ -521,14 +508,6 @@ button{
     color : #333;
 }
 
-.google{
-    background-color: white;
-}
-
-.github{
-    background-color: #272e33;
-}
-
-.kakao{
-    background-color: #fae100;
+.job-content {
+    display: none;
 }
