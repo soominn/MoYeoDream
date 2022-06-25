@@ -1,9 +1,6 @@
 package com.project.moyeodream.controller;
 
-import com.project.moyeodream.domain.vo.Criteria;
-import com.project.moyeodream.domain.vo.PageDTO;
-import com.project.moyeodream.domain.vo.PostDTO;
-import com.project.moyeodream.domain.vo.PostVO;
+import com.project.moyeodream.domain.vo.*;
 import com.project.moyeodream.service.PostService;
 import com.project.moyeodream.service.PostServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +24,7 @@ public class PostController {
 
     // 모든 자유 게시판 목록
     @GetMapping("list")
-    public String postList(Model model, Criteria criteria){
+    public String postList(Model model, PostCriteria criteria){
         log.info("--------------------------------------------------");
         log.info("getList Controller...............");
         log.info("Criteria............." + criteria);
@@ -36,6 +33,7 @@ public class PostController {
         PageDTO pageDTO = new PageDTO(criteria, postService.getTotal());
         model.addAttribute("postList",postService.getList(criteria));
         model.addAttribute("pageDTO", pageDTO );
+        model.addAttribute("criteria", criteria);
 
         log.info("-------------------------------------------------");
         log.info(pageDTO.getCriteria().getListLink());
@@ -46,7 +44,7 @@ public class PostController {
 
     // 게시글 상세 조회
     @GetMapping("read")
-    public String postRead(Integer postNumber, Criteria criteria, Model model){
+    public String postRead(Integer postNumber, PostCriteria criteria, Model model){
         log.info("--------------------------------------------------");
         log.info("read Controller...............");
         log.info("Criteria............." + criteria);
@@ -54,6 +52,7 @@ public class PostController {
 
         // 상세보기 들어오면 조회수 1 UP
         model.addAttribute("post",postService.postRead(postNumber));
+        model.addAttribute("criteria",criteria);
 
         return "/board/boardDetail";
     }
@@ -72,20 +71,21 @@ public class PostController {
 
     // 자유게시판 수정화면 불러오기
     @GetMapping("modify")
-    public String goModify(Criteria criteria, Integer postNumber, Model model){
+    public String goModify(PostCriteria criteria, Integer postNumber, Model model){
         log.info("-----------------------------------------------");
         log.info("go Modify Controller........................");
         log.info("criteria ........" + criteria);
         log.info("-----------------------------------------------");
 
         model.addAttribute("post",postService.postRead(postNumber));
+        model.addAttribute("criteria",criteria);
 
         return "/board/boardModify";
     }
 
     // 자유게시판 수정 완료
     @PostMapping("modify")
-    public RedirectView postModify(PostVO postVO, Criteria criteria, RedirectAttributes rttr){
+    public RedirectView postModify(PostVO postVO, PostCriteria criteria, RedirectAttributes rttr){
         log.info("---------------------------------------------------");
         log.info("modifyOk controller..................");
         log.info("criteria..........................."+ criteria);
@@ -95,7 +95,7 @@ public class PostController {
         postService.postUpdate(postVO);
 
         rttr.addAttribute("postNumber", postVO.getPostNumber());
-        rttr.addFlashAttribute("criteria", criteria);
+        rttr.addAttribute("criteria", criteria);
 
         return new RedirectView("/post/read");
     }
@@ -121,7 +121,7 @@ public class PostController {
 
     /* 게시판 등록 완료*/
     @PostMapping("postRegister")
-    public String register(PostVO postVO, Model model, Criteria criteria){
+    public String register(PostVO postVO, Model model, PostCriteria criteria){
         log.info("--------------------------------------------------");
         log.info("post Register ........" + postVO);
         log.info("--------------------------------------------------");

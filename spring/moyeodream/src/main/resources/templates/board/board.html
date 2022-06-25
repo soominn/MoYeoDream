@@ -205,7 +205,6 @@
   let params = [[${pageDTO.criteria.listLink}]];
   let pageNum = [[${criteria.pageNum}]];
   let $pageNums = $(".pagination-link"); /* css 변화를 위함 */
-  let postList = [[${postList}]];
 
   if(postNumber != null){
     alert(postNumber + "번 게시글이 등록되었습니다.");
@@ -220,8 +219,6 @@
       }
     });
 
-    console.log(postList);
-    console.log('[[${postList}]]'[0]);
   });
 
   /* 페이징 버튼 클릭시 - 페이지 이동 */
