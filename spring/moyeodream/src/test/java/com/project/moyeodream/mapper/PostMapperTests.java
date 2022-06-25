@@ -50,6 +50,18 @@ public class PostMapperTests {
         }
     }
 
+    // 게시글 조회수 올리기 테스트
+    @Test
+    public void viewUp(){
+        log.info("-----------------------------------------");
+        log.info("mapper read..........");
+        log.info("-----------------------------------------");
+
+        int postNumber = 2;
+        postMapper.viewUp(postNumber);
+        log.info("게시글 번호 : " + postMapper.read(postNumber));
+    }
+
     // 게시글 조회 테스트
 //    @Test
     public void readTest(){
@@ -62,7 +74,7 @@ public class PostMapperTests {
     }
 
     // 게시글 수정 완료 테스트
-    @Test
+//    @Test
     public void modifyOkTest(){
         log.info("-----------------------------------------");
         log.info("mapper modifyOk..........");

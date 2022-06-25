@@ -51,7 +51,7 @@ public class PostControllerTests {
     }
 
     // 게시글 상세보기
-//    @Test
+    @Test
     public void readTest() throws Exception{
         log.info(
           mockMvc.perform(MockMvcRequestBuilders.get("/post/read")
@@ -73,7 +73,7 @@ public class PostControllerTests {
     }
 
     // 게시글 수정 완료
-    @Test
+//    @Test
     public void modifyOkTest() throws Exception{
         log.info(
             mockMvc.perform(MockMvcRequestBuilders.post("/post/modify")

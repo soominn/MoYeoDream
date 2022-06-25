@@ -33,6 +33,15 @@
         SELECT COUNT(POST_NUMBER) FROM TBL_POST
     </select>
 
+    <!-- 게시글 조회수 올리기 -->
+    <update id="viewUp">
+        UPDATE TBL_POST
+        SET POST_VIEWS =
+            (SELECT POST_VIEWS + 1 FROM TBL_POST
+            WHERE POST_NUMBER = #{postNumber} )
+        WHERE POST_NUMBER = #{postNumber}
+    </update>
+
     <!-- 게시글 조회 -->
     <select id="read" resultType="postDTO">
         SELECT POST_NUMBER, POST_CATEGORY, POST_TITLE, POST_CONTENT, POST_VIEWS, tm.MEMBER_NICKNAME, POST_REGISTER_DATE, POST_UPDATE_DATE

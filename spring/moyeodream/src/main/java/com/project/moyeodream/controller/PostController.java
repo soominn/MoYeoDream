@@ -53,12 +53,7 @@ public class PostController {
         log.info("--------------------------------------------------");
 
         // 상세보기 들어오면 조회수 1 UP
-        log.info("클릭 전 조회수 : " + postService.postRead(postNumber).getPostViews());
-        int views = postService.postRead(postNumber).getPostViews() + 1;
-        postService.postRead(postNumber).setPostViews(views);
-
         model.addAttribute("post",postService.postRead(postNumber));
-        log.info("클릭 후 조회수 : " + postService.postRead(postNumber).getPostViews());
 
         return "/board/boardDetail";
     }
