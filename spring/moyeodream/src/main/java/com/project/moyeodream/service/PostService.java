@@ -17,7 +17,8 @@ public interface PostService {
 
     public List<PostVO> getCategoryList(String postCategory);
 
-    public PostVO postRead(int postNumber);
+    // 게시글 상세보기
+    public PostDTO postRead(int postNumber);
 
     public PostVO myPost(int postNumber);
 

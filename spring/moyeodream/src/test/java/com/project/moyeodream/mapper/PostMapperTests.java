@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,7 @@ public class PostMapperTests {
     private PostMapper postMapper;
 
     /* 게시판 전체목록 테스트 */
-    @Test
+//    @Test
     public void getListTest(){
         log.info("-----------------------------------------");
         log.info("mapper getList...........");
@@ -47,5 +48,32 @@ public class PostMapperTests {
             postMapper.insert(postVO);
             log.info("postVO" +  i + " 등록 완료");
         }
+    }
+
+    // 게시글 조회 테스트
+//    @Test
+    public void readTest(){
+        log.info("-----------------------------------------");
+        log.info("mapper read..........");
+        log.info("-----------------------------------------");
+
+        postMapper.read(145);
+        log.info("게시글 번호 : "+ postMapper.read(145).getPostNumber());
+    }
+
+    // 게시글 수정 완료 테스트
+    @Test
+    public void modifyOkTest(){
+        log.info("-----------------------------------------");
+        log.info("mapper modifyOk..........");
+        log.info("-----------------------------------------");
+
+        PostVO postVO = new PostVO();
+        postVO.setPostTitle("맵퍼 테스트 제목");
+        postVO.setPostContent("맵퍼 테스트 - 수정 완료");
+        postVO.setPostNumber(2);
+
+        postMapper.update(postVO);
+        log.info(postVO.getPostNumber() + "번 게시글 수정 완료");
     }
 }

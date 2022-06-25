@@ -55,11 +55,11 @@
                   class="input_box"
                   id="input"
                   placeholder="글 제목을 입력해주세요!"
-                  value
+                  value=""
 
           />
-          <div class="summernote" name="postContent"></div>
-          <textarea id="summernote" name="postContent"></textarea>
+          <textarea id="summernote" name="content"></textarea>
+          <input type="hidden" name="postContent">
         </section>
         <section class="register_button">
           <button class="write_cancel">취소</button>
@@ -76,4 +76,18 @@
 <script src="/js/header.js"></script>
 <script src="/js/login.js"></script>
 <script src="/js/boardWrite.js"></script>
+<script th:inline="javascript">
+  //------------board Modify 공통 내용-------------------------//
+  let inputContent = document.querySelector("input[name=postContent]");
+  // 값을 넣어줄 input
+  let $postForm = $("form[name= postForm]");
+
+  function saveContent(){
+    let $value = $(".summernote").summernote('code');
+    alert("전달할 컨텐츠 : " + $value);
+    inputContent.value = $value;
+    $postForm.submit();
+  }
+  //----------------------------------------------------------//
+</script>
 </html>

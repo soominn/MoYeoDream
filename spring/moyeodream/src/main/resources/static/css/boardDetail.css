@@ -63,7 +63,9 @@ div.study-user {
   display: flex;
   grid-gap: 15px;
   gap: 15px;
+  display: flex;
   align-items: center;
+  justify-content: space-between ;
 }
 
 div.user-profile {
@@ -94,6 +96,7 @@ div.user-nickname {
 div.study-registered-date {
   font-size: 18px;
   color: #717171;
+  margin-left: 8px;
 }
 
 div.recommend-wrap {
@@ -335,4 +338,15 @@ section.change-buttons {
 button.change-button {
   font-size: 16px;
   color: #444;
+}
+
+.memberInfoWrap{
+  display: flex;
+  align-items : center;
+}
+
+section.contentManage{
+  margin-top: 0;
+  display: flex;
+  justify-content: flex-end;
 }

@@ -40,13 +40,48 @@ public class PostControllerTests {
     }
 
     /* 게시글 목록 가져오기 */
-    @Test
+//    @Test
     public void getListTest() throws Exception{
         log.info(
           mockMvc.perform(MockMvcRequestBuilders.get("/post/list")
           .param("pageNum", "1")
           .param("amount", "10"))
                   .andReturn().getModelAndView().getModel().toString()
+        );
+    }
+
+    // 게시글 상세보기
+//    @Test
+    public void readTest() throws Exception{
+        log.info(
+          mockMvc.perform(MockMvcRequestBuilders.get("/post/read")
+          .param("postNumber", "145")
+          .param("criteria", new Criteria().toString()))
+                .andReturn().getModelAndView().getModel().toString()
+        );
+    }
+
+    // 게시글 수정화면 불러오기
+//    @Test
+    public void goModifyTest() throws Exception{
+        log.info(
+         mockMvc.perform(MockMvcRequestBuilders.get("/post/modify")
+         .param("postNumber", "146")
+         .param("criteria", new Criteria().toString()))
+                .andReturn().getModelAndView().getModel().toString()
+        );
+    }
+
+    // 게시글 수정 완료
+    @Test
+    public void modifyOkTest() throws Exception{
+        log.info(
+            mockMvc.perform(MockMvcRequestBuilders.post("/post/modify")
+                    .param("postTitle", "수정완료 컨트롤러 단위테스트")
+                    .param("postContent", "modifyOk controller 단위테스트")
+                    .param("postNumber", "130")
+                    .param("criteria", new Criteria().toString()))
+                    .andReturn().getModelAndView().getModel().toString()
         );
     }
 

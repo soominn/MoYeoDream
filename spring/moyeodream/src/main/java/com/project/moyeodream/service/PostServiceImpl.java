@@ -33,8 +33,9 @@ public class PostServiceImpl implements PostService{
         return postDAO.getCategoryList(postCategory);
     }
 
+    // 게시글 상세조회
     @Override
-    public PostVO postRead(int postNumber) {
+    public PostDTO postRead(int postNumber) {
         return postDAO.postRead(postNumber);
     }
 

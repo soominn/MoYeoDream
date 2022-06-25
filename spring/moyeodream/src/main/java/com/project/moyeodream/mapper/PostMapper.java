@@ -17,7 +17,7 @@ public interface PostMapper {
     // 카테고리 별 스터디
     public List<PostVO> getCategoryList(String postCategory);
     // 자유 게시판 상세 조회
-    public PostVO read(int postNumber);
+    public PostDTO read(int postNumber);
     // 내 자유 게시판 글 확인
     public PostVO myPost(int memberNumber);
     // 자유 게시판 작성

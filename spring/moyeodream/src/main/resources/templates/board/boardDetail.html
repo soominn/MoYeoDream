@@ -17,7 +17,14 @@
 <body>
   <header th:replace="~{/fragments/header::header}"></header>
   <!-- 헤더 부분 ↑ -->
-  <div class="main-container">
+  <form action="/post/list" name="pageForm" th:object="${criteria}">
+    <input type="hidden" th:field="*{pageNum}">
+    <input type="hidden" th:field="*{amount}">
+    <input type="hidden" th:filed="*{type}">
+    <input type="hidden" th:fleld="*{keyword}">
+  </form>
+  <div class="main-container" th:object="${post}">
+    <input type="hidden" th:field="*{postNumber}">
     <section class="top">
       <div class="back">
         <svg
@@ -37,20 +44,22 @@
           ></path>
         </svg>
       </div>
-      <div class="study-title">오류가 났는데 해결이 안됩니다.</div>
+      <div class="study-title" th:text="*{postTitle}"></div>
       <div class="study-user">
-        <div class="user-profile">
-          <img
-            src="https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG"
-          />
-          <div class="user-nickname">박해연</div>
+        <div class="memberInfoWrap">
+          <div class="user-profile">
+            <img
+                    src="https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG"
+            />
+            <div class="user-nickname" th:text="*{memberNickname}"></div>
+          </div>
+          <div class="study-registered-date" th:text="*{postRegisterDate}"></div>
         </div>
-        <div class="study-registered-date">2022.06.15</div>
+        <section class="contentMange">
+          <button class="change-button" id="goModify">수정</button>
+          <button class="change-button" id="goDelete">삭제</button>
+        </section>
       </div>
-      <section class="change-buttons">
-        <button class="change-button">수정</button>
-        <button class="change-button">삭제</button>
-      </section>
       <div class="recommend-wrap">
         <div class="recommend-post">
           <div class="recommend-for">
@@ -128,17 +137,13 @@
     <!-- 글 내용 -->
     <section class="middle">
       <div class="post-content">
-        <p>
-          프로젝트를 진행하던 중에 오류가 났습니다. 구글링해서 찾아봤는데도
-          답이 안나오네요 도와주세요 이것저것 건들여도 해결이 안됩니다.
-          유튜브에 영상있길래 따라 해봤는데 해결이 되지 않네요 혹시 아시는 분
-          있을까요?
+        <p id="postContent">
         </p>
       </div>
       <div class="edit-button">
-        <button class="edit" onclick="location.href='boardEdit.html'">
-          수정하기
-        </button>
+<!--        <button class="edit" onclick="location.href='boardEdit.html'">-->
+<!--          수정하기-->
+<!--        </button>-->
       </div>
     </section>
     <!-- 글 내용 -->
@@ -250,4 +255,21 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="/js/header.js"></script>
 <script src="/js/login.js"></script>
+<script th:inline="javascript">
+  let params = [[${criteria.listLink}]];
+  let postNum = [[${post.postNumber}]];
+  let $postContent = $("#postContent");
+  let $value = [[${post.postContent}]];
+
+  $(document).ready(function(){
+    $postContent.append($value);
+    console.log($value);
+  });
+
+  $("#goModify").on("click",function(){
+    alert("글 번호 : "+ postNum);
+    location.href = "/post/modify" + params + "&postNumber=" + postNum;
+  });
+
+</script>
 </html>
