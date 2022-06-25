@@ -1,5 +1,7 @@
 package com.project.moyeodream.service;
 
+import com.project.moyeodream.domain.vo.Criteria;
+import com.project.moyeodream.domain.vo.InquiryDTO;
 import com.project.moyeodream.domain.vo.InquiryVO;
 import org.springframework.stereotype.Service;
 
@@ -8,15 +10,20 @@ import java.util.List;
 @Service
 public interface InquiryService {
 
-    public List<InquiryVO> getTotalList();
+    public List<InquiryDTO> getTotalList(Criteria criteria);
 
-    public InquiryVO getList(int inquiryNumber);
+    // 게시판 글 개수
+    public int getTotal();
+
+    public InquiryDTO getList(int inquiryNumber, int inquiryMemberNumber);
 
     public void inquiryInsert(InquiryVO inquiryVO);
 
     public boolean inquiryModify(InquiryVO inquiryVO);
 
     public boolean inquiryDelete(int inquiryNumber);
+
+    public boolean inquiryVisit(int inquiryNumber);
 
     public void answer(InquiryVO inquiryVO);
 }

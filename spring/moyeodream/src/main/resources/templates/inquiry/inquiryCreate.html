@@ -16,7 +16,7 @@
     <header th:replace="~{/fragments/header::header}"></header>
     <!-- 헤더 부분 ↑ -->
     <div class="main-container">
-        <form action="">
+        <form method="post" action="/inquiry/register" id="inquiryForm">
             <section class="bottom">
                 <div class="study-title">
                     <span>1</span>
@@ -24,12 +24,13 @@
                 </div>
                 <section class="study-title-input">
                     <label for="title-input">제목</label>
-                    <input type="text" name="titleInput" id="title-input" placeholder="글 제목을 입력해주세요!">
+                    <input type="text" name="inquiryTitle" id="title-input" placeholder="글 제목을 입력해주세요!">
                     <div class="summernote"></div>
+                    <input type="hidden" class="inquiry-content" name="inquiryContent">
                 </section>
                 <section class="study-button">
-                    <button class="cancel">취소</button>
-                    <button class="register">등록</button>
+                    <button type="button" class="cancel"><a th:href="@{/inquiry/list}">취소</a></button>
+                    <button type="button" class="register">등록</button>
                 </section>
             </section>
         </form>

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Data
-public class JobpostingVO {
+public class JobpostingDTO {
     private Long jobpostingNumber;                   // 채용 공고 고유번호(DB SEQUENCE 사용)
     private String jobpostingCompanyName;               // 회사 이름
     private String jobpostingCompanyLogo;               // 회사 로고
@@ -23,4 +23,5 @@ public class JobpostingVO {
     private Integer jobpostingApprove;                  // 채용 공고 승인 여부(defalut : 0, 승인 시 1)
     private Integer jobpostingDelete;                   // 채용 공고 삭제 여부(defalut : 0, 삭제 시 1)
     private Integer jobpostingMemberNumber;             // 채용 공고 멤버 넘버(FK)    -   채용 공고 작성자 정보 가져오기 위해
+    private String memberNickname;                     // 채용자 이름
 }
