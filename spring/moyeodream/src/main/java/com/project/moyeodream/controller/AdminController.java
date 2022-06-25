@@ -1,12 +1,15 @@
 package com.project.moyeodream.controller;
 
-import com.project.moyeodream.domain.vo.MemberVO;
+import com.project.moyeodream.domain.vo.AdminVO;
+import com.project.moyeodream.service.AdminService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 
 @Controller
@@ -14,13 +17,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 @RequestMapping("/admin/*")
 public class AdminController {
-
+    private final AdminService adminService;
     // 관리자 로그인
     @PostMapping("login")
-    public int adminLogin(MemberVO memberVO){
-        return memberVO.getMemberNumber();
-    }
+    public String adminLogin(AdminVO adminVO, Model model){
+        log.info("----------------------------");
+        log.info("adminLogin............. id : " + adminVO.getAdminId());
+        log.info("adminLogin............. pw : " + adminVO.getAdminPw());
+        log.info("adminVO............. : " + adminVO.toString());
+        log.info("----------------------------");
 
+        if(adminService.login(adminVO) != 0){
+            model.addAttribute("number",adminService.login(adminVO));
+            log.info("adminLogin............. Flash : " + model.getAttribute("number"));
+            return "/admin/adminMain";
+        }
+        log.info("실패");
+        return "/admin/adminLogin";
+    }
+    @GetMapping("login")
+    public String adminLogin(){
+        return "/admin/adminLogin";
+    }
+    @PostMapping("id")
+    public String id(String id){
+        return adminService.id(id);
+    }
 
     // ---- 프론트 ----
 

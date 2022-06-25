@@ -17,15 +17,15 @@
                 <img src="/img/adminLogo.png">
             </div>
             <div class="formBox">
-                <form>
+                <form action="/admin/login" method="post" id="adminLogin">
                     <div>
-                        <input type="text" name="id" class="adminId" placeholder="아이디">
+                        <input type="text" name="adminId" class="adminId" placeholder="아이디">
                     </div>
                     <div>
-                        <input type="password" name="pw" class="adminPw" placeholder="비밀번호">
+                        <input type="password" name="adminPw" class="adminPw" placeholder="비밀번호">
                     </div>
                     <p class="errorMsg"></p>
-                    <button type="button" class="loginBtn">로그인</button>
+                    <button type="submit" class="loginBtn">로그인</button>
                 </form>
             </div>
             <div class="forgetBox">

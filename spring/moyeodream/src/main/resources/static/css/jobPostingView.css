@@ -119,7 +119,7 @@ div.recommend-for {
     display: flex;
     margin-left: 2rem;
     position: fixed;
-    top: 350px;
+    top: 200px;
 }
 
 div.recommend-wrap div.line {
@@ -149,7 +149,7 @@ ul.recommend-post {
     border-radius: 1rem;
     margin-top: 1.5rem;
     position: fixed;
-    top: 400px;
+    top: 240px;
 }
 
 li.recommend {
@@ -422,4 +422,12 @@ section.change-buttons {
 button.change-button {
     font-size: 16px;
     color: #444;
+}
+
+button.delete-button:hover{
+    color: red;
+}
+
+.study-info-content{
+    cursor: pointer;
 }

@@ -1,5 +1,6 @@
 package com.project.moyeodream.mapper;
 
+import com.project.moyeodream.domain.vo.JobpostingDTO;
 import com.project.moyeodream.domain.vo.JobpostingVO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -12,13 +13,17 @@ public interface JobpostingMapper {
     // 승인된 채용 공고 목록
     public List<JobpostingVO> getApproveList();
     // 채용 공고 상세 조회
-    public JobpostingVO read(int jobpostingNumber);
+    public JobpostingDTO read(int jobpostingNumber);
+    // 스터디 만든 회원의 닉네임 찾기
+    public String selectNickName(int jobpostingMemberNumber);
     // 채용 공고 작성
     public void insert(JobpostingVO jobpostingVO);
     // 채용 공고 수정
     public int update(JobpostingVO jobpostingVO);
     // 채용 공고 삭제
     public int delete(int jobpostingNumber);
+    // 조회수 수정
+    public int visit(int jobpostingNumber);
     // 채용 공고 승인
     public int approve(int jobpostingNumber);
     // 채용 공고 거절

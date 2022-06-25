@@ -1,19 +1,22 @@
 package com.project.moyeodream.service;
 
 import com.project.moyeodream.domain.dao.JobpostingDAO;
+import com.project.moyeodream.domain.vo.InquiryDTO;
+import com.project.moyeodream.domain.vo.JobpostingDTO;
 import com.project.moyeodream.domain.vo.JobpostingVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Qualifier("jobposting")
+@Qualifier("jobposting") @Primary
 public class JobpostingServiceImpl implements JobpostingService{
 
-    private JobpostingDAO jobpostingDAO;
+    private final JobpostingDAO jobpostingDAO;
 
     @Override
     public List<JobpostingVO> getList() {
@@ -25,9 +28,13 @@ public class JobpostingServiceImpl implements JobpostingService{
         return jobpostingDAO.getApproveList();
     }
 
+
     @Override
-    public JobpostingVO jobpostRead(int jobpostingNumber) {
-        return jobpostingDAO.jobpostRead(jobpostingNumber);
+    public JobpostingDTO jobpostRead(int jobpostingNumber, int jobpostingMemberNumber) {
+        JobpostingDTO jobpostingDTO = jobpostingDAO.jobpostRead(jobpostingNumber);
+        jobpostingDTO.setMemberNickname(jobpostingDAO.findNickName(jobpostingMemberNumber));
+
+        return jobpostingDTO;
     }
 
     @Override
@@ -43,6 +50,11 @@ public class JobpostingServiceImpl implements JobpostingService{
     @Override
     public boolean jobpostRemove(int jobpostingNumber) {
         return jobpostingDAO.jobpostRemove(jobpostingNumber);
+    }
+
+    @Override
+    public boolean jobpostVisit(int jobpostingNumber) {
+        return jobpostingDAO.jobpostVisit(jobpostingNumber);
     }
 
     @Override

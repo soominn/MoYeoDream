@@ -172,3 +172,21 @@ button.register {
 div.note-editor {
     margin-top: 36px;
 }
+
+.alert{
+    visibility: hidden;
+    position: fixed;
+    margin: 0 auto;
+    left: 0;
+    right : 0;   /* 가운데로 이동 */
+    width : 500px;
+    height : 50px;
+    font-size: 15px;
+    border: 1px solid rgba(128, 128, 128, 0.5);
+    z-index: 1000;
+    background-color: white;
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+    box-shadow: 2px 2px 5px rgba(128, 128, 128, 0.5);
+}

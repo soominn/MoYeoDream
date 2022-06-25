@@ -1,5 +1,6 @@
 package com.project.moyeodream.domain.dao;
 
+import com.project.moyeodream.domain.vo.JobpostingDTO;
 import com.project.moyeodream.domain.vo.JobpostingVO;
 import com.project.moyeodream.mapper.JobpostingMapper;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class JobpostingDAO {
 
-    private JobpostingMapper jobpostingMapper;
+    private final JobpostingMapper jobpostingMapper;
 
     // 전체 채용 공고 목록
     public List<JobpostingVO> getList(){
@@ -24,8 +25,13 @@ public class JobpostingDAO {
     }
 
     // 채용 공고 상세 조회
-    public JobpostingVO jobpostRead(int jobpostingNumber){
+    public JobpostingDTO jobpostRead(int jobpostingNumber){
         return jobpostingMapper.read(jobpostingNumber);
+    }
+
+    // 스터디 만든 회원의 닉네임 찾기
+    public String findNickName(int jobpostingMemberNumber) {
+        return jobpostingMapper.selectNickName(jobpostingMemberNumber);
     }
 
     // 채용 공고 작성
@@ -41,6 +47,11 @@ public class JobpostingDAO {
     // 채용 공고 삭제
     public boolean jobpostRemove(int jobpostingNumber){
         return jobpostingMapper.delete(jobpostingNumber) == 1;
+    }
+
+    // 조회수 증가
+    public boolean jobpostVisit(int jobpostingNumber){
+        return jobpostingMapper.visit(jobpostingNumber) == 1;
     }
 
     // 채용 공고 승인
