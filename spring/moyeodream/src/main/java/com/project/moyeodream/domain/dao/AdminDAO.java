@@ -13,6 +13,13 @@ public class AdminDAO {
     private final AdminMapper adminMapper;
     // 관리자 로그인
     public int login(AdminVO adminVO){
+        if(adminMapper.login(adminVO)==null){
+            return 0;
+        }
         return adminMapper.login(adminVO);
+    }
+    // 아이디 조회
+    public String id(String id){
+        return adminMapper.id(id);
     }
 }

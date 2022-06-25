@@ -17,4 +17,9 @@ public class AdminServiceImpl implements AdminService{
     public int login(AdminVO adminVO) {
         return adminDAO.login(adminVO);
     }
+
+    @Override
+    public String id(String id) {
+        return adminDAO.id(id);
+    }
 }

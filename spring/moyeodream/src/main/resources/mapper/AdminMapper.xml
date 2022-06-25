@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.moyeodream.mapper.AdminMapper">
-    <select id="login" resultType="_int">
+    <select id="login" resultType="int">
         SELECT ADMIN_NUMBER
         FROM TBL_ADMIN
         WHERE ADMIN_ID = #{adminId} AND ADMIN_PW = #{adminPw}
+    </select>
+
+    <select id="id" resultType="string">
+        SELECT ADMIN_ID
+        FROM TBL_ADMIN
+        WHERE ADMIN_ID = #{adminId}
     </select>
 
 </mapper>
