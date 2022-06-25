@@ -34,4 +34,8 @@ public class PostCriteria extends Criteria {
 
         return builder.toUriString();
     }
+
+    public String[] getTypes(){
+        return type == null? new String[]{} : type.split("");
+    }
 }
