@@ -166,7 +166,7 @@
   });
 
   /* 게시글 상세보기로 이동 */
-  $("#goRead").on("click",function(e){
+  $("li#goRead").on("click",function(e){
     e.preventDefault();
     let postNumber = $(this).attr("href");
     location.href = "/post/read" + params + "&postNumber=" + postNumber;
