@@ -30,19 +30,22 @@ selectArr.forEach(select => {
 const $optionArr = $(".opt1st");
 const $filter1st = $(".filter1st").find(".selected");
 const $filter2ndArr = $(".filter2nd");
+let $pageForm = $("form[name='pageForm']");
+const $inputType = $pageForm.find("input[name=type]");
+
 
 $filter1st.click(function(){
-    console.log("클릭됨");
     $optionArr.each(function(){
         $(this).mouseup(function(e){
             let $tge = $(e.target);
-            console.log($tge);
             if($tge.hasClass("title")){ // 검색조건 : 제목
-                console.log("첫번째 필터 : 제목");
                 let $titleFilter = $("div.titleFilter");
 
                 $filter2ndArr.not($(this)).removeClass("visible");
                 $titleFilter.addClass("visible");
+
+                // 첫번째 필터 값 <input name="type">에 넣기
+                $inputType.val($tge.attr("value"));
 
             }else if($tge.hasClass("writer")){ //검색조건 : 작성자
                 let $writerFilter = $("div.writerFilter");
@@ -50,17 +53,23 @@ $filter1st.click(function(){
                 $filter2ndArr.not($(this)).removeClass("visible");
                 $writerFilter.addClass("visible");
 
+                $inputType.val($tge.attr("value"));
+
             }else if($tge.hasClass("period")){ //검색조건 : 작성기간
                 let $periodFilter = $("div.periodFilter");
 
                 $filter2ndArr.not($(this)).removeClass("visible");
                 $periodFilter.addClass("visible");
 
-            }else if($tge.hasClass("status")){ // 검색조건 : 답변유무
-                let $statusFilter = $("div.statusFilter");
+                $inputType.val($tge.attr("value"));
+
+            }else if($tge.hasClass("reply")){ // 검색조건 : 댓글내용
+                let $replyFilter = $("div.replyFilter");
 
                 $filter2ndArr.not($(this)).removeClass("visible");
-                $statusFilter.addClass("visible");
+                $replyFilter.addClass("visible");
+
+                $inputType.val($tge.attr("value"));
             }
         });
     });

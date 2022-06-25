@@ -410,4 +410,20 @@ div.titleFilter{
   border :2px solid #ffcd00;
   box-sizing: border-box;
 }
+
+div.default input{
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background-color: white;
+  border: 1px solid rgb(204, 204, 204);
+  padding: 10px 15px;
+  font-size: 16px;
+  font-family: inherit;
+}
+
+form[name="searchForm"]{
+  width : 704px;
+}
 /*----------검색 필터 css-------*/
