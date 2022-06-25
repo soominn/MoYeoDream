@@ -83,7 +83,7 @@
   let $postForm = $("form[name= postForm]");
 
   function saveContent(){
-    let $value = $(".summernote").summernote('code');
+    let $value = $("#summernote").summernote('code');
     alert("전달할 컨텐츠 : " + $value);
     inputContent.value = $value;
     $postForm.submit();
