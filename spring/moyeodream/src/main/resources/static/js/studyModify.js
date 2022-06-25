@@ -1,15 +1,8 @@
 $(document).ready(function() {
-    $('.summernote-chief').summernote({
-        lang: "ko-KR",
-        placeholder: '내용을 작성해주세요!'
-    });
-});
+    $('.summernote-chief').summernote('code', studyChief);
+    $('.summernote-study').summernote('code', studyContent);
 
-$(document).ready(function() {
-    $('.summernote-study').summernote({
-        lang: "ko-KR",
-        placeholder: '내용을 작성해주세요!'
-    });
+    $inputStartDate.val(dateFormat(studyStart));
 });
 
 const $selectCategory = $("select#category-select");
@@ -62,3 +55,8 @@ $registerButton.on("click", function () {
         $("#studyForm").submit();
     }
 });
+
+function dateFormat(format) {
+    let date = new Date(format);
+    return date.getFullYear() + "-" + ((date.getMonth() + 1) > 9 ? (date.getMonth() + 1).toString() : "0" + (date.getMonth() + 1)) + "-" + (date.getDate() > 9 ? date.getDate().toString() : "0" + date.getDate().toString());
+}
