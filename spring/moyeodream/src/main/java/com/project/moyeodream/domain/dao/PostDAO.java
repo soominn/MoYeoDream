@@ -33,6 +33,9 @@ public class PostDAO {
         return postMapper.getCategoryList(postCategory);
     }
 
+    // 게시글 조회수 올리기
+    public boolean viewUp(int postNumber) { return postMapper.viewUp(postNumber) == 1;}
+
     // 자유 게시판 조회
     public PostDTO postRead(int postNumber){
         return postMapper.read(postNumber);

@@ -36,6 +36,9 @@ public class PostServiceImpl implements PostService{
     // 게시글 상세조회
     @Override
     public PostDTO postRead(int postNumber) {
+        // 조회수 1up 먼저 해준 후
+        postDAO.viewUp(postNumber);
+        // 해당 postNumber의 DB를 읽어온다.
         return postDAO.postRead(postNumber);
     }
 
