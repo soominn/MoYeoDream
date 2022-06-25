@@ -2,4 +2,50 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.moyeodream.mapper.JobpostingMapper">
 
+    <!--채용 공고 작성-->
+    <insert id="insert">
+        INSERT INTO TBL_JOBPOSTING
+        (JOBPOSTING_NUMBER, JOBPOSTING_COMPANY_NAME, JOBPOSTING_COMPANY_LOGO, JOBPOSTING_APPLICATION_START, JOBPOSTING_APPLICATION_END,
+         JOBPOSTING_CAREER, JOBPOSTING_WORKTYPE, JOBPOSTING_ELIGIBILITY, JOBPOSTING_AREA, JOBPOSTING_COMPANY_URL,
+          JOBPOSTING_TITLE, JOBPOSTING_CONTENT, JOBPOSTING_MEMBER_NUMBER)
+        VALUES
+        (SEQ_JOBPOSTING.NEXTVAL, #{jobpostingCompanyName}, #{jobpostingCompanyLogo}, #{jobpostingApplicationStart}, #{jobpostingApplicationEnd},
+         #{jobpostingCareer}, #{jobpostingWorktype}, #{jobpostingEligibility}, #{jobpostingArea}, #{jobpostingCompanyUrl},
+          #{jobpostingTitle}, #{jobpostingContent}, #{jobpostingMemberNumber})
+    </insert>
+
+    <select id="read" resultType="com.project.moyeodream.domain.vo.JobpostingDTO">
+        SELECT JOBPOSTING_NUMBER, JOBPOSTING_COMPANY_NAME, JOBPOSTING_COMPANY_LOGO, JOBPOSTING_APPLICATION_START, JOBPOSTING_APPLICATION_END,
+         JOBPOSTING_CAREER, JOBPOSTING_WORKTYPE, JOBPOSTING_ELIGIBILITY, JOBPOSTING_AREA, JOBPOSTING_COMPANY_URL,
+          JOBPOSTING_TITLE, JOBPOSTING_CONTENT, JOBPOSTING_MEMBER_NUMBER, JOBPOSTING_REGISTER_DATE
+        FROM TBL_JOBPOSTING
+        WHERE JOBPOSTING_NUMBER = #{jobpostingNumber}
+    </select>
+
+    <update id="update">
+        UPDATE TBL_JOBPOSTING
+        SET JOBPOSTING_COMPANY_NAME = #{jobpostingCompanyName}, JOBPOSTING_COMPANY_LOGO = #{jobpostingCompanyLogo}, JOBPOSTING_APPLICATION_START = #{jobpostingApplicationStart},
+         JOBPOSTING_APPLICATION_END = #{jobpostingApplicationEnd}, JOBPOSTING_CAREER = #{jobpostingCareer}, JOBPOSTING_WORKTYPE = #{jobpostingWorktype},
+          JOBPOSTING_ELIGIBILITY = #{jobpostingEligibility}, JOBPOSTING_AREA = #{jobpostingArea}, JOBPOSTING_COMPANY_URL = #{jobpostingCompanyUrl},
+           JOBPOSTING_TITLE = #{jobpostingTitle}, JOBPOSTING_CONTENT = #{jobpostingContent}
+        WHERE JOBPOSTING_NUMBER = #{jobpostingNumber}
+    </update>
+
+    <update id="delete">
+        UPDATE TBL_JOBPOSTING
+        SET JOBPOSTING_DELETE = 1
+        WHERE JOBPOSTING_NUMBER = #{jobpostingNumber}
+    </update>
+
+    <update id="visit">
+        UPDATE TBL_JOBPOSTING
+        SET JOBPOSTING_VIEWS = JOBPOSTING_VIEWS+1
+        WHERE JOBPOSTING_NUMBER = #{jobpostingNumber}
+    </update>
+
+    <select id="selectNickName" resultType="string">
+        SELECT MEMBER_NICKNAME FROM TBL_MEMBER
+        WHERE MEMBER_NUMBER = #{jobpostingMemberNumber}
+    </select>
+
 </mapper>
