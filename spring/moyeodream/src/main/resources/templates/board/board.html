@@ -52,8 +52,9 @@
                   <div class="board-title">
                     <h3 class="title_text" th:text="*{postTitle}"></h3>
                   </div>
-                  <p class="board_body postContentP" th:utext="*{postContent}">
-                  </p>
+                  <div class="contentWrap">
+                    <p class="board_body postContentP" th:inline="none"></p>[(*{postContent})]
+                  </div>
                   <input type="hidden">
                   <div class="board_info-footer">
                     <span th:text="*{memberNickname}"></span>

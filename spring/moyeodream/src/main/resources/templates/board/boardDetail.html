@@ -27,7 +27,7 @@
     <input type="hidden" th:field="*{postNumber}">
     <section class="top">
       <div class="back">
-        <svg
+        <svg id="goList"
           stroke="currentColor"
           fill="currentColor"
           stroke-width="0"
@@ -260,6 +260,7 @@
   let postNum = [[${post.postNumber}]];
   let $postContent = $("#postContent");
   let $value = [[${post.postContent}]];
+  let goList = document.querySelector("svg#goList");
 
   $(document).ready(function(){
     $postContent.append($value);
@@ -269,6 +270,10 @@
   $("#goModify").on("click",function(){
     alert("글 번호 : "+ postNum);
     location.href = "/post/modify" + params + "&postNumber=" + postNum;
+  });
+
+  goList.addEventListener("click",function(){
+    location.href="/post/list" + params;
   });
 
 </script>
