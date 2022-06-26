@@ -1,6 +1,7 @@
 package com.project.moyeodream.controller;
 
 import com.project.moyeodream.domain.vo.Criteria;
+import com.project.moyeodream.domain.vo.PostCriteria;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -40,12 +41,12 @@ public class PostControllerTests {
     }
 
     /* 게시글 목록 가져오기 */
-//    @Test
+    @Test
     public void getListTest() throws Exception{
         log.info(
           mockMvc.perform(MockMvcRequestBuilders.get("/post/list")
           .param("pageNum", "1")
-          .param("amount", "10"))
+          .param("amount", "5"))
                   .andReturn().getModelAndView().getModel().toString()
         );
     }
@@ -56,7 +57,7 @@ public class PostControllerTests {
         log.info(
           mockMvc.perform(MockMvcRequestBuilders.get("/post/read")
           .param("postNumber", "145")
-          .param("criteria", new Criteria().toString()))
+          .param("criteria", new PostCriteria().toString()))
                 .andReturn().getModelAndView().getModel().toString()
         );
     }
@@ -67,20 +68,20 @@ public class PostControllerTests {
         log.info(
          mockMvc.perform(MockMvcRequestBuilders.get("/post/modify")
          .param("postNumber", "146")
-         .param("criteria", new Criteria().toString()))
+         .param("criteria", new PostCriteria().toString()))
                 .andReturn().getModelAndView().getModel().toString()
         );
     }
 
     // 게시글 수정 완료
-    @Test
+//    @Test
     public void modifyOkTest() throws Exception{
         log.info(
             mockMvc.perform(MockMvcRequestBuilders.post("/post/modify")
                     .param("postTitle", "수정완료 컨트롤러 단위테스트")
                     .param("postContent", "modifyOk controller 단위테스트")
                     .param("postNumber", "130")
-                    .param("criteria", new Criteria().toString()))
+                    .param("criteria", new PostCriteria().toString()))
                     .andReturn().getModelAndView().getModel().toString()
         );
     }

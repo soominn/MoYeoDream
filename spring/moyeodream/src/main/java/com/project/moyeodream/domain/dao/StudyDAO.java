@@ -45,13 +45,13 @@ public class StudyDAO {
     }
 
     // 스터디 수정
-    public boolean update(StudyVO studyVO) {
-        return studyMapper.update(studyVO) == 1;
+    public void update(StudyVO studyVO) {
+        studyMapper.update(studyVO);
     }
 
     // 스터디 삭제
-    public boolean delete(int studyNumber) {
-        return studyMapper.delete(studyNumber) == 1;
+    public void delete(int studyNumber) {
+        studyMapper.delete(studyNumber);
     }
 
     // 카테고리 별 스터디

@@ -29,4 +29,20 @@ public class PageDTO {
         this.prev = this.startPage > 1;
         this.next = this.endPage < realEnd;
     }
+
+    // 자유게시판
+    public PageDTO(PostCriteria criteria, Integer total) {
+        this.criteria = criteria;
+        this.total = total;
+        this.endPage = (int) (Math.ceil(criteria.getPageNum() / (double) 10)) * 10;
+        this.startPage = endPage - 9;
+        this.realEnd = (int) (Math.ceil(total / (double) criteria.getAmount()));
+
+        if (realEnd < this.endPage) {
+            this.endPage = realEnd;
+        }
+
+        this.prev = this.startPage > 1;
+        this.next = this.endPage < realEnd;
+    }
 }

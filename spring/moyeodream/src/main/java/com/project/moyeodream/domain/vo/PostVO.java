@@ -14,4 +14,5 @@ public class PostVO {
     private String postRegisterDate;              // 게시글 작성날짜(DB SYSDATE 사용)
     private String postUpdateDate;                // 게시글 수정날짜(DB SYSDATE 사용)
     private Integer postMemberNumber;             // 게시글 멤버 넘버(FK)  -   게시글 작성자 정보 가져오기 위해
+
 }

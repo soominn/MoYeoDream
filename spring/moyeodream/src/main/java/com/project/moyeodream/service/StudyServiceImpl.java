@@ -26,11 +26,16 @@ public class StudyServiceImpl implements StudyService{
     }
 
     @Override
-    public StudyDTO read(int studyNumber, int studyMemberNumber) {
+    public StudyDTO read(int studyNumber) {
         StudyDTO studyDTO = studyDAO.read(studyNumber);
-        studyDTO.setMemberNickname(studyDAO.findNickName(studyMemberNumber));
+        studyDTO.setMemberNickname(studyDAO.findNickName(studyDTO.getStudyMemberNumber()));
         return studyDTO;
     }
+
+    @Override
+    public StudyDTO modify(int studyNumber) {
+        return studyDAO.read(studyNumber);
+    };
 
     @Override
     public List<StudyVO> CratedList(int userNumber) {
@@ -48,13 +53,13 @@ public class StudyServiceImpl implements StudyService{
     }
 
     @Override
-    public boolean modify(StudyVO studyVO) {
-        return studyDAO.update(studyVO);
+    public void modify(StudyVO studyVO) {
+        studyDAO.update(studyVO);
     }
 
     @Override
-    public boolean remove(int studyNumber) {
-        return studyDAO.delete(studyNumber);
+    public void remove(int studyNumber) {
+        studyDAO.delete(studyNumber);
     }
 
     @Override

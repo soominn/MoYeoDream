@@ -2,6 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.moyeodream.mapper.PostMapper">
 
+    <!-- 검색필터 -->
+    <sql id="search">
+        <if test=" type != null and keyword != null ">
+            <trim prefixOverrides="OR" suffix="AND">
+                <choose>
+                    <when test="type == 'C'.toString() ">
+                        OR (POST_ CATEGORY LIKE '%'||#{keyword}||'%')
+                    </when>
+                    <when test="type == 'T'.toString()">
+                        OR (POST_TITLE LIKE '%'||#{keyword}||'%')
+                    </when>
+                    <when test="type == 'W'.toString()">
+                        OR (tm.MEMBER_NICKNAME LIKE '%'||#{keyword}||'%')
+                    </when>
+                    <when test="type == 'P'.toString()">
+                        (OR POST_UPDATE_DATE LIKE '%'||#{keyword}||'%'
+                        OR POST_REGISTER_DATE LIKE '%'||#{keyword}||'%')
+                    </when>
+                    <when test="type == 'R'.toString()">
+                        OR ( LIKE '%'||#{keyword}||'%')
+                    </when>
+                </choose>
+            </trim>
+        </if>
+    </sql>
+
     <!-- 게시글 등록 완료 -->
     <insert id="insert">
         <selectKey keyProperty="postNumber" order="BEFORE" resultType="integer">
@@ -9,10 +35,10 @@
         </selectKey>
         INSERT INTO TBL_POST
         (POST_NUMBER, POST_CATEGORY, POST_TITLE, POST_CONTENT, POST_MEMBER_NUMBER)
-        VALUES(#{postNumber}, #{postCategory}, #{postTitle}, #{postContent}, '1')
+        VALUES(#{postNumber}, #{postCategory}, #{postTitle}, #{postContent}, '21')
     </insert>
 
-    <!-- 게시글 전체 목록 -->
+    <!-- 게시글 목록 불러오기 -->
     <select id="getList" resultType="postDTO">
         SELECT RN, POST_NUMBER, POST_CATEGORY, POST_TITLE, POST_CONTENT, POST_VIEWS, MEMBER_NICKNAME, POST_UPDATE_DATE
         FROM
@@ -21,8 +47,10 @@
             ROWNUM RN, POST_NUMBER, POST_CATEGORY, POST_TITLE, POST_CONTENT, POST_VIEWS, tm.MEMBER_NICKNAME, POST_UPDATE_DATE
             FROM TBL_POST tp JOIN TBL_MEMBER tm
             ON tp.POST_MEMBER_NUMBER = tm.MEMBER_NUMBER
+            WHERE
+            <include refid="search"/>
         <![CDATA[
-            WHERE ROWNUM <= #{pageNum} * #{amount}
+            ROWNUM <= #{pageNum} * #{amount}
         )
         WHERE RN > ((#{pageNum} -1) * #{amount})
         ]]>
@@ -32,6 +60,15 @@
     <select id="getTotal" resultType="_int">
         SELECT COUNT(POST_NUMBER) FROM TBL_POST
     </select>
+
+    <!-- 게시글 조회수 올리기 -->
+    <update id="viewUp">
+        UPDATE TBL_POST
+        SET POST_VIEWS =
+            (SELECT POST_VIEWS + 1 FROM TBL_POST
+            WHERE POST_NUMBER = #{postNumber} )
+        WHERE POST_NUMBER = #{postNumber}
+    </update>
 
     <!-- 게시글 조회 -->
     <select id="read" resultType="postDTO">

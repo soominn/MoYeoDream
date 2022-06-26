@@ -40,10 +40,10 @@
             <label for="category-select" class="labels">카테고리</label>
             <div class="select">
               <select name="postCategory" id="category-select">
-                <option value="free-talking">자유주제</option>
-                <option value="qna">질문&답변</option>
-                <option value="study-review">스터디 후기</option>
-                <option value="interview-review">기업면접 후기</option>
+                <option value="FREETALKING">자유주제</option>
+                <option value="QNA">질문&답변</option>
+                <option value="STUDYREVIEW">스터디 후기</option>
+                <option value="INTERVIEW">기업면접 후기</option>
               </select>
             </div>
           </div>
@@ -83,7 +83,7 @@
   let $postForm = $("form[name= postForm]");
 
   function saveContent(){
-    let $value = $(".summernote").summernote('code');
+    let $value = $("#summernote").summernote('code');
     alert("전달할 컨텐츠 : " + $value);
     inputContent.value = $value;
     $postForm.submit();
