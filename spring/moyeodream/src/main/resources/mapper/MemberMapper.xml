@@ -2,4 +2,73 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.moyeodream.mapper.MemberMapper">
 
+    <!-- 회원가입  -->
+    <insert id="insert">
+        <selectKey keyProperty="memberNumber" order="BEFORE" resultType="_int">
+            SELECT SEQ_MEMBER.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO TBL_MEMBER
+        (MEMBER_NUMBER,MEMBER_EMAIL,MEMBER_NICKNAME,MEMBER_INTERESTS)
+        VALUES (#{memberNumber},#{memberEmail},#{memberNickname},#{memberInterests})
+    </insert>
+
+    <!-- 로그인   -->
+    <select id="login">
+        SELECT MEMBER_NUMBER
+        FROM TBL_MEMBER
+        WHERE MEMBER_EMAIL = #{memberEmail}
+    </select>
+
+    <!-- 중복 이메일 체크 -->
+   <select id="checkEmail" resultType="_int">
+        SELECT COUNT(MEMBER_EMAIL)
+        FROM TBL_MEMBER
+        WHERE MEMBER_EMAIL = #{memberEmail}
+    </select>
+
+    <select id="getMyStudyList" resultType="studyDTO">
+        SELECT
+        STUDY_NUMBER, STUDY_CATEGORY, STUDY_START, STUDY_PERSONNEL, STUDY_TITLE, STUDY_APPROVE, STUDY_VIEWS, ts.STUDY_MEMBER_NUMBER, tm.MEMBER_NICKNAME
+        FROM TBL_STUDY ts JOIN TBL_MEMBER tm
+        ON ts.STUDY_MEMBER_NUMBER = tm.MEMBER_NUMBER
+        WHERE tm.MEMBER_NUMBER = #{memberNumber}
+    </select>
+
+    <select id="select" resultType="memberVO">
+        SELECT MEMBER_NUMBER, MEMBER_EMAIL, MEMBER_NICKNAME, MEMBER_INTERESTS, MEMBER_INTRODUCTION, MEMBER_PROFILE
+        FROM TBL_MEMBER
+        WHERE MEMBER_NUMBER = #{memberNumber}
+    </select>
+
+    <update id="update">
+        UPDATE TBL_MEMBER
+        SET MEMBER_NICKNAME = #{memberNickname}, MEMBER_INTRODUCTION = #{memberIntroduction}
+        WHERE MEMBER_NUMBER = #{memberNumber}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM TBL_MEMBER
+        WHERE MEMBER_NUMBER = #{memberNumber}
+    </delete>
+
+    <select id="selectMyStudy0" resultType="_int">
+        SELECT NVL(STUDY_DATA, 0)
+        FROM(
+            SELECT COUNT(CASE WHEN ts.STUDY_APPROVE = '0' THEN 1 END) AS STUDY_DATA
+            FROM TBL_STUDY ts JOIN TBL_MEMBER tm
+            ON ts.STUDY_MEMBER_NUMBER = tm.MEMBER_NUMBER
+            WHERE MEMBER_NUMBER = #{memberNumber}
+        )
+    </select>
+
+    <select id="selectMyStudy1" resultType="_int">
+        SELECT NVL(STUDY_DATA, 0)
+        FROM(
+            SELECT COUNT(CASE WHEN ts.STUDY_APPROVE = '1' THEN 1 END) AS STUDY_DATA
+            FROM TBL_STUDY ts JOIN TBL_MEMBER tm
+            ON ts.STUDY_MEMBER_NUMBER = tm.MEMBER_NUMBER
+            WHERE MEMBER_NUMBER = #{memberNumber}
+        )
+    </select>
+
 </mapper>
