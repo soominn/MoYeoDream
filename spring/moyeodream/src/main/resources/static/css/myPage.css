@@ -134,6 +134,7 @@ body>div{
     width: 100%;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 119px;
 }
 
 .fTBYHw{
@@ -429,7 +430,10 @@ body>div{
     display: flex;
 }
 
-
+.noCategory{
+    font-size: 11px;
+    color: gray;
+}
 
 
 
