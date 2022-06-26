@@ -14,18 +14,8 @@ public class StudyCommentDAO {
     private final StudyCommentMapper studyCommentMapper;
 
     // 댓글 작성
-    public void studyCommentRegister(StudyCommentVO studyCommentVO) {
+    public void register(StudyCommentVO studyCommentVO) {
         studyCommentMapper.insert(studyCommentVO);
-    }
-
-    // 댓글 수정
-    public boolean studyCommentUpdate(StudyCommentVO studyCommentVO) {
-        return studyCommentMapper.update(studyCommentVO) == 1;
-    }
-
-    // 댓글 삭제
-    public boolean studyCommentDelete(int studyCommentNumber) {
-        return studyCommentMapper.delete(studyCommentNumber) == 1;
     }
 
     // 전체 댓글 목록
@@ -36,5 +26,20 @@ public class StudyCommentDAO {
     // 댓글 작성한 멤버의 닉네임
     public String selectNickname(int studyCommentMemberNumber) {
         return studyCommentMapper.selectNickname(studyCommentMemberNumber);
+    }
+
+    // 댓글 수정
+    public void modify(StudyCommentVO studyCommentVO) {
+        studyCommentMapper.update(studyCommentVO);
+    }
+
+    // 댓글 삭제
+    public void remove(int studyCommentNumber) {
+        studyCommentMapper.delete(studyCommentNumber);
+    }
+
+    // 댓글 총개수
+    public int getTotal(int studyCommentStudyNumber) {
+        return studyCommentMapper.getTotal(studyCommentStudyNumber);
     };
 }
