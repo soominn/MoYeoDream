@@ -1,6 +1,7 @@
 package com.project.moyeodream.controller;
 
 import com.project.moyeodream.domain.vo.StudyVO;
+import com.project.moyeodream.service.StudyCommentService;
 import com.project.moyeodream.service.StudyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/study/*")
 public class StudyController {
     private final StudyService studyService;
+    private final StudyCommentService studyCommentService;
 
     // 모든 스터디 목록
     @GetMapping("list")
@@ -74,7 +76,7 @@ public class StudyController {
 
         studyService.register(studyVO);
 
-        return new RedirectView("/study/read?studyNumber=" + studyVO.getStudyNumber() + "&studyMemberNumber=" + studyVO.getStudyMemberNumber());
+        return new RedirectView("/study/read?studyNumber=" + studyVO.getStudyNumber());
     }
 
     // 스터디 수정
@@ -93,7 +95,7 @@ public class StudyController {
 
         studyService.modify(studyVO);
 
-        return new RedirectView("/study/read?studyNumber=" + studyVO.getStudyNumber() + "&studyMemberNumber=" + studyVO.getStudyMemberNumber());
+        return new RedirectView("/study/read?studyNumber=" + studyVO.getStudyNumber());
     }
 
     // 스터디 삭제

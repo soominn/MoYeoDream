@@ -29,8 +29,8 @@ public class StudyDAO {
     }
 
     // 스터디 만든 회원의 닉네임 찾기
-    public String findNickName(int studyMemberNumber) {
-        return studyMapper.selectNickName(studyMemberNumber);
+    public String findNickname(int studyMemberNumber) {
+        return studyMapper.selectNickname(studyMemberNumber);
     }
 
     // 내가 만든 스터디 목록

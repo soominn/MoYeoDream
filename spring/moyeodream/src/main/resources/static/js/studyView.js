@@ -1,4 +1,59 @@
 $(document).ready(function() {
+    $.ajax({
+        url: "/studyComment/list/" + studyNumber,
+        type: "GET",
+        dataType: "json",
+        success: function(result) {
+            $commentContent = $("ul.comment-list");
+            for(let i in result) {
+                let comment = "";
+                comment += "<li class=\"comment\">";
+                comment += "    <section class=\"comment-info-wrap\">";
+                comment += "        <div class=\"comment-info\">";
+                comment += "            <img src=\"https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG\">";
+                comment += "            <div class=\"comment-title-wrap\">";
+                comment += "                <div class=\"comment-title\">";
+                comment += "                    <div class=\"comment-user\">" + result[i].memberNickname + "</div>";
+                comment += "                    <div class=\"comment-registered-date\">" + result[i].studyCommentRegisterDate + "</div>";
+                comment += "                </div>";
+                comment += "            </div>";
+                comment += "        </div>";
+                comment += "        <section class=\"comment-button-wrap\">";
+                comment += "            <button type=\"button\" class=\"comment-button comment-modify\">수정</button>";
+                comment += "            <button type=\"button\" class=\"comment-button comment-remove\">삭제</button>";
+                comment += "        </section>";
+                comment += "    </section>";
+                comment += "    <section class=\"comment-content-wrap\">";
+                comment += "        <p class=\"comment-content\">" + result[i].studyCommentContent + "</p>";
+                comment += "        <div class=\"comment-revise\">";
+                comment += "            <input type=\"text\" value=\"" + result[i].studyCommentContent + "\" placeholder=\"" + result[i].studyCommentContent +"\" name=\"commentRevise\">";
+                comment += "            <div class=\"comment-revise-buttons\">";
+                comment += "                <button class=\"comment-revise-button cancel\">취소</button>";
+                comment += "                <button class=\"comment-revise-button register\">완료</button>";
+                comment += "            </div>";
+                comment += "        </div>";
+                comment += "    </section>";
+                comment += "</li>";
+                $commentContent.append(comment);
+            }
+
+            $modifyButton = $("button.comment-modify");
+            $cancelButton = $("button.cancel");
+
+            // $removeButton = $("button.comment-remove");
+
+            $modifyButton.on("click", function() {
+                $(this).parent().parent().next().children("p").css("display", "none");
+                $(this).parent().parent().next().children("div").css("display", "block");
+            });
+
+            $cancelButton.on("click", function() {
+                $(this).parent().parent().prev().css("display", "block");
+                $(this).parent().parent().css("display", "none");
+            });
+        }
+    });
+
     $("div.study-registered-date").text(dateFormat(studyRegisterDate));
     $("span.study-start").text(dateFormat(studyStartDate));
 
