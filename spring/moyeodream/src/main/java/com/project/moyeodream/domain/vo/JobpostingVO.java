@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 public class JobpostingVO {
-    private Long jobpostingNumber;                   // 채용 공고 고유번호(DB SEQUENCE 사용)
+    private Long jobpostingNumber;                      // 채용 공고 고유번호(DB SEQUENCE 사용)
     private String jobpostingCompanyName;               // 회사 이름
     private String jobpostingCompanyLogo;               // 회사 로고
     private String jobpostingApplicationStart;          // 접수 기간(시작)

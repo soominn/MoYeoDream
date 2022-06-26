@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.moyeodream.mapper.JobpostingMapper">
-
     <!--채용 공고 작성-->
     <insert id="insert">
         INSERT INTO TBL_JOBPOSTING
@@ -14,7 +13,7 @@
           #{jobpostingTitle}, #{jobpostingContent}, #{jobpostingMemberNumber})
     </insert>
 
-    <select id="read" resultType="com.project.moyeodream.domain.vo.JobpostingDTO">
+    <select id="read" resultType="jobpostingDTO">
         SELECT JOBPOSTING_NUMBER, JOBPOSTING_COMPANY_NAME, JOBPOSTING_COMPANY_LOGO, JOBPOSTING_APPLICATION_START, JOBPOSTING_APPLICATION_END,
          JOBPOSTING_CAREER, JOBPOSTING_WORKTYPE, JOBPOSTING_ELIGIBILITY, JOBPOSTING_AREA, JOBPOSTING_COMPANY_URL,
           JOBPOSTING_TITLE, JOBPOSTING_CONTENT, JOBPOSTING_MEMBER_NUMBER, JOBPOSTING_REGISTER_DATE
@@ -47,5 +46,86 @@
         SELECT MEMBER_NICKNAME FROM TBL_MEMBER
         WHERE MEMBER_NUMBER = #{jobpostingMemberNumber}
     </select>
+
+    <!-- 어드민에서 검색-->
+    <sql id="adminSearch">
+        <if test="type != null and keyword != null">
+            <trim prefix="(" suffix=") AND " prefixOverrides="OR">
+                <foreach item="type" collection="types">
+                    <trim prefix="OR">
+                        <choose>
+                            <when test="type == 'T'.toString()">
+                                (JOBPOSTING_TITLE LIKE '%'||#{keyword}||'%')
+                            </when>
+                            <when test="type == 'C'.toString()">
+                                (JOBPOSTING_COMPANY_NAME LIKE '%'||#{keyword}||'%')
+                            </when>
+                            <when test="type == 'AW'.toString()">
+                                (JOBPOSTING_APPROVE = TO_NUMBER(#{keyword}))
+                            </when>
+                            <when test="type == 'AS'.toString()">
+                                (JOBPOSTING_APPROVE = TO_NUMBER(#{keyword}))
+                            </when>
+                        </choose>
+                    </trim>
+                </foreach>
+            </trim>
+        </if>
+    </sql>
+
+    <select id="getApproveWait" resultType="jobpostingVO">
+        SELECT JOBPOSTING_NUMBER, JOBPOSTING_COMPANY_NAME, JOBPOSTING_COMPANY_LOGO, JOBPOSTING_APPLICATION_START, JOBPOSTING_APPLICATION_END,
+            JOBPOSTING_CAREER, JOBPOSTING_WORKTYPE, JOBPOSTING_ELIGIBILITY, JOBPOSTING_AREA, JOBPOSTING_COMPANY_URL,
+            JOBPOSTING_TITLE, JOBPOSTING_CONTENT, JOBPOSTING_MEMBER_NUMBER, JOBPOSTING_REGISTER_DATE, JOBPOSTING_APPROVE
+        FROM
+            (
+            SELECT /*+ INDEX_DESC(TBL_JOBPOSTING PK_JOBPOSTING) */
+            ROWNUM RN,JOBPOSTING_NUMBER, JOBPOSTING_COMPANY_NAME, JOBPOSTING_COMPANY_LOGO, JOBPOSTING_APPLICATION_START, JOBPOSTING_APPLICATION_END,
+            JOBPOSTING_CAREER, JOBPOSTING_WORKTYPE, JOBPOSTING_ELIGIBILITY, JOBPOSTING_AREA, JOBPOSTING_COMPANY_URL,
+            JOBPOSTING_TITLE, JOBPOSTING_CONTENT, JOBPOSTING_MEMBER_NUMBER, JOBPOSTING_REGISTER_DATE, JOBPOSTING_APPROVE
+            FROM TBL_JOBPOSTING
+            <![CDATA[
+            WHERE JOBPOSTING_APPROVE = 0
+            )
+        WHERE RN <= 10
+        ]]>
+    </select>
+
+    <select id="getJobList" resultType="jobpostingVO">
+        SELECT /*+ INDEX_DESC(TBL_JOBPOSTING PK_JOBPOSTING) */
+            JOBPOSTING_NUMBER, JOBPOSTING_COMPANY_NAME, JOBPOSTING_COMPANY_LOGO, JOBPOSTING_APPLICATION_START, JOBPOSTING_APPLICATION_END,
+            JOBPOSTING_CAREER, JOBPOSTING_WORKTYPE, JOBPOSTING_ELIGIBILITY, JOBPOSTING_AREA, JOBPOSTING_COMPANY_URL,
+            JOBPOSTING_TITLE, JOBPOSTING_CONTENT, JOBPOSTING_MEMBER_NUMBER, JOBPOSTING_REGISTER_DATE, JOBPOSTING_APPROVE
+        FROM
+        (
+            SELECT /*+ INDEX_DESC(TBL_JOBPOSTING PK_JOBPOSTING) */
+            ROWNUM RN,JOBPOSTING_NUMBER, JOBPOSTING_COMPANY_NAME, JOBPOSTING_COMPANY_LOGO, JOBPOSTING_APPLICATION_START, JOBPOSTING_APPLICATION_END,
+            JOBPOSTING_CAREER, JOBPOSTING_WORKTYPE, JOBPOSTING_ELIGIBILITY, JOBPOSTING_AREA, JOBPOSTING_COMPANY_URL,
+            JOBPOSTING_TITLE, JOBPOSTING_CONTENT, JOBPOSTING_MEMBER_NUMBER, JOBPOSTING_REGISTER_DATE, JOBPOSTING_APPROVE
+            FROM TBL_JOBPOSTING
+            WHERE
+            <include refid="adminSearch"/>
+    <![CDATA[
+            ROWNUM <= #{pageNum} * #{amount}
+        )
+        WHERE RN > (#{pageNum} - 1) * #{amount}
+    ]]>
+    </select>
+
+    <select id="getTotal" resultType="_int">
+        SELECT COUNT(JOBPOSTING_NUMBER) FROM TBL_JOBPOSTING
+        <where>
+            <trim suffixOverrides="AND">
+                <include refid="adminSearch"/>
+            </trim>
+        </where>
+    </select>
+
+    <update id="approve">
+        UPDATE TBL_JOBPOSTING
+        SET JOBPOSTING_APPROVE = 1
+        WHERE JOBPOSTING_NUMBER = #{jobpostingNumber}
+    </update>
+
 
 </mapper>

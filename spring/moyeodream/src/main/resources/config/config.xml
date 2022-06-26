@@ -6,7 +6,9 @@
         <typeAlias type="com.project.moyeodream.domain.vo.StudyCommentVO" alias="studyCommentVO"/>
         <typeAlias type="com.project.moyeodream.domain.vo.PostCommentVO" alias="postCommentVO"/>
         <typeAlias type="com.project.moyeodream.domain.vo.InquiryVO" alias="inquiryVO"/>
+        <typeAlias type="com.project.moyeodream.domain.vo.InquiryDTO" alias="inquiryDTO"/>
         <typeAlias type="com.project.moyeodream.domain.vo.JobpostingVO" alias="jobpostingVO"/>
+        <typeAlias type="com.project.moyeodream.domain.vo.JobpostingDTO" alias="jobpostingDTO"/>
         <typeAlias type="com.project.moyeodream.domain.vo.MemberVO" alias="memberVO"/>
         <typeAlias type="com.project.moyeodream.domain.vo.PostVO" alias="postVO"/>
         <typeAlias type="com.project.moyeodream.domain.vo.PostDTO" alias="postDTO"/>

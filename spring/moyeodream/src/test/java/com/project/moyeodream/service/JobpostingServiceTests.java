@@ -1,6 +1,7 @@
 package com.project.moyeodream.service;
 
 import com.project.moyeodream.domain.dao.AdminDAO;
+import com.project.moyeodream.domain.dao.JobpostingDAO;
 import com.project.moyeodream.domain.vo.AdminVO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -9,15 +10,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 @Slf4j
-public class AdminServiceTests {
+public class JobpostingServiceTests {
     @Autowired
-    private AdminService adminService;
+    private JobpostingService jobpostingService;
 
     @Test
-    public void loginTest() {
-        AdminVO adminVO = new AdminVO();
-        adminVO.setAdminId("admin");
-        adminVO.setAdminPw("123");
-        log.info("관리자 번호 : " + adminService.login(adminVO));
+    public void approveWaitTest() {
+        log.info("승인 안된 채용 공고 : " + jobpostingService.approveWait());
     }
 }
