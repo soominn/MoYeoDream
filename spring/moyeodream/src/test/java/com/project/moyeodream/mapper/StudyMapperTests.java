@@ -42,7 +42,7 @@ public class StudyMapperTests {
     @Test
     public void selectNicknameTest() {
         log.info("---------------------------------------------------------");
-        log.info("member의 nickname : " + studyMapper.selectNickName(1));
+        log.info("member의 nickname : " + studyMapper.selectNickname(1));
         log.info("---------------------------------------------------------");
     }
 }

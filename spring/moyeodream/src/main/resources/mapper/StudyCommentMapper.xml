@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.moyeodream.mapper.StudyCommentMapper">
+    <select id="getList" resultType="studyCommentDTO">
+        SELECT /*+ INDEX_ASC(TBL_STUDY_COMMENT PK_STUDY_COMMENT) */
+        STUDY_COMMENT_NUMBER, STUDY_COMMENT_REGISTER_DATE, STUDY_COMMENT_CONTENT, STUDY_COMMENT_MEMBER_NUMBER, STUDY_COMMENT_STUDY_NUMBER FROM TBL_STUDY_COMMENT
+        WHERE STUDY_COMMENT_STUDY_NUMBER = #{studyCommentStudyNumber}
+    </select>
 
+    <select id="selectNickname" resultType="string">
+        SELECT MEMBER_NICKNAME FROM TBL_MEMBER
+        WHERE MEMBER_NUMBER = #{studyCommentMemberNumber}
+    </select>
 </mapper>

@@ -4,6 +4,7 @@
     <typeAliases>
         <typeAlias type="com.project.moyeodream.domain.vo.InquiryCommentVO" alias="inquiryCommentVO"/>
         <typeAlias type="com.project.moyeodream.domain.vo.StudyCommentVO" alias="studyCommentVO"/>
+        <typeAlias type="com.project.moyeodream.domain.vo.StudyCommentDTO" alias="studyCommentDTO"/>
         <typeAlias type="com.project.moyeodream.domain.vo.PostCommentVO" alias="postCommentVO"/>
         <typeAlias type="com.project.moyeodream.domain.vo.InquiryVO" alias="inquiryVO"/>
         <typeAlias type="com.project.moyeodream.domain.vo.InquiryDTO" alias="inquiryDTO"/>

@@ -28,7 +28,7 @@ public class StudyServiceImpl implements StudyService{
     @Override
     public StudyDTO read(int studyNumber) {
         StudyDTO studyDTO = studyDAO.read(studyNumber);
-        studyDTO.setMemberNickname(studyDAO.findNickName(studyDTO.getStudyMemberNumber()));
+        studyDTO.setMemberNickname(studyDAO.findNickname(studyDTO.getStudyMemberNumber()));
         return studyDTO;
     }
 

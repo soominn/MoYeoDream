@@ -14,7 +14,7 @@
         WHERE STUDY_NUMBER = #{studyNumber}
     </select>
 
-    <select id="selectNickName" resultType="string">
+    <select id="selectNickname" resultType="string">
         SELECT MEMBER_NICKNAME FROM TBL_MEMBER
         WHERE MEMBER_NUMBER = #{studyMemberNumber}
     </select>
