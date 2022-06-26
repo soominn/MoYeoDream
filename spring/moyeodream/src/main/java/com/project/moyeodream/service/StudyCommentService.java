@@ -14,20 +14,23 @@ public class StudyCommentService {
     private final StudyCommentDAO studyCommentDAO;
 
     public void register(StudyCommentVO studyCommentVO) {
-
+        studyCommentDAO.register(studyCommentVO);
     }
 
-    public void update(StudyCommentVO studyCommentVO) {
-
+    public void modify(StudyCommentVO studyCommentVO) {
+        studyCommentDAO.modify(studyCommentVO);
     }
 
-    public void delete(int studyCommentNumber) {
-
+    public void remove(int studyCommentNumber) {
+        studyCommentDAO.remove(studyCommentNumber);
     }
 
     public List<StudyCommentDTO> getList(int studyCommentStudyNumber) {
         List<StudyCommentDTO> studyCommentDTOS = studyCommentDAO.getList(studyCommentStudyNumber);
-        studyCommentDTOS.forEach(DTO -> DTO.setMemberNickname(studyCommentDAO.selectNickname(DTO.getStudyCommentMemberNumber())));
+        studyCommentDTOS.forEach(DTO -> {
+            DTO.setMemberNickname(studyCommentDAO.selectNickname(DTO.getStudyCommentMemberNumber()));
+            DTO.setCommentTotal(studyCommentDAO.getTotal(studyCommentStudyNumber));
+        });
         return studyCommentDTOS;
     }
 }

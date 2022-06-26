@@ -127,10 +127,10 @@
         <section class="study-comment-wrap">
             <div class="study-comment">
                 <div class="comment-input-wrap">
-                    <h1>0개의 댓글이 있습니다.</h1>
-                    <textarea class="comment-input" placeholder="댓글을 입력하세요."></textarea>
+                    <h1><span class="comment-total"></span>개의 댓글이 있습니다.</h1>
+                    <textarea class="comment-input" placeholder="댓글을 입력하세요." name="studyCommentContent"></textarea>
                     <div class="comment-button">
-                        <button class="comment-input-button" name="register">댓글 등록</button>
+                        <button class="comment-input-button" name="register" onclick="clickCommentRegister()">댓글 등록</button>
                     </div>
                 </div>
                 <ul class="comment-list"></ul>
