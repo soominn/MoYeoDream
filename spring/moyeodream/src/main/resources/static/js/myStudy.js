@@ -57,7 +57,3 @@ var selectCategory = document.getElementsByClassName("select-category");
 /* -------------------------------------------------------------------------- */
 
 
-
-
-
-

@@ -1,3 +1,4 @@
+/*
 const imgThumbnail2 = document.querySelector("img.img-example");
 const imgFile2 = document.querySelector("input[id='imageUpload']");
 const imgDelete2 = document.querySelector("button.img-delete");
@@ -20,6 +21,7 @@ imgDelete2.addEventListener("click", function() {
 	imgFile2.value = "";
 	imgThumbnail2.src = "https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG";
 });
+*/
 
 $(function() {
 	$(".open-selectt").click(function() {
@@ -91,6 +93,17 @@ $clear.click(function(){
 
 
 
+/* 회원탈퇴 창*/
+$(function(){
+	$(".button-withdraw").click(function(){
+		$("#root").css('opacity', '0.5');
+		$(".delete-confirm-window").show();
+	});
+	$(".cancelButton_cancelButton__1wL0W").click(function(){
+		$(".delete-confirm-window").hide();
+		$("#root").css('opacity', '1');
+	});
+});
 
 
 
