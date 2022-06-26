@@ -1,15 +1,20 @@
 package com.project.moyeodream.controller;
 
 import com.project.moyeodream.domain.vo.AdminVO;
+import com.project.moyeodream.domain.vo.JobpostingVO;
 import com.project.moyeodream.service.AdminService;
+import com.project.moyeodream.service.JobpostingService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 
 @Controller
@@ -18,9 +23,11 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/admin/*")
 public class AdminController {
     private final AdminService adminService;
+//    private final JobpostingService jobpostingService;
+
     // 관리자 로그인
     @PostMapping("login")
-    public String adminLogin(AdminVO adminVO, Model model){
+    public RedirectView adminLogin(AdminVO adminVO, RedirectAttributes rttr){
         log.info("----------------------------");
         log.info("adminLogin............. id : " + adminVO.getAdminId());
         log.info("adminLogin............. pw : " + adminVO.getAdminPw());
@@ -28,21 +35,28 @@ public class AdminController {
         log.info("----------------------------");
 
         if(adminService.login(adminVO) != 0){
-            model.addAttribute("number",adminService.login(adminVO));
-            log.info("adminLogin............. Flash : " + model.getAttribute("number"));
-            return "/admin/adminMain";
+            rttr.addFlashAttribute("number",adminService.login(adminVO));
+            log.info("adminLogin............. Flash : " + rttr.getAttribute("number"));
+            return new RedirectView("/jobPosting/approveWait");
         }
         log.info("실패");
-        return "/admin/adminLogin";
+        return new RedirectView("/admin/login");
     }
     @GetMapping("login")
     public String adminLogin(){
         return "/admin/adminLogin";
     }
-    @PostMapping("id")
-    public String id(String id){
-        return adminService.id(id);
-    }
+
+//    @GetMapping("approveWait")
+//    public String approveWait(Model model){
+//        List<JobpostingVO> list = jobpostingService.approveWait();
+//        model.addAttribute("jobposting",list);
+//        return "admin/adminMain";
+//    }
+//    @PostMapping("id")
+//    public String id(String id){
+//        return adminService.id(id);
+//    }
 
     // ---- 프론트 ----
 

@@ -1,8 +1,6 @@
 package com.project.moyeodream.controller;
 
-import com.project.moyeodream.domain.vo.Criteria;
-import com.project.moyeodream.domain.vo.InquiryVO;
-import com.project.moyeodream.domain.vo.PageDTO;
+import com.project.moyeodream.domain.vo.*;
 import com.project.moyeodream.service.InquiryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -138,4 +137,14 @@ public class InquiryController {
         // 문의 상세보기
         @GetMapping("inquiryView")
         public void inquiryView(){}
+
+        // 답변 대기 중인 문의 글
+        @GetMapping("approveWait")
+        public String approveWait(Model model/*RedirectAttributes rttr*/){
+                List<InquiryDTO> list = inquiryService.approveWait();
+                model.addAttribute("inquiryList",list);
+//                rttr.addFlashAttribute("inquiryList",list);
+//                log.info("adminLogin............. Flash : " + rttr.getAttribute("number"));
+                return "admin/adminMain";
+        }
 }

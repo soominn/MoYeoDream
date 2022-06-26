@@ -58,4 +58,9 @@ public class InquiryDAO {
     public void answer(InquiryVO inquiryVO){
         inquiryMapper.answer(inquiryVO);
     }
+
+    // 답변되지 않은 게시글 보기
+    public List<InquiryDTO> approveWait(){
+        return inquiryMapper.getApproveWait();
+    };
 }

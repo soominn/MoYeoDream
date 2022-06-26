@@ -28,5 +28,7 @@ public interface InquiryMapper {
     // 문의하기 답변
     public void answer(InquiryVO inquiryVO);
 
+    // 답변 대기 중인 문의글
+    public List<InquiryDTO> getApproveWait();
 
 }

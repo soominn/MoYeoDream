@@ -61,4 +61,9 @@ public class InquiryServiceImpl implements InquiryService{
     public void answer(InquiryVO inquiryVO) {
         inquiryDAO.answer(inquiryVO);
     }
+
+    @Override
+    public List<InquiryDTO> approveWait(){
+        return inquiryDAO.approveWait();
+    };
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -69,8 +69,8 @@
     </nav>
     <!-- 여기까지 adminNav -->
     <section>
-        <div class="sectionWrap">
-            <div class="topTitle">  
+        <div class="sectionWrap" th:object="${jobPosting}">
+            <div class="topTitle">
                 <h1>채용공고 상세보기</h1>
             </div>
             <div class="contentWrap">
@@ -80,44 +80,44 @@
                     </div>
                 </div>
                 <div class="postTitle">
-                    <h1>신입 및 경력직원 채용 공고_IT부문</h1>
+                    <h1 th:text="*{jobpostingTitle}"/>
                 </div>
                 <div class="writerWrap">
                     <div class="writerImg">
-                        <img src="assets/img/mainicon.png">
+                        <img th:src="*{jobpostingCompanyLogo}">
                     </div>
                     <div class="writerName">
-                        <p>IT회사</p>
+                        <p th:text="*{jobpostingCompanyName}"/>
                     </div>
                     <div class="registerDate">
-                        <p>2022-06-17</p>
+                        <p th:text="*{jobpostingRegisterDate}"/>
                     </div>
                 </div>
                 <div class="basicInfoWrap">
                     <div class="">
                         <p class="infoQ">근무 지역</p>
-                        <p class="infoA">서울</p>
+                        <p class="infoA" th:text="*{jobpostingArea}"/>
                     </div>
                     <div class="">
                         <p class="infoQ">접수 기간</p>
-                        <p class="infoA">2022-06-27</p>
+                        <p class="infoA" th:text="*{jobpostingApplicationStart}"/>
                         <p class="infoA">&nbsp ~ &nbsp</p>
-                        <p class="infoA">2022-07-07</p>
+                        <p class="infoA" th:text="*{jobpostingApplicationEnd}"/>
                     </div>
                     <div class="">
                         <p class="infoQ">채용 형태</p>
-                        <p class="infoA">신입</p>
+                        <p class="infoA" th:text="*{jobpostingCareer}"/>
                         <p class="infoA">&nbsp / &nbsp</p>
-                        <p class="infoA">정규직</p>
+                        <p class="infoA" th:text="*{jobpostingWorktype}"/>
                     </div>
                     <div class="">
                         <p class="infoQ">지원 자격</p>
-                        <p class="infoA">학력무관</p>
+                        <p class="infoA" th:text="*{jobpostingEligibility}"/>
                     </div>
                     <div class="">
                         <p class="infoQ">기업 사이트</p>
                         <div class="openLink">
-                            <p class="infoA">hhtml:////</p>
+                            <a class="infoA" th:href="@{*{jobpostingCompanyUrl}}" th:text="*{jobpostingCompanyUrl}"/>
                             <img src="assets/img/openLink.svg">
                         </div>
                     </div>
@@ -126,14 +126,12 @@
                     <p>기업 소개</p>
                 </div>
                 <div class="postIntroDetail">
-                    <p>
-                        기업사이트가 들어올 부분입니다
-                    </p>
+                    <p th:text="*{jobpostingContent}"/>
                 </div>
             </div>
-            <div class="btnWrap">  
+            <div class="btnWrap">
                 <div>
-                    <button type="button" class="confirm">승인</button>
+                    <button type="button" id="goList" class="confirm">승인</button>
                     <button type="button" class="refuse">반려</button>
                 </div>
             </div>
@@ -141,6 +139,14 @@
     </section>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script th:inline="javascript">;
+    let jobpostingNumber = [[${jobpostingNumber}]];
+    // let params = [[${criteria.listLink}]];
+    $("button#goList").on("click", function (e) {
+        e.preventDefault();
+        location.href = "/jobPosting/approve?jobpostingNumber="+jobpostingNumber;
+    });
+</script>
 <script src="/js/adminNav.js"></script>
-<script src="/js/adminStudyView.js"></script>
+<!--<script src="/js/adminStudyView.js" th:inline="javascript">;</script>-->
 </html>
