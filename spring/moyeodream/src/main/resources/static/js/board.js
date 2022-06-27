@@ -45,6 +45,7 @@ $filter1st.click(function(){
                 $titleFilter.addClass("visible");
 
                 // 첫번째 필터 값 <input name="type">에 넣기
+                console.log($tge.attr("value"));
                 $inputType.val($tge.attr("value"));
 
             }else if($tge.hasClass("writer")){ //검색조건 : 작성자
@@ -60,6 +61,14 @@ $filter1st.click(function(){
 
                 $filter2ndArr.not($(this)).removeClass("visible");
                 $periodFilter.addClass("visible");
+
+                $inputType.val($tge.attr("value"));
+
+            }else if($tge.hasClass("body")){ // 검색조건 : 본문내용
+                let $contentFilter = $("div.contentFilter");
+
+                $filter2ndArr.not($(this)).removeClass("visible");
+                $contentFilter.addClass("visible");
 
                 $inputType.val($tge.attr("value"));
 

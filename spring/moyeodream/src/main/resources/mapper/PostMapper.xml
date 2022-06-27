@@ -8,7 +8,7 @@
             <trim prefixOverrides="OR" suffix="AND">
                 <choose>
                     <when test="type == 'C'.toString() ">
-                        OR (POST_ CATEGORY LIKE '%'||#{keyword}||'%')
+                        OR (POST_CATEGORY = #{keyword})
                     </when>
                     <when test="type == 'T'.toString()">
                         OR (POST_TITLE LIKE '%'||#{keyword}||'%')
@@ -16,12 +16,8 @@
                     <when test="type == 'W'.toString()">
                         OR (tm.MEMBER_NICKNAME LIKE '%'||#{keyword}||'%')
                     </when>
-                    <when test="type == 'P'.toString()">
-                        (OR POST_UPDATE_DATE LIKE '%'||#{keyword}||'%'
-                        OR POST_REGISTER_DATE LIKE '%'||#{keyword}||'%')
-                    </when>
-                    <when test="type == 'R'.toString()">
-                        OR ( LIKE '%'||#{keyword}||'%')
+                    <when test="type == 'B'.toString()">
+                        OR (POST_CONTENT LIKE '%'||#{keyword}||'%')
                     </when>
                 </choose>
             </trim>
@@ -84,4 +80,10 @@
         SET POST_TITLE = #{postTitle}, POST_CONTENT = #{postContent}
         WHERE POST_NUMBER = #{postNumber}
     </update>
+
+    <!-- 게시글 삭제 -->
+    <delete id ="delete">
+        DELETE FROM TBL_POST
+        WHERE POST_NUMBER = #{postNumber}
+    </delete>
 </mapper>

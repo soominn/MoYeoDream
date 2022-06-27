@@ -15,7 +15,7 @@
   <link rel="stylesheet" type="text/css" href="/css/login.css">
 </head>
 <body>
-  <header th:replace="~{/fragments/header::header}"></header>
+<!--  <header th:replace="~{/fragments/header::header}"></header>-->
   <!-- 헤더 부분 ↑ -->
 
   <section class="category-box" style="border-bottom: 2px solid #d1d1d1">
@@ -29,16 +29,16 @@
           <a id="viewAll" href="#"><span>전체</span></a>
         </li>
         <li class="board-aside_menu">
-          <a class="viewFree" value="C" href="#"><span>자유주제</span></a>
+          <a class="searchCate" name="C" value="freetalk" href="#"><span>자유주제</span></a>
         </li>
         <li class="board-aside_menu">
-          <a class= "viewQna" value="C" href="#"><span>질문&답변</span></a>
+          <a class= "searchCate" name="C" value="qna" href="#"><span>질문&답변</span></a>
         </li>
         <li class="board-aside_menu">
-          <a class="viewStudyReview" value="C" href="#"><span>스터디 후기</span></a>
+          <a class="searchCate" name="C" value="studyreview" href="#"><span>스터디 후기</span></a>
         </li>
         <li class="board-aside_menu">
-          <a class="viewInterview" value="C" href="#"><span>기업면접 후기</span></a>
+          <a class="searchCate" name="C" value="interview" href="#"><span>기업면접 후기</span></a>
         </li>
       </ul>
     </nav>
@@ -141,6 +141,7 @@
                   <li class="option opt1st title" value="T">제목</li>
                   <li class="option opt1st writer" value="W">작성자</li>
                   <li class="option opt1st period" value="P">작성 기간</li>
+                  <li class="option opt1st body" value="B">본문 내용</li>
                   <li class="option opt1st reply" value="R">댓글 내용</li>
                 </ul>
               </div>
@@ -178,12 +179,20 @@
                 <button type="button" class="searchBtn">검색</button>
               </form>
             </div>
+            <div class="filter2nd contentFilter"> <!-- 검색조건 : 본문내용 -->
+              <form class="filter2ndForm">
+                <div class="keywordBox">
+                  <input type="text" name="keywordText" placeholder="본문 포함 단어를 검색하세요.">
+                </div>
+                <button type="button" class="searchBtn">검색</button>
+              </form>
+            </div>
             <div class="filter2nd replyFilter"> <!-- 검색조건 : 댓글내용 -->
               <form class="filter2ndForm">
                 <div class="keywordBox">
-                  <input type="text" name="keyword" placeholder="댓글이나 포함 단어를 검색하세요.">
+                  <input type="text" name="keywordText" placeholder="댓글이나 포함 단어를 검색하세요.">
                 </div>
-                <button type="button" name="keywordText" class="searchBtn">검색</button>
+                <button type="button" class="searchBtn">검색</button>
               </form>
             </div>
             </div>
@@ -237,25 +246,23 @@
   });
 
   // 전체보기
-  $("a.viewAll").on("click", function(e){
-    e.preventDefault();
+  $("a#viewAll").on("click", function(event){
+    event.preventDefault();
+    $pageForm.find("input[name=pageNum]").val(1);
+    $pageForm.find("input[name=type]").val("");
+    $pageForm.find("input[name=keyword]").val("");
     $pageForm.submit();
   });
 
   // 카테고리 : 자유게시판
-  $("a.viewFree").on("click", function(e){
+  $("a.searchCate").on("click", function(e){
     e.preventDefault();
-    alert("클릭됨");
-    $pageForm.find("input[name=type]").val($(this).attr('value'));
-    $pageForm.find("input[name=keyword]").val('free');
+    $pageForm.find("input[name=pageNum]").val(1);
+    $pageForm.find("input[name=type]").val($(this).attr('name'));
+    $pageForm.find("input[name=keyword]").val($(this).attr('value'));
     $pageForm.submit();
   });
 
-  // 카테고리 : 질문답변
-
-  // 카테고리 : 스터디 후기
-
-  // 카테고리 : 면접 후기
 
   // 검색필터 - 검색
   $searchBtn.each(function(){
