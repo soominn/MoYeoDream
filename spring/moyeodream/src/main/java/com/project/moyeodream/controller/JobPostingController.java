@@ -154,6 +154,7 @@ public class JobPostingController {
     @GetMapping("getJobList")
     public String getJobList(Model model, Criteria criteria){
         model.addAttribute("jobpostingList",jobpostingService.getJobList(criteria));
+        log.info("list.............................. : "+ jobpostingService.getJobList(criteria));
         model.addAttribute("pageDTO", new PageDTO(criteria, jobpostingService.getTotal(criteria)));
         return "admin/adminPostManage";
     }
