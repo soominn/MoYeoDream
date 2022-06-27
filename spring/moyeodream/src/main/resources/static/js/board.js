@@ -38,6 +38,7 @@ $filter1st.click(function(){
     $optionArr.each(function(){
         $(this).mouseup(function(e){
             let $tge = $(e.target);
+
             if($tge.hasClass("title")){ // 검색조건 : 제목
                 let $titleFilter = $("div.titleFilter");
 
@@ -54,6 +55,7 @@ $filter1st.click(function(){
                 $filter2ndArr.not($(this)).removeClass("visible");
                 $writerFilter.addClass("visible");
 
+                console.log($tge.attr("value"));
                 $inputType.val($tge.attr("value"));
 
             }else if($tge.hasClass("period")){ //검색조건 : 작성기간
