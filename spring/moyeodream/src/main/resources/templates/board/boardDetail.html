@@ -15,7 +15,7 @@
   <link rel="stylesheet" type="text/css" href="/css/login.css">
 </head>
 <body>
-  <header th:replace="~{/fragments/header::header}"></header>
+<!--  <header th:replace="~{/fragments/header::header}"></header>-->
   <!-- 헤더 부분 ↑ -->
   <form action="/post/list" name="pageForm" th:object="${criteria}">
     <input type="hidden" th:field="*{pageNum}">
@@ -261,12 +261,18 @@
   let goList = document.querySelector("svg#goList");
 
   $("#goModify").on("click",function(){
-    alert("글 번호 : "+ postNum);
     location.href = "/post/modify" + params + "&postNumber=" + postNum;
   });
 
   goList.addEventListener("click",function(){
     location.href="/post/list" + params;
+  });
+
+  $("#goDelete").on("click",function(){
+    let check = confirm("게시글을 삭제하시겠습니까?");
+    if(check){
+      location.href = "/post/remove" + params + "&postNumber=" + postNum;
+    }
   });
 
 </script>

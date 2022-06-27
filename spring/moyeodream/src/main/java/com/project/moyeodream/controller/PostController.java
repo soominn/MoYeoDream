@@ -102,7 +102,16 @@ public class PostController {
 
     // 자유게시판 삭제
     @GetMapping("remove")
-    public void postRemove(PostVO postVO){}
+    public RedirectView postRemove(Integer postNumber, PostCriteria criteria){
+        log.info("---------------------------------------------------");
+        log.info("delete controller..................");
+        log.info("criteria..........................."+ criteria);
+        log.info("---------------------------------------------------");
+
+        postService.postDelete(postNumber);
+
+        return new RedirectView("/post/list");
+    }
 
     // --- 프론트 ---
 

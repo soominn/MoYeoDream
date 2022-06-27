@@ -41,4 +41,14 @@ public class PostServiceTest {
         log.info("service modifyOk.....................");
         log.info("----------------------------------------");
     }
+
+    // 게시글 삭제 완료
+    @Test
+    public void deleteTest(){
+        log.info("----------------------------------------");
+        log.info("service deleteOk.....................");
+        log.info("----------------------------------------");
+
+        postService.postDelete(144);
+    }
 }

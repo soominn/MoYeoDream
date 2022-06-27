@@ -86,4 +86,16 @@ public class PostControllerTests {
         );
     }
 
+    // 게시글 삭제
+//    @Test
+    public void deleteTest() throws Exception{
+        log.info(
+                mockMvc.perform(MockMvcRequestBuilders.post("/post/remove")
+                        .param("postNumber","144")
+                        .param("criteria", new PostCriteria().toString()))
+                        .andReturn().toString()
+                );
+        log.info("게시글 삭제 완료");
+    }
+
 }
