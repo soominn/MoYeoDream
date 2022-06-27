@@ -20,6 +20,9 @@
                         (OR POST_UPDATE_DATE LIKE '%'||#{keyword}||'%'
                         OR POST_REGISTER_DATE LIKE '%'||#{keyword}||'%')
                     </when>
+                    <when test="type == 'B'.toString()">
+                        OR ( POST_CONTENT LIKE '%'||#{keyword}||'%')
+                    </when>
                     <when test="type == 'R'.toString()">
                         OR ( LIKE '%'||#{keyword}||'%')
                     </when>

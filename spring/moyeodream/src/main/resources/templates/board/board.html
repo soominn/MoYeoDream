@@ -141,6 +141,7 @@
                   <li class="option opt1st title" value="T">제목</li>
                   <li class="option opt1st writer" value="W">작성자</li>
                   <li class="option opt1st period" value="P">작성 기간</li>
+                  <li class="option opt1st body" value="B">본문 내용</li>
                   <li class="option opt1st reply" value="R">댓글 내용</li>
                 </ul>
               </div>
@@ -178,12 +179,20 @@
                 <button type="button" class="searchBtn">검색</button>
               </form>
             </div>
+            <div class="filter2nd contentFilter"> <!-- 검색조건 : 본문내용 -->
+              <form class="filter2ndForm">
+                <div class="keywordBox">
+                  <input type="text" name="keywordText" placeholder="본문 포함 단어를 검색하세요.">
+                </div>
+                <button type="button" class="searchBtn">검색</button>
+              </form>
+            </div>
             <div class="filter2nd replyFilter"> <!-- 검색조건 : 댓글내용 -->
               <form class="filter2ndForm">
                 <div class="keywordBox">
-                  <input type="text" name="keyword" placeholder="댓글이나 포함 단어를 검색하세요.">
+                  <input type="text" name="keywordText" placeholder="댓글이나 포함 단어를 검색하세요.">
                 </div>
-                <button type="button" name="keywordText" class="searchBtn">검색</button>
+                <button type="button" class="searchBtn">검색</button>
               </form>
             </div>
             </div>
@@ -237,8 +246,9 @@
   });
 
   // 전체보기
-  $("a.viewAll").on("click", function(e){
-    e.preventDefault();
+  $("p.viewAll").on("click", function(event){
+    alert("클릭됨");
+    event.preventDefault();
     $pageForm.submit();
   });
 
