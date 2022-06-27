@@ -45,10 +45,10 @@
                     <label for="category-select" class="labels" >카테고리</label>
                     <div class="select">
                         <select id="category-select" th:field="*{postCategory}" disabled>
-                            <option value="free-talking">자유주제</option>
+                            <option value="freetalk">자유주제</option>
                             <option value="qna">질문&답변</option>
-                            <option value="study-review">스터디 후기</option>
-                            <option value="interview-review">기업면접 후기</option>
+                            <option value="studyreview">스터디 후기</option>
+                            <option value="interview">기업면접 후기</option>
                         </select>
                     </div>
                 </div>
@@ -67,8 +67,8 @@
                 <input type="hidden" th:field="*{postContent}">
             </section>
             <section class="register_button">
-                <button class="write_cancel">취소</button>
-                <button class="write_register">등록</button>
+                <button class="write_cancel" id="goList">취소</button>
+                <button type="submit" class="write_register">등록</button>
             </section>
         </form>
     </div>
@@ -93,6 +93,10 @@
                 $(this).prop("selected");
             }
         });
+    });
+
+    $("#goList").on("click",function(e){
+        e.preventDefault();
     });
 
     //------------board Write 공통 내용------------------------------//
