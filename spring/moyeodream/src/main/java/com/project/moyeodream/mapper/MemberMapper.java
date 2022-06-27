@@ -1,7 +1,11 @@
 package com.project.moyeodream.mapper;
 
+import com.project.moyeodream.domain.vo.Criteria;
 import com.project.moyeodream.domain.vo.MemberVO;
+import com.project.moyeodream.domain.vo.PostDTO;
+import com.project.moyeodream.domain.vo.StudyDTO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -15,4 +19,22 @@ public interface MemberMapper {
     public int update(MemberVO memberVO);
     // 회원 탈퇴
     public int delete(int memberNumber);
+
+    // 전체 문의보기
+    public List<StudyDTO> getMyStudyList(int memberNumber);
+
+    // 내 승인된 스터디 개수
+    public int selectMyStudy1(int memberNumber);
+
+    // 내 대기 중인 스터디 개수
+    public int selectMyStudy0(int memberNumber);
+
+    // 내 게시물 목록
+    public List<PostDTO> getMyPostList(@Param("memberNumber") int memberNumber, @Param("criteria") Criteria criteria);
+
+    // 내 게시글 개수
+    public int getMyPostCount(int memberNumber);
+
+    // 선택된 게시글 삭제
+    public int deleteBoard(String boardIdx);
 }
