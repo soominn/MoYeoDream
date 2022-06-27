@@ -161,6 +161,7 @@ nav{
 
 section{
     display:flex;
-    padding-left: 300px;
+    padding-left: 21vw;
+    padding-right: 1vw;
     height:100%;
 }
