@@ -55,6 +55,11 @@
     <!-- 게시글 전체 개수 -->
     <select id="getTotal" resultType="_int">
         SELECT COUNT(POST_NUMBER) FROM TBL_POST
+        <where>
+            <trim suffixOverrides="AND">
+                <include refid="search"/>
+            </trim>
+        </where>
     </select>
 
     <!-- 게시글 조회수 올리기 -->
