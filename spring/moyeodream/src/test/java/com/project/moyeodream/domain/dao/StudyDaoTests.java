@@ -40,7 +40,7 @@ public class StudyDaoTests {
     @Test
     public void selectNicknameTest() {
         log.info("---------------------------------------------------------");
-        log.info("member의 nickname : " + studyDAO.findNickName(1));
+        log.info("member의 nickname : " + studyDAO.findNickname(1));
         log.info("---------------------------------------------------------");
     }
 }

@@ -122,7 +122,7 @@ button{
     width : 24px;
 }
 
-.selectBox ul{ /* .optionWrap */
+.selectBox .optionWrap{ /* .optionWrap */
     display: none;
     width : 100%;
     border : 1px solid rgb(204, 204, 204);
@@ -139,6 +139,16 @@ button{
     background-color: white;
 }
 
+.search{
+    border: 1px solid #cccccc;
+    margin-right: 20px;
+    width: 300px;
+    height: 50px;
+    outline: none;
+    border-radius: 6px;
+    font-family: inherit;
+}
+
 .option{
     padding : 11px 13px;
     color: #333;
@@ -149,7 +159,7 @@ button{
     background-color:rgba(255, 229, 121, 0.7);
 }
 
-li.status{
+option.status{
     text-align: left;
 }
 
@@ -187,9 +197,10 @@ div.titleFilter{
 }
 
 .searchBtn{
+    text-align: center;
     width : 60px;
     height : 38px;
-    padding: 5px 5px;
+    padding-top: 16px;
     font-size: 15px;
     background-color: #ffe579;
     cursor: pointer;
@@ -296,7 +307,7 @@ td{
 	justify-content: center;
 }
 
-.numberBtns button {
+.numberBtns a {
 	display: inline-flex;
 	width: 32px;
 	height: 32px;

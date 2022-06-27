@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -74,59 +74,52 @@
                 <h1>채용공고 관리</h1>
             </div>
             <div class="searchWrap">
-                <div class="searchContent">
-                    <div class="filter1st">
-                        <div class="selectBox">
-                            <div class="selected"> 
-                                <div class="selectedValue">검색조건 선택</div>
-                                <div class="arrow">
-                                    <svg height="20" width="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class="css-8mmkcg"><path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"></path></svg>
+                <form method="get" action="/jobPosting/getJobList" id="searchForm" th:object="${pageDTO}">
+                    <div class="searchContent" th:object="${criteria}">
+                        <div class="filter1st">
+                            <select class="selectBox" name="type">
+                                <div class="selected">
+                                    <option class="selectedValue" value="">검색조건 선택</option>
+                                    <div class="arrow">
+                                        <svg height="20" width="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class="css-8mmkcg"><path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"></path></svg>
+                                    </div>
                                 </div>
-                            </div>
-                            <ul class="optionWrap">
-                                <li class="option opt1st title">제목</li>
-                                <li class="option opt1st writer">작성 기업</li>
-                                <li class="option opt1st period">작성 기간</li>
-                                <li class="option opt1st status">승인 상태</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="filter2nd titleFilter"> <!-- 검색조건 : 제목 -->
-                        <form class="filter2ndForm">
-                            <input type="text" placeholder="스터디 제목이나 포함 단어를 입력해주세요.">
-                            <button type="button" class="searchBtn">검색</button>
-                        </form>
-                    </div>
-                    <div class="filter2nd writerFilter"> <!-- 검색조건 : 작성기업 -->
-                        <form class="filter2ndForm">
-                            <input type="text" placeholder="작성기업을 입력해주세요.">
-                            <button type="button" class="searchBtn">검색</button>
-                        </form>
-                    </div>
-                    <div class="filter2nd periodFilter"> <!-- 검색조건 : 작성기간 -->
-                        <form class="periodForm">
-                            <input type="date" class="periodStart" id=""periodStart placeholder="시작날짜 선택">
-                            <p> &nbsp; ~ &nbsp;</p>
-                            <input type="date" class="periodEnd" placeholder="끝날자 선택">
-                            <button type="button" class="searchBtn">검색</button>
-                        </form>
-                    </div>
-                    <div class="filter2nd statusFilter"> <!-- 검색조건 : 승인상태 -->
-                        <div class="selectBox">
-                            <div class="selected"> 
-                                <div class="selectedValue">상태 선택</div>
-                                <div class="arrow">
-                                    <svg height="20" width="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class="css-8mmkcg"><path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"></path></svg>
+                                <div class="optionWrap">
+                                    <option class="option opt1st title" value="T" th:selected="*{type == 'T'}">제목</option>
+                                    <option class="option opt1st writer" value="C" th:selected="*{type == 'C'}">작성 기업</option>
+                                    <option class="option opt1st status" value="AW" th:selected="*{type == 'AW'}">승인 여부</option>
+                                    <option class="option opt1st status" value="AS" th:selected="*{type == 'AS'}">승인 완료</option>
                                 </div>
-                            </div>
-                            <ul class="optionWrap">
-                                <li class="option">승인 대기 </li>
-                                <li class="option">승인 완료 </li>
-                            </ul>
+                            </select>
                         </div>
-                        <button type="button" class="searchBtn">검색</button>
+                        <input class="search Approve" id="keyword" type="text" th:field="*{keyword}">
+                        <a href="#" class="searchBtn">검색</a>
+
+                        <!--                        <div class="filter2nd titleFilter"> &lt;!&ndash; 검색조건 : 제목 &ndash;&gt;-->
+<!--                            <form class="filter2ndForm">-->
+<!--                                <input name="keyword" type="text" placeholder="스터디 제목이나 포함 단어를 입력해주세요." th:field="*{keyword}">-->
+<!--                                <button type="button" class="searchBtn">검색</button>-->
+<!--                            </form>-->
+<!--                        </div>-->
+<!--                        <div class="filter2nd writerFilter"> &lt;!&ndash; 검색조건 : 작성기업 &ndash;&gt;-->
+<!--                            <form class="filter2ndForm">-->
+<!--                                <input id="keyword" name="keyword" type="text" placeholder="작성기업을 입력해주세요." th:field="*{keyword}">-->
+<!--                                <button type="button" class="searchBtn">검색</button>-->
+<!--                            </form>-->
+<!--                        </div>-->
+<!--                        <div class="filter2nd statusFilter"> &lt;!&ndash; 검색조건 : 승인상태 &ndash;&gt;-->
+<!--                            <div class="selectBox">-->
+<!--                                <div class="selected">-->
+<!--                                    <div class="selectedValue">상태 선택</div>-->
+<!--                                    <div class="arrow">-->
+<!--                                        <svg height="20" width="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class="css-8mmkcg"><path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"></path></svg>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <a href="" class="searchBtn">검색</a>-->
+<!--                        </div>-->
                     </div>
-                </div>
+                </form>
             </div>
             <div class="tableWrap">
                 <table class="postList">
@@ -139,63 +132,95 @@
                         <th width="13%" class="status">상태</th>
                         <th width="10%"></th>
                     </tr>
-                    <tr>
-                        <td class="tableNum">26</td>
-                        <td>신입 및 경력직원 채용 공고_IT부문</td>
-                        <td>IT회사</td>
-                        <td>2022-07-07</td>
-                        <td>2020-06-17</td>
-                        <td class="status">승인대기</td>
-                        <td><button type="button" class="viewBtn">상세보기</button></td>
-                    </tr>
-                    <tr>
-                        <td class="tableNum">26</td>
-                        <td>신입 및 경력직원 채용 공고_IT부문</td>
-                        <td>IT회사</td>
-                        <td>2022-07-07</td>
-                        <td>2020-06-17</td>
-                        <td class="status">승인대기</td>
-                        <td><button type="button" class="viewBtn">상세보기</button></td>
-                    </tr>
+                        <tr th:each="jobposting:${jobpostingList}">
+                            <li th:object="${jobposting}">
+                                <td class="tableNum" th:text="*{jobpostingNumber}"/>
+                                <td th:text="*{jobpostingTitle}"/>
+                                <td th:text="*{jobpostingCompanyName}"/>
+                                <td th:text="*{jobpostingApplicationStart}"/>
+                                <td th:text="*{jobpostingApplicationEnd}"/>
+                                <td class="status" th:if="*{jobpostingApprove == 0}">승인대기</td>
+                                <td class="status" th:unless="*{jobpostingApprove == 0}">승인</td>
+                                <td><button type="button" class="viewBtn goDetail" th:href="*{jobpostingNumber}">상세보기</button></td>
+                            </li>
+                        </tr>
                 </table>
             </div>
             <div>
                 <div class="pageNumWrap">
 					<div class="numberBtns">
-						<button type="button">
-							<span>
-								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-									<path fill-rule="evenodd" d="M15.5 5.5l-6 6.5 6 6.5L14 20l-7.5-8L14 4l1.5 1.5z" fill="#1a1a1a"></path>
-								</svg>
-							</span>
-						</button>
-						<button type="button" class="numBtn selected">
-							<span>
-								1
-							</span>
-						</button>
-						<div id="newInquiryButton">
-						<button type="button" class="numBtn">
-							<span id="helpNumber">
-								2
-							</span>
-						</button>
-						</div>
+                        <a type="button" class="changePage" th:if="${pageDTO.prev}" th:href="${pageDTO.startPage - 1}">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd" d="M15.5 5.5l-6 6.5 6 6.5L14 20l-7.5-8L14 4l1.5 1.5z" fill="#1a1a1a"></path>
+                                </svg>
+                            </span>
+                        </a>
+
+
+                        <th:block th:each="num:${#numbers.sequence(pageDTO.startPage, pageDTO.endPage)}">
+                            <a type="button" class="numBtn selected " th:text="${num}" th:if="${pageDTO.criteria.pageNum == num}"/>
+                            <div id="newInquiryButton">
+                                <a type="button" class="numBtn changePage" th:unless="${pageDTO.criteria.pageNum == num}" th:href="${num}">
+                                    <span id="helpNumber" th:text="${num}"/>
+                                </a>
+                            </div>
+                        </th:block>
+
 						<div id="newInquiryButton2"></div>
-						<button type="button">
-							<span>
-								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-									<path fill-rule="evenodd" d="M8.5 18.5l6-6.5-6-6.5L10 4l7.5 8-7.5 8-1.5-1.5z" fill="#1a1a1a"></path>
-								</svg>
-							</span>
-						</button>
+                        <a type="button" class="changePage" th:if="${pageDTO.next}" th:href="${pageDTO.endPage + 1}">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd" d="M8.5 18.5l6-6.5-6-6.5L10 4l7.5 8-7.5 8-1.5-1.5z" fill="#1a1a1a"></path>
+                                </svg>
+                            </span>
+                        </a>
 					</div>
 				</div>
             </div>
+            <form action="/jobPosting/getJobList" th:object="${criteria}" name="pageForm">
+                <input type="hidden" th:field="*{pageNum}">
+                <input type="hidden" th:field="*{amount}">
+                <input type="hidden" th:field="*{type}">
+                <input type="hidden" th:field="*{keyword}">
+            </form>
         </div>
     </section>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/js/adminNav.js"></script>
 <script src="/js/adminStudyManage.js"></script>
+<script th:inline="javascript">;
+let boardNumber = [[${boardNumber}]];
+let $pageForm = $(pageForm);
+let $serachForm = $(searchForm);
+let params = [[${pageDTO.criteria.listLink}]];
+//
+$("button.goDetail").on("click", function(e){
+    e.preventDefault();
+    location.href = "/jobPosting/adPostRead" + params + "&jobpostingNumber=" + $(this).attr("href");
+});
+
+$("#searchForm a").on("click", function(e){
+    e.preventDefault();
+
+    if(!$serachForm.find("option:selected").val()){
+        alert("검색종류를 선택하세요");
+        return false;
+    }
+
+    if(!$serachForm.find("input[name='keyword']").val()){
+        alert("키워드를 입력하세요");
+        return false;
+    }
+
+    $serachForm.submit();
+});
+
+$("a.changePage").on("click", function(e){
+    e.preventDefault();
+    $pageForm.find("input[name='pageNum']").val($(this).attr("href"));
+    $pageForm.submit();
+});
+</script>
 </html>

@@ -14,8 +14,19 @@
         WHERE STUDY_NUMBER = #{studyNumber}
     </select>
 
-    <select id="selectNickName" resultType="string">
+    <select id="selectNickname" resultType="string">
         SELECT MEMBER_NICKNAME FROM TBL_MEMBER
         WHERE MEMBER_NUMBER = #{studyMemberNumber}
     </select>
+
+    <update id="update">
+        UPDATE TBL_STUDY
+        SET STUDY_CATEGORY = #{studyCategory}, STUDY_PROCESS = #{studyProcess}, STUDY_PERSONNEL = #{studyPersonnel}, STUDY_START = #{studyStart}, STUDY_COMMUNICATION = #{studyCommunication}, STUDY_PERIOD = #{studyPeriod}, STUDY_CHIEF = #{studyChief}, STUDY_TITLE = #{studyTitle}, STUDY_CONTENT = #{studyContent}
+        WHERE STUDY_NUMBER = #{studyNumber}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM TBL_STUDY
+        WHERE STUDY_NUMBER = #{studyNumber}
+    </delete>
 </mapper>

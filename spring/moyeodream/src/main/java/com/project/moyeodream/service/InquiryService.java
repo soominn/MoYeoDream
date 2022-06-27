@@ -26,4 +26,6 @@ public interface InquiryService {
     public boolean inquiryVisit(int inquiryNumber);
 
     public void answer(InquiryVO inquiryVO);
+
+    public List<InquiryDTO> approveWait();
 }

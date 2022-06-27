@@ -1,6 +1,8 @@
 package com.project.moyeodream.controller;
 
+import com.project.moyeodream.domain.vo.Criteria;
 import com.project.moyeodream.domain.vo.JobpostingVO;
+import com.project.moyeodream.domain.vo.PageDTO;
 import com.project.moyeodream.service.JobpostingService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -113,7 +115,12 @@ public class JobPostingController {
 
     //    채용 공고 승인
     @GetMapping("approve")
-    public void jobPostApprove(Integer jobPostingNumber){}
+    public String jobPostApprove(Integer jobPostingNumber/*, Criteria criteria, RedirectAttributes rttr*/){
+        log.info("승인 여뷰.................... : "+jobpostingService.approve(jobPostingNumber));
+//        rttr.addFlashAttribute("jobpostingList",jobpostingService.getJobList(criteria));
+//        rttr.addFlashAttribute("pageDTO", new PageDTO(criteria, jobpostingService.getTotal(criteria)));
+        return "jobPosting/getJobList";
+    }
 
     //    채용 공고 거절
     @GetMapping("refuse")
@@ -128,4 +135,38 @@ public class JobPostingController {
     // 채용 공고 상세 보기
     @GetMapping("jobPostingView")
     public void jobPostingView() {}
+
+    // 승인대기 채용공고
+    @GetMapping("approveWait")
+    public RedirectView approveWait(RedirectAttributes rttr){
+        List<JobpostingVO> list = jobpostingService.approveWait();
+        rttr.addFlashAttribute("jobpostingList",list);
+        rttr.addFlashAttribute("number",rttr.getFlashAttributes().get("number"));
+        log.info("adminLogin............. Flash : " + rttr.getAttribute("number"));
+        return new RedirectView("/inquiry/approveWait");
+    }
+
+    // 채용공고 admin
+    @GetMapping("getJobList")
+    public String getJobList(Model model, Criteria criteria){
+        if(criteria.getTypes().equals("AW")){
+            criteria.setKeyword("0");
+        }else if (criteria.getTypes().equals("AS")){
+            criteria.setKeyword("1");
+        }
+        model.addAttribute("jobpostingList",jobpostingService.getJobList(criteria));
+        model.addAttribute("pageDTO", new PageDTO(criteria, jobpostingService.getTotal(criteria)));
+        return "admin/adminPostManage";
+    }
+
+    // 관리자 채용 공고 세부 조회
+    @GetMapping("adPostRead")
+    public String adPostRead(Integer jobpostingNumber, Model model){
+        log.info("----------------------------");
+        log.info("jobpostingRead............. : " + jobpostingNumber);
+        log.info("----------------------------");
+        jobpostingService.jobpostVisit(jobpostingNumber);
+        model.addAttribute("jobPosting", jobpostingService.adPostRead(jobpostingNumber));
+        return "admin/adminPostView";
+    }
 }

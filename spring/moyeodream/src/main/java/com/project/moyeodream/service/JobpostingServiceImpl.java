@@ -1,6 +1,7 @@
 package com.project.moyeodream.service;
 
 import com.project.moyeodream.domain.dao.JobpostingDAO;
+import com.project.moyeodream.domain.vo.Criteria;
 import com.project.moyeodream.domain.vo.InquiryDTO;
 import com.project.moyeodream.domain.vo.JobpostingDTO;
 import com.project.moyeodream.domain.vo.JobpostingVO;
@@ -65,5 +66,22 @@ public class JobpostingServiceImpl implements JobpostingService{
     @Override
     public boolean refuse(int jobpostingNumber) {
         return jobpostingDAO.refuse(jobpostingNumber);
+    }
+
+    @Override
+    public List<JobpostingVO> approveWait() { return jobpostingDAO.approveWait(); }
+
+    @Override
+    public List<JobpostingVO> getJobList(Criteria criteria) { return jobpostingDAO.getJobList(criteria); }
+
+    @Override
+    public int getTotal(Criteria criteria) {
+        return jobpostingDAO.getTotal(criteria);
+    }
+
+    @Override
+    public JobpostingDTO adPostRead(int jobpostingNumber) {
+        JobpostingDTO jobpostingDTO = jobpostingDAO.adPostRead(jobpostingNumber);
+        return jobpostingDTO;
     }
 }

@@ -2,7 +2,10 @@
 const $confirmBtn = $(".confirm");
 
 $confirmBtn.click(function(){
-    confirm("승인 하시겠습니까?")
+    let app = confirm("승인 하시겠습니까?")
+    if(app){
+        alert("승인");
+    }
 });
 
 /* 반려버튼 */

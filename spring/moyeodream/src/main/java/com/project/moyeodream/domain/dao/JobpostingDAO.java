@@ -1,5 +1,6 @@
 package com.project.moyeodream.domain.dao;
 
+import com.project.moyeodream.domain.vo.Criteria;
 import com.project.moyeodream.domain.vo.JobpostingDTO;
 import com.project.moyeodream.domain.vo.JobpostingVO;
 import com.project.moyeodream.mapper.JobpostingMapper;
@@ -56,11 +57,27 @@ public class JobpostingDAO {
 
     // 채용 공고 승인
     public boolean approve(int jobpostingNumber){
-        return jobpostingMapper.approve(jobpostingNumber) == 1;
+        return jobpostingMapper.approve(jobpostingNumber);
     }
 
     // 채용 공고 거절
     public boolean refuse(int jobpostingNumber){
         return jobpostingMapper.refuse(jobpostingNumber) == 1;
+    }
+
+    // 승인 대기 채용 공고
+    public List<JobpostingVO> approveWait() { return jobpostingMapper.getApproveWait(); }
+
+    // 채용 공고 가져오기 admin
+    public List<JobpostingVO> getJobList(Criteria criteria) { return jobpostingMapper.getJobList(criteria); }
+
+    // 채용 공고 전체 개수
+    public int getTotal(Criteria criteria){
+        return jobpostingMapper.getTotal(criteria);
+    }
+
+    // 채용 공고 상세 조회 관리자
+    public JobpostingDTO adPostRead(int jobpostingNumber){
+        return jobpostingMapper.read(jobpostingNumber);
     }
 }

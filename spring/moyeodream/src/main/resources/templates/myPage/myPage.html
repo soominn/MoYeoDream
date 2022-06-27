@@ -18,16 +18,14 @@
                 <header th:replace="~{/fragments/header::header}"></header>
                 <!-- 헤더 부분 ↑ -->
 
-				<div class="kgBzKM">
+				<div class="kgBzKM" th:object="${member}">
 					<div class="gqgKCQ">
-						<header class="fTBYHw">
-                            
-						</header>
+
 						<div class="iTujEl">
 							<aside class="ipCzuu">
 								<section class="LaCvk cgWehN">
 									<h4 class="jdPAHA dyWeXC">내 정보</h4>
-									<a class="eYKbXT" onclick="location.href='ViewCoupon.co'">
+									<a class="eYKbXT" th:href="@{/member/myProfile(memberNumber=*{memberNumber})}">
 										<div class="cqZvVN gkiCmL">프로필 수정</div>
 									</a>
                                     <a class="eYKbXT" href="Logout.us">
@@ -36,13 +34,13 @@
 								</section>
 								<section class="LaCvk cgWehN fXhCUc">
 									<h4 class="jdPAHA dyWeXC">메뉴</h4>
-									<a class="eYKbXT" onclick="location.href='createrSupport.jsp'">
+									<a class="eYKbXT" th:href="@{/member/myStudy(memberNumber=*{memberNumber})}">
 										<div class="cqZvVN gkiCmL">내 스터디</div>
 									</a>
-									<a class="eYKbXT" onclick="location.href='createrSupport.jsp'">
+									<a class="eYKbXT" th:href="@{/member/myPost(memberNumber=*{memberNumber})}">
 										<div class="cqZvVN gkiCmL">내 게시글</div>
 									</a>
-									<a class="eYKbXT" onclick="location.href='createrSupport.jsp'">
+									<a class="eYKbXT" th:href="@{/member/myComment}">
 										<div class="cqZvVN gkiCmL">내 댓글</div>
 									</a>
 									
@@ -60,15 +58,16 @@
                                     </div>
                                 </div>
                                 
-                                <!--<div>
+                                <div>
                                     <div class="my-info-title">
                                         <div class="my-info-title2">
                                             <div class="my-info-title3">
-                                                한 줄 소개가 비어있습니다.
+                                                <span th:if="*{memberIntroduction == null}" >한 줄 소개가 비어있습니다.</span>
+                                                <span th:unless="*{memberIntroduction == null}" th:text="*{memberIntroduction}"></span>
                                             </div>
                                         </div>
                                     </div>
-                                </div>-->
+                                </div>
 
                                 <div class="void-block"></div>
 
@@ -84,14 +83,14 @@
                                     <div class="my-info">
                                         <div class="my-info2">
                                             <span style="font-size: 18px;">&#9997;&nbsp;</span>
-                                            강동원
+                                            <span th:text="*{memberNickname}"></span>
                                         </div>
                                     </div>
 
                                     <div class="my-info">
                                         <div class="my-info2">
                                             <span style="font-size: 19px;">&#128236;&nbsp;</span>
-                                            example@example.com
+                                            <span th:text="*{memberEmail}"></span>
                                         </div>
                                     </div>
 
@@ -107,33 +106,24 @@
                                     </div>
                                     
                                     <div class="all-my-info">
-                                        <div class="my-info">
-                                            <div class="my-info2">
-                                                웹 개발자
+
+                                        <div class="my-info" th:if="*{memberInterests == null}">
+                                            <div class="my-info2 noCategory">
+                                                프로필 수정에서 관심분야를 선택해주세요
                                             </div>
                                         </div>
 
-                                        <div class="my-info">
-                                            <div class="my-info2">
-                                                배우
-                                            </div>
-                                        </div>
-                                        <div class="my-info">
-                                            <div class="my-info2">
-                                                가수
-                                            </div>
-                                        </div>
-                                        <div class="my-info">
-                                            <div class="my-info2">
-                                                짜파게티 요리사
-                                            </div>
-                                        </div>
-                                        <div class="my-info">
-                                            <div class="my-info2">
-                                                멋쟁이 토마토
-                                            </div>
-                                        </div>
-                                        
+                                        <ul style="list-style: none" th:unless="*{memberInterests == null}">
+
+                                            <li >
+                                                <div class="my-info">
+                                                    <div class="my-info2">
+                                                        <span th:text="*{memberInterests}"></span>
+                                                    </div>
+                                                </div>
+                                            </li>
+
+                                        </ul>
                                         
                                     </div>
 

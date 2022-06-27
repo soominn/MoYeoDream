@@ -1,5 +1,6 @@
 package com.project.moyeodream.service;
 
+import com.project.moyeodream.domain.vo.Criteria;
 import com.project.moyeodream.domain.vo.JobpostingDTO;
 import com.project.moyeodream.domain.vo.JobpostingVO;
 import org.springframework.stereotype.Service;
@@ -26,4 +27,12 @@ public interface JobpostingService {
     public boolean approve(int jobpostingNumber);
 
     public boolean refuse(int jobpostingNumber);
+
+    public List<JobpostingVO> approveWait();
+
+    public List<JobpostingVO> getJobList(Criteria criteria);
+
+    public int getTotal(Criteria criteria);
+
+    public JobpostingDTO adPostRead(int jobpostingNumber);
 }

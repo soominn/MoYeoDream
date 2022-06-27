@@ -15,9 +15,10 @@
 <body>
 <header th:replace="~{/fragments/header::header}"></header>
 <!-- 헤더 부분 ↑ -->
-<div class="main-container">
-    <form action="/study/register" method="post" id="studyForm">
+<div class="main-container" th:object="${study}">
+    <form action="/study/modify" method="post" id="studyForm">
         <section class="top">
+            <input type="hidden" th:field="*{studyNumber}">
             <div class="study-info-title">
                 <span>1</span>
                 <h2>스터디 기본 정보를 입력해주세요.</h2>
@@ -26,7 +27,7 @@
                 <li class="study-info-item">
                     <label for="category-select">카테고리</label>
                     <div class="select">
-                        <select name="studyCategory" id="category-select">
+                        <select name="studyCategory" id="category-select" th:field="*{studyCategory}">
                             <option value=""></option>
                             <option value="culture">문화/예술</option>
                             <option value="sports">스포츠/레저</option>
@@ -44,7 +45,7 @@
                 <li class="study-info-item">
                     <label for="way-select">진행 방식</label>
                     <div class="select">
-                        <select name="studyProcess" id="way-select">
+                        <select name="studyProcess" id="way-select" th:field="*{studyProcess}">
                             <option value=""></option>
                             <option value="online">온라인</option>
                             <option value="offline">오프라인</option>
@@ -56,7 +57,7 @@
                 <li class="study-info-item">
                     <label for="people-select">모집 인원</label>
                     <div class="select">
-                        <select name="studyPersonnel" id="people-select">
+                        <select name="studyPersonnel" id="people-select" th:field="*{studyPersonnel}">
                             <option value=""></option>
                             <option value="none">인원 미정</option>
                             <option value="one">1명</option>
@@ -75,7 +76,7 @@
                 <li class="study-info-item">
                     <label for="start-date">시작 예정일</label>
                     <div class="input">
-                        <input type="date" name="studyStart" id="start-date" th:value="${#calendars.format(#calendars.createNow(), 'yyyy-MM-dd')}">
+                        <input type="date" name="studyStart" id="start-date">
                     </div>
                 </li>
             </ul>
@@ -83,13 +84,13 @@
                 <li class="study-info-item">
                     <label for="contact-input">연락 방법</label>
                     <div class="input">
-                        <input type="text" name="studyCommunication" id="contact-input" placeholder="오픈 카톡방 링크">
+                        <input type="text" name="studyCommunication" id="contact-input" placeholder="오픈 카톡방 링크" th:field="*{studyCommunication}">
                     </div>
                 </li>
                 <li class="study-info-item">
                     <label for="period-select">진행 기간</label>
                     <div class="select">
-                        <select name="studyPeriod" id="period-select">
+                        <select name="studyPeriod" id="period-select" th:field="*{studyPeriod}">
                             <option value=""></option>
                             <option value="none">기간 미정</option>
                             <option value="oneMonth">1개월</option>
@@ -121,7 +122,7 @@
             </div>
             <section class="study-title-input">
                 <label for="title-input">제목</label>
-                <input type="text" name="studyTitle" id="title-input" placeholder="글 제목을 입력해주세요!">
+                <input type="text" name="studyTitle" id="title-input" placeholder="글 제목을 입력해주세요!" th:field="*{studyTitle}">
                 <div class="summernote-study"></div>
                 <input type="hidden" class="study-content" name="studyContent">
             </section>
@@ -137,7 +138,12 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
-<script src="/js/studyCreate.js"></script>
+<script th:inline="javascript">
+    let studyStart = [[${study.studyStart}]];
+    let studyChief = [[${study.studyChief}]];
+    let studyContent = [[${study.studyContent}]];
+</script>
+<script src="/js/studyModify.js"></script>
 <script src="/js/header.js"></script>
 <script src="/js/login.js"></script>
 </html>
