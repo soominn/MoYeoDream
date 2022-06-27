@@ -140,11 +140,11 @@ public class InquiryController {
 
         // 답변 대기 중인 문의 글
         @GetMapping("approveWait")
-        public String approveWait(Model model/*RedirectAttributes rttr*/){
+        public String approveWait(Model model){
                 List<InquiryDTO> list = inquiryService.approveWait();
                 model.addAttribute("inquiryList",list);
 //                rttr.addFlashAttribute("inquiryList",list);
-//                log.info("adminLogin............. Flash : " + rttr.getAttribute("number"));
+//                log.info("adminLogin............. Flash : " + rttr.getFlashAttributes());
                 return "admin/adminMain";
         }
 }

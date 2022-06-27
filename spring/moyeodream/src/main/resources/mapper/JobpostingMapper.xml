@@ -61,10 +61,10 @@
                                 (JOBPOSTING_COMPANY_NAME LIKE '%'||#{keyword}||'%')
                             </when>
                             <when test="type == 'AW'.toString()">
-                                (JOBPOSTING_APPROVE = TO_NUMBER(#{keyword}))
+                                (JOBPOSTING_APPROVE = 0)
                             </when>
                             <when test="type == 'AS'.toString()">
-                                (JOBPOSTING_APPROVE = TO_NUMBER(#{keyword}))
+                                (JOBPOSTING_APPROVE = 1)
                             </when>
                         </choose>
                     </trim>
