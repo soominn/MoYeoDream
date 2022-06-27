@@ -45,6 +45,9 @@
     <section class="board-list-container">
       <ul class="board-list">
         <th:block th:each="post:${postList}">
+          <div class="noPostWrap" th:if="${postList == null}">
+            <p> 게시글 없음 </p>
+          </div>
           <li class="board-container" id ="goRead" th:object="${post}" th:href="${post.postNumber}">
             <a href="">
               <div class="board">
@@ -172,9 +175,9 @@
             <div class="filter2nd periodFilter"> <!-- 검색조건 : 작성기간 -->
               <form class="periodForm">
                 <div class="keywordBox">
-                  <input type="date" class="periodStart" id=""periodStart placeholder="시작날짜 선택">
+                  <input type="date" name="keywordText" class="periodStart" id=""periodStart placeholder="시작날짜 선택">
                   <p> &nbsp; ~ &nbsp;</p>
-                  <input type="date" class="periodEnd" placeholder="끝날자 선택">
+                  <input type="date" name="keywordText" class="periodEnd" placeholder="끝날자 선택">
                 </div>
                 <button type="button" class="searchBtn">검색</button>
               </form>

@@ -17,8 +17,7 @@
                         OR (tm.MEMBER_NICKNAME LIKE '%'||#{keyword}||'%')
                     </when>
                     <when test="type == 'P'.toString()">
-                        (OR POST_UPDATE_DATE LIKE '%'||#{keyword}||'%'
-                        OR POST_REGISTER_DATE LIKE '%'||#{keyword}||'%')
+                        (OR POST_UPDATE_DATE BETWEEN TO_DATE('20220622') AND TO_DATE('20220624')
                     </when>
                     <when test="type == 'B'.toString()">
                         OR ( POST_CONTENT LIKE '%'||#{keyword}||'%')
@@ -55,7 +54,7 @@
         <![CDATA[
             ROWNUM <= #{pageNum} * #{amount}
         )
-        WHERE RN > ((#{pageNum} -1) * #{amount})
+        WHERE RN > ((#{pageNum} -1) * #{amount}) AND POST_UPDATE_DATE = TO_DATE('20220629')
         ]]>
     </select>
 
