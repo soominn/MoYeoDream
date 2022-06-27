@@ -109,11 +109,10 @@ $(document).ready(function() {
         dataType: "json",
         success: function(result) {
             $commentTotal = $("span.comment-total");
-            $commentTotal.empty();
-            let total = result[0].commentTotal != null ? result[0].commentTotal : 0;
-            $commentTotal.text(total);
-            console.log(total);
-
+            if(result != null) {
+                $commentTotal.html(total);
+                console.log(total);
+            }
             $commentContent = $("ul.comment-list");
             $commentContent.empty();
             for(let i in result) {
@@ -187,11 +186,10 @@ function clickCommentRegister() {
                 dataType: "json",
                 success: function(result) {
                     $commentTotal = $("span.comment-total");
-                    $commentTotal.empty();
-                    let total = result[0].commentTotal != null ? result[0].commentTotal : 0;
-                    $commentTotal.text(total);
-                    console.log(total);
-
+                    if(result != null) {
+                        $commentTotal.html(total);
+                        console.log(total);
+                    }
                     $commentContent = $("ul.comment-list");
                     $commentContent.empty();
                     for(let i in result) {
@@ -217,6 +215,8 @@ function clickCommentRegister() {
                         comment += "    <section class=\"comment-content-wrap\">";
                         comment += "        <p class=\"comment-content\">" + result[i].studyCommentContent + "</p>";
                         comment += "        <div class=\"comment-revise\">";
+                        comment += "            <input type=\"hidden\" name=\"studyCommentNumber\" value=\"" + result[i].studyCommentNumber + "\">";
+                        comment += "            <input type=\"hidden\" name=\"studyCommentStudyNumber\" value=\"" + result[i].studyCommentStudyNumber + "\">";
                         comment += "            <input type=\"text\" value=\"" + result[i].studyCommentContent + "\" placeholder=\"" + result[i].studyCommentContent +"\" name=\"commentRevise\">";
                         comment += "            <div class=\"comment-revise-buttons\">";
                         comment += "                <button class=\"comment-revise-button cancel\">취소</button>";
@@ -227,20 +227,6 @@ function clickCommentRegister() {
                         comment += "</li>";
                         $commentContent.append(comment);
                     }
-                    alert("댓글이 등록되었습니다.");
-
-                    $modifyButton = $("button.comment-modify");
-                    $cancelButton = $("button.cancel");
-
-                    $modifyButton.on("click", function() {
-                        $(this).parent().parent().next().children("p").css("display", "none");
-                        $(this).parent().parent().next().children("div").css("display", "block");
-                    });
-
-                    $cancelButton.on("click", function() {
-                        $(this).parent().parent().prev().css("display", "block");
-                        $(this).parent().parent().css("display", "none");
-                    });
                 }
             });
         }
@@ -266,11 +252,10 @@ $(document).on("click", ".register", function() {
                 dataType: "json",
                 success: function(result) {
                     $commentTotal = $("span.comment-total");
-                    $commentTotal.empty();
-                    let total = result[0].commentTotal != null ? result[0].commentTotal : 0;
-                    $commentTotal.text(total);
-                    console.log(total);
-
+                    if(result != null) {
+                        $commentTotal.html(total);
+                        console.log(total);
+                    }
                     $commentContent = $("ul.comment-list");
                     $commentContent.empty();
                     for(let i in result) {
@@ -308,7 +293,6 @@ $(document).on("click", ".register", function() {
                         comment += "</li>";
                         $commentContent.append(comment);
                     }
-                    alert("댓글이 수정되었습니다.");
                 }
             });
         }
@@ -327,11 +311,10 @@ $(document).on("click", ".comment-remove", function() {
                 dataType: "json",
                 success: function(result) {
                     $commentTotal = $("span.comment-total");
-                    $commentTotal.empty();
-                    let total = result[0].commentTotal != null ? result[0].commentTotal : 0;
-                    $commentTotal.text(total);
-                    console.log(total);
-
+                    if(result != null) {
+                        $commentTotal.html(total);
+                        console.log(total);
+                    }
                     $commentContent = $("ul.comment-list");
                     $commentContent.empty();
                     for(let i in result) {
@@ -369,7 +352,6 @@ $(document).on("click", ".comment-remove", function() {
                         comment += "</li>";
                         $commentContent.append(comment);
                     }
-                    alert("댓글이 삭제되었습니다.");
                 }
             });
         }
