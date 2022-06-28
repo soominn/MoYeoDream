@@ -44,6 +44,7 @@
     </nav>
     <section class="board-list-container">
       <ul class="board-list">
+        <th:block th:each="post:${postList}">
           <li class="board-container" id ="goRead" th:object="${post}" th:href="${post.postNumber}">
             <a href="">
               <div class="board">
@@ -253,7 +254,7 @@
     $pageForm.submit();
   });
 
-  // 카테고리 : 자유게시판
+  // 카테고리 분류
   $("a.searchCate").on("click", function(e){
     e.preventDefault();
     $pageForm.find("input[name=pageNum]").val(1);

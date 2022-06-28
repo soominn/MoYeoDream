@@ -54,7 +54,7 @@
         <![CDATA[
             ROWNUM <= #{pageNum} * #{amount}
         )
-        WHERE RN > ((#{pageNum} -1) * #{amount}) AND POST_UPDATE_DATE = TO_DATE('20220629')
+        WHERE RN > ((#{pageNum} -1) * #{amount})
         ]]>
     </select>
 

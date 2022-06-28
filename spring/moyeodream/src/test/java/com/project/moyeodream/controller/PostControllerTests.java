@@ -41,12 +41,11 @@ public class PostControllerTests {
     }
 
     /* 게시글 목록 가져오기 */
-    @Test
+//    @Test
     public void getListTest() throws Exception{
         log.info(
-          mockMvc.perform(MockMvcRequestBuilders.get("/post/list")
-          .param("pageNum", "1")
-          .param("amount", "5"))
+          mockMvc.perform(MockMvcRequestBuilders.get("/get/list")
+          .param("criteria", new PostCriteria().toString()))
                   .andReturn().getModelAndView().getModel().toString()
         );
     }
@@ -74,7 +73,7 @@ public class PostControllerTests {
     }
 
     // 게시글 수정 완료
-//    @Test
+    @Test
     public void modifyOkTest() throws Exception{
         log.info(
             mockMvc.perform(MockMvcRequestBuilders.post("/post/modify")

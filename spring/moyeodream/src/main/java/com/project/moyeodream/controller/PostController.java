@@ -95,7 +95,7 @@ public class PostController {
         postService.postUpdate(postVO);
 
         rttr.addAttribute("postNumber", postVO.getPostNumber());
-        rttr.addAttribute("criteria", criteria);
+        rttr.addFlashAttribute("criteria", criteria);
 
         return new RedirectView("/post/read");
     }

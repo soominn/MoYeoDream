@@ -1,6 +1,7 @@
 package com.project.moyeodream.service;
 
 import com.project.moyeodream.domain.vo.PostCriteria;
+import com.project.moyeodream.domain.vo.PostVO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ public class PostServiceTest {
     private PostService postService;
 
     // 게시글 전체 목록
-    @Test
+//    @Test
     public void getList(){
         log.info("----------------------------------------");
         log.info("service getList.....................");
@@ -35,15 +36,22 @@ public class PostServiceTest {
     }
 
     // 게시글 수정 완료
-//    @Test
+    @Test
     public void modifyOkTest(){
         log.info("----------------------------------------");
         log.info("service modifyOk.....................");
         log.info("----------------------------------------");
+
+        PostVO postVO = new PostVO();
+        postVO.setPostTitle("수정테스트");
+        postVO.setPostContent("수정DAO test");
+        postVO.setPostNumber(44);
+
+        postService.postUpdate(postVO);
     }
 
     // 게시글 삭제 완료
-    @Test
+//    @Test
     public void deleteTest(){
         log.info("----------------------------------------");
         log.info("service deleteOk.....................");
