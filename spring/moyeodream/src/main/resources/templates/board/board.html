@@ -274,8 +274,8 @@
       let $keywordText = $(this).closest("form").find("input[name='keywordText']");
 
       if(!$keywordText.val()){
-        console.log(!$keywordText.val());
         alert("검색어를 입력하세요!");
+        return;
       }
 
       console.log($keywordText.val());
