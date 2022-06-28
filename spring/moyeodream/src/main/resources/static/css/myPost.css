@@ -38,12 +38,17 @@ p{
     line-height: 1.6;
 }
 
+.back{
+    margin-left: 196px;
+    margin-bottom: 13px;
+}
+
 #root{
     min-height: 100%;
 }
 
 .myPosts_pageWrapper__2qXu7{
-    padding-top: 5rem;
+    padding-top: 2rem;
 }
 
 .myPosts_myLikes__2p117{

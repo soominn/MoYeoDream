@@ -71,4 +71,35 @@
         )
     </select>
 
+    <!--내 게시물 목록-->
+    <select id="getMyPostList" parameterType="map" resultType="postDTO">
+        SELECT RN, POST_NUMBER, POST_CATEGORY, POST_TITLE, POST_CONTENT, POST_VIEWS, POST_REGISTER_DATE, POST_UPDATE_DATE, POST_MEMBER_NUMBER, MEMBER_NICKNAME
+        FROM
+        (
+            SELECT
+            ROWNUM RN, POST_NUMBER, POST_CATEGORY, POST_TITLE, POST_CONTENT, POST_VIEWS, POST_REGISTER_DATE, POST_UPDATE_DATE, tp.POST_MEMBER_NUMBER, tm.MEMBER_NICKNAME
+            FROM TBL_POST tp JOIN TBL_MEMBER tm
+            ON tp.POST_MEMBER_NUMBER = tm.MEMBER_NUMBER
+            WHERE tm.MEMBER_NUMBER = #{memberNumber}
+            AND <![CDATA[ ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
+        )
+        WHERE RN > ((#{criteria.pageNum} -1) * #{criteria.amount})
+        ORDER BY POST_NUMBER DESC
+        ]]>
+    </select>
+
+    <!--내 게시글 개수-->
+    <select id="getMyPostCount" resultType="_int">
+        SELECT COUNT(tp.POST_NUMBER)
+        FROM TBL_POST tp JOIN TBL_MEMBER tm
+        ON tp.POST_MEMBER_NUMBER = tm.MEMBER_NUMBER
+        WHERE MEMBER_NUMBER = #{memberNumber}
+    </select>
+
+    <!--선택한 게시글 삭제-->
+    <delete id="deleteBoard">
+		DELETE FROM TBL_POST
+		WHERE POST_NUMBER = #{postNumber}
+	</delete>
+
 </mapper>

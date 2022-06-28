@@ -113,13 +113,17 @@ public class JobPostingController {
         return new RedirectView("/main");
     }
 
-    //    채용 공고 승인
-    @GetMapping("approve")
-    public String jobPostApprove(Integer jobPostingNumber/*, Criteria criteria, RedirectAttributes rttr*/){
-        log.info("승인 여뷰.................... : "+jobpostingService.approve(jobPostingNumber));
-//        rttr.addFlashAttribute("jobpostingList",jobpostingService.getJobList(criteria));
-//        rttr.addFlashAttribute("pageDTO", new PageDTO(criteria, jobpostingService.getTotal(criteria)));
-        return "jobPosting/getJobList";
+    // 채용 공고 승인
+    @PostMapping("approve")
+    public RedirectView jobPostApprove(Integer jobpostingNumber, Criteria criteria, RedirectAttributes rttr){
+
+        log.info("가져온 번호.................... : " + jobpostingNumber);
+        boolean app = jobpostingService.approve(jobpostingNumber);
+        log.info("수정 여부.................... : " + app);
+        
+        rttr.addAttribute(jobpostingNumber);
+        rttr.addFlashAttribute(criteria);
+        return new RedirectView("/jobPosting/getJobList");
     }
 
     //    채용 공고 거절
@@ -140,20 +144,15 @@ public class JobPostingController {
     @GetMapping("approveWait")
     public RedirectView approveWait(RedirectAttributes rttr){
         List<JobpostingVO> list = jobpostingService.approveWait();
-        rttr.addFlashAttribute("jobpostingList",list);
-        rttr.addFlashAttribute("number",rttr.getFlashAttributes().get("number"));
-        log.info("adminLogin............. Flash : " + rttr.getAttribute("number"));
+        rttr.addFlashAttribute("jobpostingList", list);
+        rttr.addFlashAttribute("number", rttr.getFlashAttributes());
+        log.info("adminLogin............. Flash : " + rttr.getFlashAttributes());
         return new RedirectView("/inquiry/approveWait");
     }
 
-    // 채용공고 admin
+    // 채용공고 리스트 admin
     @GetMapping("getJobList")
     public String getJobList(Model model, Criteria criteria){
-        if(criteria.getTypes().equals("AW")){
-            criteria.setKeyword("0");
-        }else if (criteria.getTypes().equals("AS")){
-            criteria.setKeyword("1");
-        }
         model.addAttribute("jobpostingList",jobpostingService.getJobList(criteria));
         model.addAttribute("pageDTO", new PageDTO(criteria, jobpostingService.getTotal(criteria)));
         return "admin/adminPostManage";
@@ -165,7 +164,6 @@ public class JobPostingController {
         log.info("----------------------------");
         log.info("jobpostingRead............. : " + jobpostingNumber);
         log.info("----------------------------");
-        jobpostingService.jobpostVisit(jobpostingNumber);
         model.addAttribute("jobPosting", jobpostingService.adPostRead(jobpostingNumber));
         return "admin/adminPostView";
     }

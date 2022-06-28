@@ -141,7 +141,7 @@
                                 <td th:text="*{jobpostingApplicationEnd}"/>
                                 <td class="status" th:if="*{jobpostingApprove == 0}">승인대기</td>
                                 <td class="status" th:unless="*{jobpostingApprove == 0}">승인</td>
-                                <td><button type="button" class="viewBtn goDetail" th:href="*{jobpostingNumber}">상세보기</button></td>
+                                <td><button type="button" class="viewBtn goRead" th:href="*{jobpostingNumber}">상세보기</button></td>
                             </li>
                         </tr>
                 </table>
@@ -196,7 +196,7 @@ let $pageForm = $(pageForm);
 let $serachForm = $(searchForm);
 let params = [[${pageDTO.criteria.listLink}]];
 //
-$("button.goDetail").on("click", function(e){
+$("button.goRead").on("click", function(e){
     e.preventDefault();
     location.href = "/jobPosting/adPostRead" + params + "&jobpostingNumber=" + $(this).attr("href");
 });

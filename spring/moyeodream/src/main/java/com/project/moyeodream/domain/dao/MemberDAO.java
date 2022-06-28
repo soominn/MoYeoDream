@@ -1,14 +1,19 @@
 package com.project.moyeodream.domain.dao;
 
+import com.project.moyeodream.domain.vo.Criteria;
 import com.project.moyeodream.domain.vo.MemberVO;
+import com.project.moyeodream.domain.vo.PostDTO;
+import com.project.moyeodream.domain.vo.StudyDTO;
 import com.project.moyeodream.mapper.MemberMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @RequiredArgsConstructor
 public class MemberDAO {
-    private MemberMapper memberMapper;
+    private final MemberMapper memberMapper;
 
     // 회원 가입
     public void join(MemberVO memberVO){
@@ -27,5 +32,29 @@ public class MemberDAO {
     public boolean memberDelete(int memberNumber){
         return memberMapper.delete(memberNumber) == 1;
     }
+
+    // 전체 내 스터디 보기
+    public List<StudyDTO> getMyStudyList(int memberNumber){ return memberMapper.getMyStudyList(memberNumber); }
+
+    // 내 승인된 스터디 개수
+    public int selectMyStudy1(int memberNumber) { return memberMapper.selectMyStudy1(memberNumber); }
+
+    // 내 대기 중인 스터디 개수
+    public int selectMyStudy0(int memberNumber) { return memberMapper.selectMyStudy0(memberNumber); }
+
+
+    // 내 게시물 목록
+    public List<PostDTO> getMyPostList(int memberNumber, Criteria criteria){ return memberMapper.getMyPostList(memberNumber, criteria); }
+
+    // 내 게시글 개수
+    public int getMyPostCount(int memberNumber){ return memberMapper.getMyPostCount(memberNumber); }
+
+    // 선택된 게시글 삭제
+    public void deleteBoard(List<String> boardIdxArray) {
+        for(int i=0; i<boardIdxArray.size(); i++) {
+            memberMapper.deleteBoard(boardIdxArray.get(i));
+        }
+    }
+
 
 }

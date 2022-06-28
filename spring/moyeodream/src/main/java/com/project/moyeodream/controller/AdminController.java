@@ -36,7 +36,7 @@ public class AdminController {
 
         if(adminService.login(adminVO) != 0){
             rttr.addFlashAttribute("number",adminService.login(adminVO));
-            log.info("adminLogin............. Flash : " + rttr.getAttribute("number"));
+            log.info("adminLogin............. Flash : " + rttr.getFlashAttributes().get("number").toString());
             return new RedirectView("/jobPosting/approveWait");
         }
         log.info("실패");
