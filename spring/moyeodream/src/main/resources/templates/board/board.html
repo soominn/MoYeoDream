@@ -44,7 +44,10 @@
     </nav>
     <section class="board-list-container">
       <ul class="board-list">
-        <th:block th:each="post:${postList}">
+        <div class="noPostWrap" th:if="${postList.size() == 0}">
+          <p> 등록된 게시물이 없습니다. </p>
+        </div>
+        <th:block th:unless="${postList.size() == 0}" th:each="post:${postList}">
           <li class="board-container" id ="goRead" th:object="${post}" th:href="${post.postNumber}">
             <a href="">
               <div class="board">
