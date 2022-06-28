@@ -8,7 +8,7 @@
             <trim prefixOverrides="OR" suffix="AND">
                 <choose>
                     <when test="type == 'C'.toString() ">
-                        OR (POST_ CATEGORY LIKE '%'||#{keyword}||'%')
+                        OR (POST_CATEGORY LIKE '%'||#{keyword}||'%')
                     </when>
                     <when test="type == 'T'.toString()">
                         OR (POST_TITLE LIKE '%'||#{keyword}||'%')
