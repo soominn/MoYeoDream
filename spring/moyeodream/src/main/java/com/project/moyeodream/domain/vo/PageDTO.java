@@ -16,7 +16,6 @@ public class PageDTO {
     private boolean next, prev;
     private Integer total;
     private Criteria criteria;
-    private PostCriteria pCriteria;
 
     public PageDTO(Criteria criteria, Integer total) {
         this.criteria = criteria;
@@ -41,11 +40,8 @@ public class PageDTO {
 
     // 자유게시판
     public PageDTO(PostCriteria criteria, Integer total) {
-        log.info("postPageDTO 들어옴");
         this.criteria = criteria;
-        log.info(criteria.toString());
         this.total = total;
-        log.info(total.toString());
         this.endPage = (int) (Math.ceil(criteria.getPageNum() / (double) 10)) * 10;
         this.startPage = endPage - 9;
         this.realEnd = (int) (Math.ceil(total / (double) criteria.getAmount()));
