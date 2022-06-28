@@ -5,33 +5,50 @@ import com.project.moyeodream.domain.vo.PostCommentVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Qualifier("comment")
+@Qualifier("postReply")
 public class PostCommentServiceImpl implements PostCommentService {
-
-    private PostCommentDAO postCommentDAO;
-
+    
+    private final PostCommentDAO postCommentDAO;
+    
+    // 댓글 전체목록 가져오기
     @Override
-    public void postCommentRegister(PostCommentVO postCommentVO) {
-        postCommentDAO.postCommentRegister(postCommentVO);
+    public List<PostCommentVO> getReplyList(Integer postNumber) {
+        return postCommentDAO.getReplyList(postNumber);
     }
 
+    // 댓글 개수 가져오기
     @Override
-    public boolean postCommentUpdate(PostCommentVO postCommentVO) {
-        return postCommentDAO.postCommentUpdate(postCommentVO);
+    public int getReplyTotal(Integer postNumber) {
+        return postCommentDAO.getReplyTotal(postNumber);
     }
 
+    // 댓글 1개 가져오기
     @Override
-    public boolean postCommentDelete(int commentNumber) {
-        return postCommentDAO.postCommentDelete(commentNumber);
+    public PostCommentVO getReply(Integer postCommentNumber) {
+        return postCommentDAO.getReply(postCommentNumber);
     }
 
+    // 댓글 등록
     @Override
-    public List<PostCommentVO> postCommentList() {
-        return postCommentDAO.postCommentList();
+    public void registerReply(PostCommentVO postCommentVO) {
+        postCommentDAO.registerReply(postCommentVO);
+    }
+
+    // 댓글 수정
+    @Override
+    public boolean modifyReply(PostCommentVO postCommentVO) {
+        return postCommentDAO.modifyReply(postCommentVO);
+    }
+
+    // 댓글 삭제
+    @Override
+    public boolean removeReply(Integer postCommentNumber) {
+        return postCommentDAO.removeReply(postCommentNumber);
     }
 }
