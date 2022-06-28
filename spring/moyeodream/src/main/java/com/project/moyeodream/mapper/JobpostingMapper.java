@@ -35,4 +35,8 @@ public interface JobpostingMapper {
     public List<JobpostingVO> getJobList(Criteria criteria);
     // 채용 공고 전체 개수
     public int getTotal(Criteria criteria);
+    // 승인 여부 확인
+    public int getApprove(int jobpostingNumber);
+    // 체크한 공고
+    public void check(int jobpostingNumber);
 }

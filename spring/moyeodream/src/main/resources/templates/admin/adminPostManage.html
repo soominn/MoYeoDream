@@ -16,7 +16,7 @@
         <div class="headerWrap">
             <div class="headerLeft">
                 <div class="headerLogo">
-                    <img src="/img/adminLogo.png">
+                    <img onclick="location.href='/jobPosting/approveWait'" src="/img/adminLogo.png">
                 </div>
             </div>
             <div class="headerRight">
@@ -24,7 +24,7 @@
                     <img src="/img/mainicon.png">
                     <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"></path></svg>
                     <div class="iconHidden">
-                        <div><p>로그아웃</p></div>
+                        <div onclick="location.href='/admin/login'"><p>로그아웃</p></div>
                     </div>
                 </div>
             </div>
@@ -50,7 +50,7 @@
                         <svg height="20" width="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class="css-8mmkcg"><path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"></path></svg>
                     </div>
                 </div>
-                <div class="menuChild postChild">
+                <div class="menuChild postChild" onclick="location.href='/jobPosting/getJobList'">
                     <p>채용공고 관리</p>
                 </div>
             </div>
@@ -81,18 +81,19 @@
                                 <div class="selected">
                                     <option class="selectedValue" value="">검색조건 선택</option>
                                     <div class="arrow">
-                                        <svg height="20" width="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class="css-8mmkcg"><path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"></path></svg>
+                                        <svg height="20" width="20" style="padding-right: 5px" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class="css-8mmkcg"><path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"></path></svg>
                                     </div>
                                 </div>
                                 <div class="optionWrap">
                                     <option class="option opt1st title" value="T" th:selected="*{type == 'T'}">제목</option>
-                                    <option class="option opt1st writer" value="C" th:selected="*{type == 'C'}">작성 기업</option>
-                                    <option class="option opt1st status" value="AW" th:selected="*{type == 'AW'}">승인 여부</option>
-                                    <option class="option opt1st status" value="AS" th:selected="*{type == 'AS'}">승인 완료</option>
+                                    <option class="option opt1st writer" value="W" th:selected="*{type == 'W'}">작성 기업</option>
+                                    <option class="option opt1st status" value="A" th:selected="*{type == 'A'}">승인</option>
+                                    <option class="option opt1st status" value="S" th:selected="*{type == 'S'}">대기</option>
+                                    <option class="option opt1st status" value="C" th:selected="*{type == 'C'}">체크</option>
                                 </div>
                             </select>
                         </div>
-                        <input class="search Approve" id="keyword" type="text" th:field="*{keyword}">
+                        <input class="search approve" id="keyword" type="text" th:field="*{keyword}" style="display: block">
                         <button href="#" class="searchBtn">검색</button>
                     </div>
                 </form>
@@ -116,8 +117,13 @@
                                 <td th:text="*{jobpostingCompanyName}"/>
                                 <td th:text="*{jobpostingApplicationStart}"/>
                                 <td th:text="*{jobpostingApplicationEnd}"/>
-                                <td class="status" th:if="*{jobpostingApprove == 0}">승인대기</td>
-                                <td class="status" th:unless="*{jobpostingApprove == 0}">승인</td>
+                                <th:block th:if="*{jobpostingCheck == 1}">
+                                    <td class="status">체크</td>
+                                </th:block>
+                                <th:block th:unless="*{jobpostingCheck == 1}">
+                                    <td class="status" th:if="*{jobpostingApprove == 0}">대기</td>
+                                    <td class="status" th:unless="*{jobpostingApprove == 0}">승인</td>
+                                </th:block>
                                 <td><button type="button" class="viewBtn goRead" th:href="*{jobpostingNumber}">상세보기</button></td>
                             </li>
                         </tr>
@@ -178,28 +184,48 @@
 <script src="/js/adminNav.js"></script>
 <script src="/js/adminStudyManage.js"></script>
 <script th:inline="javascript">;
-let boardNumber = [[${boardNumber}]];
 let $pageForm = $(pageForm);
 let $serachForm = $(searchForm);
 let params = [[${pageDTO.criteria.listLink}]];
-//
+
+if($(".selectBox option:selected").val().toString() == "S" || $(".selectBox option:selected").val().toString() == "A" || $(".selectBox option:selected").val().toString() == "C"){
+    $('input.search').css({'display':'none'});
+}
+
 $("button.goRead").on("click", function(e){
     e.preventDefault();
     location.href = "/jobPosting/adPostRead" + params + "&jobpostingNumber=" + $(this).attr("href");
 });
 
+$(".selectBox").on("click",function (e) {
+    e.preventDefault();
+    console.log($(".selectBox option:selected").val());
+    if(!($(".selectBox option:selected").val().toString() == "S") && !($(".selectBox option:selected").val().toString() == "A") && !($(".selectBox option:selected").val().toString() == "C")){
+        $('input.search').val("");
+        $('input.search').css({'display':'block'});
+    }else {
+        $('input.search').val("");
+        $('input.search').css({'display':'none'});
+
+    }
+});
+
 $("#searchForm button").on("click", function(e){
     e.preventDefault();
-
     if(!$serachForm.find("option:selected").val()){
         alert("검색종류를 선택하세요");
         return false;
     }
 
-    if(!$serachForm.find("input[name='keyword']").val()){
-        alert("키워드를 입력하세요");
-        return false;
+    if($(".selectBox option:selected").val().toString() == "T" || $(".selectBox option:selected").val().toString() == "W"){
+        if(!$serachForm.find("input[name='keyword']").val()){
+            alert("키워드를 입력하세요");
+            return false;
+        }
+    }else {
+        $('input.search').css({'display':'none'});
     }
+
 
     $serachForm.submit();
 });

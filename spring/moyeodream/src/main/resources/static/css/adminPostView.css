@@ -6,6 +6,7 @@ body {
     min-width: 600px;
     background-color: #Fbfbfb;
     color : #333;
+    overflow-x: hidden;
 }
 
 .sectionWrap{
@@ -16,20 +17,18 @@ body {
     margin-bottom: 150px;
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 .topTitle{
-    width: 100%;
+    width: 77vw;
     display: flex;
-    justify-content: center;
     margin-bottom: 30px;
 }
 
 .topTitle h1{
     display: flex;
     align-items: center;
-    width: 1500px;
+    width: 77vw;
     height : 80px;
     box-sizing: border-box;
     background-color: white;
@@ -40,7 +39,7 @@ body {
 }
 
 .contentWrap{
-    width: 1500px;
+    width: 77vw;
     box-sizing: border-box;
     border : 1px solid #d0d0d0;
     background-color: white;
@@ -140,16 +139,15 @@ div.openLink{
 
 .btnWrap{
     margin-top: 40px;
-    width: 100%;
+    width: 77vw;
     display: flex;
-    justify-content: center;
     margin-bottom: 30px;
 }
 
 .btnWrap div{
     display: flex;
     align-items: center;
-    width: 1500px;
+    width: 77vw;
     height : 80px;
     box-sizing: border-box;
     background-color: white;

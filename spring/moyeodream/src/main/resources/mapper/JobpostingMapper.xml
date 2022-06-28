@@ -16,7 +16,7 @@
     <select id="read" resultType="jobpostingDTO">
         SELECT JOBPOSTING_NUMBER, JOBPOSTING_COMPANY_NAME, JOBPOSTING_COMPANY_LOGO, JOBPOSTING_APPLICATION_START, JOBPOSTING_APPLICATION_END,
          JOBPOSTING_CAREER, JOBPOSTING_WORKTYPE, JOBPOSTING_ELIGIBILITY, JOBPOSTING_AREA, JOBPOSTING_COMPANY_URL,
-          JOBPOSTING_TITLE, JOBPOSTING_CONTENT, JOBPOSTING_MEMBER_NUMBER, JOBPOSTING_REGISTER_DATE
+          JOBPOSTING_TITLE, JOBPOSTING_CONTENT, JOBPOSTING_MEMBER_NUMBER, JOBPOSTING_REGISTER_DATE, JOBPOSTING_APPROVE, JOBPOSTING_DELETE, JOBPOSTING_CHECK
         FROM TBL_JOBPOSTING
         WHERE JOBPOSTING_NUMBER = #{jobpostingNumber}
     </select>
@@ -57,14 +57,17 @@
                             <when test="type == 'T'.toString()">
                                 (JOBPOSTING_TITLE LIKE '%'||#{keyword}||'%')
                             </when>
-                            <when test="type == 'C'.toString()">
+                            <when test="type == 'W'.toString()">
                                 (JOBPOSTING_COMPANY_NAME LIKE '%'||#{keyword}||'%')
                             </when>
-                            <when test="type == 'AW'.toString()">
-                                (JOBPOSTING_APPROVE = 0)
+                            <when test="type == 'A'.toString()">
+                                (JOBPOSTING_APPROVE = 1 AND JOBPOSTING_CHECK = 0)
                             </when>
-                            <when test="type == 'AS'.toString()">
-                                (JOBPOSTING_APPROVE = 1)
+                            <when test="type == 'S'.toString()">
+                                (JOBPOSTING_APPROVE = 0 AND JOBPOSTING_CHECK = 0)
+                            </when>
+                            <when test="type == 'C'.toString()">
+                                (JOBPOSTING_CHECK = 1)
                             </when>
                         </choose>
                     </trim>
@@ -82,10 +85,10 @@
             SELECT /*+ INDEX_DESC(TBL_JOBPOSTING PK_JOBPOSTING) */
             ROWNUM RN,JOBPOSTING_NUMBER, JOBPOSTING_COMPANY_NAME, JOBPOSTING_COMPANY_LOGO, JOBPOSTING_APPLICATION_START, JOBPOSTING_APPLICATION_END,
             JOBPOSTING_CAREER, JOBPOSTING_WORKTYPE, JOBPOSTING_ELIGIBILITY, JOBPOSTING_AREA, JOBPOSTING_COMPANY_URL,
-            JOBPOSTING_TITLE, JOBPOSTING_CONTENT, JOBPOSTING_MEMBER_NUMBER, JOBPOSTING_REGISTER_DATE, JOBPOSTING_APPROVE
+            JOBPOSTING_TITLE, JOBPOSTING_CONTENT, JOBPOSTING_MEMBER_NUMBER, JOBPOSTING_REGISTER_DATE, JOBPOSTING_APPROVE, JOBPOSTING_DELETE, JOBPOSTING_CHECK
             FROM TBL_JOBPOSTING
             <![CDATA[
-            WHERE JOBPOSTING_APPROVE = 0
+            WHERE JOBPOSTING_APPROVE = 0 AND JOBPOSTING_DELETE = 0
             )
         WHERE RN <= 10
         ]]>
@@ -95,15 +98,16 @@
         SELECT /*+ INDEX_DESC(TBL_JOBPOSTING PK_JOBPOSTING) */
             JOBPOSTING_NUMBER, JOBPOSTING_COMPANY_NAME, JOBPOSTING_COMPANY_LOGO, JOBPOSTING_APPLICATION_START, JOBPOSTING_APPLICATION_END,
             JOBPOSTING_CAREER, JOBPOSTING_WORKTYPE, JOBPOSTING_ELIGIBILITY, JOBPOSTING_AREA, JOBPOSTING_COMPANY_URL,
-            JOBPOSTING_TITLE, JOBPOSTING_CONTENT, JOBPOSTING_MEMBER_NUMBER, JOBPOSTING_REGISTER_DATE, JOBPOSTING_APPROVE
+            JOBPOSTING_TITLE, JOBPOSTING_CONTENT, JOBPOSTING_MEMBER_NUMBER, JOBPOSTING_REGISTER_DATE, JOBPOSTING_APPROVE, JOBPOSTING_CHECK
         FROM
         (
             SELECT /*+ INDEX_DESC(TBL_JOBPOSTING PK_JOBPOSTING) */
             ROWNUM RN,JOBPOSTING_NUMBER, JOBPOSTING_COMPANY_NAME, JOBPOSTING_COMPANY_LOGO, JOBPOSTING_APPLICATION_START, JOBPOSTING_APPLICATION_END,
             JOBPOSTING_CAREER, JOBPOSTING_WORKTYPE, JOBPOSTING_ELIGIBILITY, JOBPOSTING_AREA, JOBPOSTING_COMPANY_URL,
-            JOBPOSTING_TITLE, JOBPOSTING_CONTENT, JOBPOSTING_MEMBER_NUMBER, JOBPOSTING_REGISTER_DATE, JOBPOSTING_APPROVE
+            JOBPOSTING_TITLE, JOBPOSTING_CONTENT, JOBPOSTING_MEMBER_NUMBER, JOBPOSTING_REGISTER_DATE, JOBPOSTING_APPROVE, JOBPOSTING_DELETE, JOBPOSTING_CHECK
             FROM TBL_JOBPOSTING
             WHERE
+            JOBPOSTING_DELETE = 0 AND
             <include refid="adminSearch"/>
     <![CDATA[
             ROWNUM <= #{pageNum} * #{amount}
@@ -114,11 +118,8 @@
 
     <select id="getTotal" resultType="_int">
         SELECT COUNT(JOBPOSTING_NUMBER) FROM TBL_JOBPOSTING
-        <where>
-            <trim suffixOverrides="AND">
-                <include refid="adminSearch"/>
-            </trim>
-        </where>
+        WHERE <include refid="adminSearch"/>
+        JOBPOSTING_DELETE = 0
     </select>
 
     <update id="approve">
@@ -127,5 +128,15 @@
         WHERE JOBPOSTING_NUMBER = #{jobpostingNumber}
     </update>
 
+    <select id="getApprove" resultType="_int">
+        SELECT JOBPOSTING_APPROVE FROM TBL_JOBPOSTING
+        WHERE JOBPOSTING_NUMBER = #{jobpostingNumber}
+    </select>
+
+    <update id="check">
+        UPDATE TBL_JOBPOSTING
+        SET JOBPOSTING_CHECK = 1, JOBPOSTING_APPROVE = 0
+        WHERE JOBPOSTING_NUMBER = #{jobpostingNumber}
+    </update>
 
 </mapper>
