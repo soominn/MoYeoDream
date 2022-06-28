@@ -2,7 +2,6 @@ package com.project.moyeodream.service;
 
 import com.project.moyeodream.domain.dao.PostDAO;
 import com.project.moyeodream.domain.vo.Criteria;
-import com.project.moyeodream.domain.vo.PostCriteria;
 import com.project.moyeodream.domain.vo.PostDTO;
 import com.project.moyeodream.domain.vo.PostVO;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +25,7 @@ public class PostServiceImpl implements PostService{
 
     // 게시판 글 개수
     @Override
-    public int getTotal(PostCriteria criteria) {
+    public int getTotal(Criteria criteria) {
         return postDAO.getTotal(criteria);
     }
     @Override
