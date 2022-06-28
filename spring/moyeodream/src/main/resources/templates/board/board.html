@@ -20,6 +20,10 @@
 
   <section class="category-box" style="border-bottom: 2px solid #d1d1d1">
     <h2 class="page-title">자유 게시판</h2>
+    <div class="postReg">
+      <button type="button" class="postRegBtn">+</button>
+      <p class="postRegText">글쓰기</p>
+    </div>
   </section>
 
   <div class="main-container">
@@ -44,7 +48,10 @@
     </nav>
     <section class="board-list-container">
       <ul class="board-list">
-        <th:block th:each="post:${postList}">
+        <div class="noPostWrap" th:if="${postList.size() == 0}">
+          <p> 등록된 게시물이 없습니다. </p>
+        </div>
+        <th:block th:unless="${postList.size() == 0}" th:each="post:${postList}">
           <li class="board-container" id ="goRead" th:object="${post}" th:href="${post.postNumber}">
             <a href="">
               <div class="board">
@@ -267,12 +274,25 @@
   // 검색필터 - 검색
   $searchBtn.each(function(){
     $(this).on("click",function(){
+
       let $keywordText = $(this).closest("form").find("input[name='keywordText']");
+
+      if(!$keywordText.val()){
+        alert("검색어를 입력하세요!");
+        return;
+      }
+
       console.log($keywordText.val());
       $inputKeyword.val($keywordText.val());
 
       $pageForm.submit();
     });
   });
+
+  // 게시판 글쓰기
+  $(".postReg").on("click",function(e){
+    e.preventDefault();
+    location.href = "/post/postRegister";
+  })
 </script>
 </html>
