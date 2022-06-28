@@ -30,7 +30,7 @@
             </div>
         </div>
     </header>
-    <nav>  
+    <nav>
         <div class="navWrap">
             <div class="navDiv">
                 <div class="menuParent studyParent">
@@ -39,7 +39,7 @@
                         <svg height="20" width="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class="css-8mmkcg"><path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"></path></svg>
                     </div>
                 </div>
-                <div class="menuChild studyChild">
+                <div class="menuChild studyChild" onclick="location.href='/study/getStudyList'">
                     <p>스터디 관리</p>
                 </div>
             </div>
@@ -78,18 +78,20 @@
                     <div class="searchContent" th:object="${criteria}">
                         <div class="filter1st">
                             <select class="selectBox" name="type">
-                                <div class="selected">
-                                    <option class="selectedValue" value="">검색조건 선택</option>
-                                    <div class="arrow">
-                                        <svg height="20" width="20" style="padding-right: 5px" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class="css-8mmkcg"><path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"></path></svg>
+                                <div class="selectBox">
+                                    <div class="selected">
+                                        <option class="selectedValue" value="">검색조건 선택</option>
+                                        <div class="arrow">
+                                            <svg height="20" width="20" style="padding-right: 5px" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class="css-8mmkcg"><path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"></path></svg>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="optionWrap">
-                                    <option class="option opt1st title" value="T" th:selected="*{type == 'T'}">제목</option>
-                                    <option class="option opt1st writer" value="W" th:selected="*{type == 'W'}">작성 기업</option>
-                                    <option class="option opt1st status" value="A" th:selected="*{type == 'A'}">승인</option>
-                                    <option class="option opt1st status" value="S" th:selected="*{type == 'S'}">대기</option>
-                                    <option class="option opt1st status" value="C" th:selected="*{type == 'C'}">체크</option>
+                                    <div class="optionWrap">
+                                        <option class="option opt1st title" value="T" th:selected="*{type == 'T'}">제목</option>
+                                        <option class="option opt1st writer" value="W" th:selected="*{type == 'W'}">작성 기업</option>
+                                        <option class="option opt1st status" value="A" th:selected="*{type == 'A'}">승인</option>
+                                        <option class="option opt1st status" value="S" th:selected="*{type == 'S'}">대기</option>
+                                        <option class="option opt1st status" value="C" th:selected="*{type == 'C'}">체크</option>
+                                    </div>
                                 </div>
                             </select>
                         </div>

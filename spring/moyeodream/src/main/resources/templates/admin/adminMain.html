@@ -39,7 +39,7 @@
                         <svg height="20" width="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class="css-8mmkcg"><path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"></path></svg>
                     </div>
                 </div>
-                <div class="menuChild studyChild">
+                <div class="menuChild studyChild" onclick="location.href='/study/getStudyList'">
                     <p>스터디 관리</p>
                 </div>
             </div>
@@ -73,17 +73,24 @@
             <div class="sectionPreview">
                 <div class="previewMenu">
                     <p>스터디 관리</p>
-                    <p class="moreList">더보기 >></p>
+                    <p class="moreList" onclick="location.href='/study/getStudyList'">더보기 >></p>
                 </div>
                 <ul class="previewList">
-                    <li>
-                        <p class="previewNum">79</p>
-                        <p class="previewTitle">왕초보 스프링 스터디</p>
-                    </li>
-                    <li>
-                        <p class="previewNum">78</p>
-                        <p class="previewTitle">왕초보 스프링 스터디</p>
-                    </li>
+                    <th:block th:if="${!#lists.isEmpty(studyList)}">
+                        <th:block th:each="study:${studyList}">
+                            <li th:object="${study}">
+                                <p class="previewNum" th:text="*{studyNumber}"/>
+                                <p class="previewTitle" th:text="*{studyTitle}"/>
+                            </li>
+                        </th:block>
+                    </th:block>
+                    <th:block th:unless="${!#lists.isEmpty(studyList)}">
+                        <li >
+                            <p style="text-align: center">
+                                승인 대기 중인 채용공고가 없습니다
+                            </p>
+                        </li>
+                    </th:block>
                 </ul>
             </div>
             <div class="sectionPreview">
@@ -137,8 +144,11 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/js/adminNav.js"></script>
-<!--<script th:inline="javascript">;-->
-<!--    let adminNumber = [[${number}]]-->
-<!--    alert(adminNumber+"번 관리자님 환영합니다!");-->
-<!--</script>-->
+<script th:inline="javascript">;
+    let adminNumber  = [[${number}]];
+    let count  = [[${count}]];
+    if(count){
+        alert(adminNumber+"번 관리자님 환영합니다!");
+    }
+</script>
 </html>

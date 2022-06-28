@@ -1,10 +1,7 @@
 package com.project.moyeodream.service;
 
 import com.project.moyeodream.domain.dao.JobpostingDAO;
-import com.project.moyeodream.domain.vo.Criteria;
-import com.project.moyeodream.domain.vo.InquiryDTO;
-import com.project.moyeodream.domain.vo.JobpostingDTO;
-import com.project.moyeodream.domain.vo.JobpostingVO;
+import com.project.moyeodream.domain.vo.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
@@ -90,4 +87,8 @@ public class JobpostingServiceImpl implements JobpostingService{
 
     @Override
     public void check(int jobpostingNumber){jobpostingDAO.check(jobpostingNumber);}
+
+
+
+
 }

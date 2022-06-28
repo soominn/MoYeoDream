@@ -1,5 +1,7 @@
 package com.project.moyeodream.domain.dao;
 
+import com.project.moyeodream.domain.vo.Criteria;
+import com.project.moyeodream.domain.vo.JobpostingVO;
 import com.project.moyeodream.domain.vo.StudyDTO;
 import com.project.moyeodream.domain.vo.StudyVO;
 import com.project.moyeodream.mapper.StudyMapper;
@@ -60,7 +62,7 @@ public class StudyDAO {
     }
 
     // 스터디 승인
-    public int approve(int studyNumber){
+    public boolean approve(int studyNumber){
         return studyMapper.approve(studyNumber);
     }
 
@@ -68,4 +70,23 @@ public class StudyDAO {
     public int refuse(int studyNumber){
         return studyMapper.refuse(studyNumber);
     }
+
+
+    
+    // 스터디 10개 항목
+    public List<StudyVO> getApproveWait() { return studyMapper.getApproveWait(); }
+
+    // 스터디 가져오기 admin
+    public List<StudyDTO> getStudyList(Criteria criteria) { return studyMapper.getStudyList(criteria); }
+
+    // 스터디 전체 개수
+    public int getTotal(Criteria criteria){
+        return studyMapper.getTotal(criteria);
+    }
+
+    // 승인 여부 확인
+    public int getApprove(int studyNumber){return studyMapper.getApprove(studyNumber);}
+
+    // 채용공고 체크하기
+    public void check(int studyNumber){studyMapper.check(studyNumber);}
 }

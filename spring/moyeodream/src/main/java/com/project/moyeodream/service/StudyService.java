@@ -1,7 +1,6 @@
 package com.project.moyeodream.service;
 
-import com.project.moyeodream.domain.vo.StudyDTO;
-import com.project.moyeodream.domain.vo.StudyVO;
+import com.project.moyeodream.domain.vo.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +17,12 @@ public interface StudyService {
     public void modify(StudyVO studyVO);
     public void remove(int studyNumber);
     public List<StudyVO> getCategoryList(String studyCategory);
-    public int approve(int studyNumber);
+    public boolean approve(int studyNumber);
     public int refuse(int studyNumber);
+    public List<StudyVO> getApproveWait();
+    public List<StudyDTO> getStudyList(Criteria criteria);
+    public int getTotal(Criteria criteria);
+    public StudyDTO adStudyRead(int studyNumber);
+    public int getApprove(int studyNumber);
+    public void check(int studyNumber);
 }

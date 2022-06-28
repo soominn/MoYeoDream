@@ -18,6 +18,7 @@ public class StudyVO {
     private String studyChief;                    // 스터디장 소개
     private Integer studyApprove;                 // 스터디 승인 여부(defalut : 0, 승인 시 1)
     private Integer studyViews;                   // 스터디 조회수
+    private Integer studyCheck;                   // 스터디 조회수
     private String studyRegisterDate;             // 스터디 작성날짜(DB SYSDATE 사용)
     private String studyUpdateDate;               // 스터디 수정날짜(DB SYSDATE 사용)
     private Integer studyMemberNumber;            // 스터디 멤버 넘버(FK)    -   스터디 작성자 정보 가져오기 위해

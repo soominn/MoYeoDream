@@ -1,5 +1,7 @@
 package com.project.moyeodream.mapper;
 
+import com.project.moyeodream.domain.vo.Criteria;
+import com.project.moyeodream.domain.vo.JobpostingVO;
 import com.project.moyeodream.domain.vo.StudyDTO;
 import com.project.moyeodream.domain.vo.StudyVO;
 import org.apache.ibatis.annotations.Mapper;
@@ -29,7 +31,19 @@ public interface StudyMapper {
     // 카테고리 별 스터디
     public List<StudyVO> getCategoryList(String studyCategory);
     // 스터디 승인
-    public int approve(int studyNumber);
+    public boolean approve(int studyNumber);
     // 스터디 거절
     public int refuse(int studyNumber);
+    
+    
+    // 승인 대기 10개 게시물
+    public List<StudyVO> getApproveWait();
+    // 스터디 가져오기 admin
+    public List<StudyDTO> getStudyList(Criteria criteria);
+    // 스터디 전체 개수
+    public int getTotal(Criteria criteria);
+    // 승인 여부 확인
+    public int getApprove(int studyNumber);
+    // 체크한 스터디
+    public void check(int studyNumber);
 }

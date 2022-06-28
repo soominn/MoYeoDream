@@ -1,8 +1,7 @@
 package com.project.moyeodream.service;
 
 import com.project.moyeodream.domain.dao.StudyDAO;
-import com.project.moyeodream.domain.vo.StudyDTO;
-import com.project.moyeodream.domain.vo.StudyVO;
+import com.project.moyeodream.domain.vo.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -68,12 +67,39 @@ public class StudyServiceImpl implements StudyService{
     }
 
     @Override
-    public int approve(int studyNumber) {
-        return 0;
+    public boolean approve(int studyNumber) {
+        return studyDAO.approve(studyNumber);
     }
 
     @Override
     public int refuse(int studyNumber) {
         return 0;
     }
+
+
+
+
+
+    @Override
+    public List<StudyVO> getApproveWait(){ return studyDAO.getApproveWait(); }
+
+    @Override
+    public List<StudyDTO> getStudyList(Criteria criteria) { return studyDAO.getStudyList(criteria); }
+
+    @Override
+    public int getTotal(Criteria criteria) {
+        return studyDAO.getTotal(criteria);
+    }
+
+    @Override
+    public StudyDTO adStudyRead(int studyNumber) {
+        StudyDTO studyDTO = studyDAO.read(studyNumber);
+        return studyDTO;
+    }
+
+    @Override
+    public int getApprove(int studyNumber){return studyDAO.getApprove(studyNumber);}
+
+    @Override
+    public void check(int studyNumber){studyDAO.check(studyNumber);}
 }
