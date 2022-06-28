@@ -24,12 +24,13 @@ public class PostController {
 
     // 모든 자유 게시판 목록
     @GetMapping("list")
-    public String postList(Model model, PostCriteria criteria){
+    public String postList(Model model, Criteria criteria){
         log.info("--------------------------------------------------");
         log.info("getList Controller...............");
         log.info("Criteria............." + criteria);
         log.info("--------------------------------------------------");
 
+        criteria.setAmount(5);
         PageDTO pageDTO = new PageDTO(criteria, postService.getTotal(criteria));
         model.addAttribute("postList",postService.getList(criteria));
         model.addAttribute("pageDTO", pageDTO );
@@ -44,7 +45,7 @@ public class PostController {
 
     // 게시글 상세 조회
     @GetMapping("read")
-    public String postRead(Integer postNumber, PostCriteria criteria, Model model){
+    public String postRead(Integer postNumber, Criteria criteria, Model model){
         log.info("--------------------------------------------------");
         log.info("read Controller...............");
         log.info("Criteria............." + criteria);
@@ -71,7 +72,7 @@ public class PostController {
 
     // 자유게시판 수정화면 불러오기
     @GetMapping("modify")
-    public String goModify(PostCriteria criteria, Integer postNumber, Model model){
+    public String goModify(Criteria criteria, Integer postNumber, Model model){
         log.info("-----------------------------------------------");
         log.info("go Modify Controller........................");
         log.info("criteria ........" + criteria);
@@ -85,7 +86,7 @@ public class PostController {
 
     // 자유게시판 수정 완료
     @PostMapping("modify")
-    public RedirectView postModify(PostVO postVO, PostCriteria criteria, RedirectAttributes rttr){
+    public RedirectView postModify(PostVO postVO, Criteria criteria, RedirectAttributes rttr){
         log.info("---------------------------------------------------");
         log.info("modifyOk controller..................");
         log.info("criteria..........................."+ criteria);
@@ -102,7 +103,7 @@ public class PostController {
 
     // 자유게시판 삭제
     @GetMapping("remove")
-    public RedirectView postRemove(Integer postNumber, PostCriteria criteria){
+    public RedirectView postRemove(Integer postNumber, Criteria criteria){
         log.info("---------------------------------------------------");
         log.info("delete controller..................");
         log.info("criteria..........................."+ criteria);
@@ -130,7 +131,7 @@ public class PostController {
 
     /* 게시판 등록 완료*/
     @PostMapping("postRegister")
-    public String register(PostVO postVO, Model model, PostCriteria criteria){
+    public String register(PostVO postVO, Model model, Criteria criteria){
         log.info("--------------------------------------------------");
         log.info("post Register ........" + postVO);
         log.info("--------------------------------------------------");

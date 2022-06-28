@@ -21,7 +21,7 @@ public class PostDAO {
     }
 
     // 게시판 글 개수
-    public int getTotal(PostCriteria criteria){
+    public int getTotal(Criteria criteria){
         return postMapper.getTotal(criteria);
     }
 

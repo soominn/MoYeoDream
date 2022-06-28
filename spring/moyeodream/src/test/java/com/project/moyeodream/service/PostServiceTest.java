@@ -1,6 +1,6 @@
 package com.project.moyeodream.service;
 
-import com.project.moyeodream.domain.vo.PostCriteria;
+import com.project.moyeodream.domain.vo.Criteria;
 import com.project.moyeodream.domain.vo.PostVO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,7 @@ public class PostServiceTest {
         log.info("service getList.....................");
         log.info("----------------------------------------");
 
-        PostCriteria criteria = new PostCriteria();
+        Criteria criteria = new Criteria();
         postService.getList(criteria);
     }
 
