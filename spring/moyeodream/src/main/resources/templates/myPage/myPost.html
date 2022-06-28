@@ -66,7 +66,8 @@
                                                     <span>&nbsp;·&nbsp;</span>
                                                     <span th:text="*{postRegisterDate}"></span>
                                                     <span>&nbsp;·&nbsp;</span>
-                                                    <span th:text="*{postCategory}"></span>
+                                                    <span id="postCategory"></span>
+                                                    <span style="display: none" id="postCategory-sample" th:text="*{postCategory}"></span>
                                                 </div>
                                             </div>
                                             <div class="question__additional-info">
@@ -206,6 +207,25 @@
     });
 
 
+    let postCategory = $("#postCategory-sample").text();
+
+    $(document).ready(function() {
+
+        if(postCategory == "FREETALKING") {
+            $("span#postCategory").text("자유주제");
+        }
+        else if(postCategory == "QNA") {
+            $("span#postCategory").text("질문&답변");
+        }
+        else if(postCategory == "STUDYREVIEW") {
+            $("span#postCategory").text("스터디 후기");
+        }
+        else if(postCategory == "INTERVIEW") {
+            $("span#postCategory").text("기업면접 후기");
+        }
+
+
+    });
 
 
 

@@ -2,4 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.moyeodream.mapper.InquiryCommentMapper">
 
+    <select id="getlist" resultType="inquiryCommentVO">
+        SELECT /*+ INDEX_ASC(TBL_INQUIRY_COMMENT PK_INQUIRY_COMMENT) */
+        INQUIRY_COMMENT_NUMBER, INQUIRY_COMMENT_REGISTER_DATE, INQUIRY_COMMENT_UPDATE_DATE, INQUIRY_COMMENT_CONTENT, INQUIRY_NUMBER FROM TBL_INQUIRY_COMMENT
+        WHERE INQUIRY_NUMBER = #{inquiryNumber}
+    </select>
+
+
+    <select id="getTotal" resultType="_int">
+        SELECT COUNT(INQUIRY_COMMENT_NUMBER) FROM TBL_INQUIRY_COMMENT
+        WHERE INQUIRY_NUMBER = #{inquiryNumber}
+    </select>
 </mapper>
