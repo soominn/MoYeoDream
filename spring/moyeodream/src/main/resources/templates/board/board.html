@@ -20,6 +20,10 @@
 
   <section class="category-box" style="border-bottom: 2px solid #d1d1d1">
     <h2 class="page-title">자유 게시판</h2>
+    <div class="postReg">
+      <button type="button" class="postRegBtn">+</button>
+      <p class="postRegText">글쓰기</p>
+    </div>
   </section>
 
   <div class="main-container">
@@ -284,5 +288,11 @@
       $pageForm.submit();
     });
   });
+
+  // 게시판 글쓰기
+  $(".postReg").on("click",function(e){
+    e.preventDefault();
+    location.href = "/post/postRegister";
+  })
 </script>
 </html>
