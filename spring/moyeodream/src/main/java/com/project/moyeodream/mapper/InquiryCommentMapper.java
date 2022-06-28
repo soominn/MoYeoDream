@@ -1,8 +1,11 @@
 package com.project.moyeodream.mapper;
 
+import com.project.moyeodream.domain.vo.Criteria;
 import com.project.moyeodream.domain.vo.InquiryCommentVO;
 import com.project.moyeodream.domain.vo.PostCommentVO;
+import com.project.moyeodream.domain.vo.StudyCommentDTO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -15,7 +18,8 @@ public interface InquiryCommentMapper {
     // 댓글 삭제
     public int delete(int inquiryCommentNumber);
     // 전체 댓글 목록
-    public List<InquiryCommentVO> getlist();
-
+    public List<InquiryCommentVO> getlist(int inquiryNumber);
+    // 댓글 총개수
+    public int getTotal(int inquiryNumber);
 
 }
