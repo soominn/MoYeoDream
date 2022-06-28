@@ -29,7 +29,7 @@ public class PostDaoTests {
     }
 
     /* 게시판 전체 목록 */
-    @Test
+//    @Test
     public void getListTest(){
         log.info("---------------------------------------------");
         log.info("DAO get List........................");
@@ -38,6 +38,21 @@ public class PostDaoTests {
         PostCriteria criteria = new PostCriteria();
 
         postDAO.getList(criteria);
+    }
+
+    /* 게시글 수정 */
+    @Test
+    public void modifyOkTest(){
+        log.info("---------------------------------------------");
+        log.info("DAO modifyOk........................");
+        log.info("---------------------------------------------");
+
+        PostVO postVO = new PostVO();
+        postVO.setPostTitle("수정테스트");
+        postVO.setPostContent("수정DAO test");
+        postVO.setPostNumber(44);
+
+        postDAO.postUpdate(postVO);
     }
 
 }
