@@ -1,9 +1,6 @@
 package com.project.moyeodream.mapper;
 
-import com.project.moyeodream.domain.vo.Criteria;
-import com.project.moyeodream.domain.vo.PageDTO;
-import com.project.moyeodream.domain.vo.PostDTO;
-import com.project.moyeodream.domain.vo.PostVO;
+import com.project.moyeodream.domain.vo.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -13,7 +10,7 @@ public interface PostMapper {
     // 전체 자유 게시판 목록
     public List<PostDTO> getList(Criteria criteria);
     // 자유게시판 글 개수
-    public int getTotal();
+    public int getTotal(PostCriteria criteria);
     // 카테고리 별 스터디
     public List<PostVO> getCategoryList(String postCategory);
     // 게시글 조회수 올리기

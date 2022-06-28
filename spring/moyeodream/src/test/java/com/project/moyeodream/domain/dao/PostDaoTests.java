@@ -36,6 +36,8 @@ public class PostDaoTests {
         log.info("---------------------------------------------");
 
         PostCriteria criteria = new PostCriteria();
+        criteria.setType("C");
+        criteria.setKeyword("study");
 
         postDAO.getList(criteria);
     }

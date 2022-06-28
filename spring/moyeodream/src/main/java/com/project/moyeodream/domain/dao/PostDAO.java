@@ -1,9 +1,6 @@
 package com.project.moyeodream.domain.dao;
 
-import com.project.moyeodream.domain.vo.Criteria;
-import com.project.moyeodream.domain.vo.JobpostingVO;
-import com.project.moyeodream.domain.vo.PostDTO;
-import com.project.moyeodream.domain.vo.PostVO;
+import com.project.moyeodream.domain.vo.*;
 import com.project.moyeodream.mapper.PostMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,8 +21,8 @@ public class PostDAO {
     }
 
     // 게시판 글 개수
-    public int getTotal(){
-        return postMapper.getTotal();
+    public int getTotal(PostCriteria criteria){
+        return postMapper.getTotal(criteria);
     }
 
     // 카테고리 별 스터디

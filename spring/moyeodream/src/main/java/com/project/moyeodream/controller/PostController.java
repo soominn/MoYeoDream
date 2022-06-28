@@ -30,7 +30,7 @@ public class PostController {
         log.info("Criteria............." + criteria);
         log.info("--------------------------------------------------");
 
-        PageDTO pageDTO = new PageDTO(criteria, postService.getTotal());
+        PageDTO pageDTO = new PageDTO(criteria, postService.getTotal(criteria));
         model.addAttribute("postList",postService.getList(criteria));
         model.addAttribute("pageDTO", pageDTO );
         model.addAttribute("criteria", criteria);
