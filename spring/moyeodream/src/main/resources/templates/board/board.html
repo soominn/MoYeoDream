@@ -267,7 +267,14 @@
   // 검색필터 - 검색
   $searchBtn.each(function(){
     $(this).on("click",function(){
+
       let $keywordText = $(this).closest("form").find("input[name='keywordText']");
+
+      if(!$keywordText.val()){
+        console.log(!$keywordText.val());
+        alert("검색어를 입력하세요!");
+      }
+
       console.log($keywordText.val());
       $inputKeyword.val($keywordText.val());
 
