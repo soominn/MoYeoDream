@@ -114,18 +114,24 @@ public class JobPostingController {
     }
 
     // 채용 공고 승인
-    @PostMapping("approve")
-    public RedirectView jobPostApprove(Integer jobpostingNumber, Criteria criteria, RedirectAttributes rttr){
-
+    @GetMapping("approve")
+    public RedirectView jobPostApprove(int jobpostingNumber, Criteria criteria, RedirectAttributes rttr){
         log.info("가져온 번호.................... : " + jobpostingNumber);
-        boolean app = jobpostingService.approve(jobpostingNumber);
-        log.info("수정 여부.................... : " + app);
-        
-        rttr.addAttribute(jobpostingNumber);
+        log.info("승인 여부.................... : " + jobpostingService.approve(jobpostingNumber));
+
         rttr.addFlashAttribute(criteria);
         return new RedirectView("/jobPosting/getJobList");
     }
 
+    // 채용 공고 삭제
+    @GetMapping("delete")
+    public RedirectView jobPostDelete(int jobpostingNumber, Criteria criteria, RedirectAttributes rttr){
+        log.info("가져온 번호.................... : " + jobpostingNumber);
+        log.info("삭제 여부.................... : " + jobpostingService.jobpostRemove(jobpostingNumber));
+
+        rttr.addFlashAttribute(criteria);
+        return new RedirectView("/jobPosting/getJobList");
+    }
     //    채용 공고 거절
     @GetMapping("refuse")
     public void jobPostRefuse(Integer jobPostingNumber){}
@@ -161,11 +167,21 @@ public class JobPostingController {
 
     // 관리자 채용 공고 세부 조회
     @GetMapping("adPostRead")
-    public String adPostRead(Integer jobpostingNumber, Model model){
+    public String adPostRead(Integer jobpostingNumber,Criteria criteria, Model model){
         log.info("----------------------------");
         log.info("jobpostingRead............. : " + jobpostingNumber);
         log.info("----------------------------");
         model.addAttribute("jobPosting", jobpostingService.adPostRead(jobpostingNumber));
         return "admin/adminPostView";
+    }
+
+    // 채용 공고 체크
+    @GetMapping("check")
+    public RedirectView jobPostCheck(int jobpostingNumber, Criteria criteria, RedirectAttributes rttr){
+        log.info("가져온 번호.................... : " + jobpostingNumber);
+        jobpostingService.check(jobpostingNumber);
+
+        rttr.addFlashAttribute(criteria);
+        return new RedirectView("/jobPosting/getJobList");
     }
 }

@@ -80,4 +80,10 @@ public class JobpostingDAO {
     public JobpostingDTO adPostRead(int jobpostingNumber){
         return jobpostingMapper.read(jobpostingNumber);
     }
+
+    // 승인 여부 확인
+    public int getApprove(int jobpostingNumber){return jobpostingMapper.getApprove(jobpostingNumber);}
+
+    // 채용공고 체크하기
+    public void check(int jobpostingNumber){jobpostingMapper.check(jobpostingNumber);}
 }

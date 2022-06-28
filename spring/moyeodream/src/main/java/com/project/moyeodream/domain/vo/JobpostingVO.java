@@ -19,6 +19,7 @@ public class JobpostingVO {
     private String jobpostingTitle;                     // 채용 공고 제목
     private String jobpostingContent;                   // 채용 공고 내용
     private String jobpostingRegisterDate;              // 채용 공고 작성날짜(DB SYSDATE 사용)
+    private Integer jobpostingCheck;                     // 채용 공고 체크 여부
     private Integer jobpostingViews;                    // 채용 공고 조회수
     private Integer jobpostingApprove;                  // 채용 공고 승인 여부(defalut : 0, 승인 시 1)
     private Integer jobpostingDelete;                   // 채용 공고 삭제 여부(defalut : 0, 삭제 시 1)

@@ -84,4 +84,10 @@ public class JobpostingServiceImpl implements JobpostingService{
         JobpostingDTO jobpostingDTO = jobpostingDAO.adPostRead(jobpostingNumber);
         return jobpostingDTO;
     }
+
+    @Override
+    public int getApprove(int jobpostingNumber){return jobpostingDAO.getApprove(jobpostingNumber);}
+
+    @Override
+    public void check(int jobpostingNumber){jobpostingDAO.check(jobpostingNumber);}
 }
