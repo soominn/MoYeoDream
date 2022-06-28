@@ -36,7 +36,7 @@ public class PostServiceTest {
     }
 
     // 게시글 수정 완료
-    @Test
+//    @Test
     public void modifyOkTest(){
         log.info("----------------------------------------");
         log.info("service modifyOk.....................");

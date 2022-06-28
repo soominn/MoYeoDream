@@ -1,6 +1,7 @@
 package com.project.moyeodream.mapper;
 
 import com.project.moyeodream.domain.vo.Criteria;
+import com.project.moyeodream.domain.vo.PostCriteria;
 import com.project.moyeodream.domain.vo.PostDTO;
 import com.project.moyeodream.domain.vo.PostVO;
 import lombok.extern.slf4j.Slf4j;
@@ -20,13 +21,15 @@ public class PostMapperTests {
     private PostMapper postMapper;
 
     /* 게시판 전체목록 테스트 */
-//    @Test
+    @Test
     public void getListTest(){
         log.info("-----------------------------------------");
         log.info("mapper getList...........");
         log.info("-----------------------------------------");
 
-        Criteria criteria = new Criteria();
+        PostCriteria criteria = new PostCriteria();
+        criteria.setType("C");
+        criteria.setKeyword("study");
         List<PostDTO> list = postMapper.getList(criteria);
         log.info(list.toString());
     }
@@ -51,7 +54,7 @@ public class PostMapperTests {
     }
 
     // 게시글 조회수 올리기 테스트
-    @Test
+//    @Test
     public void viewUp(){
         log.info("-----------------------------------------");
         log.info("mapper read..........");

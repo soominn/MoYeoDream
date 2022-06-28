@@ -1,7 +1,10 @@
 package com.project.moyeodream.controller;
 
-import com.project.moyeodream.domain.vo.Criteria;
-import com.project.moyeodream.domain.vo.PostCriteria;
+import com.project.moyeodream.domain.dao.PostDAO;
+import com.project.moyeodream.domain.vo.*;
+import com.project.moyeodream.mapper.PostMapper;
+import com.project.moyeodream.service.PostService;
+import com.project.moyeodream.service.PostServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,7 +13,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.ui.Model;
 import org.springframework.web.context.WebApplicationContext;
+
+import java.util.List;
 
 @SpringBootTest
 @Slf4j
@@ -20,6 +26,7 @@ public class PostControllerTests {
 
     @Autowired
     private WebApplicationContext webApplicationContext;
+    private PostDAO postDAO;
 
     @BeforeEach
     public void setUp(){
@@ -43,9 +50,15 @@ public class PostControllerTests {
     /* 게시글 목록 가져오기 */
 //    @Test
     public void getListTest() throws Exception{
+        PostCriteria criteria = new PostCriteria();
+        criteria.setPageNum(1);
+        criteria.setAmount(5);
+        criteria.setType("C");
+        criteria.setKeyword("study");
+
         log.info(
           mockMvc.perform(MockMvcRequestBuilders.get("/get/list")
-          .param("criteria", new PostCriteria().toString()))
+          .param("criteria", String.valueOf(criteria)))
                   .andReturn().getModelAndView().getModel().toString()
         );
     }
@@ -73,7 +86,7 @@ public class PostControllerTests {
     }
 
     // 게시글 수정 완료
-    @Test
+//    @Test
     public void modifyOkTest() throws Exception{
         log.info(
             mockMvc.perform(MockMvcRequestBuilders.post("/post/modify")
