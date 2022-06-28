@@ -1,16 +1,13 @@
 package com.project.moyeodream.mapper;
 
 import com.project.moyeodream.domain.vo.Criteria;
-import com.project.moyeodream.domain.vo.PostCriteria;
 import com.project.moyeodream.domain.vo.PostDTO;
 import com.project.moyeodream.domain.vo.PostVO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootTest
@@ -27,7 +24,7 @@ public class PostMapperTests {
         log.info("mapper getList...........");
         log.info("-----------------------------------------");
 
-        PostCriteria criteria = new PostCriteria();
+        Criteria criteria = new Criteria();
         criteria.setType("C");
         criteria.setKeyword("study");
         List<PostDTO> list = postMapper.getList(criteria);

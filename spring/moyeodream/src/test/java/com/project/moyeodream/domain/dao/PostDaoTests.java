@@ -1,10 +1,8 @@
 package com.project.moyeodream.domain.dao;
 
 import com.project.moyeodream.domain.vo.Criteria;
-import com.project.moyeodream.domain.vo.PostCriteria;
 import com.project.moyeodream.domain.vo.PostVO;
 import lombok.extern.slf4j.Slf4j;
-import oracle.jdbc.proxy.annotation.Post;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -35,7 +33,7 @@ public class PostDaoTests {
         log.info("DAO get List........................");
         log.info("---------------------------------------------");
 
-        PostCriteria criteria = new PostCriteria();
+        Criteria criteria = new Criteria();
         criteria.setType("C");
         criteria.setKeyword("study");
 

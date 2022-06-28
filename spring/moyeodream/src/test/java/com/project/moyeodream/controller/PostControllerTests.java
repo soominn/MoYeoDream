@@ -50,15 +50,10 @@ public class PostControllerTests {
     /* 게시글 목록 가져오기 */
 //    @Test
     public void getListTest() throws Exception{
-        PostCriteria criteria = new PostCriteria();
-        criteria.setPageNum(1);
-        criteria.setAmount(5);
-        criteria.setType("C");
-        criteria.setKeyword("study");
 
         log.info(
           mockMvc.perform(MockMvcRequestBuilders.get("/get/list")
-          .param("criteria", String.valueOf(criteria)))
+          .param("criteria", new Criteria().toString()))
                   .andReturn().getModelAndView().getModel().toString()
         );
     }
@@ -69,7 +64,7 @@ public class PostControllerTests {
         log.info(
           mockMvc.perform(MockMvcRequestBuilders.get("/post/read")
           .param("postNumber", "145")
-          .param("criteria", new PostCriteria().toString()))
+          .param("criteria", new Criteria().toString()))
                 .andReturn().getModelAndView().getModel().toString()
         );
     }
@@ -80,7 +75,7 @@ public class PostControllerTests {
         log.info(
          mockMvc.perform(MockMvcRequestBuilders.get("/post/modify")
          .param("postNumber", "146")
-         .param("criteria", new PostCriteria().toString()))
+         .param("criteria", new Criteria().toString()))
                 .andReturn().getModelAndView().getModel().toString()
         );
     }
@@ -93,7 +88,7 @@ public class PostControllerTests {
                     .param("postTitle", "수정완료 컨트롤러 단위테스트")
                     .param("postContent", "modifyOk controller 단위테스트")
                     .param("postNumber", "130")
-                    .param("criteria", new PostCriteria().toString()))
+                    .param("criteria", new Criteria().toString()))
                     .andReturn().getModelAndView().getModel().toString()
         );
     }
@@ -104,7 +99,7 @@ public class PostControllerTests {
         log.info(
                 mockMvc.perform(MockMvcRequestBuilders.post("/post/remove")
                         .param("postNumber","144")
-                        .param("criteria", new PostCriteria().toString()))
+                        .param("criteria", new Criteria().toString()))
                         .andReturn().toString()
                 );
         log.info("게시글 삭제 완료");

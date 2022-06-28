@@ -16,14 +16,14 @@ public class PageDTO {
     private boolean next, prev;
     private Integer total;
     private Criteria criteria;
-    private PostCriteria pCriteria;
 
     public PageDTO(Criteria criteria, Integer total) {
         this.criteria = criteria;
         this.total = total;
 
-        if(total != 0){
-            this.endPage = (int) (Math.ceil(criteria.getPageNum() / (double) criteria.getAmount())) * criteria.getAmount();
+                                                            // criteria.getAmount (X)
+        if(total != 0){                                     // 게시물 개수가 아닌 한페이지에 나올 페이지 넘버의 개수(10)를 곱해줌
+            this.endPage = (int) (Math.ceil(criteria.getPageNum() / 10.0)) * 10;
         }else {
             this.endPage = 9;
         }
@@ -39,22 +39,4 @@ public class PageDTO {
         this.next = this.endPage < realEnd;
     }
 
-    // 자유게시판
-    public PageDTO(PostCriteria criteria, Integer total) {
-        log.info("postPageDTO 들어옴");
-        this.criteria = criteria;
-        log.info(criteria.toString());
-        this.total = total;
-        log.info(total.toString());
-        this.endPage = (int) (Math.ceil(criteria.getPageNum() / (double) 10)) * 10;
-        this.startPage = endPage - 9;
-        this.realEnd = (int) (Math.ceil(total / (double) criteria.getAmount()));
-
-        if (realEnd < this.endPage) {
-            this.endPage = realEnd;
-        }
-
-        this.prev = this.startPage > 1;
-        this.next = this.endPage < realEnd;
-    }
 }

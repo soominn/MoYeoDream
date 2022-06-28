@@ -1,7 +1,6 @@
 package com.project.moyeodream.service;
 
 import com.project.moyeodream.domain.vo.Criteria;
-import com.project.moyeodream.domain.vo.PostCriteria;
 import com.project.moyeodream.domain.vo.PostDTO;
 import com.project.moyeodream.domain.vo.PostVO;
 import org.springframework.stereotype.Service;
@@ -14,7 +13,7 @@ public interface PostService {
     public List<PostDTO> getList(Criteria criteria);
 
     // 게시판 글 개수
-    public int getTotal(PostCriteria criteria);
+    public int getTotal(Criteria criteria);
 
     public List<PostVO> getCategoryList(String postCategory);
 
