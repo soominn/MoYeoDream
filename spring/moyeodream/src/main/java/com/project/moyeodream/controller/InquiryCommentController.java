@@ -1,19 +1,21 @@
 package com.project.moyeodream.controller;
 
 import com.project.moyeodream.domain.vo.InquiryCommentVO;
-import com.project.moyeodream.domain.vo.PostCommentVO;
+import com.project.moyeodream.domain.vo.StudyCommentDTO;
+import com.project.moyeodream.service.InquiryCommentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+
+@RestController
 @Slf4j
-@RequiredArgsConstructor
 @RequestMapping("/inquirycomment/*")
+@RequiredArgsConstructor
 public class InquiryCommentController {
+    private final InquiryCommentService inquiryCommentService;
+
     // 댓글 작성
     @PostMapping("register")
     public void inquiryCommentWrite(InquiryCommentVO inquiryCommentVO){ }
@@ -26,11 +28,12 @@ public class InquiryCommentController {
     @GetMapping("remove")
     public void inquiryCommentRemove(Integer inquiryCommentNumber){ }
 
-    // 전체 댓글 목록 조회
-    @GetMapping("list")
-    public void inquiryComment(Integer inquiryCommentInquiryNumber){ }
 
-    // 내 댓글 목록 조회
-    @GetMapping("myList")
-    public void myInquiryComment(Integer inquiryCommentMemberNumber){ }
+    // 전체 댓글 목록 조회
+    @GetMapping("/list/{inquiryNumber}")
+    public List<InquiryCommentVO> inquiryComment(@PathVariable("inquiryNumber") int inquiryNumber){
+        log.info("getList........... : " + inquiryNumber);
+        return inquiryCommentService.inquiryCommentList(inquiryNumber);
+    }
+
 }

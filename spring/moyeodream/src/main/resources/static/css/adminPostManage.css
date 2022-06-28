@@ -40,7 +40,7 @@ button{
 .topTitle{
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: left;
 }
 
 .topTitle h1{
@@ -62,27 +62,26 @@ button{
     margin-bottom: 20px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
 }
 
 .searchContent{
     display: flex;
     align-items: center;
-    width : 1500px;
     height : 56px;
     box-sizing: border-box;
-    margin: 30px 20px;
+    margin: 30px 0px;
 }
 
 .filter1st{
-    width : 280px;
+    width : 170px;
     height : 56px;
 }
 
 .selectBox{
     position: relative;
     display: inline-block;
-    width : 250px;
+    width : 150px;
     margin-right : 30px;
     height: 100%;
     box-sizing: border-box;
@@ -113,6 +112,7 @@ button{
 .selectedValue{
     display: flex;
     align-items: center;
+    text-align: center;
     max-width : 75%;
     height: 56px;
     color: #333;
@@ -144,6 +144,7 @@ button{
     margin-right: 20px;
     width: 300px;
     height: 50px;
+    width: 20vw;
     outline: none;
     border-radius: 6px;
     font-family: inherit;
@@ -153,14 +154,11 @@ button{
     padding : 11px 13px;
     color: #333;
     background-color: white;
+    text-align: center;
 }
 
 .option:hover{
     background-color:rgba(255, 229, 121, 0.7);
-}
-
-option.status{
-    text-align: left;
 }
 
 .filter2nd{
@@ -200,7 +198,6 @@ div.titleFilter{
     text-align: center;
     width : 60px;
     height : 38px;
-    padding-top: 16px;
     font-size: 15px;
     background-color: #ffe579;
     cursor: pointer;
@@ -239,7 +236,7 @@ div.titleFilter{
 .tableWrap{
     width : 100%;
     display: flex;
-    justify-content: center;
+    justify-content: left;
 }
 
 .postList {
