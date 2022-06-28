@@ -35,4 +35,8 @@ public interface JobpostingService {
     public int getTotal(Criteria criteria);
 
     public JobpostingDTO adPostRead(int jobpostingNumber);
+
+    public int getApprove(int jobpostingNumber);
+
+    public void check(int jobpostingNumber);
 }
