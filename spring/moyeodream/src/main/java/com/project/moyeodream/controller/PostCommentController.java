@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @Slf4j
 @RequiredArgsConstructor
@@ -51,13 +53,15 @@ public class PostCommentController {
 
     // 전체 댓글 목록 조회
     @GetMapping("list/{postNumber}")
-    public void getList(@PathVariable Integer postNumber){
+    public List<PostCommentVO> getList(@PathVariable Integer postNumber){
         log.info("---------------------------------------");
         log.info("reply getList Controller......");
         log.info("---------------------------------------");
 
         log.info("가져온 list : " +
                 postCommentService.getReplyList(postNumber));
+
+        return postCommentService.getReplyList(postNumber);
     }
 
     // 전체 댓글 개수
