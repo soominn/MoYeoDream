@@ -31,24 +31,24 @@ public class PostCommentController {
 
     // 댓글 수정
     @PostMapping("modify")
-    public void modify(@RequestBody PostCommentVO postCommentVO){
+    public boolean modify(@RequestBody PostCommentVO postCommentVO){
         log.info("---------------------------------------");
         log.info("reply modify Controller......");
         log.info("---------------------------------------");
 
-        postCommentService.modifyReply(postCommentVO);
         log.info(postCommentVO.getPostCommentNumber() + "번 댓글 수정 성공");
+        return postCommentService.modifyReply(postCommentVO);
     }
 
     // 댓글 삭제
     @GetMapping("remove/{postCommentNumber}")
-    public String remove(@PathVariable Integer postCommentNumber){
+    public boolean remove(@PathVariable Integer postCommentNumber){
         log.info("---------------------------------------");
         log.info("reply remove Controller......");
         log.info("---------------------------------------");
 
-        postCommentService.removeReply(postCommentNumber);
-        return postCommentNumber+"번 댓글 삭제 성공";
+        log.info(postCommentNumber+"번 댓글 삭제 성공");
+        return postCommentService.removeReply(postCommentNumber);
     }
 
     // 전체 댓글 목록 조회
@@ -66,23 +66,26 @@ public class PostCommentController {
 
     // 전체 댓글 개수
     @GetMapping("total/{postNumber}")
-    public void getTotal(@PathVariable Integer postNumber){
+    public Integer getTotal(@PathVariable Integer postNumber){
         log.info("---------------------------------------");
         log.info("reply getTotal Controller......");
         log.info("---------------------------------------");
 
         log.info(postNumber+"번 댓글 개수 : "
                 + postCommentService.getReplyTotal(postNumber));
+        return postCommentService.getReplyTotal(postNumber);
     }
 
     // 내 댓글 목록 조회
     @GetMapping("myList/{memberNumber}")
-    public void myList(@PathVariable Integer memberNumber){
+    public List<PostCommentVO> myList(@PathVariable Integer memberNumber){
         log.info("---------------------------------------");
         log.info("reply mytList Controller......");
         log.info("---------------------------------------");
 
         log.info("가져온 list : " +
                 postCommentService.myList(memberNumber));
+
+        return postCommentService.myList(memberNumber);
     }
 }
