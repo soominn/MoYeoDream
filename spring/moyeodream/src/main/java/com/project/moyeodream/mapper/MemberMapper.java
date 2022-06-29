@@ -37,4 +37,10 @@ public interface MemberMapper {
 
     // 선택된 게시글 삭제
     public int deleteBoard(String boardIdx);
+
+    // 내 댓글 목록
+    public List<PostDTO> getMyCommentList(@Param("memberNumber") int memberNumber, @Param("criteria") Criteria criteria);
+
+    // 내 댓글 개수
+    public int getMyCommentCount(int memberNumber);
 }

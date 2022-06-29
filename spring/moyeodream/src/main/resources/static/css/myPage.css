@@ -435,7 +435,24 @@ body>div{
     color: gray;
 }
 
+.cateBlockk{
+    display: none;
+}
 
+.cateListItem{
+    margin-right: 8px;
+    margin-top: 2px;
+    width: 14px;
+    height: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: #ffe579;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+}
 
 
 

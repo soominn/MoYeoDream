@@ -28,11 +28,8 @@ public class JobpostingServiceImpl implements JobpostingService{
 
 
     @Override
-    public JobpostingDTO jobpostRead(int jobpostingNumber, int jobpostingMemberNumber) {
-        JobpostingDTO jobpostingDTO = jobpostingDAO.jobpostRead(jobpostingNumber);
-        jobpostingDTO.setMemberNickname(jobpostingDAO.findNickName(jobpostingMemberNumber));
-
-        return jobpostingDTO;
+    public JobpostingDTO jobpostRead(int jobpostingNumber) {
+        return jobpostingDAO.jobpostRead(jobpostingNumber);
     }
 
     @Override

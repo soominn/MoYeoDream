@@ -31,10 +31,8 @@ public class InquiryServiceImpl implements InquiryService{
     }
 
     @Override
-    public InquiryDTO getList(int inquiryNumber, int inquiryMemberNumber) {
-        InquiryDTO inquiryDTO = inquiryDAO.getList(inquiryNumber);
-        inquiryDTO.setMemberNickname(inquiryDAO.findNickName(inquiryMemberNumber));
-        return inquiryDTO;
+    public InquiryDTO getList(int inquiryNumber) {
+        return inquiryDAO.getList(inquiryNumber);
     }
 
     @Override
