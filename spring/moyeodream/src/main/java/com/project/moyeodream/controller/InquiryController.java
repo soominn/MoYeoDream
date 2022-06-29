@@ -10,10 +10,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @Slf4j
@@ -140,11 +144,14 @@ public class InquiryController {
 
         // 답변 대기 중인 문의 글
         @GetMapping("approveWait")
-        public String approveWait(Model model, RedirectAttributes rttr){
-                List<InquiryDTO> list = inquiryService.approveWait();
-                model.addAttribute("inquiryList",list);
-//                rttr.addFlashAttribute("inquiryList",list);
-//                log.info("adminLogin............. Flash : " + rttr.getFlashAttributes());
-                return "admin/adminMain";
+        public RedirectView approveWait(Model model, RedirectAttributes rttr, HttpServletRequest req){
+                Map<String, Object> flash = (Map<String, Object>) RequestContextUtils.getInputFlashMap(req);
+                log.info("flash................................ : " + flash.get("jobpostingList").toString());
+                rttr.addFlashAttribute("jobpostingList", flash.get("jobpostingList"));
+                rttr.addFlashAttribute("number", flash.get("number"));
+                rttr.addFlashAttribute("count", flash.get("count"));
+                rttr.addFlashAttribute("inquiryList",inquiryService.approveWait());
+                log.info("adminLogin............. Flash : " + rttr.getFlashAttributes());
+                return new RedirectView("/study/approveWait");
         }
 }

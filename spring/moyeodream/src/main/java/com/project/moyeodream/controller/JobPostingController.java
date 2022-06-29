@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @Slf4j
@@ -22,6 +25,7 @@ import java.util.List;
 @RequestMapping("/jobPosting/*")
 public class JobPostingController {
     private final JobpostingService jobpostingService;
+    private Integer loginNumber = 0;
 
     //    모든 채용 공고 목록
     @GetMapping("list")
@@ -148,10 +152,18 @@ public class JobPostingController {
 
     // 승인대기 채용공고
     @GetMapping("approveWait")
-    public RedirectView approveWait(RedirectAttributes rttr){
-        List<JobpostingVO> list = jobpostingService.approveWait();
-        rttr.addFlashAttribute("jobpostingList", list);
-        rttr.addFlashAttribute("number", rttr.getFlashAttributes());
+    public RedirectView approveWait(RedirectAttributes rttr, HttpServletRequest req){
+        Map<String, Integer> flash = (Map<String, Integer>) RequestContextUtils.getInputFlashMap(req);
+        rttr.addFlashAttribute("jobpostingList", jobpostingService.approveWait());
+        if(loginNumber == 0){
+            loginNumber = flash.get("number");
+            rttr.addFlashAttribute("number", loginNumber);
+            rttr.addFlashAttribute("count", true);
+        }else {
+            rttr.addFlashAttribute("number", loginNumber);
+            rttr.addFlashAttribute("count", false);
+        }
+
         log.info("adminLogin............. Flash : " + rttr.getFlashAttributes());
         return new RedirectView("/inquiry/approveWait");
     }

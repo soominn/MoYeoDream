@@ -1,5 +1,8 @@
 package com.project.moyeodream.controller;
 
+import com.project.moyeodream.domain.vo.Criteria;
+import com.project.moyeodream.domain.vo.JobpostingVO;
+import com.project.moyeodream.domain.vo.PageDTO;
 import com.project.moyeodream.domain.vo.StudyVO;
 import com.project.moyeodream.service.StudyCommentService;
 import com.project.moyeodream.service.StudyService;
@@ -11,10 +14,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @Slf4j
@@ -110,13 +117,20 @@ public class StudyController {
         return register();
     }
 
+
     // 카테고리별 스터디
     @GetMapping("categoryList")
     public void studyCate(String studyCategory){}
 
     // 스터디 승인
     @GetMapping("approve")
-    public void studyApprove(Integer studyNumber){}
+    public RedirectView studyApprove(Integer studyNumber, Criteria criteria, RedirectAttributes rttr){
+        log.info("가져온 번호.................... : " + studyNumber);
+        log.info("승인 여부.................... : " + studyService.approve(studyNumber));
+
+        rttr.addFlashAttribute(criteria);
+        return new RedirectView("/study/getStudyList");
+    }
 
     // 스터디 거절
     @GetMapping("refuse")
@@ -131,4 +145,56 @@ public class StudyController {
     // 스터디 모집 상세보기
     @GetMapping("studyView")
     public void studyView() {}
+
+    // 승인대기 채용공고
+    @GetMapping("approveWait")
+    public String approveWait(Model model, RedirectAttributes rttr, HttpServletRequest req){
+        Map<String, Object> flash = (Map<String, Object>) RequestContextUtils.getInputFlashMap(req);
+        model.addAttribute("jobpostingList",flash.get("jobpostingList"));
+        model.addAttribute("inquiryList",flash.get("inquiryList"));
+        model.addAttribute("count",flash.get("count"));
+        model.addAttribute("number",flash.get("number"));
+        model.addAttribute("studyList", studyService.getApproveWait());
+        log.info("adminLogin............. Flash : " + rttr.getFlashAttributes());
+        return "/admin/adminMain";
+    }
+
+    // 채용공고 리스트 admin
+    @GetMapping("getStudyList")
+    public String getStudyList(Model model, Criteria criteria){
+        model.addAttribute("studyList",studyService.getStudyList(criteria));
+        log.info("list.............................. : "+ studyService.getStudyList(criteria));
+        model.addAttribute("pageDTO", new PageDTO(criteria, studyService.getTotal(criteria)));
+        return "admin/adminStudyManage";
+    }
+
+    // 관리자 스터디 세부 조회
+    @GetMapping("adStudyRead")
+    public String adStudyRead(Integer studyNumber,Criteria criteria, Model model){
+        log.info("----------------------------");
+        log.info("adStudyRead............. : " + studyNumber);
+        log.info("----------------------------");
+        model.addAttribute("study", studyService.adStudyRead(studyNumber));
+        return "admin/adminStudyView";
+    }
+
+    // 스터디 체크
+    @GetMapping("check")
+    public RedirectView studyPostCheck(int studyNumber, Criteria criteria, RedirectAttributes rttr){
+        log.info("가져온 번호.................... : " + studyNumber);
+        studyService.check(studyNumber);
+
+        rttr.addFlashAttribute(criteria);
+        return new RedirectView("/study/getStudyList");
+    }
+
+    // 스터디 삭제 관리자
+    @GetMapping("delete")
+    public RedirectView studyDelete(int studyNumber, Criteria criteria, RedirectAttributes rttr){
+        log.info("가져온 번호.................... : " + studyNumber);
+        studyService.remove(studyNumber);
+
+        rttr.addFlashAttribute(criteria);
+        return new RedirectView("/study/getStudyList");
+    }
 }

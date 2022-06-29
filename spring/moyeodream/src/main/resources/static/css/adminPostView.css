@@ -10,10 +10,11 @@ body {
 }
 
 .sectionWrap{
+
     width : 100%;
     min-width: 800px;
     height : 100%;
-    margin-top: 136px;
+    margin-top: 115px;
     margin-bottom: 150px;
     display: flex;
     flex-direction: column;
