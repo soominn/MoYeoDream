@@ -30,4 +30,11 @@ public interface MemberService {
 
     // 선택된 게시글 삭제
     public void deleteBoard(List<String> boardIdxArray);
+
+    // 내 댓글 목록
+    public List<PostDTO> getMyCommentList(int memberNumber, Criteria criteria);
+
+    // 내 댓글 개수
+    public int getMyCommentCount(int memberNumber);
+
 }

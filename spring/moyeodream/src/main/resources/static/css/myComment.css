@@ -38,6 +38,11 @@ p{
     line-height: 1.6;
 }
 
+.back{
+    margin-left: 196px;
+    margin-bottom: 13px;
+}
+
 #root{
     min-height: 100%;
 }
@@ -368,3 +373,47 @@ input.delete-checkbox{
 }
 
 
+
+
+/* 페이징 버튼 */
+.pagination .pagination-list {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 100px;
+}
+.pagination.is-small {
+    font-size: 0.75rem;
+}
+.pagination-link,
+.pagination-prev,
+.pagination-next {
+    -webkit-appearance: none;
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    box-shadow: none;
+    display: inline-flex;
+    height: 2.25em;
+    line-height: 1.5;
+    padding: calc(0.375em - 1px) calc(0.625em - 1px);
+    position: relative;
+    vertical-align: top;
+    font-size: 1em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    justify-content: center;
+    margin: 0.25rem;
+    text-align: center;
+    border-color: #dbdbdb;
+    color: #363636;
+    min-width: 2.25em;
+}
+.pagination-link.is-current {
+    background-color: #ffe579;
+    border-color: #ffe579;
+    color: #000;
+    font-weight: 600;
+}

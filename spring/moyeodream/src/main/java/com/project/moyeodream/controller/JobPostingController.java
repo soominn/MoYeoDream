@@ -38,25 +38,23 @@ public class JobPostingController {
 
     //    채용 공고 조회
     @GetMapping("read")
-    public String jobPostRead(Integer jobpostingNumber, Integer jobpostingMemberNumber, Model model){
+    public String jobPostRead(Integer jobpostingNumber, Model model){
         log.info("----------------------------");
         log.info("jobpostingRead............. : " + jobpostingNumber);
-        log.info("jobpostingMemberRead............. : " + jobpostingMemberNumber);
         log.info("----------------------------");
         jobpostingService.jobpostVisit(jobpostingNumber);
-        model.addAttribute("jobPosting", jobpostingService.jobpostRead(jobpostingNumber, jobpostingMemberNumber));
+        model.addAttribute("jobPosting", jobpostingService.jobpostRead(jobpostingNumber));
         return "/jobPosting/jobPostingView";
     }
 
 
     //    수정 페이지에서 공고 내용 가져오기
     @GetMapping("modifyRead")
-    public String inquiryModifyRead(Integer jobpostingNumber, Integer jobpostingMemberNumber, Model model){
+    public String inquiryModifyRead(Integer jobpostingNumber, Model model){
         log.info("----------------------------");
         log.info("jobpostingRead............. : " + jobpostingNumber);
-        log.info("jobpostingMemberRead............. : " + jobpostingMemberNumber);
         log.info("----------------------------");
-        model.addAttribute("jobPosting", jobpostingService.jobpostRead(jobpostingNumber, jobpostingMemberNumber));
+        model.addAttribute("jobPosting", jobpostingService.jobpostRead(jobpostingNumber));
         return "/jobPosting/jobPostingModify";
     }
 

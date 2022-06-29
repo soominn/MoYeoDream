@@ -72,24 +72,22 @@ public class InquiryController {
 
         //    문의 조회
         @GetMapping("read")
-        public String inquiryRead(Integer inquiryNumber, Integer inquiryMemberNumber, Model model){
+        public String inquiryRead(Integer inquiryNumber, Model model){
                 log.info("----------------------------");
                 log.info("inquiryRead............. : " + inquiryNumber);
-                log.info("inquiryMemberRead............. : " + inquiryMemberNumber);
                 log.info("----------------------------");
                 inquiryService.inquiryVisit(inquiryNumber);
-                model.addAttribute("inquiry", inquiryService.getList(inquiryNumber, inquiryMemberNumber));
+                model.addAttribute("inquiry", inquiryService.getList(inquiryNumber));
                 return "/inquiry/inquiryView";
         }
 
         //    수정 페이지에서 문의 내용 가져오기
         @GetMapping("modifyRead")
-        public String inquiryModifyRead(Integer inquiryNumber, Integer inquiryMemberNumber, Model model){
+        public String inquiryModifyRead(Integer inquiryNumber, Model model){
                 log.info("----------------------------");
                 log.info("inquiryRead............. : " + inquiryNumber);
-                log.info("inquiryMemberRead............. : " + inquiryMemberNumber);
                 log.info("----------------------------");
-                model.addAttribute("inquiry", inquiryService.getList(inquiryNumber, inquiryMemberNumber));
+                model.addAttribute("inquiry", inquiryService.getList(inquiryNumber));
                 return "/inquiry/inquiryModify";
         }
 

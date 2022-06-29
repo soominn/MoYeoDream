@@ -62,4 +62,11 @@ public class MemberServiceImpl implements MemberService{
     public void deleteBoard(List<String> boardIdxArray) { memberDAO.deleteBoard(boardIdxArray); }
 
 
+    // 내 댓글 목록
+    @Override
+    public List<PostDTO> getMyCommentList(int memberNumber, Criteria criteria) { return memberDAO.getMyCommentList(memberNumber, criteria); }
+
+    // 내 댓글 개수
+    @Override
+    public int getMyCommentCount(int memberNumber) { return memberDAO.getMyCommentCount(memberNumber); }
 }

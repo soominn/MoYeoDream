@@ -14,7 +14,7 @@ public interface JobpostingService {
 
     public List<JobpostingVO> getApproveList();
 
-    public JobpostingDTO jobpostRead(int jobpostingNumber, int jobpostingMemberNumber);
+    public JobpostingDTO jobpostRead(int jobpostingNumber);
 
     public void jobpostRegister(JobpostingVO jobpostingVO);
 

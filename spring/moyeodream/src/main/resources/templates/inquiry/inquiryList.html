@@ -25,7 +25,7 @@
         <th:block th:each="inquiry:${inquiryList}">
 
           <li class="board-container" th:object="${inquiry}">
-            <a th:href="@{/inquiry/read(inquiryNumber=*{inquiryNumber}, inquiryMemberNumber=*{inquiryMemberNumber})}">
+            <a th:href="@{/inquiry/read(inquiryNumber=*{inquiryNumber})}">
               <div class="board">
                 <div class="board_info">
                   <div class="board-title">

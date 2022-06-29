@@ -1,4 +1,4 @@
-/*
+
 const imgThumbnail2 = document.querySelector("img.img-example");
 const imgFile2 = document.querySelector("input[id='imageUpload']");
 const imgDelete2 = document.querySelector("button.img-delete");
@@ -21,7 +21,7 @@ imgDelete2.addEventListener("click", function() {
 	imgFile2.value = "";
 	imgThumbnail2.src = "https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG";
 });
-*/
+
 
 $(function() {
 	$(".open-selectt").click(function() {
@@ -44,13 +44,62 @@ const $deleteOneArr = $(".choice-box-value-removee");
 // 선택된 태그의 개수
 let tagCount2 = 0;
 
+// 받아올 카테고리의 배열
+let memberInterestsArr = [];
+
 $(document).ready(function() {
+	memberInterestsArr = memberInterests.split(',');
+
 	$cateBlockArr.each(function() {
 		if($(this).css("display") == "block") {
 			tagCount2++;
 			console.log(tagCount2);
 		}
 	});
+
+	/*관심 분야 받아오기*/
+	for (let i in memberInterestsArr){
+		if(memberInterestsArr[i] == 'culture'){
+			$(".culture").show();
+			tagCount2++;
+		}
+		else if(memberInterestsArr[i] == 'sports'){
+			$(".sports").show();
+			tagCount2++;
+		}
+		else if(memberInterestsArr[i] == 'programming'){
+			$(".programming").show();
+			tagCount2++;
+		}
+		else if(memberInterestsArr[i] == 'foreign'){
+			$(".foreign").show();
+			tagCount2++;
+		}
+		else if(memberInterestsArr[i] == 'science'){
+			$(".science").show();
+			tagCount2++;
+		}
+		else if(memberInterestsArr[i] == 'finance'){
+			$(".finance").show();
+			tagCount2++;
+		}
+		else if(memberInterestsArr[i] == 'politics'){
+			$(".politics").show();
+			tagCount2++;
+		}
+		else if(memberInterestsArr[i] == 'certificate'){
+			$(".certificate").show();
+			tagCount2++;
+		}
+		else if(memberInterestsArr[i] == 'officiary'){
+			$(".officiary").show();
+			tagCount2++;
+		}
+		else if(memberInterestsArr[i] == 'employment'){
+			$(".employment").show();
+			tagCount2++;
+		}
+	}
 });
 
 $cateChildLiArr.each(function(){

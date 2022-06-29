@@ -56,5 +56,10 @@ public class MemberDAO {
         }
     }
 
+    // 내 댓글 목록
+    public List<PostDTO> getMyCommentList(int memberNumber, Criteria criteria){ return memberMapper.getMyCommentList(memberNumber, criteria); }
+
+    // 내 댓글 개수
+    public int getMyCommentCount(int memberNumber){ return memberMapper.getMyCommentCount(memberNumber); }
 
 }

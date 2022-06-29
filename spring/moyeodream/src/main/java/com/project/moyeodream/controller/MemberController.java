@@ -78,7 +78,25 @@ public class MemberController {
 
     //내 댓글
     @GetMapping("myComment")
-    public String myComment(){ return "myPage/myComment"; }
+    public String myComment(Integer memberNumber, Model model, Criteria criteria){
+        log.info("----------------------------");
+        log.info("list.............");
+        log.info("Criteria............." + criteria);
+        log.info("memberNumber............." + memberNumber);
+        log.info("getMyPostCount............." + memberService.getMyCommentCount(memberNumber));
+        log.info("----------------------------");
+
+        PageDTO pageDTO = new PageDTO(criteria, memberService.getMyCommentCount(memberNumber));
+        model.addAttribute("pageDTO", pageDTO );
+        model.addAttribute("myCommentList", memberService.getMyCommentList(memberNumber, criteria));
+        model.addAttribute("memberNumber", memberNumber);
+
+        log.info("-------------------------------------------------");
+        log.info(pageDTO.getCriteria().getListLink());
+        log.info(pageDTO.toString());
+
+        return "myPage/myComment";
+    }
 
     // 내 정보수정 이동
     @GetMapping("myProfile")

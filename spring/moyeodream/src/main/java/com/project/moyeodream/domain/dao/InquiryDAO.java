@@ -29,11 +29,6 @@ public class InquiryDAO {
         return inquiryMapper.getList(inquiryNumber);
     }
 
-    // 스터디 만든 회원의 닉네임 찾기
-    public String findNickName(int inquiryMemberNumber) {
-        return inquiryMapper.selectNickName(inquiryMemberNumber);
-    }
-
     // 문의하기 작성
     public void inquiryInsert(InquiryVO inquiryVO){
         inquiryMapper.insert(inquiryVO);

@@ -89,7 +89,7 @@
                 <input type="hidden" class="jobposting-content" name="jobpostingContent">
             </section>
             <section class="study-button">
-                <button class="cancel" th:href="@{/main}">취소</button>
+                <button class="cancel" th:href="@{/jobPosting/read(jobpostingNumber=*{jobpostingNumber})}">취소</button>
                 <button type="button" class="register">등록</button>
             </section>
         </section>
