@@ -316,5 +316,30 @@
     });
   };
 
+  // 댓글 등록
+  $(".comment-input-button").on("click",function(e){
+    e.preventDefault();
+
+    if(!$(".comment-input")){
+      alert("내용을 입력해주세요.");
+      return;
+    }
+
+    let postNumber = postNum;
+    let postContent = $(".comment-input").val();
+    let memberNumber = 1;
+
+    postCommentService.register({
+      postCommentContent : postContent,
+      postCommentMemberNumber : memberNumber,
+      postCommentPostNumber : postNumber
+    }, function(result){
+      console.log("댓글 등록 성공");
+      $(".comment-input").val("");
+      showList(postNumber);
+    });
+
+  });
+
 </script>
 </html>
