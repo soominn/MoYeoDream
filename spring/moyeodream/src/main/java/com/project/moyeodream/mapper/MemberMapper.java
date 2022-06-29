@@ -13,6 +13,10 @@ import java.util.List;
 public interface MemberMapper {
     // 회원 가입
     public void insert(MemberVO memberVO);
+    // 로그인
+    public int login(String memberEmail);
+    // 중복된 이메일 검사
+    public int checkEmail(String memberEmail);
     // 내 정보 보기
     public MemberVO select(int memberNumber);
     // 내 정보 수정

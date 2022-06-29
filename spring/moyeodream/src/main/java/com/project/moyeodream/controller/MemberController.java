@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -23,12 +25,50 @@ public class MemberController {
 
 
     // 회원가입
-    @PostMapping("join")
-    public void memberJoin(MemberVO memberVO){}
+    @ResponseBody
+    @PostMapping("/join")
+    public void memberJoin(@RequestBody MemberVO memberVO){
+        log.info("---------------------------");
+        log.info("memberJoin: " + memberVO);
+        log.info("---------------------------");
+        memberService.join(memberVO);
+    }
 
     // 로그인
-    @PostMapping("login")
-    public void memberLogin(Integer userNumber){}
+    @PostMapping("/login")
+    public String memberLogin(String memberEmail, HttpServletRequest request){
+        log.info("----------------------------");
+        log.info("memberLogin............. email : " + memberEmail);
+        log.info("----------------------------");
+
+        HttpSession session = request.getSession();
+        session.setAttribute("memberNumber", memberService.login(memberEmail));
+        return main();
+    }
+
+    // 로그아웃
+    @PostMapping("/logout")
+    public String memberLogout(HttpServletRequest request){
+        log.info("----------------------------");
+        log.info("memberLogout");
+        log.info("----------------------------");
+
+        HttpSession session = request.getSession();
+        session.removeAttribute("memberNumber");
+
+        return main();
+    }
+
+    // 중복 이메일 체크
+    @ResponseBody
+    @PostMapping("/checkEmail")
+    public boolean checkEmail(@RequestBody MemberVO memberVO){
+        log.info("----------------------------");
+        log.info("memberLogin............. email : " + memberVO.getMemberEmail());
+        log.info("----------------------------");
+
+        return memberService.checkEmail(memberVO.getMemberEmail());
+    }
 
     // 내 정보 불러오기
     @GetMapping("read")
