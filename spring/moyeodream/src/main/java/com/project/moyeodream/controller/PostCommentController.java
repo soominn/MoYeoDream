@@ -18,7 +18,7 @@ public class PostCommentController {
 
     // 댓글 작성
     @PostMapping("register")
-    public void postCommentWrite(@RequestBody PostCommentVO postCommentVO){
+    public void register(@RequestBody PostCommentVO postCommentVO){
         log.info("---------------------------------------");
         log.info("reply register Controller......");
         log.info("---------------------------------------");
@@ -29,7 +29,7 @@ public class PostCommentController {
 
     // 댓글 수정
     @PostMapping("modify")
-    public void postCommentUpdate(@RequestBody PostCommentVO postCommentVO){
+    public void modify(@RequestBody PostCommentVO postCommentVO){
         log.info("---------------------------------------");
         log.info("reply modify Controller......");
         log.info("---------------------------------------");
@@ -40,20 +40,45 @@ public class PostCommentController {
 
     // 댓글 삭제
     @GetMapping("remove/{postCommentNumber}")
-    public void postCommentRemove(@PathVariable Integer postCommentNumber){
+    public String remove(@PathVariable Integer postCommentNumber){
         log.info("---------------------------------------");
         log.info("reply remove Controller......");
         log.info("---------------------------------------");
 
         postCommentService.removeReply(postCommentNumber);
-        log.info(postCommentNumber+"번 댓글 삭제 완료");
+        return postCommentNumber+"번 댓글 삭제 성공";
     }
 
     // 전체 댓글 목록 조회
-    @GetMapping("list")
-    public void postComment(Integer postCommentPostNumber){ }
+    @GetMapping("list/{postNumber}")
+    public void getList(@PathVariable Integer postNumber){
+        log.info("---------------------------------------");
+        log.info("reply getList Controller......");
+        log.info("---------------------------------------");
+
+        log.info("가져온 list : " +
+                postCommentService.getReplyList(postNumber));
+    }
+
+    // 전체 댓글 개수
+    @GetMapping("total/{postNumber}")
+    public void getTotal(@PathVariable Integer postNumber){
+        log.info("---------------------------------------");
+        log.info("reply getTotal Controller......");
+        log.info("---------------------------------------");
+
+        log.info(postNumber+"번 댓글 개수 : "
+                + postCommentService.getReplyTotal(postNumber));
+    }
 
     // 내 댓글 목록 조회
-    @GetMapping("myList")
-    public void myPostComment(Integer postCommentMemberNumber){ }
+    @GetMapping("myList/{memberNumber}")
+    public void myList(@PathVariable Integer memberNumber){
+        log.info("---------------------------------------");
+        log.info("reply mytList Controller......");
+        log.info("---------------------------------------");
+
+        log.info("가져온 list : " +
+                postCommentService.myList(memberNumber));
+    }
 }
