@@ -33,4 +33,8 @@ public class StudyCommentService {
         });
         return studyCommentDTOS;
     }
+
+    public Integer getTotal(int studyCommentStudyNumber){
+        return studyCommentDAO.getTotal(studyCommentStudyNumber);
+    }
 }

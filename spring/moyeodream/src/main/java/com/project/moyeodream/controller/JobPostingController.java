@@ -29,7 +29,7 @@ public class JobPostingController {
 
     //    모든 채용 공고 목록
     @GetMapping("list")
-    public void jobPostList(){}
+    public void jobPostList(){    }
 
     //    승인된 채용 공고 목록
     @GetMapping("approveList")

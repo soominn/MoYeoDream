@@ -16,8 +16,18 @@ public class JobpostingDAO {
     private final JobpostingMapper jobpostingMapper;
 
     // 전체 채용 공고 목록
-    public List<JobpostingVO> getList(){
-        return jobpostingMapper.getList();
+    public List<JobpostingDTO> getList(Criteria criteria){
+        return jobpostingMapper.getList(criteria);
+    }
+    
+    // 전체 채용 공고 목록 - 인기
+    public List<JobpostingDTO> getListView(Criteria criteria){
+        return jobpostingMapper.getListView(criteria);
+    }
+    
+    // 전체 채용 공고 목록 - 최신
+    public List<JobpostingDTO> getListLatest(Criteria criteria){
+        return jobpostingMapper.getListLatest(criteria);
     }
 
     // 승인된 채용 공고 목록

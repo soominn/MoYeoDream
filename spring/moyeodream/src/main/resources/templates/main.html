@@ -9,6 +9,18 @@
     <link rel="stylesheet" type="text/css" href="/css/header.css">
     <link rel="stylesheet" type="text/css" href="/css/login.css">
     <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <style>
+        .onFilter button{
+            cursor: pointer;
+            border: 1px solid #ffe579;
+            background-color: #ffe579;
+            width: 130px;
+            border-radius: 10px;
+            font-size: 20px;
+            height: 50px;
+            margin-bottom: -15px;
+        }
+    </style>
 </head>
 <body>
     <header th:replace="~{/fragments/header::header}"></header>
@@ -36,14 +48,10 @@
                 </div>
             </div>
         </div>
+
+
         <!-- 카테고리 필터 -->
         <div class="cateFilterWrap">
-            <div class="cateTopWrap">
-                <ul>
-                    <li class="cateLi cateLiSelect"><p>인기</p></li>
-                    <li class="cateLi"><p>모두보기</p></li>
-                </ul>
-            </div>
             <div class="cateBottomWrap">
                 <ul>
                     <li class="cateChildLi" value="culture"><p>문화 • 예술</p></li>
@@ -84,6 +92,8 @@
                 </ul>
             </div>
         </div>
+
+
         <!-- 메인 컨텐츠 List -->
         <div class="mainContentWrap">
             <div class="contentType">
@@ -103,458 +113,93 @@
                     </div>-->
                 </div>
                 <div class="onFilter">
-                    <span>모집 중만 보기</span>
-                    <label for="switchInput" class="toggleSwitch">
-                        <input type="checkbox" id="switchInput">
-                        <div class="toggleBall"></div>
-                    </label>
+                    <button onclick="changeView()" style="margin-right: 15px">인기순</button>
+                    <button onclick="changeLatest()">최신순</button>
                 </div>
             </div>
+
+
             <!-- 스터디 List 시작 -->
-            <div class="contentChildren study-content">
-                <ul class="contentList3Wrap">
-                    <li class="contentListChild">
-                        <div class="contentDate">
-                            <p class="dateText">시작 예정일 |</p>
-                            <p> 2022.07.07 </p>
-                        </div>
-                        <h2>왕초보 온라인 스터디원 모집합니다! (Spring)</h2>
-                        <ul class="hashList">
-                            <li>#온라인</li>
-                            <li>#왕초보</li>
-                            <li>#인원 미정</li>
-                        </ul>
-                        <!-- <ul class="iconList">
-                            <li><img src="/img/springIcon.svg"></li>
-                        </ul> -->
-                        <div class="contentBottom">
-                            <div class="contentLeader">
-                                <img src="/img/mainicon.png">
-                                <p>Handongseok</p>
+            <th:block th:if="${!#lists.isEmpty(studyList)}">
+                <div class="contentChildren study-content">
+                    <ul class="contentList3Wrap">
+                        <li class="contentListChild studyList" th:each="study:${studyList}" th:object="${study}" th:href="*{studyNumber}">
+                            <div class="contentDate">
+                                <p class="dateText">시작 예정일 |</p>
+                                <p th:text="*{studyStart}"/>
                             </div>
-                            <div class="contentReaction">
-                                <div class="reactionView">
-                                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" color="#999999" height="28" width="28" xmlns="http://www.w3.org/2000/svg" style="color: rgb(153, 153, 153);"><path d="M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 0 0 0 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"></path></svg>
-                                    <p>208</p>
+                            <h2 th:text="*{studyTitle}"/>
+                            <ul class="hashList">
+                                <li th:text="*{studyCategory}"/>
+                                <li th:text="*{studyProcess}"/>
+                                <li th:text="*{studyPersonnel}"/>
+                            </ul>
+                            <!-- <ul class="iconList">
+                                <li><img src="/img/springIcon.svg"></li>
+                            </ul> -->
+                            <div class="contentBottom">
+                                <div class="contentLeader">
+                                    <img src="/img/mainicon.png">
+                                    <p th:text="*{memberNickname}"/>
                                 </div>
-                                <div class="reactionComment">
-                                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" color="#999999" height="20" width="20" xmlns="http://www.w3.org/2000/svg" style="color: rgb(153, 153, 153);"><path d="M256 32C114.6 32 0 125.1 0 240c0 47.6 19.9 91.2 52.9 126.3C38 405.7 7 439.1 6.5 439.5c-6.6 7-8.4 17.2-4.6 26S14.4 480 24 480c61.5 0 110-25.7 139.1-46.3C192 442.8 223.2 448 256 448c141.4 0 256-93.1 256-208S397.4 32 256 32zm0 368c-26.7 0-53.1-4.1-78.4-12.1l-22.7-7.2-19.5 13.8c-14.3 10.1-33.9 21.4-57.5 29 7.3-12.1 14.4-25.7 19.9-40.2l10.6-28.1-20.6-21.8C69.7 314.1 48 282.2 48 240c0-88.2 93.3-160 208-160s208 71.8 208 160-93.3 160-208 160z"></path></svg>
-                                    <p>10</p>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <!-- 여기부터 복사한 List -->
-                    <li class="contentListChild">
-                        <div class="contentDate">
-                            <p class="dateText">시작 예정일 |</p>
-                            <p> 2022.07.07 </p>
-                        </div>
-                        <h2>왕초보 온라인 스터디원 모집합니다! (Spring)</h2>
-                        <ul class="hashList">
-                            <li>#온라인</li>
-                            <li>#왕초보</li>
-                            <li>#인원 미정</li>
-                        </ul>
-                        <!-- <ul class="iconList">
-                            <li><img src="/img/springIcon.svg"></li>
-                        </ul> -->
-                        <div class="contentBottom">
-                            <div class="contentLeader">
-                                <img src="/img/mainicon.png">
-                                <p>Handongseok</p>
-                            </div>
-                            <div class="contentReaction">
-                                <div class="reactionView">
-                                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" color="#999999" height="28" width="28" xmlns="http://www.w3.org/2000/svg" style="color: rgb(153, 153, 153);"><path d="M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 0 0 0 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"></path></svg>
-                                    <p>208</p>
-                                </div>
-                                <div class="reactionComment">
-                                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" color="#999999" height="20" width="20" xmlns="http://www.w3.org/2000/svg" style="color: rgb(153, 153, 153);"><path d="M256 32C114.6 32 0 125.1 0 240c0 47.6 19.9 91.2 52.9 126.3C38 405.7 7 439.1 6.5 439.5c-6.6 7-8.4 17.2-4.6 26S14.4 480 24 480c61.5 0 110-25.7 139.1-46.3C192 442.8 223.2 448 256 448c141.4 0 256-93.1 256-208S397.4 32 256 32zm0 368c-26.7 0-53.1-4.1-78.4-12.1l-22.7-7.2-19.5 13.8c-14.3 10.1-33.9 21.4-57.5 29 7.3-12.1 14.4-25.7 19.9-40.2l10.6-28.1-20.6-21.8C69.7 314.1 48 282.2 48 240c0-88.2 93.3-160 208-160s208 71.8 208 160-93.3 160-208 160z"></path></svg>
-                                    <p>10</p>
+                                <div class="contentReaction">
+                                    <div class="reactionView">
+                                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" color="#999999" height="28" width="28" xmlns="http://www.w3.org/2000/svg" style="color: rgb(153, 153, 153);"><path d="M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 0 0 0 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"></path></svg>
+                                        <p th:text="*{studyViews}"/>
+                                    </div>
+                                    <div class="reactionComment">
+                                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" color="#999999" height="20" width="20" xmlns="http://www.w3.org/2000/svg" style="color: rgb(153, 153, 153);"><path d="M256 32C114.6 32 0 125.1 0 240c0 47.6 19.9 91.2 52.9 126.3C38 405.7 7 439.1 6.5 439.5c-6.6 7-8.4 17.2-4.6 26S14.4 480 24 480c61.5 0 110-25.7 139.1-46.3C192 442.8 223.2 448 256 448c141.4 0 256-93.1 256-208S397.4 32 256 32zm0 368c-26.7 0-53.1-4.1-78.4-12.1l-22.7-7.2-19.5 13.8c-14.3 10.1-33.9 21.4-57.5 29 7.3-12.1 14.4-25.7 19.9-40.2l10.6-28.1-20.6-21.8C69.7 314.1 48 282.2 48 240c0-88.2 93.3-160 208-160s208 71.8 208 160-93.3 160-208 160z"></path></svg>
+                                        <p th:text="*{studyCommentTotal}"/>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </li>
-                    <li class="contentListChild">
-                        <div class="contentDate">
-                            <p class="dateText">시작 예정일 |</p>
-                            <p> 2022.07.07 </p>
-                        </div>
-                        <h2>왕초보 온라인 스터디원 모집합니다! (Spring)</h2>
-                        <ul class="hashList">
-                            <li>#온라인</li>
-                            <li>#왕초보</li>
-                            <li>#인원 미정</li>
-                        </ul>
-                        <!-- <ul class="iconList">
-                            <li><img src="/img/springIcon.svg"></li>
-                        </ul> -->
-                        <div class="contentBottom">
-                            <div class="contentLeader">
-                                <img src="/img/mainicon.png">
-                                <p>Handongseok</p>
-                            </div>
-                            <div class="contentReaction">
-                                <div class="reactionView">
-                                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" color="#999999" height="28" width="28" xmlns="http://www.w3.org/2000/svg" style="color: rgb(153, 153, 153);"><path d="M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 0 0 0 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"></path></svg>
-                                    <p>208</p>
-                                </div>
-                                <div class="reactionComment">
-                                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" color="#999999" height="20" width="20" xmlns="http://www.w3.org/2000/svg" style="color: rgb(153, 153, 153);"><path d="M256 32C114.6 32 0 125.1 0 240c0 47.6 19.9 91.2 52.9 126.3C38 405.7 7 439.1 6.5 439.5c-6.6 7-8.4 17.2-4.6 26S14.4 480 24 480c61.5 0 110-25.7 139.1-46.3C192 442.8 223.2 448 256 448c141.4 0 256-93.1 256-208S397.4 32 256 32zm0 368c-26.7 0-53.1-4.1-78.4-12.1l-22.7-7.2-19.5 13.8c-14.3 10.1-33.9 21.4-57.5 29 7.3-12.1 14.4-25.7 19.9-40.2l10.6-28.1-20.6-21.8C69.7 314.1 48 282.2 48 240c0-88.2 93.3-160 208-160s208 71.8 208 160-93.3 160-208 160z"></path></svg>
-                                    <p>10</p>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="contentListChild">
-                        <div class="contentDate">
-                            <p class="dateText">시작 예정일 |</p>
-                            <p> 2022.07.07 </p>
-                        </div>
-                        <h2>왕초보 온라인 스터디원 모집합니다! (Spring)</h2>
-                        <ul class="hashList">
-                            <li>#온라인</li>
-                            <li>#왕초보</li>
-                            <li>#인원 미정</li>
-                        </ul>
-                        <!-- <ul class="iconList">
-                            <li><img src="/img/springIcon.svg"></li>
-                        </ul> -->
-                        <div class="contentBottom">
-                            <div class="contentLeader">
-                                <img src="/img/mainicon.png">
-                                <p>Handongseok</p>
-                            </div>
-                            <div class="contentReaction">
-                                <div class="reactionView">
-                                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" color="#999999" height="28" width="28" xmlns="http://www.w3.org/2000/svg" style="color: rgb(153, 153, 153);"><path d="M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 0 0 0 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"></path></svg>
-                                    <p>208</p>
-                                </div>
-                                <div class="reactionComment">
-                                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" color="#999999" height="20" width="20" xmlns="http://www.w3.org/2000/svg" style="color: rgb(153, 153, 153);"><path d="M256 32C114.6 32 0 125.1 0 240c0 47.6 19.9 91.2 52.9 126.3C38 405.7 7 439.1 6.5 439.5c-6.6 7-8.4 17.2-4.6 26S14.4 480 24 480c61.5 0 110-25.7 139.1-46.3C192 442.8 223.2 448 256 448c141.4 0 256-93.1 256-208S397.4 32 256 32zm0 368c-26.7 0-53.1-4.1-78.4-12.1l-22.7-7.2-19.5 13.8c-14.3 10.1-33.9 21.4-57.5 29 7.3-12.1 14.4-25.7 19.9-40.2l10.6-28.1-20.6-21.8C69.7 314.1 48 282.2 48 240c0-88.2 93.3-160 208-160s208 71.8 208 160-93.3 160-208 160z"></path></svg>
-                                    <p>10</p>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="contentListChild">
-                        <div class="contentDate">
-                            <p class="dateText">시작 예정일 |</p>
-                            <p> 2022.07.07 </p>
-                        </div>
-                        <h2>왕초보 온라인 스터디원 모집합니다! (Spring)</h2>
-                        <ul class="hashList">
-                            <li>#온라인</li>
-                            <li>#왕초보</li>
-                            <li>#인원 미정</li>
-                        </ul>
-                        <!-- <ul class="iconList">
-                            <li><img src="/img/springIcon.svg"></li>
-                        </ul> -->
-                        <div class="contentBottom">
-                            <div class="contentLeader">
-                                <img src="/img/mainicon.png">
-                                <p>Handongseok</p>
-                            </div>
-                            <div class="contentReaction">
-                                <div class="reactionView">
-                                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" color="#999999" height="28" width="28" xmlns="http://www.w3.org/2000/svg" style="color: rgb(153, 153, 153);"><path d="M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 0 0 0 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"></path></svg>
-                                    <p>208</p>
-                                </div>
-                                <div class="reactionComment">
-                                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" color="#999999" height="20" width="20" xmlns="http://www.w3.org/2000/svg" style="color: rgb(153, 153, 153);"><path d="M256 32C114.6 32 0 125.1 0 240c0 47.6 19.9 91.2 52.9 126.3C38 405.7 7 439.1 6.5 439.5c-6.6 7-8.4 17.2-4.6 26S14.4 480 24 480c61.5 0 110-25.7 139.1-46.3C192 442.8 223.2 448 256 448c141.4 0 256-93.1 256-208S397.4 32 256 32zm0 368c-26.7 0-53.1-4.1-78.4-12.1l-22.7-7.2-19.5 13.8c-14.3 10.1-33.9 21.4-57.5 29 7.3-12.1 14.4-25.7 19.9-40.2l10.6-28.1-20.6-21.8C69.7 314.1 48 282.2 48 240c0-88.2 93.3-160 208-160s208 71.8 208 160-93.3 160-208 160z"></path></svg>
-                                    <p>10</p>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="contentListChild">
-                        <div class="contentDate">
-                            <p class="dateText">시작 예정일 |</p>
-                            <p> 2022.07.07 </p>
-                        </div>
-                        <h2>왕초보 온라인 스터디원 모집합니다! (Spring)</h2>
-                        <ul class="hashList">
-                            <li>#온라인</li>
-                            <li>#왕초보</li>
-                            <li>#인원 미정</li>
-                        </ul>
-                        <!-- <ul class="iconList">
-                            <li><img src="/img/springIcon.svg"></li>
-                        </ul> -->
-                        <div class="contentBottom">
-                            <div class="contentLeader">
-                                <img src="/img/mainicon.png">
-                                <p>Handongseok</p>
-                            </div>
-                            <div class="contentReaction">
-                                <div class="reactionView">
-                                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" color="#999999" height="28" width="28" xmlns="http://www.w3.org/2000/svg" style="color: rgb(153, 153, 153);"><path d="M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 0 0 0 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"></path></svg>
-                                    <p>208</p>
-                                </div>
-                                <div class="reactionComment">
-                                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" color="#999999" height="20" width="20" xmlns="http://www.w3.org/2000/svg" style="color: rgb(153, 153, 153);"><path d="M256 32C114.6 32 0 125.1 0 240c0 47.6 19.9 91.2 52.9 126.3C38 405.7 7 439.1 6.5 439.5c-6.6 7-8.4 17.2-4.6 26S14.4 480 24 480c61.5 0 110-25.7 139.1-46.3C192 442.8 223.2 448 256 448c141.4 0 256-93.1 256-208S397.4 32 256 32zm0 368c-26.7 0-53.1-4.1-78.4-12.1l-22.7-7.2-19.5 13.8c-14.3 10.1-33.9 21.4-57.5 29 7.3-12.1 14.4-25.7 19.9-40.2l10.6-28.1-20.6-21.8C69.7 314.1 48 282.2 48 240c0-88.2 93.3-160 208-160s208 71.8 208 160-93.3 160-208 160z"></path></svg>
-                                    <p>10</p>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="contentListChild">
-                        <div class="contentDate">
-                            <p class="dateText">시작 예정일 |</p>
-                            <p> 2022.07.07 </p>
-                        </div>
-                        <h2>왕초보 온라인 스터디원 모집합니다! (Spring)</h2>
-                        <ul class="hashList">
-                            <li>#온라인</li>
-                            <li>#왕초보</li>
-                            <li>#인원 미정</li>
-                        </ul>
-                        <!-- <ul class="iconList">
-                            <li><img src="/img/springIcon.svg"></li>
-                        </ul> -->
-                        <div class="contentBottom">
-                            <div class="contentLeader">
-                                <img src="/img/mainicon.png">
-                                <p>Handongseok</p>
-                            </div>
-                            <div class="contentReaction">
-                                <div class="reactionView">
-                                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" color="#999999" height="28" width="28" xmlns="http://www.w3.org/2000/svg" style="color: rgb(153, 153, 153);"><path d="M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 0 0 0 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"></path></svg>
-                                    <p>208</p>
-                                </div>
-                                <div class="reactionComment">
-                                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" color="#999999" height="20" width="20" xmlns="http://www.w3.org/2000/svg" style="color: rgb(153, 153, 153);"><path d="M256 32C114.6 32 0 125.1 0 240c0 47.6 19.9 91.2 52.9 126.3C38 405.7 7 439.1 6.5 439.5c-6.6 7-8.4 17.2-4.6 26S14.4 480 24 480c61.5 0 110-25.7 139.1-46.3C192 442.8 223.2 448 256 448c141.4 0 256-93.1 256-208S397.4 32 256 32zm0 368c-26.7 0-53.1-4.1-78.4-12.1l-22.7-7.2-19.5 13.8c-14.3 10.1-33.9 21.4-57.5 29 7.3-12.1 14.4-25.7 19.9-40.2l10.6-28.1-20.6-21.8C69.7 314.1 48 282.2 48 240c0-88.2 93.3-160 208-160s208 71.8 208 160-93.3 160-208 160z"></path></svg>
-                                    <p>10</p>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <!-- 여기까지 복사한 List -->
-                </ul>
-            </div>
+                        </li>
+                    </ul>
+                </div>
+            </th:block>
+
+
             <!-- 채용공고 List 시작 -->
-            <div class="contentChildren job-content">
-                <ul class="contentList3Wrap">
-                    <li class="contentListChild">
-                        <div class="contentDate">
-                            <p class="dateText">접수 기간 |</p>
-                            <p>2022.06.16 ~ 2022.06.21</p>
-                        </div>
-                        <h2>비즈니스 콘텐츠 마케팅 어시스턴트</h2>
-                        <ul class="hashList">
-                            <li>#신입</li>
-                            <li>#인턴</li>
-                            <li>#학력 무관</li>
-                        </ul>
-                        <!-- <ul class="iconList">
-                            <li><img src="/img/springIcon.svg"></li>
-                        </ul> -->
-                        <div class="contentBottom">
-                            <div class="contentLeader">
-                                <img src="https://cf-cpi.campuspick.com/jobcompany/1617782593200481.png">
-                                <p>당근마켓</p>
+            <th:block th:if="${!#lists.isEmpty(jobpostingList)}">
+                <div class="contentChildren job-content">
+                    <ul id="article-list" class="contentList3Wrap">
+                        <li class="contentListChild jobpostingList" th:each="jobposting:${jobpostingList}" th:object="${jobposting}" th:href="*{jobpostingNumber}">
+                            <div class="contentDate">
+                                <p class="dateText">접수 기간 |</p>
+                                <p th:text="*{jobpostingApplicationStart} + ' ~ '"/>
+                                <p th:text="*{jobpostingApplicationEnd}"/>
                             </div>
-                            <div class="contentReaction">
-                                <div class="reactionView">
-                                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" color="#999999" height="28" width="28" xmlns="http://www.w3.org/2000/svg" style="color: rgb(153, 153, 153);"><path d="M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 0 0 0 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"></path></svg>
-                                    <p>208</p>
+                            <h2>비즈니스 콘텐츠 마케팅 어시스턴트</h2>
+                            <ul class="hashList">
+                                <li th:text="*{jobpostingCareer}"/>
+                                <li th:text="*{jobpostingWorktype}"/>
+                                <li th:text="*{jobpostingEligibility}"/>
+                            </ul>
+                            <!-- <ul class="iconList">
+                                <li><img src="/img/springIcon.svg"></li>
+                            </ul> -->
+                            <div class="contentBottom">
+                                <div class="contentLeader">
+                                    <img th:src="*{jobpostingCompanyLogo}">
+                                        <p  th:text="*{jobpostingTitle}"/>
+                                </div>
+                                <div class="contentReaction">
+                                    <div class="reactionView">
+                                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" color="#999999" height="28" width="28" xmlns="http://www.w3.org/2000/svg" style="color: rgb(153, 153, 153);"><path d="M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 0 0 0 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"></path></svg>
+                                        <p th:text="*{jobpostingViews}"/>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </li>
-                    <li class="contentListChild">
-                        <div class="contentDate">
-                            <p class="dateText">접수 기간 |</p>
-                            <p>2022.06.16 ~ 2022.06.21</p>
-                        </div>
-                        <h2>비즈니스 콘텐츠 마케팅 어시스턴트</h2>
-                        <ul class="hashList">
-                            <li>#신입</li>
-                            <li>#인턴</li>
-                            <li>#학력 무관</li>
-                        </ul>
-                        <!-- <ul class="iconList">
-                            <li><img src="/img/springIcon.svg"></li>
-                        </ul> -->
-                        <div class="contentBottom">
-                            <div class="contentLeader">
-                                <img src="https://cf-cpi.campuspick.com/jobcompany/1617782593200481.png">
-                                <p>당근마켓</p>
-                            </div>
-                            <div class="contentReaction">
-                                <div class="reactionView">
-                                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" color="#999999" height="28" width="28" xmlns="http://www.w3.org/2000/svg" style="color: rgb(153, 153, 153);"><path d="M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 0 0 0 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"></path></svg>
-                                    <p>208</p>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="contentListChild">
-                        <div class="contentDate">
-                            <p class="dateText">접수 기간 |</p>
-                            <p>2022.06.16 ~ 2022.06.21</p>
-                        </div>
-                        <h2>비즈니스 콘텐츠 마케팅 어시스턴트</h2>
-                        <ul class="hashList">
-                            <li>#신입</li>
-                            <li>#인턴</li>
-                            <li>#학력 무관</li>
-                        </ul>
-                        <!-- <ul class="iconList">
-                            <li><img src="/img/springIcon.svg"></li>
-                        </ul> -->
-                        <div class="contentBottom">
-                            <div class="contentLeader">
-                                <img src="https://cf-cpi.campuspick.com/jobcompany/1617782593200481.png">
-                                <p>당근마켓</p>
-                            </div>
-                            <div class="contentReaction">
-                                <div class="reactionView">
-                                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" color="#999999" height="28" width="28" xmlns="http://www.w3.org/2000/svg" style="color: rgb(153, 153, 153);"><path d="M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 0 0 0 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"></path></svg>
-                                    <p>208</p>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="contentListChild">
-                        <div class="contentDate">
-                            <p class="dateText">접수 기간 |</p>
-                            <p>2022.06.16 ~ 2022.06.21</p>
-                        </div>
-                        <h2>비즈니스 콘텐츠 마케팅 어시스턴트</h2>
-                        <ul class="hashList">
-                            <li>#신입</li>
-                            <li>#인턴</li>
-                            <li>#학력 무관</li>
-                        </ul>
-                        <!-- <ul class="iconList">
-                            <li><img src="/img/springIcon.svg"></li>
-                        </ul> -->
-                        <div class="contentBottom">
-                            <div class="contentLeader">
-                                <img src="https://cf-cpi.campuspick.com/jobcompany/1617782593200481.png">
-                                <p>당근마켓</p>
-                            </div>
-                            <div class="contentReaction">
-                                <div class="reactionView">
-                                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" color="#999999" height="28" width="28" xmlns="http://www.w3.org/2000/svg" style="color: rgb(153, 153, 153);"><path d="M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 0 0 0 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"></path></svg>
-                                    <p>208</p>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="contentListChild">
-                        <div class="contentDate">
-                            <p class="dateText">접수 기간 |</p>
-                            <p>2022.06.16 ~ 2022.06.21</p>
-                        </div>
-                        <h2>비즈니스 콘텐츠 마케팅 어시스턴트</h2>
-                        <ul class="hashList">
-                            <li>#신입</li>
-                            <li>#인턴</li>
-                            <li>#학력 무관</li>
-                        </ul>
-                        <!-- <ul class="iconList">
-                            <li><img src="/img/springIcon.svg"></li>
-                        </ul> -->
-                        <div class="contentBottom">
-                            <div class="contentLeader">
-                                <img src="https://cf-cpi.campuspick.com/jobcompany/1617782593200481.png">
-                                <p>당근마켓</p>
-                            </div>
-                            <div class="contentReaction">
-                                <div class="reactionView">
-                                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" color="#999999" height="28" width="28" xmlns="http://www.w3.org/2000/svg" style="color: rgb(153, 153, 153);"><path d="M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 0 0 0 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"></path></svg>
-                                    <p>208</p>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="contentListChild">
-                        <div class="contentDate">
-                            <p class="dateText">접수 기간 |</p>
-                            <p>2022.06.16 ~ 2022.06.21</p>
-                        </div>
-                        <h2>비즈니스 콘텐츠 마케팅 어시스턴트</h2>
-                        <ul class="hashList">
-                            <li>#신입</li>
-                            <li>#인턴</li>
-                            <li>#학력 무관</li>
-                        </ul>
-                        <!-- <ul class="iconList">
-                            <li><img src="/img/springIcon.svg"></li>
-                        </ul> -->
-                        <div class="contentBottom">
-                            <div class="contentLeader">
-                                <img src="https://cf-cpi.campuspick.com/jobcompany/1617782593200481.png">
-                                <p>당근마켓</p>
-                            </div>
-                            <div class="contentReaction">
-                                <div class="reactionView">
-                                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" color="#999999" height="28" width="28" xmlns="http://www.w3.org/2000/svg" style="color: rgb(153, 153, 153);"><path d="M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 0 0 0 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"></path></svg>
-                                    <p>208</p>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="contentListChild">
-                        <div class="contentDate">
-                            <p class="dateText">접수 기간 |</p>
-                            <p>2022.06.16 ~ 2022.06.21</p>
-                        </div>
-                        <h2>비즈니스 콘텐츠 마케팅 어시스턴트</h2>
-                        <ul class="hashList">
-                            <li>#신입</li>
-                            <li>#인턴</li>
-                            <li>#학력 무관</li>
-                        </ul>
-                        <!-- <ul class="iconList">
-                            <li><img src="/img/springIcon.svg"></li>
-                        </ul> -->
-                        <div class="contentBottom">
-                            <div class="contentLeader">
-                                <img src="https://cf-cpi.campuspick.com/jobcompany/1617782593200481.png">
-                                <p>당근마켓</p>
-                            </div>
-                            <div class="contentReaction">
-                                <div class="reactionView">
-                                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" color="#999999" height="28" width="28" xmlns="http://www.w3.org/2000/svg" style="color: rgb(153, 153, 153);"><path d="M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 0 0 0 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"></path></svg>
-                                    <p>208</p>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="contentListChild">
-                        <div class="contentDate">
-                            <p class="dateText">접수 기간 |</p>
-                            <p>2022.06.16 ~ 2022.06.21</p>
-                        </div>
-                        <h2>비즈니스 콘텐츠 마케팅 어시스턴트</h2>
-                        <ul class="hashList">
-                            <li>#신입</li>
-                            <li>#인턴</li>
-                            <li>#학력 무관</li>
-                        </ul>
-                        <!-- <ul class="iconList">
-                            <li><img src="/img/springIcon.svg"></li>
-                        </ul> -->
-                        <div class="contentBottom">
-                            <div class="contentLeader">
-                                <img src="https://cf-cpi.campuspick.com/jobcompany/1617782593200481.png">
-                                <p>당근마켓</p>
-                            </div>
-                            <div class="contentReaction">
-                                <div class="reactionView">
-                                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" color="#999999" height="28" width="28" xmlns="http://www.w3.org/2000/svg" style="color: rgb(153, 153, 153);"><path d="M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 0 0 0 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"></path></svg>
-                                    <p>208</p>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+                        </li>
+                    </ul>
+                </div>
+            </th:block>
+<!--            <form action="/main/changeList" th:object="${criteria}" name="pageForm">-->
+<!--                <input type="hidden" th:field="*{pageNum}">-->
+<!--                <input type="hidden" th:field="*{amount}">-->
+<!--                <input type="hidden" th:field="*{type}">-->
+<!--                <input type="hidden" th:field="*{keyword}">-->
+<!--            </form>-->
         </div>
     </section>
 </body>
@@ -563,4 +208,25 @@
 <script src="/js/header.js"></script>
 <script src="/js/login.js"></script>
 <script src="/js/main.js"></script>
+<script th:inline="javascript">;
+    function changeView(){
+        location.href="/main/changeView";
+    }
+    function changeLatest(){
+        location.href="/main/changeLatest";
+    }
+
+    $("li.studyList").on("click", function(e) {
+        e.preventDefault();
+        location.href = "/study/read?studyNumber=" + $(this).attr("href");
+    });
+
+    $("li.jobpostingList").on("click", function(e) {
+        e.preventDefault();
+        location.href = "/jobPostingView/read?jobpostingNumber=" + $(this).attr("href");
+    });
+</script>
+<script type="text/javascript" th:inline="javascript">;
+
+</script>
 </html>

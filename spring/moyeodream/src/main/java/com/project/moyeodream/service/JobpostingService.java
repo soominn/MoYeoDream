@@ -10,7 +10,11 @@ import java.util.List;
 @Service
 public interface JobpostingService {
 
-    public List<JobpostingVO> getList();
+    public List<JobpostingDTO> getList(Criteria criteria);
+
+    public List<JobpostingDTO> getListView(Criteria criteria);
+
+    public List<JobpostingDTO> getListLatest(Criteria criteria);
 
     public List<JobpostingVO> getApproveList();
 

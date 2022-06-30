@@ -7,7 +7,9 @@ import java.util.List;
 
 @Service
 public interface StudyService {
-    public List<StudyVO> getList();
+    public List<StudyDTO> getList(Criteria criteria);
+    public List<StudyDTO> getListView(Criteria criteria);
+    public List<StudyDTO> getListLatest (Criteria criteria);
     public List<StudyVO> getApproveList();
     public StudyDTO read(int studyNumber);
     public List<StudyVO> CratedList(int userNumber);
