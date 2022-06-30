@@ -181,33 +181,34 @@
     let memberInterests = [[${member.memberInterests}]];
 
     $(document).ready(function() {
-        memberInterestsArr = memberInterests.split(',');
+        if(memberInterests != null) {
+            memberInterestsArr = memberInterests.split(',');
 
-        /*관심 분야 받아오기*/
-        for (let i in memberInterestsArr){
-            if(memberInterestsArr[i] == 'culture'){
-                $(".culture").show();
-            }else if(memberInterestsArr[i] == 'sports'){
-                $(".sports").show();
-            }else if(memberInterestsArr[i] == 'programming'){
-                $(".programming").show();
-            }else if(memberInterestsArr[i] == 'foreign'){
-                $(".foreign").show();
-            }else if(memberInterestsArr[i] == 'science'){
-                $(".science").show();
-            }else if(memberInterestsArr[i] == 'finance'){
-                $(".finance").show();
-            }else if(memberInterestsArr[i] == 'politics'){
-                $(".politics").show();
-            }else if(memberInterestsArr[i] == 'certificate'){
-                $(".certificate").show();
-            }else if(memberInterestsArr[i] == 'officiary'){
-                $(".officiary").show();
-            }else if(memberInterestsArr[i] == 'employment'){
-                $(".employment").show();
+            /*관심 분야 받아오기*/
+            for (let i in memberInterestsArr){
+                if(memberInterestsArr[i] == 'culture'){
+                    $(".culture").show();
+                }else if(memberInterestsArr[i] == 'sports'){
+                    $(".sports").show();
+                }else if(memberInterestsArr[i] == 'programming'){
+                    $(".programming").show();
+                }else if(memberInterestsArr[i] == 'foreign'){
+                    $(".foreign").show();
+                }else if(memberInterestsArr[i] == 'science'){
+                    $(".science").show();
+                }else if(memberInterestsArr[i] == 'finance'){
+                    $(".finance").show();
+                }else if(memberInterestsArr[i] == 'politics'){
+                    $(".politics").show();
+                }else if(memberInterestsArr[i] == 'certificate'){
+                    $(".certificate").show();
+                }else if(memberInterestsArr[i] == 'officiary'){
+                    $(".officiary").show();
+                }else if(memberInterestsArr[i] == 'employment'){
+                    $(".employment").show();
+                }
             }
         }
-
     });
 
 </script>

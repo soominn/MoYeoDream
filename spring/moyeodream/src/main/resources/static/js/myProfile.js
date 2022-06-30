@@ -48,7 +48,53 @@ let tagCount2 = 0;
 let memberInterestsArr = [];
 
 $(document).ready(function() {
-	memberInterestsArr = memberInterests.split(',');
+	if(memberInterests != null) {
+		memberInterestsArr = memberInterests.split(',');
+
+		/*관심 분야 받아오기*/
+		for (let i in memberInterestsArr){
+			if(memberInterestsArr[i] == 'culture'){
+				$(".culture").show();
+				tagCount2++;
+			}
+			else if(memberInterestsArr[i] == 'sports'){
+				$(".sports").show();
+				tagCount2++;
+			}
+			else if(memberInterestsArr[i] == 'programming'){
+				$(".programming").show();
+				tagCount2++;
+			}
+			else if(memberInterestsArr[i] == 'foreign'){
+				$(".foreign").show();
+				tagCount2++;
+			}
+			else if(memberInterestsArr[i] == 'science'){
+				$(".science").show();
+				tagCount2++;
+			}
+			else if(memberInterestsArr[i] == 'finance'){
+				$(".finance").show();
+				tagCount2++;
+			}
+			else if(memberInterestsArr[i] == 'politics'){
+				$(".politics").show();
+				tagCount2++;
+			}
+			else if(memberInterestsArr[i] == 'certificate'){
+				$(".certificate").show();
+				tagCount2++;
+			}
+			else if(memberInterestsArr[i] == 'officiary'){
+				$(".officiary").show();
+				tagCount2++;
+			}
+			else if(memberInterestsArr[i] == 'employment'){
+				$(".employment").show();
+				tagCount2++;
+			}
+		}
+	}
 
 	$cateBlockArr.each(function() {
 		if($(this).css("display") == "block") {
@@ -57,49 +103,7 @@ $(document).ready(function() {
 		}
 	});
 
-	/*관심 분야 받아오기*/
-	for (let i in memberInterestsArr){
-		if(memberInterestsArr[i] == 'culture'){
-			$(".culture").show();
-			tagCount2++;
-		}
-		else if(memberInterestsArr[i] == 'sports'){
-			$(".sports").show();
-			tagCount2++;
-		}
-		else if(memberInterestsArr[i] == 'programming'){
-			$(".programming").show();
-			tagCount2++;
-		}
-		else if(memberInterestsArr[i] == 'foreign'){
-			$(".foreign").show();
-			tagCount2++;
-		}
-		else if(memberInterestsArr[i] == 'science'){
-			$(".science").show();
-			tagCount2++;
-		}
-		else if(memberInterestsArr[i] == 'finance'){
-			$(".finance").show();
-			tagCount2++;
-		}
-		else if(memberInterestsArr[i] == 'politics'){
-			$(".politics").show();
-			tagCount2++;
-		}
-		else if(memberInterestsArr[i] == 'certificate'){
-			$(".certificate").show();
-			tagCount2++;
-		}
-		else if(memberInterestsArr[i] == 'officiary'){
-			$(".officiary").show();
-			tagCount2++;
-		}
-		else if(memberInterestsArr[i] == 'employment'){
-			$(".employment").show();
-			tagCount2++;
-		}
-	}
+
 });
 
 $cateChildLiArr.each(function(){

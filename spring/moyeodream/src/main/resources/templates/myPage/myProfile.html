@@ -32,7 +32,7 @@
                         <div class="img-controller">
                             <label class="img-choose">
                                 이미지 선택
-                                <input id="imageUpload" type="file" accept="image/*">
+                                <input id="imageUpload" name="memberProfile" type="file" accept="image/*">
                             </label>
                             <button class="img-delete">이미지 제거</button>
                         </div>
@@ -192,12 +192,7 @@
                                             </li>
                                         </ul>
 
-                                        <div class="css-1g6gooii">
-                                            <div class="select__input" style="display: inline-block;">
-                                                <input name="memberInterests" id="memberInterests" type="hidden">
-                                                <div style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 16px; font-family: Arial; font-weight: 400; font-style: normal; letter-spacing: normal; text-transform: none;"></div>
-                                            </div>
-                                        </div>
+                                        <input value="" name="memberInterests" id="memberInterests" type="text" style="display: none">
                                     </div>
                                     <div class="select__indicators css-1wy0on6">
                                         <div class="select__indicator select__clear-indicator css-tlfecz-indicatorContainerr delete-all-selectt" aria-hidden="true">
@@ -268,15 +263,27 @@
     const $registerButton = $("button.button-fin");
 
 
+    let interestsList = "";
+    let interest = new Array();
+
     $registerButton.on("click", function () {
 
         if($inputNickName.val() == "") {
             alert("닉네임을 입력해주세요.");
         }
         else {
+            for(let i = 0; i < $('li.cateBlockk').length; i++) {
+                if ($($('li.cateBlockk')[i]).css("display") == "list-item") {
+                    interest.push($($('li.cateBlockk')[i]).attr("value"));
+                }
+            }
+            interestsList = interest.join(",");
+            $("#memberInterests").attr('value',interestsList);
             $("#memberForm").submit();
         }
     });
+
+
 
 </script>
 </html>
