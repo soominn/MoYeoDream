@@ -23,7 +23,6 @@ import java.util.List;
 public class MemberController {
     private final MemberService memberService;
 
-
     // 회원가입
     @ResponseBody
     @PostMapping("/join")
@@ -43,7 +42,7 @@ public class MemberController {
 
         HttpSession session = request.getSession();
         session.setAttribute("memberNumber", memberService.login(memberEmail));
-        return main();
+        return "redirect:http://localhost:11111/member/main";
     }
 
     // 로그아웃
@@ -56,7 +55,7 @@ public class MemberController {
         HttpSession session = request.getSession();
         session.removeAttribute("memberNumber");
 
-        return main();
+        return "redirect:http://localhost:11111/member/main";
     }
 
     // 중복 이메일 체크
@@ -80,7 +79,6 @@ public class MemberController {
         return "/myPage/myPage";
     }
 
-
     // 내 정보 수정(post)
     @PostMapping("modify")
     public RedirectView myProfileModify(MemberVO memberVO){
@@ -93,7 +91,6 @@ public class MemberController {
         return new RedirectView("/member/read?memberNumber=" + memberVO.getMemberNumber());
     }
 
-
     // 탈퇴
     @GetMapping("remove")
     public RedirectView memberRemove(Integer memberNumber, RedirectAttributes rttr){
@@ -104,7 +101,6 @@ public class MemberController {
         memberService.memberDelete(memberNumber);
         return new RedirectView("/main");
     }
-
 
     // ----- 프론트 -----
 
@@ -194,6 +190,4 @@ public class MemberController {
         memberService.deleteBoard(boardIdxArray);
         return boardIdxArray;
     }
-
-
 }

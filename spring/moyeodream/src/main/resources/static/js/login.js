@@ -140,21 +140,25 @@ function kakaoLogin() {
 						data: JSON.stringify(memberEmail),
 						success: function (result) {
 							if(result){
-								// 중복 존재
+								// 로그인
 								$("input[name='memberEmail']").val(response.kakao_account.email);
 								$("form#loginForm").submit();
 							}
 							else {
+								// 회원가입
 								loginContent.style.display = "none";
 								nicknameContent.style.display = "flex";
 
 								nicknameNext.addEventListener("click", function() {
-									if($("input[name='memberNickname']").val() == "") {
+									let memberNickname = $("input[name='memberNickname']").val();
+									if(memberNickname == "") {
 										alert("값을 입력해주세요!");
 										return;
 									}
+
 									nicknameContent.style.display = "none";
 									interestContent.style.display = "flex";
+									$("span.nickname").text(memberNickname);
 								});
 
 								interestNext.addEventListener("click", function() {
@@ -168,6 +172,7 @@ function kakaoLogin() {
 										alert("값을 입력해주세요!");
 										return;
 									}
+
 									interestContent.style.display = "none";
 									imgContent.style.display = "flex";
 								});
@@ -195,10 +200,7 @@ function kakaoLogin() {
 										url:"/member/join",
 										type:"post",
 										contentType: "application/json; charset=utf-8",
-										data: JSON.stringify(memberInfo),
-										success: function (result) {
-											location.href = "http://localhost:11111/member/main";
-										}
+										data: JSON.stringify(memberInfo)
 									})
 								});
 
@@ -221,6 +223,7 @@ function kakaoLogin() {
 									$loginBg.css("display", "none");
 									$loginContainer.css("display", "none");
 									$("body").css("overflow", "visible");
+									location.href = "http://localhost:11111/member/main";
 								});
 							}
 						}
