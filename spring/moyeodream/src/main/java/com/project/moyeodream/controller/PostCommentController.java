@@ -41,7 +41,7 @@ public class PostCommentController {
     }
 
     // 댓글 삭제
-    @GetMapping("remove/{postCommentNumber}")
+    @DeleteMapping("remove/{postCommentNumber}")
     public boolean remove(@PathVariable Integer postCommentNumber){
         log.info("---------------------------------------");
         log.info("reply remove Controller......");

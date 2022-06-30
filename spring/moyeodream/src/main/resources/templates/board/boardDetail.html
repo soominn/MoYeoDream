@@ -240,6 +240,9 @@
     });
   };
 
+  // 댓글 수정창이 한개만 열리게 하기 위함
+  let modCheck = false;
+
   // 댓글 등록
   $(".comment-input-button").on("click",function(e){
     e.preventDefault();
@@ -269,6 +272,13 @@
   $("ul.comment-list").on("click","button.modifyBtn", function(e){
 
     e.preventDefault();
+
+    if(modCheck){
+      alert("이미 수정중인 댓글이 있습니다.");
+      return;
+    }
+
+    modCheck = true
     let commentNum = this.classList[2];
 
     $("button." + commentNum).show();
@@ -297,6 +307,7 @@
 
     originalVal.show();
     toModify.hide();
+    modCheck = false;
   });
 
   // 댓글 수정 완료
@@ -319,7 +330,25 @@
     $(this).hide();
     $(this).next().hide();
     showList(postNum);
+    modCheck = false;
 
+  });
+
+  // 댓글 삭제
+  $("ul.comment-list").on("click","button.deleteBtn", function(e){
+    e.preventDefault();
+    let commentNum = this.classList[2];
+    let originalVal = $(this).closest("li").find(".comment-content-wrap");
+
+    let delCheck = confirm("댓글을 삭제하시겠습니까?");
+    if(!delCheck){
+      return;
+    }
+
+    postCommentService.remove(commentNum, function(){
+      console.log("댓글 삭제 성공");
+      showList(postNum);
+    });
   });
 
 

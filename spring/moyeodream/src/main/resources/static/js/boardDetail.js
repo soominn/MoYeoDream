@@ -44,6 +44,18 @@ let postCommentService = (function(){
     }
 
     // 댓글 삭제 
+    function remove(postCommentNumber, callback){
+        console.log("js remove.......");
+        $.ajax({
+            url : "/postReply/remove/"+postCommentNumber ,
+            type : "delete",
+            success : function(){
+                if(callback){
+                    callback();
+                }
+            }
+        })
+    };
 
-return {getList: getList, register: register, modify: modify};
+return {getList: getList, register: register, modify: modify, remove: remove};
 })();
