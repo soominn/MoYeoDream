@@ -69,17 +69,6 @@ public class MemberController {
         return memberService.checkEmail(memberVO.getMemberEmail());
     }
 
-    // 이미지 가져오기
-    @ResponseBody
-    @GetMapping("/checkImg/{memberNumber}")
-    public String checkImg(@PathVariable("memberNumber") int memberNumber) {
-        log.info("----------------------------");
-        log.info("memberLogin............. number : " + memberNumber);
-        log.info("----------------------------");
-
-        return memberService.checkImg(memberNumber);
-    }
-
     // 내 정보 불러오기
     @GetMapping("read")
     public String myPageRead(Integer memberNumber, Model model){

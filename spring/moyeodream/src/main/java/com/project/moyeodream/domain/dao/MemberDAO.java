@@ -23,10 +23,6 @@ public class MemberDAO {
     public int login(String memberEmail){return memberMapper.login(memberEmail);}
     // 중복된 이메일 체크
     public boolean checkEmail(String memberEmail){return memberMapper.checkEmail(memberEmail) == 1;}
-    // 이미지 가져오기
-    public String checkImg(int memberNumber){
-        return memberMapper.checkImg(memberNumber);
-    }
     // 내 정보 보기
     public MemberVO myPageView(int memberNumber){
         return memberMapper.select(memberNumber);

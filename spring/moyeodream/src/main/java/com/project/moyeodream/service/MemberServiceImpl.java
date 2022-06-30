@@ -31,9 +31,6 @@ public class MemberServiceImpl implements MemberService{
     public boolean checkEmail(String memberEmail){return memberDAO.checkEmail(memberEmail);}
 
     @Override
-    public String checkImg(int memberNumber){return memberDAO.checkImg(memberNumber);}
-
-    @Override
     public MemberVO myPageView(int memberNumber) {
         return memberDAO.myPageView(memberNumber);
     }
