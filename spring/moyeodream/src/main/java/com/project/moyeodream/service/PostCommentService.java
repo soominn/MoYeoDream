@@ -29,4 +29,7 @@ public interface PostCommentService {
     // 댓글 삭제
     public boolean removeReply(Integer postCommentNumber);
 
+    // 내 댓글 가져오기
+    public List<PostCommentVO> myList(Integer memberNumber);
+
 }

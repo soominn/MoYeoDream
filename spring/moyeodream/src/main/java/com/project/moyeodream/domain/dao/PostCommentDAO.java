@@ -43,4 +43,9 @@ public class PostCommentDAO {
         return postCommentMapper.deleteReply(postCommentNumber) == 1;
     }
 
+    // 내 댓글 보기
+    public List<PostCommentVO> myList(Integer memberNumber){
+        return postCommentMapper.myList(memberNumber);
+    }
+
 }
