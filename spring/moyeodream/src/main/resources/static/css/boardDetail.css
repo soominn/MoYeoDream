@@ -350,3 +350,23 @@ section.contentManage{
   display: flex;
   justify-content: flex-end;
 }
+
+.modifyCommentWrap{
+  display: none;
+}
+
+.modifyCommentWrap textarea{
+  width: 90%;
+  height: 200px;
+  resize: none;
+  border: #9f9f9fa3 1px solid;
+  outline: none;
+  font-size: 15px;
+  font-family: inherit;
+  padding: 10px;
+  border-radius: 3px;
+}
+
+.modOkBtn, .cancelBtn{
+  display: none;
+}

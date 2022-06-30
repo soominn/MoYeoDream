@@ -283,8 +283,6 @@
   function showList(postNumber){
 
     postCommentService.getList(postNumber, function(list){
-      console.log(postNumber);
-      console.log(list);
       let str = "";
 
       $.each(list, function(i, comment){
@@ -300,17 +298,20 @@
         str += "</div>";
         str += "</div>";
         str += "<section class='comment-button-wrap'>";
-        str += "<button class='comment-button'>수정</button>";
-        str += "<button class='comment-button'>삭제</button>";
+        str += "<button class='comment-button modifyBtn'>수정</button>";
+        str += "<button class='comment-button deleteBtn'>삭제</button>";
+        str += "<button class='comment-button modOkBtn'>수정완료</button>";
+        str += "<button class='comment-button cancelBtn'>취소</button>";
         str += "</section>";
         str += "</section>";
         str += "<section class='comment-content-wrap'>";
         str += "<p class='comment-content'>"+ comment.postCommentContent +"</p>";
         str += "</section>";
+        str += "<section class='modifyCommentWrap'>";
+        str += "<textarea class='modifyComment'></textarea>";
+        str += "</section>";
         str += "</li>";
       });
-
-      console.log("str : "+str);
 
       $("ul.comment-list").html(str);
     });
@@ -338,6 +339,22 @@
       $(".comment-input").val("");
       showList(postNumber);
     });
+
+  });
+
+  // 댓글 수정 클릭
+  $(".modifyBtn").on("click", function(e){
+    e.preventDefault();
+
+    let $replyLi = $(this).closest("li");
+
+    $(".comment-button").hide();
+    $replyLi.find(".modOkBtn").show();
+    $replyLi.find(".deleteBtn").show();
+
+    $replyLi.find(".comment-content-wrap").hide();
+    $replyLi.find(".modifyCommentWrap").show();
+    $replyLi.find(".modifyCommentWrap").text($replyLi.find(".comment-content-wrap").text());
 
   });
 
