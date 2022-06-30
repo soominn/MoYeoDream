@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -20,10 +22,15 @@ public class PostCommentController {
 
     // 댓글 작성
     @PostMapping("register")
-    public void register(@RequestBody PostCommentVO postCommentVO){
+    public void register(@RequestBody PostCommentVO postCommentVO, HttpServletRequest req){
         log.info("---------------------------------------");
         log.info("reply register Controller......");
         log.info("---------------------------------------");
+
+        // 세션에서 작성자 정보 받아오기
+        HttpSession session = req.getSession();
+        postCommentVO.setPostCommentMemberNumber((Integer)session.getAttribute("memberNumber"));
+        log.info("작성자 memberNum : "+postCommentVO.getPostCommentMemberNumber());
 
         postCommentService.registerReply(postCommentVO);
         log.info(postCommentVO.getPostCommentNumber() + "번 댓글 등록 성공");
