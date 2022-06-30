@@ -16,5 +16,6 @@
         <typeAlias type="com.project.moyeodream.domain.vo.StudyVO" alias="studyVO"/>
         <typeAlias type="com.project.moyeodream.domain.vo.StudyDTO" alias="studyDTO"/>
         <typeAlias type="com.project.moyeodream.domain.vo.AdminVO" alias="adminVO"/>
+        <typeAlias type="com.project.moyeodream.domain.vo.FileVO" alias="fileVO"/>
     </typeAliases>
 </configuration>
