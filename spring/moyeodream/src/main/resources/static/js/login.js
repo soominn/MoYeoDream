@@ -38,7 +38,7 @@ imgFile.addEventListener("change", function(event) {
 	formData.append("file", profileFiles[0]);
 
 	$.ajax({
-		url: "/upload/uploadProfile",
+		url: "/file/uploadProfile",
 		type: "POST",
 		data: formData,
 		processData: false,
@@ -57,7 +57,7 @@ imgDelete.addEventListener("click", function() {
 	console.log(path);
 
 	$.ajax({
-		url: "/upload/deleteProfile",
+		url: "/file/deleteProfile",
 		type: "DELETE",
 		data: {path: path}
 	});
