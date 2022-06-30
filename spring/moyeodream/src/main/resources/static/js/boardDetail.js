@@ -43,5 +43,7 @@ let postCommentService = (function(){
         });
     }
 
+    // 댓글 삭제 
+
 return {getList: getList, register: register, modify: modify};
 })();

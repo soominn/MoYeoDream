@@ -370,3 +370,7 @@ section.contentManage{
 .modOkBtn, .cancelBtn{
   display: none;
 }
+
+.comment-button{
+  cursor: pointer;
+}

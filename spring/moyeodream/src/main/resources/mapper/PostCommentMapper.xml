@@ -34,7 +34,8 @@
     <!-- 댓글 수정 -->
     <update id="updateReply">
         UPDATE TBL_POST_COMMENT
-        SET POST_COMMENT_CONTENT = #{postCommentContent}
+        SET POST_COMMENT_CONTENT = #{postCommentContent},
+            POST_COMMENT_UPDATE_DATE = SYSDATE
         WHERE POST_COMMENT_NUMBER = #{postCommentNumber}
     </update>
 
