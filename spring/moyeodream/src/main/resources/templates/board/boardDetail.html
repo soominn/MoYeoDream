@@ -320,7 +320,7 @@
   $(".comment-input-button").on("click",function(e){
     e.preventDefault();
 
-    if(!$(".comment-input")){
+    if(!$(".comment-input").val()){
       alert("내용을 입력해주세요.");
       return;
     }
