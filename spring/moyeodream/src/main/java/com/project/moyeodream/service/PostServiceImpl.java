@@ -1,5 +1,6 @@
 package com.project.moyeodream.service;
 
+import com.project.moyeodream.domain.dao.PostCommentDAO;
 import com.project.moyeodream.domain.dao.PostDAO;
 import com.project.moyeodream.domain.vo.Criteria;
 import com.project.moyeodream.domain.vo.PostDTO;
@@ -16,11 +17,18 @@ import java.util.List;
 public class PostServiceImpl implements PostService{
 
     private final PostDAO postDAO;
+    private final PostCommentDAO postCommentDAO;
 
     // 게시판 전체 목록
     @Override
     public List<PostDTO> getList(Criteria criteria) {
-        return postDAO.getList(criteria);
+        List<PostDTO> postList = postDAO.getList(criteria);
+        postList.forEach( post -> {
+            // 댓글 개수 구하기
+            int commentCount = postCommentDAO.getReplyTotal(post.getPostNumber());
+            post.setPostCommentCount(commentCount);
+        });
+        return postList;
     }
 
     // 게시판 글 개수
