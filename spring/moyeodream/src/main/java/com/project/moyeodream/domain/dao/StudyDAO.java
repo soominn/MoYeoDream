@@ -16,8 +16,16 @@ public class StudyDAO {
     private final StudyMapper studyMapper;
 
     // 전체 스터디 목록
-    public List<StudyVO> getList(){
-        return studyMapper.getList();
+    public List<StudyDTO> getList(Criteria criteria){
+        return studyMapper.getList(criteria);
+    }
+    // 전체 스터디 목록 - 인기
+    public List<StudyDTO> getListView(Criteria criteria){
+        return studyMapper.getListView(criteria);
+    }
+    // 전체 스터디 목록 - 최신
+    public List<StudyDTO> getListLatest(Criteria criteria){
+        return studyMapper.getListLatest(criteria);
     }
 
     // 승인된 스터디 목록

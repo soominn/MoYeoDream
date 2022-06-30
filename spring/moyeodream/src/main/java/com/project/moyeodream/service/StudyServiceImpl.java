@@ -15,8 +15,18 @@ public class StudyServiceImpl implements StudyService{
     private final StudyDAO studyDAO;
 
     @Override
-    public List<StudyVO> getList() {
-        return studyDAO.getList();
+    public List<StudyDTO> getList(Criteria criteria) {
+        return studyDAO.getList(criteria);
+    }
+
+    @Override
+    public List<StudyDTO> getListView(Criteria criteria) {
+        return studyDAO.getListView(criteria);
+    }
+
+    @Override
+    public List<StudyDTO> getListLatest(Criteria criteria) {
+        return studyDAO.getListLatest(criteria);
     }
 
     @Override
