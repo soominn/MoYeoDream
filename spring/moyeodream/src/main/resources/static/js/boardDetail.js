@@ -27,5 +27,21 @@ let postCommentService = (function(){
         });
     }
 
-return {getList: getList, register: register};
+    // 댓글 수정
+    function modify(param, callback){
+        console.log("js.modify,....");
+        $.ajax({
+            url : "/postReply/modify",
+            type : "post",
+            data : JSON.stringify(param),
+            contentType : "application/json",
+            success : function(comment){
+                if(callback){
+                    callback(comment);
+                };
+            }
+        });
+    }
+
+return {getList: getList, register: register, modify: modify};
 })();
