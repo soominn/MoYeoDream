@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @Slf4j
@@ -131,10 +132,15 @@ public class PostController {
 
     /* 게시판 등록 완료*/
     @PostMapping("postRegister")
-    public String register(PostVO postVO, Model model, Criteria criteria){
+    public String register(PostVO postVO, Model model, Criteria criteria, HttpServletRequest req){
         log.info("--------------------------------------------------");
         log.info("post Register ........" + postVO);
         log.info("--------------------------------------------------");
+
+        // 세션에 저장된 memberNumber 가져오기
+        HttpSession session = req.getSession();
+        postVO.setPostMemberNumber((Integer)session.getAttribute("memberNumber"));
+        log.info("작성자 memberNum : "+postVO.getPostMemberNumber());
 
         postService.postRegister(postVO);
         log.info("새로 등록한 게시글 번호" + postVO.getPostNumber());
