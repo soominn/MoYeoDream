@@ -178,6 +178,7 @@
   let params = [[${criteria.listLink}]];
   let postNum = [[${post.postNumber}]];
   let goList = document.querySelector("svg#goList");
+  let memberNum = [[${session.memberNumber}]];
 
   console.log(postNum);
   showList(postNum);
@@ -197,6 +198,12 @@
       location.href = "/post/remove" + params + "&postNumber=" + postNum;
     }
   });
+
+  for(let key in window.sessionStorage){
+
+  }
+
+  console.log(memberNum);
 
   // 댓글 목록 가져오기
   function showList(postNumber){
@@ -219,12 +226,16 @@
         str += "</div>";
         str += "</div>";
         str += "</div>";
-        str += "<section class='comment-button-wrap "+ commentNum + "'>";
-        str += "<button class='comment-button modifyBtn "+ commentNum + "'>수정</button>";
-        str += "<button class='comment-button deleteBtn "+ commentNum + "'>삭제</button>";
-        str += "<button class='comment-button modOkBtn "+ commentNum + "'>수정완료</button>";
-        str += "<button class='comment-button cancelBtn "+ commentNum + "'>취소</button>";
-        str += "</section>";
+
+        // 내 댓글만 수정 가능
+        if(memberNum == comment.postCommentMemberNumber){
+          str += "<section class='comment-button-wrap "+ commentNum + "'>";
+          str += "<button class='comment-button modifyBtn "+ commentNum + "'>수정</button>";
+          str += "<button class='comment-button deleteBtn "+ commentNum + "'>삭제</button>";
+          str += "<button class='comment-button modOkBtn "+ commentNum + "'>수정완료</button>";
+          str += "<button class='comment-button cancelBtn "+ commentNum + "'>취소</button>";
+          str += "</section>";
+        }
         str += "</section>";
         str += "<section class='comment-content-wrap'>";
         str += "<p class='comment-content'>"+ comment.postCommentContent +"</p>";

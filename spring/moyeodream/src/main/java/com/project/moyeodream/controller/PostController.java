@@ -46,15 +46,19 @@ public class PostController {
 
     // 게시글 상세 조회
     @GetMapping("read")
-    public String postRead(Integer postNumber, Criteria criteria, Model model){
+    public String postRead(Integer postNumber, Criteria criteria, Model model, HttpServletRequest req){
         log.info("--------------------------------------------------");
         log.info("read Controller...............");
         log.info("Criteria............." + criteria);
         log.info("--------------------------------------------------");
 
+        HttpSession session = req.getSession();
+        int memberNum = (Integer)session.getAttribute("memberNumber");
+
         // 상세보기 들어오면 조회수 1 UP
         model.addAttribute("post",postService.postRead(postNumber));
         model.addAttribute("criteria",criteria);
+        model.addAttribute("session", memberNum);
 
         return "/board/boardDetail";
     }

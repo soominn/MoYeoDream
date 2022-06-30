@@ -199,7 +199,7 @@
                 <div class="keywordBox">
                   <input type="text" name="keywordText" placeholder="댓글이나 포함 단어를 검색하세요.">
                 </div>
-                <button type="button" class="searchBtn">검색</button>
+                <button type="button" class="searchReplyBtn">검색</button>
               </form>
             </div>
             </div>
@@ -288,6 +288,19 @@
       $pageForm.submit();
     });
   });
+
+  $(".searchReplyBtn").on("click",function(){
+    let $keywordText = $(this).closest("form").find("input[name='keywordText']");
+
+    if(!$keywordText.val()){
+      alert("검색어를 입력하세요!");
+      return;
+    }
+
+    $inputKeyword.val($keywordText.val());
+
+
+  })
 
   // 게시판 글쓰기
   $(".postReg").on("click",function(e){

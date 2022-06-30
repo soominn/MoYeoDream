@@ -60,7 +60,7 @@ public class PostCommentController {
 
     // 전체 댓글 목록 조회
     @GetMapping("list/{postNumber}")
-    public List<PostCommentVO> getList(@PathVariable Integer postNumber){
+    public List<PostCommentVO> getList(@PathVariable Integer postNumber, HttpServletRequest req){
         log.info("---------------------------------------");
         log.info("reply getList Controller......");
         log.info("---------------------------------------");
@@ -70,6 +70,19 @@ public class PostCommentController {
 
         return postCommentService.getReplyList(postNumber);
     }
+
+//    // 댓글 내용 검색
+//    @GetMapping("list/{keyword}")
+//    public List<PostCommentVO> getList(@PathVariable String keyword){
+//        log.info("---------------------------------------");
+//        log.info("reply getList Controller......");
+//        log.info("---------------------------------------");
+//
+//        log.info("가져온 list : " +
+//                postCommentService.getReplyList(postNumber));
+//
+//        return postCommentService.getReplyList(postNumber);
+//    }
 
     // 전체 댓글 개수
     @GetMapping("total/{postNumber}")
