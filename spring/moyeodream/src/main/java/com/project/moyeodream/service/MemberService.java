@@ -14,6 +14,7 @@ public interface MemberService {
     public void join(MemberVO memberVO);
     public int login(String memberEmail);
     public boolean checkEmail(String memberEmail);
+    public String checkImg(int memberNumber);
     public MemberVO myPageView(int memberNumber);
     public boolean memberModify(MemberVO memberVO);
     public boolean memberDelete(int memberNumber);

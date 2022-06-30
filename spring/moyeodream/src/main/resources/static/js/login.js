@@ -15,6 +15,8 @@ const imgThumbnail = document.querySelector("img.img-example");
 const imgFile = document.querySelector("input[id='img-choose']");
 const imgDelete = document.querySelector("button.img-delete");
 
+let profileName;
+
 imgFile.addEventListener("change", function(event) {
 	let reader = new FileReader();
 	reader.readAsDataURL(event.target.files[0]);
@@ -27,11 +29,38 @@ imgFile.addEventListener("change", function(event) {
 			imgThumbnail.src = "https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG";
 		}
 	}
+
+	let formData = new FormData();
+	let profileInput = $("input[type='file']");
+	let profileFiles = profileInput[0].files;
+	profileName = $("input[type='file']")[0].files[0].name;
+
+	formData.append("file", profileFiles[0]);
+
+	$.ajax({
+		url: "/upload/uploadProfile",
+		type: "POST",
+		data: formData,
+		processData: false,
+		contentType: false,
+		success: function(fileName) {
+			$("#profile-name").val(fileName);
+		}
+	});
 });
 
 imgDelete.addEventListener("click", function() {
 	imgFile.value = "";
 	imgThumbnail.src = "https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG";
+
+	let path = dateFormat(new Date()) + $("#profile-name").val();
+	console.log(path);
+
+	$.ajax({
+		url: "/upload/deleteProfile",
+		type: "DELETE",
+		data: {path: path}
+	});
 });
 
 const $loginBtn = $("button.loginBtn");
@@ -193,6 +222,7 @@ function kakaoLogin() {
 									let memberInfo = {
 										memberEmail : response.kakao_account.email,
 										memberNickname : $("input[name='memberNickname']").val(),
+										memberProfile : $("#profile-name").val(),
 										memberInterests : interestsList
 									};
 
@@ -255,4 +285,9 @@ function kakaoLogout() {
 
 function logout() {
 	kakaoLogout();
+}
+
+function dateFormat(format) {
+	let date = new Date(format);
+	return date.getFullYear() + "/" + ((date.getMonth() + 1) > 9 ? (date.getMonth() + 1).toString() : "0" + (date.getMonth() + 1)) + "/" + (date.getDate() > 9 ? date.getDate().toString() : "0" + date.getDate().toString()) + "/";
 }

@@ -8,8 +8,8 @@
             SELECT SEQ_MEMBER.NEXTVAL FROM DUAL
         </selectKey>
         INSERT INTO TBL_MEMBER
-        (MEMBER_NUMBER,MEMBER_EMAIL,MEMBER_NICKNAME,MEMBER_INTERESTS)
-        VALUES (#{memberNumber},#{memberEmail},#{memberNickname},#{memberInterests})
+        (MEMBER_NUMBER, MEMBER_EMAIL, MEMBER_NICKNAME, MEMBER_PROFILE, MEMBER_INTERESTS)
+        VALUES (#{memberNumber}, #{memberEmail}, #{memberNickname}, #{memberProfile}, #{memberInterests})
     </insert>
 
     <!-- 로그인 -->
@@ -24,6 +24,13 @@
         SELECT COUNT(MEMBER_EMAIL)
         FROM TBL_MEMBER
         WHERE MEMBER_EMAIL = #{memberEmail}
+    </select>
+
+    <!-- 중복 이메일 체크 -->
+    <select id="checkImg" resultType="string">
+        SELECT MEMBER_PROFILE
+        FROM TBL_MEMBER
+        WHERE MEMBER_NUMBER = #{memberNumber}
     </select>
 
     <select id="getMyStudyList" resultType="studyDTO">
