@@ -1,6 +1,5 @@
 package com.project.moyeodream.controller;
 
-import com.project.moyeodream.domain.vo.MemberVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,18 +9,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 @Controller
 @Slf4j
-@RequestMapping("/upload/*")
-public class UploadController {
+@RequestMapping("/file/*")
+public class FileController {
     @ResponseBody
     @PostMapping("/uploadProfile")
     public String uploadProfile(MultipartFile file) throws IOException {
