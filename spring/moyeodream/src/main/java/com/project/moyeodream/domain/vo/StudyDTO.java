@@ -23,6 +23,7 @@ public class StudyDTO {
     private String studyUpdateDate;               // 스터디 수정날짜(DB SYSDATE 사용)
     private Integer studyMemberNumber;            // 스터디 멤버 넘버(FK)    -   스터디 작성자 정보 가져오기 위해
     private String memberNickname;                // 스터디 멤버의 닉네임
+    private String memberProfile;                 // 멤버 프로필 이미지
     private Integer studyCommentStudyNumber;      // 스터디 댓글 넘버(FK)    -   스터디 댓글 정보 가져오기 위해
     private Integer studyCommentNumber;           // 스터디 댓글 고유 번호
     private Integer studyCommentTotal;            // 스터디 게시물 별 댓글 총합

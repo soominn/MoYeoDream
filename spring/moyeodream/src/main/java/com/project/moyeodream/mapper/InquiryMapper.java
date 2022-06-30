@@ -28,5 +28,9 @@ public interface InquiryMapper {
 
     // 답변 대기 중인 문의글
     public List<InquiryDTO> getApproveWait();
+    // 문의글 리스트 가져오기 admin
+    public List<InquiryDTO> getInqList(Criteria criteria);
+    // 문의글 전체 개수
+    public int getTotalAdmin(Criteria criteria);
 
 }
