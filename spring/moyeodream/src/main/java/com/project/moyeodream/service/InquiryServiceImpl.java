@@ -64,17 +64,4 @@ public class InquiryServiceImpl implements InquiryService{
     public List<InquiryDTO> approveWait(){
         return inquiryDAO.approveWait();
     };
-
-    @Override
-    public List<InquiryDTO> getInqList(Criteria criteria) { return inquiryDAO.getInqList(criteria); }
-
-    @Override
-    public int getTotalAdmin(Criteria criteria){
-        return inquiryDAO.getTotalAdmin(criteria);
-    }
-
-    @Override
-    public InquiryDTO adInqRead(int inquiryNumber){
-        return inquiryDAO.getList(inquiryNumber);
-    }
 }

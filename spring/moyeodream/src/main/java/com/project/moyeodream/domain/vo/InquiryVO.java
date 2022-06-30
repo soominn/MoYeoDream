@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 public class InquiryVO {
-    private Long inquiryNumber;                      // 문의 고유번호(DB SEQUENCE 사용)
+    private Long inquiryNumber;                   // 문의 고유번호(DB SEQUENCE 사용)
     private String inquiryTitle;                     // 문의 제목
     private String inquiryContent;                   // 문의 내용
     private String inquiryAnswer;                    // 답변 내용

@@ -5,9 +5,7 @@ body {
     width : 100%;
     min-width: 600px;
 }
-a {
-    text-decoration: none;
-}
+
 header{
     position: fixed;
     width : 100%;

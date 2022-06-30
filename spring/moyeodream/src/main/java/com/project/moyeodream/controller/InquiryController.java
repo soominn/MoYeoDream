@@ -152,25 +152,4 @@ public class InquiryController {
                 log.info("adminLogin............. Flash : " + rttr.getFlashAttributes());
                 return new RedirectView("/study/approveWait");
         }
-
-        // 문의 리스트 admin
-        @GetMapping("getInqList")
-        public String getInqList(Model model, Criteria criteria){
-                model.addAttribute("inquiryList",inquiryService.getInqList(criteria));
-                log.info("list.............................. : "+ inquiryService.getInqList(criteria));
-                model.addAttribute("pageDTO", new PageDTO(criteria, inquiryService.getTotalAdmin(criteria)));
-                return "admin/adminQnaManage";
-        }
-
-        // 관리자 채용 공고 세부 조회
-        @GetMapping("adInqRead")
-        public String adInqRead(Integer inquiryNumber,Criteria criteria, Model model){
-                log.info("----------------------------");
-                log.info("inquiryListRead............. : " + inquiryNumber);
-                log.info("----------------------------");
-                log.info("승인여부----------------------------"+inquiryService.adInqRead(inquiryNumber).getInquiryAnswerBool());
-                model.addAttribute("inquiry", inquiryService.adInqRead(inquiryNumber));
-                return "admin/adminQnaView";
-        }
-
 }

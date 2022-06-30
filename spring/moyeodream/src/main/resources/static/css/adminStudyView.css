@@ -9,10 +9,6 @@ body {
     overflow-x: hidden;
 }
 
-a {
-    text-decoration: none;
-}
-
 .sectionWrap{
     width : 100%;
     min-width: 800px;

@@ -29,7 +29,7 @@
     </insert>
 
     <select id="getList" resultType="com.project.moyeodream.domain.vo.InquiryDTO">
-        SELECT INQUIRY_NUMBER, INQUIRY_TITLE, INQUIRY_CONTENT, INQUIRY_ANSWER_BOOL, INQUIRY_VIEWS, INQUIRY_REGISTER_DATE, INQUIRY_UPDATE_DATE, INQUIRY_MEMBER_NUMBER, tm.MEMBER_NICKNAME, tm.MEMBER_PROFILE
+        SELECT INQUIRY_NUMBER, INQUIRY_TITLE, INQUIRY_CONTENT, INQUIRY_REGISTER_DATE, INQUIRY_UPDATE_DATE, INQUIRY_MEMBER_NUMBER, tm.MEMBER_NICKNAME
         FROM TBL_INQUIRY ti JOIN TBL_MEMBER tm
         ON ti.INQUIRY_MEMBER_NUMBER = tm.MEMBER_NUMBER
         WHERE INQUIRY_NUMBER = #{inquiryNumber}
@@ -52,38 +52,12 @@
         WHERE INQUIRY_NUMBER = #{inquiryNumber}
     </delete>
 
-    <!-- 어드민에서 검색-->
-    <sql id="adminSearch">
-        <if test="type != null and keyword != null">
-            <trim prefix="(" suffix=") AND " prefixOverrides="OR">
-                <foreach item="type" collection="types">
-                    <trim prefix="OR">
-                        <choose>
-                            <when test="type == 'T'.toString()">
-                                (INQUIRY_TITLE LIKE '%'||#{keyword}||'%')
-                            </when>
-                            <when test="type == 'W'.toString()">
-                                (MEMBER_NICKNAME LIKE '%'||#{keyword}||'%')
-                            </when>
-                            <when test="type == 'S'.toString()">
-                                (INQUIRY_ANSWER_BOOL = 0)
-                            </when>
-                            <when test="type == 'A'.toString()">
-                                (INQUIRY_ANSWER_BOOL = 1)
-                            </when>
-                        </choose>
-                    </trim>
-                </foreach>
-            </trim>
-        </if>
-    </sql>
-
     <select id="getApproveWait" resultType="inquiryDTO">
-        SELECT INQUIRY_NUMBER, INQUIRY_TITLE, INQUIRY_CONTENT, INQUIRY_ANSWER_BOOL, INQUIRY_VIEWS, INQUIRY_REGISTER_DATE, INQUIRY_UPDATE_DATE, INQUIRY_MEMBER_NUMBER, MEMBER_NICKNAME, MEMBER_PROFILE
+        SELECT INQUIRY_NUMBER, INQUIRY_TITLE, INQUIRY_CONTENT, INQUIRY_ANSWER_BOOL, INQUIRY_VIEWS, INQUIRY_REGISTER_DATE, INQUIRY_UPDATE_DATE, INQUIRY_MEMBER_NUMBER, MEMBER_NICKNAME
         FROM
             (
-            SELECT /*+ INDEX_DESC(TBL_INQUIRY PK_INQUIRY) */
-            ROWNUM RN, INQUIRY_NUMBER, INQUIRY_TITLE, INQUIRY_CONTENT, INQUIRY_ANSWER_BOOL, INQUIRY_VIEWS, INQUIRY_REGISTER_DATE, INQUIRY_UPDATE_DATE, INQUIRY_MEMBER_NUMBER, tm.MEMBER_NICKNAME, tm.MEMBER_PROFILE
+            SELECT /*+ INDEX_DESC(TBL_JOBPOSTING PK_JOBPOSTING) */
+            ROWNUM RN,INQUIRY_NUMBER, INQUIRY_TITLE, INQUIRY_CONTENT, INQUIRY_ANSWER_BOOL, INQUIRY_VIEWS, INQUIRY_REGISTER_DATE, INQUIRY_UPDATE_DATE, INQUIRY_MEMBER_NUMBER, MEMBER_NICKNAME
             FROM TBL_INQUIRY ti JOIN TBL_MEMBER tm
             ON ti.INQUIRY_MEMBER_NUMBER = tm.MEMBER_NUMBER
             <![CDATA[
@@ -91,34 +65,5 @@
             )
         WHERE RN <= 10
         ]]>
-    </select>
-
-    <select id="getInqList" resultType="inquiryDTO">
-        SELECT /*+ INDEX_DESC(TBL_INQUIRY PK_INQUIRY) */
-        INQUIRY_NUMBER, INQUIRY_TITLE, INQUIRY_CONTENT, INQUIRY_ANSWER_BOOL, INQUIRY_VIEWS, INQUIRY_REGISTER_DATE, INQUIRY_UPDATE_DATE, INQUIRY_MEMBER_NUMBER, MEMBER_NICKNAME, MEMBER_PROFILE
-        FROM
-        (
-        SELECT /*+ INDEX_DESC(TBL_INQUIRY PK_INQUIRY) */
-        ROWNUM RN, INQUIRY_NUMBER, INQUIRY_TITLE, INQUIRY_CONTENT, INQUIRY_ANSWER_BOOL, INQUIRY_VIEWS, INQUIRY_REGISTER_DATE, INQUIRY_UPDATE_DATE, ti.INQUIRY_MEMBER_NUMBER, tm.MEMBER_NICKNAME, tm.MEMBER_PROFILE
-        FROM TBL_INQUIRY ti JOIN TBL_MEMBER tm
-        ON ti.INQUIRY_MEMBER_NUMBER = tm.MEMBER_NUMBER
-        WHERE
-            <include refid="adminSearch"/>
-        <![CDATA[
-            ROWNUM <= #{pageNum} * #{amount}
-        )
-        WHERE RN > (#{pageNum} - 1) * #{amount}
-    ]]>
-    </select>
-
-    <select id="getTotalAdmin" resultType="_int">
-        SELECT COUNT(INQUIRY_NUMBER)
-        FROM TBL_INQUIRY ti JOIN TBL_MEMBER tm
-        ON ti.INQUIRY_MEMBER_NUMBER = tm.MEMBER_NUMBER
-        <where>
-            <trim suffixOverrides="AND">
-                <include refid="adminSearch"/>
-            </trim>
-        </where>
     </select>
 </mapper>

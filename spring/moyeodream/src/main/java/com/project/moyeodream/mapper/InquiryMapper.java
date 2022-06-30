@@ -3,7 +3,6 @@ package com.project.moyeodream.mapper;
 import com.project.moyeodream.domain.vo.Criteria;
 import com.project.moyeodream.domain.vo.InquiryDTO;
 import com.project.moyeodream.domain.vo.InquiryVO;
-import com.project.moyeodream.domain.vo.JobpostingVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -29,9 +28,5 @@ public interface InquiryMapper {
 
     // 답변 대기 중인 문의글
     public List<InquiryDTO> getApproveWait();
-    // 문의글 리스트 가져오기 admin
-    public List<InquiryDTO> getInqList(Criteria criteria);
-    // 문의글 전체 개수
-    public int getTotalAdmin(Criteria criteria);
 
 }
