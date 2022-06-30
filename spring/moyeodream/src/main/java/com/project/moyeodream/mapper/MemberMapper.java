@@ -13,6 +13,10 @@ import java.util.List;
 public interface MemberMapper {
     // 회원 가입
     public void insert(MemberVO memberVO);
+    // 로그인
+    public int login(String memberEmail);
+    // 중복된 이메일 검사
+    public int checkEmail(String memberEmail);
     // 내 정보 보기
     public MemberVO select(int memberNumber);
     // 내 정보 수정
@@ -37,4 +41,10 @@ public interface MemberMapper {
 
     // 선택된 게시글 삭제
     public int deleteBoard(String boardIdx);
+
+    // 내 댓글 목록
+    public List<PostDTO> getMyCommentList(@Param("memberNumber") int memberNumber, @Param("criteria") Criteria criteria);
+
+    // 내 댓글 개수
+    public int getMyCommentCount(int memberNumber);
 }

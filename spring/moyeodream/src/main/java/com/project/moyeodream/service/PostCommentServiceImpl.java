@@ -51,4 +51,10 @@ public class PostCommentServiceImpl implements PostCommentService {
     public boolean removeReply(Integer postCommentNumber) {
         return postCommentDAO.removeReply(postCommentNumber);
     }
+
+    // 내 댓글 가져오기
+    @Override
+    public List<PostCommentVO> myList(Integer memberNumber) {
+        return postCommentDAO.myList(memberNumber);
+    }
 }

@@ -15,8 +15,6 @@ public interface InquiryMapper {
     public int getTotal();
     // 문의 상세 조회
     public InquiryDTO getList(int inquiryNumber);
-    // 스터디 만든 회원의 닉네임 찾기
-    public String selectNickName(int inquiryMemberNumber);
     // 문의하기 작성
     public void insert(InquiryVO inquiryVO);
     // 문의하기 수정

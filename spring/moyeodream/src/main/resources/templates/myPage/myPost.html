@@ -53,7 +53,8 @@
                             <th:block th:each="myPost:${myPostList}">
 
                                 <li class="question-container" th:object="${myPost}">
-                                    <a href="">
+                                    <!--상세보기는 PostDetail.html완성되면 이후에 myPostDetail.html 파일 생성해서 연결해야 함.-->
+                                    <a th:href="@{/post/read(postNumber=*{postNumber}, criteria = ${pageDTO.criteria.listLink})}">
                                         <div class="question">
                                             <div class="question__info">
                                                 <div class="question__title">
@@ -62,24 +63,24 @@
                                                 <p class="question__body" th:text="*{postContent}"></p>
                                                 <div class="question__tags"></div>
                                                 <div class="question__info-footer">
-                                                    <span th:text="*{memberNickname}">홍길동</span>
+                                                    <span th:text="*{memberNickname}"></span>
                                                     <span>&nbsp;·&nbsp;</span>
-                                                    <span th:text="*{postRegisterDate}"></span>
+                                                    <span th:if="*{postRegisterDate == postUpdateDate}" th:text="*{postRegisterDate}"></span>
+                                                    <span th:unless="*{postRegisterDate == postUpdateDate}" th:text="*{postUpdateDate}"></span>
                                                     <span>&nbsp;·&nbsp;</span>
-                                                    <span id="postCategory"></span>
-                                                    <span style="display: none" id="postCategory-sample" th:text="*{postCategory}"></span>
+                                                    <span class="postCategory" th:text="*{postCategory}"></span>
                                                 </div>
                                             </div>
                                             <div class="question__additional-info">
                                                 <div class="question__comment">
-                                                    <span class="comment__count" th:text="*{postViews}">0</span>
+                                                    <span class="comment__count">0</span>
                                                     <span class="comment__description">답변</span>
                                                 </div>
                                                 <button class="ac-button is-md is-text question__like e-like ">
                                                     <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" color="#999999" height="28" width="28" xmlns="http://www.w3.org/2000/svg" style="color: rgb(153, 153, 153);">
                                                         <path d="M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 0 0 0 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"></path>
                                                     </svg>
-                                                    0
+                                                    <span th:text="*{postViews}"></span>
                                                 </button>
                                             </div>
                                             <input type="checkbox" class="delete-checkbox" name="chk" th:value="*{postNumber}">
@@ -113,8 +114,8 @@
                         <form th:action="@{/member/myPost(memberNumber=${memberNumber})}" name="pageForm" th:object="${criteria}">
                             <input type="hidden" th:field="*{pageNum}">
                             <input type="hidden" th:field="*{amount}">
-                            <input type="hidden" th:filed="*{type}">
-                            <input type="hidden" th:fleld="*{keyword}">
+                            <input type="hidden" th:field="*{type}">
+                            <input type="hidden" th:field="*{keyword}">
                         </form>
                     </nav>
 
@@ -132,6 +133,7 @@
     let pageNum = [[${criteria.pageNum}]];
     let $pageNums = $(".pagination-link"); /* css 변화를 위함 */
     let myPostList = [[${myPostList}]];
+    let memberNumber = [[${memberNumber}]];
 
     /* 페이징버튼 css : 해당 페이지 번호가 is-current */
     $(document).ready(function(){
@@ -153,16 +155,7 @@
         $pageForm.submit();
     });
 
-    let memberNumber = [[${memberNumber}]];
-    let params = [[${criteria.listLink}]];
-    function goUpdate(){
-        location.href = "/board/modify" + params + "&memberNumber=" + boardNumber;
-    }
 
-    $("a#goList").click(function(e){
-        e.preventDefault();
-        location.href = "/board/list" + params;
-    })
 
 
 
@@ -197,7 +190,7 @@
                 ,contentType: 'application/json'
                 ,success : function(result) {
                     alert("해당글이 정상적으로 삭제되었습니다.");
-                    location.href="/";
+                    location.href="/member/myPost" + "?memberNumber=" + memberNumber;
                 },
                 error: function(request, status, error) {
 
@@ -207,23 +200,19 @@
     });
 
 
-    let postCategory = $("#postCategory-sample").text();
-
     $(document).ready(function() {
 
-        if(postCategory == "FREETALKING") {
-            $("span#postCategory").text("자유주제");
+        for(let i in myPostList) {
+            if (myPostList[i].postCategory == "FREETALKING") {
+                $(this).find($("span.postCategory").eq(i)).text("자유주제");
+            } else if (myPostList[i].postCategory == "QNA") {
+                $(this).find($("span.postCategory").eq(i)).text("질문&답변");
+            } else if (myPostList[i].postCategory == "STUDYREVIEW") {
+                $(this).find($("span.postCategory").eq(i)).text("스터디 후기");
+            } else if (myPostList[i].postCategory == "INTERVIEW") {
+                $(this).find($("span.postCategory").eq(i)).text("기업면접 후기");
+            }
         }
-        else if(postCategory == "QNA") {
-            $("span#postCategory").text("질문&답변");
-        }
-        else if(postCategory == "STUDYREVIEW") {
-            $("span#postCategory").text("스터디 후기");
-        }
-        else if(postCategory == "INTERVIEW") {
-            $("span#postCategory").text("기업면접 후기");
-        }
-
 
     });
 

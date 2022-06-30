@@ -15,7 +15,7 @@ public interface InquiryService {
     // 게시판 글 개수
     public int getTotal();
 
-    public InquiryDTO getList(int inquiryNumber, int inquiryMemberNumber);
+    public InquiryDTO getList(int inquiryNumber);
 
     public void inquiryInsert(InquiryVO inquiryVO);
 

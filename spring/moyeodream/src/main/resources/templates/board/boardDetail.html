@@ -254,11 +254,15 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="/js/header.js"></script>
-<script src="/js/login.js"></script>
+<!--<script src="/js/login.js"></script>-->
+<script src="/js/boardDetail.js"></script>
 <script th:inline="javascript">
   let params = [[${criteria.listLink}]];
   let postNum = [[${post.postNumber}]];
   let goList = document.querySelector("svg#goList");
+
+  console.log(postNum);
+  showList(postNum);
 
   $("#goModify").on("click",function(){
     location.href = "/post/modify" + params + "&postNumber=" + postNum;
@@ -273,6 +277,68 @@
     if(check){
       location.href = "/post/remove" + params + "&postNumber=" + postNum;
     }
+  });
+
+  // 댓글 목록 가져오기
+  function showList(postNumber){
+
+    postCommentService.getList(postNumber, function(list){
+      console.log(postNumber);
+      console.log(list);
+      let str = "";
+
+      $.each(list, function(i, comment){
+        str += "<li class='comment'>";
+        str += "<section class='comment-info-wrap'>";
+        str += "<div class='comment-info'>";
+        str += "<img src='https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG'/>";
+        str += "<div class='comment-title-wrap'>";
+        str += "<div class='comment-title'>";
+        str += "<div class='comment-user'>" + comment.postCommentNickname + "</div>";
+        str += "<div class='comment-registered-date'>" + comment.postCommentUpdateDate + "</div>";
+        str += "</div>";
+        str += "</div>";
+        str += "</div>";
+        str += "<section class='comment-button-wrap'>";
+        str += "<button class='comment-button'>수정</button>";
+        str += "<button class='comment-button'>삭제</button>";
+        str += "</section>";
+        str += "</section>";
+        str += "<section class='comment-content-wrap'>";
+        str += "<p class='comment-content'>"+ comment.postCommentContent +"</p>";
+        str += "</section>";
+        str += "</li>";
+      });
+
+      console.log("str : "+str);
+
+      $("ul.comment-list").html(str);
+    });
+  };
+
+  // 댓글 등록
+  $(".comment-input-button").on("click",function(e){
+    e.preventDefault();
+
+    if(!$(".comment-input")){
+      alert("내용을 입력해주세요.");
+      return;
+    }
+
+    let postNumber = postNum;
+    let postContent = $(".comment-input").val();
+    let memberNumber = 1;
+
+    postCommentService.register({
+      postCommentContent : postContent,
+      postCommentMemberNumber : memberNumber,
+      postCommentPostNumber : postNumber
+    }, function(result){
+      console.log("댓글 등록 성공");
+      $(".comment-input").val("");
+      showList(postNumber);
+    });
+
   });
 
 </script>

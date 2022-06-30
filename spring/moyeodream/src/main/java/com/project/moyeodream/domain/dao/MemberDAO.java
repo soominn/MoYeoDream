@@ -19,6 +19,10 @@ public class MemberDAO {
     public void join(MemberVO memberVO){
         memberMapper.insert(memberVO);
     }
+    // 로그인
+    public int login(String memberEmail){return memberMapper.login(memberEmail);}
+    // 중복된 이메일 체크
+    public boolean checkEmail(String memberEmail){return memberMapper.checkEmail(memberEmail) == 1;}
     // 내 정보 보기
     public MemberVO myPageView(int memberNumber){
         return memberMapper.select(memberNumber);
@@ -56,5 +60,10 @@ public class MemberDAO {
         }
     }
 
+    // 내 댓글 목록
+    public List<PostDTO> getMyCommentList(int memberNumber, Criteria criteria){ return memberMapper.getMyCommentList(memberNumber, criteria); }
+
+    // 내 댓글 개수
+    public int getMyCommentCount(int memberNumber){ return memberMapper.getMyCommentCount(memberNumber); }
 
 }

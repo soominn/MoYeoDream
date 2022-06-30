@@ -40,11 +40,6 @@ public class JobpostingDAO {
         return jobpostingMapper.read(jobpostingNumber);
     }
 
-    // 스터디 만든 회원의 닉네임 찾기
-    public String findNickName(int jobpostingMemberNumber) {
-        return jobpostingMapper.selectNickName(jobpostingMemberNumber);
-    }
-
     // 채용 공고 작성
     public void jobpostRegister(JobpostingVO jobpostingVO){
         jobpostingMapper.insert(jobpostingVO);

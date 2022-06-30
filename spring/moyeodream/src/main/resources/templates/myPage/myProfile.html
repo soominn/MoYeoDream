@@ -32,7 +32,7 @@
                         <div class="img-controller">
                             <label class="img-choose">
                                 이미지 선택
-                                <input id="imageUpload" type="file" accept="image/*">
+                                <input id="imageUpload" name="memberProfile" type="file" accept="image/*">
                             </label>
                             <button class="img-delete">이미지 제거</button>
                         </div>
@@ -53,14 +53,14 @@
                         모여드림에서 사용되는 이메일입니다. (수정 불가)
                     </p>
                     <hr>
-                    <div class="user-info-box user-info-box2">
+                    <!--<div class="user-info-box user-info-box2">
                         <h3>한 줄 소개</h3>
                         <input class="user-info-box-introduce " type="text" name="memberIntroduction" maxlength="30" placeholder="한 줄 소개가 비어있습니다" th:field="*{memberIntroduction}">
                     </div>
                     <p class="info-1">
                         나는 어떤 사람인가요? (30자 이내로 작성)
                     </p>
-                    <hr>
+                    <hr>-->
                     <div class="user-info-box user-info-box2">
                         <h3>관심 분야 태그</h3>
                         <div class="user-info-box33">
@@ -70,7 +70,7 @@
                                     <div class="choice-box-result choice-box-result--is-multi choice-box-result--has-value choice-box-result22">
                                         <ul class="cate-all-list">
 
-                                            <li class="cateBlockk" value="culture">
+                                            <li class="cateBlockk culture" value="culture">
                                                 <div class="choice-box-result33 choice-box-value">
                                                     <div class="choice-valuee choice-box-value-label">
                                                         문화 • 예술
@@ -82,7 +82,7 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li class="cateBlockk" value="sports">
+                                            <li class="cateBlockk sports" value="sports">
                                                 <div class="choice-box-result33 choice-box-value">
                                                     <div class="choice-valuee choice-box-value-label">
                                                         스포츠 • 레저
@@ -94,7 +94,7 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li class="cateBlockk" value="programming">
+                                            <li class="cateBlockk programming" value="programming">
                                                 <div class="choice-box-result33 choice-box-value">
                                                     <div class="choice-valuee choice-box-value-label">
                                                         컴퓨터 • 프로그래밍
@@ -106,7 +106,7 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li class="cateBlockk" value="foreign">
+                                            <li class="cateBlockk foreign" value="foreign">
                                                 <div class="choice-box-result33 choice-box-value">
                                                     <div class="choice-valuee choice-box-value-label">
                                                         외국어 • 토익 • 토플
@@ -118,7 +118,7 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li class="cateBlockk" value="science">
+                                            <li class="cateBlockk science" value="science">
                                                 <div class="choice-box-result33 choice-box-value">
                                                     <div class="choice-valuee choice-box-value-label">
                                                         인문 • 과학
@@ -130,7 +130,7 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li class="cateBlockk" value="finance">
+                                            <li class="cateBlockk finance" value="finance">
                                                 <div class="choice-box-result33 choice-box-value">
                                                     <div class="choice-valuee choice-box-value-label">
                                                         경제 • 금융
@@ -142,7 +142,7 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li class="cateBlockk" value="politics">
+                                            <li class="cateBlockk politics" value="politics">
                                                 <div class="choice-box-result33 choice-box-value">
                                                     <div class="choice-valuee choice-box-value-label">
                                                         정치 • 사회
@@ -154,7 +154,7 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li class="cateBlockk" value="certificate">
+                                            <li class="cateBlockk certificate" value="certificate">
                                                 <div class="choice-box-result33 choice-box-value">
                                                     <div class="choice-valuee choice-box-value-label">
                                                         자격증
@@ -166,7 +166,7 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li class="cateBlockk" value="officiary">
+                                            <li class="cateBlockk officiary" value="officiary">
                                                 <div class="choice-box-result33 choice-box-value">
                                                     <div class="choice-valuee choice-box-value-label">
                                                         공무원
@@ -178,7 +178,7 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li class="cateBlockk" value="employment">
+                                            <li class="cateBlockk employment" value="employment">
                                                 <div class="choice-box-result33 choice-box-value">
                                                     <div class="choice-valuee choice-box-value-label">
                                                         취업 • 면접
@@ -192,12 +192,7 @@
                                             </li>
                                         </ul>
 
-                                        <div class="css-1g6gooii">
-                                            <div class="select__input" style="display: inline-block;">
-                                                <input autocapitalize="none" autocomplete="off" autocorrect="off" id="react-select-4-input" spellcheck="false" tabindex="0" type="text" aria-autocomplete="list" value="" style="box-sizing: content-box; width: 2px; background: 0px center; border: 0px; font-size: inherit; opacity: 1; outline: 0px; padding: 0px; color: inherit;">
-                                                <div style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 16px; font-family: Arial; font-weight: 400; font-style: normal; letter-spacing: normal; text-transform: none;"></div>
-                                            </div>
-                                        </div>
+                                        <input value="" name="memberInterests" id="memberInterests" type="text" style="display: none">
                                     </div>
                                     <div class="select__indicators css-1wy0on6">
                                         <div class="select__indicator select__clear-indicator css-tlfecz-indicatorContainerr delete-all-selectt" aria-hidden="true">
@@ -232,8 +227,8 @@
                     </div>
                     <p class="info-1">관심 있는 분야 태그를 등록해주세요. (최대 5개까지)</p>
                     <hr>
-                    <button class="button-fin button-css">
-                        <a th:href="@{/member/modify(memberNumber=*{memberNumber})}">완료</a>
+                    <button type="button" class="button-fin button-css">
+                        완료
                     </button>
                     <button type="button" class="button-withdraw button-css">
                         회원탈퇴
@@ -261,10 +256,15 @@
 <script src="/js/myProfile.js"></script>
 <script th:inline="javascript">
 
+    // 받아올 카테고리
+    let memberInterests = [[${member.memberInterests}]];
 
     const $inputNickName = $("input.user-info-box-nickName");
     const $registerButton = $("button.button-fin");
 
+
+    let interestsList = "";
+    let interest = new Array();
 
     $registerButton.on("click", function () {
 
@@ -272,9 +272,18 @@
             alert("닉네임을 입력해주세요.");
         }
         else {
+            for(let i = 0; i < $('li.cateBlockk').length; i++) {
+                if ($($('li.cateBlockk')[i]).css("display") == "list-item") {
+                    interest.push($($('li.cateBlockk')[i]).attr("value"));
+                }
+            }
+            interestsList = interest.join(",");
+            $("#memberInterests").attr('value',interestsList);
             $("#memberForm").submit();
         }
     });
+
+
 
 </script>
 </html>

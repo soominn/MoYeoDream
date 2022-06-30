@@ -19,8 +19,6 @@ public interface JobpostingMapper {
     public List<JobpostingVO> getApproveList();
     // 채용 공고 상세 조회
     public JobpostingDTO read(int jobpostingNumber);
-    // 스터디 만든 회원의 닉네임 찾기
-    public String selectNickName(int jobpostingMemberNumber);
     // 채용 공고 작성
     public void insert(JobpostingVO jobpostingVO);
     // 채용 공고 수정

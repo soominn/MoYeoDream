@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -21,14 +23,51 @@ import java.util.List;
 public class MemberController {
     private final MemberService memberService;
 
-
     // 회원가입
-    @PostMapping("join")
-    public void memberJoin(MemberVO memberVO){}
+    @ResponseBody
+    @PostMapping("/join")
+    public void memberJoin(@RequestBody MemberVO memberVO){
+        log.info("---------------------------");
+        log.info("memberJoin: " + memberVO);
+        log.info("---------------------------");
+        memberService.join(memberVO);
+    }
 
     // 로그인
-    @PostMapping("login")
-    public void memberLogin(Integer userNumber){}
+    @PostMapping("/login")
+    public String memberLogin(String memberEmail, HttpServletRequest request){
+        log.info("----------------------------");
+        log.info("memberLogin............. email : " + memberEmail);
+        log.info("----------------------------");
+
+        HttpSession session = request.getSession();
+        session.setAttribute("memberNumber", memberService.login(memberEmail));
+        return "redirect:http://localhost:11111/member/main";
+    }
+
+    // 로그아웃
+    @PostMapping("/logout")
+    public String memberLogout(HttpServletRequest request){
+        log.info("----------------------------");
+        log.info("memberLogout");
+        log.info("----------------------------");
+
+        HttpSession session = request.getSession();
+        session.removeAttribute("memberNumber");
+
+        return "redirect:http://localhost:11111/member/main";
+    }
+
+    // 중복 이메일 체크
+    @ResponseBody
+    @PostMapping("/checkEmail")
+    public boolean checkEmail(@RequestBody MemberVO memberVO){
+        log.info("----------------------------");
+        log.info("memberLogin............. email : " + memberVO.getMemberEmail());
+        log.info("----------------------------");
+
+        return memberService.checkEmail(memberVO.getMemberEmail());
+    }
 
     // 내 정보 불러오기
     @GetMapping("read")
@@ -39,7 +78,6 @@ public class MemberController {
         model.addAttribute("member", memberService.myPageView(memberNumber));
         return "/myPage/myPage";
     }
-
 
     // 내 정보 수정(post)
     @PostMapping("modify")
@@ -53,7 +91,6 @@ public class MemberController {
         return new RedirectView("/member/read?memberNumber=" + memberVO.getMemberNumber());
     }
 
-
     // 탈퇴
     @GetMapping("remove")
     public RedirectView memberRemove(Integer memberNumber, RedirectAttributes rttr){
@@ -64,7 +101,6 @@ public class MemberController {
         memberService.memberDelete(memberNumber);
         return new RedirectView("/main");
     }
-
 
     // ----- 프론트 -----
 
@@ -78,7 +114,25 @@ public class MemberController {
 
     //내 댓글
     @GetMapping("myComment")
-    public String myComment(){ return "myPage/myComment"; }
+    public String myComment(Integer memberNumber, Model model, Criteria criteria){
+        log.info("----------------------------");
+        log.info("list.............");
+        log.info("Criteria............." + criteria);
+        log.info("memberNumber............." + memberNumber);
+        log.info("getMyPostCount............." + memberService.getMyCommentCount(memberNumber));
+        log.info("----------------------------");
+
+        PageDTO pageDTO = new PageDTO(criteria, memberService.getMyCommentCount(memberNumber));
+        model.addAttribute("pageDTO", pageDTO );
+        model.addAttribute("myCommentList", memberService.getMyCommentList(memberNumber, criteria));
+        model.addAttribute("memberNumber", memberNumber);
+
+        log.info("-------------------------------------------------");
+        log.info(pageDTO.getCriteria().getListLink());
+        log.info(pageDTO.toString());
+
+        return "myPage/myComment";
+    }
 
     // 내 정보수정 이동
     @GetMapping("myProfile")
@@ -136,6 +190,4 @@ public class MemberController {
         memberService.deleteBoard(boardIdxArray);
         return boardIdxArray;
     }
-
-
 }
