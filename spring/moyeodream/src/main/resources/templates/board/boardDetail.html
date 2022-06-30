@@ -234,9 +234,12 @@
         str += "</section>";
         str += "</li>";
 
-        $("ul.comment-list").html(str);
       });
+      $("ul.comment-list").html(str);
 
+      postCommentService.getTotal(postNum,function(result){
+        $(".comment-input-wrap").find("h1").text(result + "개의 댓글이 있습니다.");
+      })
     });
   };
 

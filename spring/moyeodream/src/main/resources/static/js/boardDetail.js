@@ -57,5 +57,15 @@ let postCommentService = (function(){
         })
     };
 
-return {getList: getList, register: register, modify: modify, remove: remove};
+    // 게시물의 댓글 개수 가져오기
+    function getTotal(postNumber, callback){
+        console.log("js getTotal......");
+        $.getJSON("/postReply/total/" + postNumber, function(result){
+            if(callback){
+                callback(result);
+            }
+        })
+    };
+
+return {getList: getList, register: register, modify: modify, remove: remove, getTotal:getTotal };
 })();
