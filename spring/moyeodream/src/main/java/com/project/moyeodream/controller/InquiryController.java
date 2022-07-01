@@ -35,9 +35,11 @@ public class InquiryController {
                 log.info("Criteria............." + criteria);
                 log.info("----------------------------");
 
+                criteria.setAmount(10);
                 PageDTO pageDTO = new PageDTO(criteria, inquiryService.getTotal());
-                model.addAttribute("pageDTO", pageDTO );
                 model.addAttribute("inquiryList", inquiryService.getTotalList(criteria));
+                model.addAttribute("pageDTO", pageDTO );
+                model.addAttribute("criteria", criteria);
 
                 log.info("-------------------------------------------------");
                 log.info(pageDTO.getCriteria().getListLink());

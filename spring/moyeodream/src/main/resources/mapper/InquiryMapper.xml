@@ -16,7 +16,6 @@
         )
         WHERE RN > ((#{pageNum} -1) * #{amount})
         ]]>
-        ORDER BY INQUIRY_NUMBER DESC
     </select>
 
     <!-- 게시글 전체 개수 -->

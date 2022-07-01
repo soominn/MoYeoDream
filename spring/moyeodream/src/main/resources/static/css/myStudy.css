@@ -50,9 +50,6 @@ p{
     margin-inline-end: 0px;
 }
 
-.back{
-    margin-left: 173.5px;
-}
 
 .category-box2{
     display: flex;
@@ -275,4 +272,9 @@ div.empty-study {
 
 div.study-box2 {
     margin-right: 25px;
+}
+
+.study-box:hover{
+    transform: scale(1.03);
+    transition: transform 0.3s;
 }
