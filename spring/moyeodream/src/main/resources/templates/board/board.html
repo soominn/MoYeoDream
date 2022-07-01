@@ -183,7 +183,7 @@
                   <p> &nbsp; ~ &nbsp;</p>
                   <input type="date" name="keywordText" class="periodEnd" placeholder="끝날자 선택">
                 </div>
-                <button type="button" class="searchBtn">검색</button>
+                <button type="button" class="searchPeriod">검색</button>
               </form>
             </div>
             <div class="filter2nd contentFilter"> <!-- 검색조건 : 본문내용 -->
@@ -217,11 +217,13 @@
 <script th:inline="javascript">
   let postNumber = [[${postNumber}]];
   $pageForm = $("form[name='pageForm']"); //board.js에 선언
+
   let params = [[${pageDTO.criteria.listLink}]];
   let pageNum = [[${criteria.pageNum}]];
   let $pageNums = $(".pagination-link"); /* css 변화를 위함 */
   let $searchBtn = $(".searchBtn");
   let $inputKeyword = $pageForm.find("input[name=keyword]");
+  let memberNum = [[${session.memberNumber}]];
 
   if(postNumber != null){
     alert(postNumber + "번 게시글이 등록되었습니다.");
@@ -235,7 +237,6 @@
         $(this).addClass("is-current");
       }
     });
-
   });
 
   /* 페이징 버튼 클릭시 - 페이지 이동 */
@@ -289,23 +290,42 @@
     });
   });
 
-  $(".searchReplyBtn").on("click",function(){
+  $(".searchReplyBtn").on("click",function() {
     let $keywordText = $(this).closest("form").find("input[name='keywordText']");
 
-    if(!$keywordText.val()){
-      alert("검색어를 입력하세요!");
+    if (!$keywordText.val()) {
+      alert("검색어를 입력해주세요.");
+      return;
+    }
+  });
+
+  // 검색필터 - 작성기간
+  $(".searchPeriod").on("click", function(e){
+    e.preventDefault();
+    let $inputStart = $(this).closest("form").find("input[class='periodStart']").val();
+    let $inputEnd = $(this).closest("form").find("input[class='periodEnd']").val();
+
+    if(!$inputStart || !$inputEnd){
+      alert("작성기간을 입력해주세요");
       return;
     }
 
-    $inputKeyword.val($keywordText.val());
+    let $keyword = $inputStart + " " + $inputEnd;
+    $inputKeyword.val($keyword);
+    console.log($inputKeyword.val());
 
-
-  })
+    $pageForm.submit();
+  });
 
   // 게시판 글쓰기
-  $(".postReg").on("click",function(e){
+  $(".postReg").on("click", function (e) {
     e.preventDefault();
+    if (memberNum == null) {
+      alert("게시글 작성은 로그인이 필요합니다.");
+      return;
+    }
     location.href = "/post/postRegister";
-  })
+  });
+
 </script>
 </html>
