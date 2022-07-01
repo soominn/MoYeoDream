@@ -77,7 +77,7 @@ public class JobPostingController {
         jobpostingService.jobpostRegister(jobpostingVO);
         rttr.addFlashAttribute("jobpostingNumber", jobpostingVO.getJobpostingNumber());
 
-        return new RedirectView("/main");
+        return new RedirectView("/main/index");
     }
 
     //    채용 공고 수정
@@ -112,7 +112,7 @@ public class JobPostingController {
         log.info("----------------------------");
 
         jobpostingService.jobpostRemove(jobpostingNumber);
-        return new RedirectView("/main");
+        return new RedirectView("/main/index");
     }
 
     // 채용 공고 승인

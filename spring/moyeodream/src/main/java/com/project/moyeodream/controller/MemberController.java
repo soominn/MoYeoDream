@@ -116,27 +116,7 @@ public class MemberController {
     @GetMapping("myPage")
     public String myPage(){ return "myPage/myPage"; }
 
-    //내 댓글
-    @GetMapping("myComment")
-    public String myComment(Integer memberNumber, Model model, Criteria criteria){
-        log.info("----------------------------");
-        log.info("list.............");
-        log.info("Criteria............." + criteria);
-        log.info("memberNumber............." + memberNumber);
-        log.info("getMyPostCount............." + memberService.getMyCommentCount(memberNumber));
-        log.info("----------------------------");
 
-        PageDTO pageDTO = new PageDTO(criteria, memberService.getMyCommentCount(memberNumber));
-        model.addAttribute("pageDTO", pageDTO );
-        model.addAttribute("myCommentList", memberService.getMyCommentList(memberNumber, criteria));
-        model.addAttribute("memberNumber", memberNumber);
-
-        log.info("-------------------------------------------------");
-        log.info(pageDTO.getCriteria().getListLink());
-        log.info(pageDTO.toString());
-
-        return "myPage/myComment";
-    }
 
     // 내 정보수정 이동
     @GetMapping("myProfile")
@@ -232,5 +212,54 @@ public class MemberController {
         log.info("boardIdxArray={}", boardIdxArray);
         memberService.deleteBoard(boardIdxArray);
         return boardIdxArray;
+    }
+
+    //내 댓글
+    @GetMapping("myComment")
+    public String myComment(Integer memberNumber, Model model, Criteria criteria){
+        log.info("----------------------------");
+        log.info("list.............");
+        log.info("Criteria............." + criteria);
+        log.info("memberNumber............." + memberNumber);
+        log.info("getMyPostCount............." + memberService.getMyCommentCount(memberNumber));
+        log.info("----------------------------");
+
+        PageDTO pageDTO = new PageDTO(criteria, memberService.getMyCommentCount(memberNumber));
+        model.addAttribute("pageDTO", pageDTO );
+        model.addAttribute("myCommentList", memberService.getMyCommentList(memberNumber, criteria));
+        model.addAttribute("memberNumber", memberNumber);
+
+        log.info("-------------------------------------------------");
+        log.info(pageDTO.getCriteria().getListLink());
+        log.info(pageDTO.toString());
+
+        return "myPage/myComment";
+    }
+
+    // 내 게시글 상세 조회
+    @GetMapping("myCommentRead")
+    public String commentRead(Integer postNumber, Criteria criteria, Model model, HttpServletRequest req){
+        log.info("--------------------------------------------------");
+        log.info("read Controller...............");
+        log.info("Criteria............." + criteria);
+        log.info("--------------------------------------------------");
+
+        int memberNum = 0;
+        HttpSession session = req.getSession();
+
+        if(session.getAttribute("memberNumber") != null){
+            log.info("세션 있음");
+            memberNum = (Integer)session.getAttribute("memberNumber");
+        } else{
+            log.info("세션 없음");
+            memberNum = -1;
+        }
+
+        // 상세보기 들어오면 조회수 1 UP
+        model.addAttribute("post",postService.postRead(postNumber));
+        model.addAttribute("criteria",criteria);
+        model.addAttribute("session", memberNum);
+
+        return "/myPage/myCommentDetail";
     }
 }

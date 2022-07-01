@@ -48,7 +48,7 @@
                             <th:block th:each="myComment:${myCommentList}">
 
                                 <li class="question-container" th:object="${myComment}">
-                                    <a href="">
+                                    <a th:href="@{/member/myCommentRead(postNumber=*{postNumber}, criteria = ${pageDTO.criteria.listLink})}">
                                         <div class="question">
                                             <div class="question__info">
                                                 <div class="question__title">
