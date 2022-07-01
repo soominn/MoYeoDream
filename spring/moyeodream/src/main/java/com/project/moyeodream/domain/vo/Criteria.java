@@ -27,8 +27,6 @@ public class Criteria {
     }
 
     public String[] getTypes(){
-        log.info("-----------------------------------------------------");
-        log.info("타입 : "+ type);
         return type == null? new String[]{} : type.split("");
                             // null 일 경우 빈 문자열 return
     }
