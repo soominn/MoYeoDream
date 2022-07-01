@@ -198,7 +198,7 @@ public class InquiryController {
         @GetMapping("answer")
         public String answer(int inquiryNumber, Criteria criteria, String inquiryAnswer, Model model){
                 InquiryDTO inquiryDTO = new InquiryDTO();
-                inquiryDTO.setInquiryNumber((long) inquiryNumber);
+                inquiryDTO.setInquiryNumber(inquiryNumber);
                 inquiryDTO.setInquiryAnswer(inquiryAnswer);
                 inquiryService.answer(inquiryDTO);
                 model.addAttribute("inquiry", inquiryService.adInqRead(inquiryNumber));
