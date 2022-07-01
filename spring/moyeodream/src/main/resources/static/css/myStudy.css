@@ -276,3 +276,8 @@ div.empty-study {
 div.study-box2 {
     margin-right: 25px;
 }
+
+.study-box:hover{
+    transform: scale(1.03);
+    transition: transform 0.3s;
+}
