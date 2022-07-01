@@ -56,8 +56,8 @@ public class InquiryServiceImpl implements InquiryService{
     }
 
     @Override
-    public void answer(InquiryVO inquiryVO) {
-        inquiryDAO.answer(inquiryVO);
+    public void answer(InquiryDTO inquiryDTO) {
+        inquiryDAO.answer(inquiryDTO);
     }
 
     @Override
@@ -76,5 +76,10 @@ public class InquiryServiceImpl implements InquiryService{
     @Override
     public InquiryDTO adInqRead(int inquiryNumber){
         return inquiryDAO.getList(inquiryNumber);
+    }
+
+    @Override
+    public boolean deleteAnswer(int inquiryNumber){
+        return inquiryDAO.deleteAnswer(inquiryNumber);
     }
 }

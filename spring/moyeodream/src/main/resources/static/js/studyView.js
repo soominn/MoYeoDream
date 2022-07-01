@@ -136,8 +136,7 @@ function getCommentList() {
                 comment += "                </div>";
                 comment += "            </div>";
                 comment += "        </div>";
-                // 세션으로 고쳐야 함 근데 세션을 못 불러옴...
-                if(result[i].studyCommentMemberNumber == 6) {
+                if(result[i].studyCommentMemberNumber == memberNumber) {
                     comment += "        <section class=\"comment-button-wrap\">";
                     comment += "            <button type=\"button\" class=\"comment-button comment-modify\">수정</button>";
                     comment += "            <button type=\"button\" class=\"comment-button comment-remove\">삭제</button>";
@@ -177,7 +176,7 @@ $(document).on("click", ".cancel", function() {
 function clickCommentRegister() {
     let jsonComment = {
         studyCommentContent : $("textarea.comment-input").val(),
-        studyCommentMemberNumber : 6,
+        studyCommentMemberNumber : memberNumber,
         studyCommentStudyNumber : studyNumber
     };
 

@@ -44,14 +44,19 @@ public class InquiryDAO {
         return inquiryMapper.delete(inquiryNumber) == 1;
     }
 
+    // 문의하기 답변 삭제
+    public boolean deleteAnswer(int inquiryNumber){
+        return inquiryMapper.deleteAnswer(inquiryNumber) == 1;
+    }
+
     // 조회수 증가
     public boolean inquiryVisit(int inquiryNumber){
         return inquiryMapper.visit(inquiryNumber) == 1;
     }
 
     // 문의하기 답변
-    public void answer(InquiryVO inquiryVO){
-        inquiryMapper.answer(inquiryVO);
+    public void answer(InquiryDTO inquiryDTO){
+        inquiryMapper.answer(inquiryDTO);
     }
 
     // 답변되지 않은 문의하기 보기

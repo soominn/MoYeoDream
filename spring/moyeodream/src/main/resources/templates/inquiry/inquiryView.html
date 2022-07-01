@@ -35,7 +35,7 @@
                 </div>
 
                 <section class="change-buttons">
-                    <div><!--세션에서 유저 정보 가져와서 일치하면 이 div 나오게 하기-->
+                    <div th:if="*{inquiryMemberNumber} == ${session.memberNumber}">
                         <button type="button" class="change-button"><a th:href="@{/inquiry/modifyRead(inquiryNumber=*{inquiryNumber})}">수정</a></button>
                         <button type="submit" class="change-button delete-button"><a th:href="@{/inquiry/remove(inquiryNumber=*{inquiryNumber})}">삭제</a></button>
                     </div>

@@ -127,7 +127,7 @@
                 <input type="hidden" class="study-content" name="studyContent">
             </section>
             <section class="study-button">
-                <button type="button" class="cancel">취소</button>
+                <button type="button" class="cancel"><a th:href="@{/member/myStudyRead(studyNumber=*{studyNumber})}">취소</a></button>
                 <button type="button" class="register">등록</button>
             </section>
         </section>

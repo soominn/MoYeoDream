@@ -24,7 +24,10 @@ public interface InquiryMapper {
     // 조회수 수정
     public int visit(int inquiryNumber);
     // 문의하기 답변
-    public void answer(InquiryVO inquiryVO);
+    public void answer(InquiryDTO inquiryDTO);
+    // 문의하기 답변 삭제
+    public int deleteAnswer(int inquiryNumber);
+
 
     // 답변 대기 중인 문의글
     public List<InquiryDTO> getApproveWait();

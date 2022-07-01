@@ -6,15 +6,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,9 +34,11 @@ public class InquiryController {
                 log.info("Criteria............." + criteria);
                 log.info("----------------------------");
 
+                criteria.setAmount(10);
                 PageDTO pageDTO = new PageDTO(criteria, inquiryService.getTotal());
-                model.addAttribute("pageDTO", pageDTO );
                 model.addAttribute("inquiryList", inquiryService.getTotalList(criteria));
+                model.addAttribute("pageDTO", pageDTO );
+                model.addAttribute("criteria", criteria);
 
                 log.info("-------------------------------------------------");
                 log.info(pageDTO.getCriteria().getListLink());
@@ -48,69 +49,89 @@ public class InquiryController {
 
         //    문의 작성
         @PostMapping("register")
-        public RedirectView inquiryRegister(InquiryVO inquiryVO, RedirectAttributes rttr){
+        public RedirectView inquiryRegister(InquiryVO inquiryVO, HttpServletRequest req){
                 log.info("----------------------------");
                 log.info("register............. : " + inquiryVO);
                 log.info("----------------------------");
 
                 // 세션에서 넘어온 유저 정보가 있어야 사용할 수 있음
-                // HttpSession session = req.getSession();
-                // Integer memberNumber = (Integer)session.getAttribute("memberNumber");
-                // inquiryVO.setInquiryMemberNumber(memberNumber);
+                 HttpSession session = req.getSession();
+                 Integer memberNumber = (Integer)session.getAttribute("memberNumber");
+                 inquiryVO.setInquiryMemberNumber(memberNumber);
 
                 // 유저 정보 받아오는테스트
-                inquiryVO.setInquiryMemberNumber(1);
+                // inquiryVO.setInquiryMemberNumber(1);
                 //-----------------------------------
 
 
                 inquiryService.inquiryInsert(inquiryVO);
-
-                rttr.addFlashAttribute("inquiryNumber", inquiryVO.getInquiryNumber());
 
                 return new RedirectView("/inquiry/list");
         }
 
         //    문의 조회
         @GetMapping("read")
-        public String inquiryRead(Integer inquiryNumber, Model model){
+        public String inquiryRead(Integer inquiryNumber, Model model, HttpServletRequest req){
                 log.info("----------------------------");
                 log.info("inquiryRead............. : " + inquiryNumber);
                 log.info("----------------------------");
+
+                int memberNum = 0;
+                HttpSession session = req.getSession();
+
+                if(session.getAttribute("memberNumber") != null){
+                        log.info("세션 있음");
+                        memberNum = (Integer)session.getAttribute("memberNumber");
+                } else{
+                        log.info("세션 없음");
+                        memberNum = -1;
+                }
+
                 inquiryService.inquiryVisit(inquiryNumber);
                 model.addAttribute("inquiry", inquiryService.getList(inquiryNumber));
+                model.addAttribute("session", memberNum);
                 return "/inquiry/inquiryView";
         }
 
         //    수정 페이지에서 문의 내용 가져오기
         @GetMapping("modifyRead")
-        public String inquiryModifyRead(Integer inquiryNumber, Model model){
+        public String inquiryModifyRead(Integer inquiryNumber, Model model, HttpServletRequest req){
                 log.info("----------------------------");
                 log.info("inquiryRead............. : " + inquiryNumber);
                 log.info("----------------------------");
+
+                int memberNum = 0;
+                HttpSession session = req.getSession();
+
+                if(session.getAttribute("memberNumber") != null){
+                        log.info("세션 있음");
+                        memberNum = (Integer)session.getAttribute("memberNumber");
+                } else{
+                        log.info("세션 없음");
+                        memberNum = -1;
+                }
+
                 model.addAttribute("inquiry", inquiryService.getList(inquiryNumber));
+                model.addAttribute("session", memberNum);
                 return "/inquiry/inquiryModify";
         }
 
         //    문의 수정
         @PostMapping("modify")
-        public RedirectView inquiryModify(InquiryVO inquiryVO, RedirectAttributes rttr){
+        public RedirectView inquiryModify(InquiryVO inquiryVO, RedirectAttributes rttr, HttpServletRequest req){
                 log.info("----------------------------");
                 log.info("modify............. : " + inquiryVO);
                 log.info("----------------------------");
 
                 // 세션에서 넘어온 유저 정보가 있어야 사용할 수 있음
-                // HttpSession session = req.getSession();
-                // Integer memberNumber = (Integer)session.getAttribute("memberNumber");
-                // inquiryVO.setInquiryMemberNumber(memberNumber);
 
-                // 유저 정보 받아오는테스트
-                inquiryVO.setInquiryMemberNumber(1);
-                //-----------------------------------
+                HttpSession session = req.getSession();
+                Integer memberNumber = (Integer)session.getAttribute("memberNumber");
+                inquiryVO.setInquiryMemberNumber(memberNumber);
 
                 inquiryService.inquiryModify(inquiryVO);
 
                 rttr.addAttribute("inquiryNumber", inquiryVO.getInquiryNumber());
-                rttr.addAttribute("inquiryMemberNumber", inquiryVO.getInquiryMemberNumber());
 
                 return new RedirectView("/inquiry/read");
         }
@@ -159,18 +180,36 @@ public class InquiryController {
                 model.addAttribute("inquiryList",inquiryService.getInqList(criteria));
                 log.info("list.............................. : "+ inquiryService.getInqList(criteria));
                 model.addAttribute("pageDTO", new PageDTO(criteria, inquiryService.getTotalAdmin(criteria)));
-                return "admin/adminQnaManage";
+                return "/admin/adminQnaManage";
+
         }
 
         // 관리자 채용 공고 세부 조회
         @GetMapping("adInqRead")
-        public String adInqRead(Integer inquiryNumber,Criteria criteria, Model model){
+        public String adInqRead(Integer inquiryNumber, Criteria criteria, Model model){
                 log.info("----------------------------");
                 log.info("inquiryListRead............. : " + inquiryNumber);
                 log.info("----------------------------");
-                log.info("승인여부----------------------------"+inquiryService.adInqRead(inquiryNumber).getInquiryAnswerBool());
                 model.addAttribute("inquiry", inquiryService.adInqRead(inquiryNumber));
-                return "admin/adminQnaView";
+                return "/admin/adminQnaView";
         }
-
+        
+        // 답변 작성
+        @GetMapping("answer")
+        public String answer(int inquiryNumber, Criteria criteria, String inquiryAnswer, Model model){
+                InquiryDTO inquiryDTO = new InquiryDTO();
+                inquiryDTO.setInquiryNumber((long) inquiryNumber);
+                inquiryDTO.setInquiryAnswer(inquiryAnswer);
+                inquiryService.answer(inquiryDTO);
+                model.addAttribute("inquiry", inquiryService.adInqRead(inquiryNumber));
+                return "/admin/adminQnaView";
+        }
+        
+        // 답변 삭제
+        @GetMapping("deleteAnswer")
+        public String deleteAnswer(int inquiryNumber, Criteria criteria, Model model){
+                inquiryService.deleteAnswer(inquiryNumber);
+                model.addAttribute("inquiry", inquiryService.adInqRead(inquiryNumber));
+                return "/admin/adminQnaView";
+        }
 }

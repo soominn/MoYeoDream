@@ -25,7 +25,7 @@ public interface InquiryService {
 
     public boolean inquiryVisit(int inquiryNumber);
 
-    public void answer(InquiryVO inquiryVO);
+    public void answer(InquiryDTO inquiryDTO);
 
     public List<InquiryDTO> approveWait();
 
@@ -34,4 +34,6 @@ public interface InquiryService {
     public int getTotalAdmin(Criteria criteria);
 
     public InquiryDTO adInqRead(int inquiryNumber);
+
+    public boolean deleteAnswer(int inquiryNumber);
 }

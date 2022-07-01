@@ -16,6 +16,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -38,41 +39,48 @@ public class JobPostingController {
 
     //    채용 공고 조회
     @GetMapping("read")
-    public String jobPostRead(Integer jobpostingNumber, Model model){
+    public String jobPostRead(Integer jobpostingNumber, Model model, HttpServletRequest req){
         log.info("----------------------------");
         log.info("jobpostingRead............. : " + jobpostingNumber);
         log.info("----------------------------");
         jobpostingService.jobpostVisit(jobpostingNumber);
+        
+        HttpSession session = req.getSession();
+        Integer memberNumber = (Integer)session.getAttribute("memberNumber");
+
         model.addAttribute("jobPosting", jobpostingService.jobpostRead(jobpostingNumber));
+        model.addAttribute("session", memberNumber);
         return "/jobPosting/jobPostingView";
     }
 
 
     //    수정 페이지에서 공고 내용 가져오기
     @GetMapping("modifyRead")
-    public String inquiryModifyRead(Integer jobpostingNumber, Model model){
+    public String inquiryModifyRead(Integer jobpostingNumber, Model model, HttpServletRequest req){
         log.info("----------------------------");
         log.info("jobpostingRead............. : " + jobpostingNumber);
         log.info("----------------------------");
+
+        HttpSession session = req.getSession();
+        Integer memberNumber = (Integer)session.getAttribute("memberNumber");
+
         model.addAttribute("jobPosting", jobpostingService.jobpostRead(jobpostingNumber));
+        model.addAttribute("session", memberNumber);
         return "/jobPosting/jobPostingModify";
     }
 
     //    채용 공고 작성
     @PostMapping("register")
-    public RedirectView jobPostRegister(JobpostingVO jobpostingVO, RedirectAttributes rttr){
+    public RedirectView jobPostRegister(JobpostingVO jobpostingVO, RedirectAttributes rttr, HttpServletRequest req){
         log.info("----------------------------");
         log.info("register............. : " + jobpostingVO);
         log.info("----------------------------");
 
         // 세션에서 넘어온 유저 정보가 있어야 사용할 수 있음
-        // HttpSession session = req.getSession();
-        // Integer memberNumber = (Integer)session.getAttribute("memberNumber");
-        // jobpostingVO.setJobpostingMemberNumber(memberNumber);
+         HttpSession session = req.getSession();
+         Integer memberNumber = (Integer)session.getAttribute("memberNumber");
+         jobpostingVO.setJobpostingMemberNumber(memberNumber);
 
-        // 유저 정보 받아오는테스트
-        jobpostingVO.setJobpostingMemberNumber(1);
-        //-----------------------------------
 
         jobpostingService.jobpostRegister(jobpostingVO);
         rttr.addFlashAttribute("jobpostingNumber", jobpostingVO.getJobpostingNumber());
@@ -82,24 +90,20 @@ public class JobPostingController {
 
     //    채용 공고 수정
     @PostMapping("modify")
-    public RedirectView jobPostModify(JobpostingVO jobpostingVO, RedirectAttributes rttr){
+    public RedirectView jobPostModify(JobpostingVO jobpostingVO, RedirectAttributes rttr, HttpServletRequest req){
         log.info("----------------------------");
         log.info("modify............. : " + jobpostingVO);
         log.info("----------------------------");
 
         // 세션에서 넘어온 유저 정보가 있어야 사용할 수 있음
-        // HttpSession session = req.getSession();
-        // Integer memberNumber = (Integer)session.getAttribute("memberNumber");
-        // jobpostingVO.setJobpostingMemberNumber(memberNumber);
+         HttpSession session = req.getSession();
+         Integer memberNumber = (Integer)session.getAttribute("memberNumber");
+         jobpostingVO.setJobpostingMemberNumber(memberNumber);
 
-        // 유저 정보 받아오는테스트
-        jobpostingVO.setJobpostingMemberNumber(1);
-        //-----------------------------------
 
         jobpostingService.jobpostUpdate(jobpostingVO);
 
         rttr.addAttribute("jobpostingNumber", jobpostingVO.getJobpostingNumber());
-        rttr.addAttribute("jobpostingMemberNumber", jobpostingVO.getJobpostingMemberNumber());
 
         return new RedirectView("/jobPosting/read");
     }
