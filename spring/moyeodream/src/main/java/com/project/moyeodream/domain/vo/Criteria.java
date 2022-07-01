@@ -2,6 +2,7 @@ package com.project.moyeodream.domain.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -9,6 +10,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Component
 @Data
 @AllArgsConstructor
+@Slf4j
 public class Criteria {
     private Integer pageNum;        // 현재 페이지
     private Integer amount;         // 한 페이지당 출력되는 데이터 개수
@@ -25,6 +27,8 @@ public class Criteria {
     }
 
     public String[] getTypes(){
+        log.info("-----------------------------------------------------");
+        log.info("타입 : "+ type);
         return type == null? new String[]{} : type.split("");
                             // null 일 경우 빈 문자열 return
     }

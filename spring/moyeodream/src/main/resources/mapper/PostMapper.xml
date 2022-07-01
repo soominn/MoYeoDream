@@ -17,7 +17,7 @@
                         OR (tm.MEMBER_NICKNAME LIKE '%'||#{keyword}||'%')
                     </when>
                     <when test="type == 'P'.toString()">
-                        (OR POST_UPDATE_DATE BETWEEN TO_DATE('20220622') AND TO_DATE('20220624')
+                        OR (POST_UPDATE_DATE) BETWEEN TO_DATE (SUBSTR(#{keyword},1,8)) AND TO_DATE (SUBSTR(#{keyword},10,8) +1)
                     </when>
                     <when test="type == 'B'.toString()">
                         OR ( POST_CONTENT LIKE '%'||#{keyword}||'%')

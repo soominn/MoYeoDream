@@ -302,13 +302,16 @@
   // 검색필터 - 작성기간
   $(".searchPeriod").on("click", function(e){
     e.preventDefault();
-    let $inputStart = $(this).closest("form").find("input[class='periodStart']").val();
-    let $inputEnd = $(this).closest("form").find("input[class='periodEnd']").val();
+    let $periodStart =$(this).closest("form").find("input[class='periodStart']").val();
+    let $periodEnd = $(this).closest("form").find("input[class='periodEnd']").val();
 
-    if(!$inputStart || !$inputEnd){
+    if(!$periodStart || !$periodEnd){
       alert("작성기간을 입력해주세요");
       return;
     }
+
+    let $inputStart = $periodStart.replace(/-/g, "");
+    let $inputEnd = $periodEnd.replace(/-/g, "");
 
     let $keyword = $inputStart + " " + $inputEnd;
     $inputKeyword.val($keyword);
