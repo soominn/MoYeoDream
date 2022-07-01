@@ -5,6 +5,10 @@ body {
     overflow: hidden;
 }
 
+a {
+    text-decoration: none;
+}
+
 ul{
     list-style: none;
     padding : 0;

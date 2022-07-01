@@ -145,7 +145,7 @@
 
     <update id="approve">
         UPDATE TBL_JOBPOSTING
-        SET JOBPOSTING_APPROVE = 1
+        SET JOBPOSTING_APPROVE = 1, JOBPOSTING_CHECK = 0
         WHERE JOBPOSTING_NUMBER = #{jobpostingNumber}
     </update>
 

@@ -6,6 +6,11 @@ body {
     min-width: 600px;
     background-color: #Fbfbfb;
     color : #333;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
 }
 
 ul{
@@ -21,14 +26,14 @@ li{
     width : 100%;
     min-width: 800px;
     height : 100%;
-    margin-top: 136px;
+    margin-top: 115px;
+    margin-bottom: 150px;
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 .topTitle{
-    width: 100%;
+    width: 77vw;
     display: flex;
     justify-content: center;
     margin-bottom: 30px;
@@ -37,7 +42,7 @@ li{
 .topTitle h1{
     display: flex;
     align-items: center;
-    width: 1500px;
+    width: 77vw;
     height : 80px;
     box-sizing: border-box;
     background-color: white;
@@ -48,7 +53,7 @@ li{
 }
 
 .contentWrap{
-    width: 1500px;
+    width: 77vw;
     box-sizing: border-box;
     border : 1px solid #d0d0d0;
     background-color: white;
@@ -108,7 +113,7 @@ li{
     display: flex;
     align-items: center;
     flex-direction: column;
-    width: 1500px;
+    width: 77vw;
     box-sizing: border-box;
     background-color: white;
     border : 1px solid #d0d0d0;
@@ -152,7 +157,7 @@ li{
     height : 250px;
     box-sizing: border-box;
     resize: none;
-    border: 1px soli #d0d0d0;
+    border: 1px solid #d0d0d0;
     outline: none;
     font-family: inherit;
     font-size: 16px;
@@ -227,7 +232,7 @@ li{
     display: flex;
     align-items: center;
     flex-direction: column;
-    width: 1500px;
+    width: 77vw;
     box-sizing: border-box;
     background-color: white;
     border : 1px solid #d0d0d0;
@@ -272,11 +277,11 @@ li{
 }
 
 .commentInput textarea{
-    width : 1400px;
+    width : 72vw;
     height : 250px;
     box-sizing: border-box;
     resize: none;
-    border: 1px soli #d0d0d0;
+    border: 1px solid #d0d0d0;
     outline: none;
     font-family: inherit;
     font-size: 16px;

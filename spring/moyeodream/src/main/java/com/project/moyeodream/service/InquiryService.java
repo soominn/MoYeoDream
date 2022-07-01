@@ -28,4 +28,10 @@ public interface InquiryService {
     public void answer(InquiryVO inquiryVO);
 
     public List<InquiryDTO> approveWait();
+
+    public List<InquiryDTO> getInqList(Criteria criteria);
+
+    public int getTotalAdmin(Criteria criteria);
+
+    public InquiryDTO adInqRead(int inquiryNumber);
 }

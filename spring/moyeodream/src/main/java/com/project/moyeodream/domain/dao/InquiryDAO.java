@@ -54,8 +54,21 @@ public class InquiryDAO {
         inquiryMapper.answer(inquiryVO);
     }
 
-    // 답변되지 않은 게시글 보기
+    // 답변되지 않은 문의하기 보기
     public List<InquiryDTO> approveWait(){
         return inquiryMapper.getApproveWait();
     };
+
+    // 문의하기 가져오기 admin
+    public List<InquiryDTO> getInqList(Criteria criteria) { return inquiryMapper.getInqList(criteria); }
+
+    // 문의하기 전체 개수
+    public int getTotalAdmin(Criteria criteria){
+        return inquiryMapper.getTotalAdmin(criteria);
+    }
+
+    // 문의하기 상세 조회 관리자
+    public InquiryDTO adInqRead(int inquiryNumber){
+        return inquiryMapper.getList(inquiryNumber);
+    }
 }
