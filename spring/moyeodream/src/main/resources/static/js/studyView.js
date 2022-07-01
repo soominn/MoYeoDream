@@ -102,21 +102,29 @@ $(document).ready(function() {
         $("span.study-period").text("장기");
     }
 
-    // 댓글 목록 불러오기
+    getCommentList();
+});
+
+// 댓글 불러오기
+function getCommentList() {
     $.ajax({
         url: "/studyComment/list/" + studyNumber,
         type: "GET",
         dataType: "json",
         success: function(result) {
-            $commentTotal = $("span.comment-total");
-            if(result != null) {
-                $commentTotal.html(total);
-                console.log(total);
+            let total;
+            if(result[0] != undefined) {
+                total = result[0].commentTotal;
             }
+            else {
+                total = 0;
+            }
+            $commentTotal = $("span.comment-total");
+            $commentTotal.html(total);
+
             $commentContent = $("ul.comment-list");
-            $commentContent.empty();
+            let comment = "";
             for(let i in result) {
-                let comment = "";
                 comment += "<li class=\"comment\">";
                 comment += "    <section class=\"comment-info-wrap\">";
                 comment += "        <div class=\"comment-info\">";
@@ -128,7 +136,8 @@ $(document).ready(function() {
                 comment += "                </div>";
                 comment += "            </div>";
                 comment += "        </div>";
-                if(result[i].studyCommentMemberNumber == window.sessionStorage.getItem("memberNumber")) {
+                // 세션으로 고쳐야 함 근데 세션을 못 불러옴...
+                if(result[i].studyCommentMemberNumber == 6) {
                     comment += "        <section class=\"comment-button-wrap\">";
                     comment += "            <button type=\"button\" class=\"comment-button comment-modify\">수정</button>";
                     comment += "            <button type=\"button\" class=\"comment-button comment-remove\">삭제</button>";
@@ -148,11 +157,11 @@ $(document).ready(function() {
                 comment += "        </div>";
                 comment += "    </section>";
                 comment += "</li>";
-                $commentContent.append(comment);
             }
+            $commentContent.html(comment);
         }
     });
-});
+}
 
 $(document).on("click", ".comment-modify", function() {
     $(this).parent().parent().next().children("p").css("display", "none");
@@ -168,10 +177,14 @@ $(document).on("click", ".cancel", function() {
 function clickCommentRegister() {
     let jsonComment = {
         studyCommentContent : $("textarea.comment-input").val(),
-        studyCommentMemberNumber : 1,
-        // window.sessionStorage.getItem("memberNumber") 세션 값 가져올 때 필요
+        studyCommentMemberNumber : 6,
         studyCommentStudyNumber : studyNumber
     };
+
+    if(jsonComment.studyCommentContent == "") {
+        alert("댓글을 입력해주세요.");
+        return;
+    }
 
     $.ajax({
         url: "/studyComment/register",
@@ -180,55 +193,7 @@ function clickCommentRegister() {
         data: JSON.stringify(jsonComment),
         success: function() {
             $("textarea.comment-input").val("");
-            $.ajax({
-                url: "/studyComment/list/" + studyNumber,
-                type: "GET",
-                dataType: "json",
-                success: function(result) {
-                    $commentTotal = $("span.comment-total");
-                    if(result != null) {
-                        $commentTotal.html(total);
-                        console.log(total);
-                    }
-                    $commentContent = $("ul.comment-list");
-                    $commentContent.empty();
-                    for(let i in result) {
-                        let comment = "";
-                        comment += "<li class=\"comment\">";
-                        comment += "    <section class=\"comment-info-wrap\">";
-                        comment += "        <div class=\"comment-info\">";
-                        comment += "            <img src=\"https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG\">";
-                        comment += "            <div class=\"comment-title-wrap\">";
-                        comment += "                <div class=\"comment-title\">";
-                        comment += "                    <div class=\"comment-user\">" + result[i].memberNickname + "</div>";
-                        comment += "                    <div class=\"comment-registered-date\">" + result[i].studyCommentRegisterDate + "</div>";
-                        comment += "                </div>";
-                        comment += "            </div>";
-                        comment += "        </div>";
-                        if(result[i].studyCommentMemberNumber == window.sessionStorage.getItem("memberNumber")) {
-                            comment += "        <section class=\"comment-button-wrap\">";
-                            comment += "            <button type=\"button\" class=\"comment-button comment-modify\">수정</button>";
-                            comment += "            <button type=\"button\" class=\"comment-button comment-remove\">삭제</button>";
-                            comment += "        </section>";
-                        }
-                        comment += "    </section>";
-                        comment += "    <section class=\"comment-content-wrap\">";
-                        comment += "        <p class=\"comment-content\">" + result[i].studyCommentContent + "</p>";
-                        comment += "        <div class=\"comment-revise\">";
-                        comment += "            <input type=\"hidden\" name=\"studyCommentNumber\" value=\"" + result[i].studyCommentNumber + "\">";
-                        comment += "            <input type=\"hidden\" name=\"studyCommentStudyNumber\" value=\"" + result[i].studyCommentStudyNumber + "\">";
-                        comment += "            <input type=\"text\" value=\"" + result[i].studyCommentContent + "\" placeholder=\"" + result[i].studyCommentContent +"\" name=\"commentRevise\">";
-                        comment += "            <div class=\"comment-revise-buttons\">";
-                        comment += "                <button class=\"comment-revise-button cancel\">취소</button>";
-                        comment += "                <button class=\"comment-revise-button register\">완료</button>";
-                        comment += "            </div>";
-                        comment += "        </div>";
-                        comment += "    </section>";
-                        comment += "</li>";
-                        $commentContent.append(comment);
-                    }
-                }
-            });
+            getCommentList();
         }
     });
 }
@@ -246,55 +211,7 @@ $(document).on("click", ".register", function() {
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(commentJSON),
         success: function() {
-            $.ajax({
-                url: "/studyComment/list/" + studyNumber,
-                type: "GET",
-                dataType: "json",
-                success: function(result) {
-                    $commentTotal = $("span.comment-total");
-                    if(result != null) {
-                        $commentTotal.html(total);
-                        console.log(total);
-                    }
-                    $commentContent = $("ul.comment-list");
-                    $commentContent.empty();
-                    for(let i in result) {
-                        let comment = "";
-                        comment += "<li class=\"comment\">";
-                        comment += "    <section class=\"comment-info-wrap\">";
-                        comment += "        <div class=\"comment-info\">";
-                        comment += "            <img src=\"https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG\">";
-                        comment += "            <div class=\"comment-title-wrap\">";
-                        comment += "                <div class=\"comment-title\">";
-                        comment += "                    <div class=\"comment-user\">" + result[i].memberNickname + "</div>";
-                        comment += "                    <div class=\"comment-registered-date\">" + result[i].studyCommentRegisterDate + "</div>";
-                        comment += "                </div>";
-                        comment += "            </div>";
-                        comment += "        </div>";
-                        if(result[i].studyCommentMemberNumber == window.sessionStorage.getItem("memberNumber")) {
-                            comment += "        <section class=\"comment-button-wrap\">";
-                            comment += "            <button type=\"button\" class=\"comment-button comment-modify\">수정</button>";
-                            comment += "            <button type=\"button\" class=\"comment-button comment-remove\">삭제</button>";
-                            comment += "        </section>";
-                        }
-                        comment += "    </section>";
-                        comment += "    <section class=\"comment-content-wrap\">";
-                        comment += "        <p class=\"comment-content\">" + result[i].studyCommentContent + "</p>";
-                        comment += "        <div class=\"comment-revise\">";
-                        comment += "            <input type=\"hidden\" name=\"studyCommentNumber\" value=\"" + result[i].studyCommentNumber + "\">";
-                        comment += "            <input type=\"hidden\" name=\"studyCommentStudyNumber\" value=\"" + result[i].studyCommentStudyNumber + "\">";
-                        comment += "            <input type=\"text\" value=\"" + result[i].studyCommentContent + "\" placeholder=\"" + result[i].studyCommentContent +"\" name=\"commentRevise\">";
-                        comment += "            <div class=\"comment-revise-buttons\">";
-                        comment += "                <button class=\"comment-revise-button cancel\">취소</button>";
-                        comment += "                <button class=\"comment-revise-button register\">완료</button>";
-                        comment += "            </div>";
-                        comment += "        </div>";
-                        comment += "    </section>";
-                        comment += "</li>";
-                        $commentContent.append(comment);
-                    }
-                }
-            });
+            getCommentList();
         }
     });
 });
@@ -305,55 +222,7 @@ $(document).on("click", ".comment-remove", function() {
         url: "/studyComment/remove/" + $(this).parent().parent().next().children(1).children(0).val(),
         type: "GET",
         success: function() {
-            $.ajax({
-                url: "/studyComment/list/" + studyNumber,
-                type: "GET",
-                dataType: "json",
-                success: function(result) {
-                    $commentTotal = $("span.comment-total");
-                    if(result != null) {
-                        $commentTotal.html(total);
-                        console.log(total);
-                    }
-                    $commentContent = $("ul.comment-list");
-                    $commentContent.empty();
-                    for(let i in result) {
-                        let comment = "";
-                        comment += "<li class=\"comment\">";
-                        comment += "    <section class=\"comment-info-wrap\">";
-                        comment += "        <div class=\"comment-info\">";
-                        comment += "            <img src=\"https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG\">";
-                        comment += "            <div class=\"comment-title-wrap\">";
-                        comment += "                <div class=\"comment-title\">";
-                        comment += "                    <div class=\"comment-user\">" + result[i].memberNickname + "</div>";
-                        comment += "                    <div class=\"comment-registered-date\">" + result[i].studyCommentRegisterDate + "</div>";
-                        comment += "                </div>";
-                        comment += "            </div>";
-                        comment += "        </div>";
-                        if(result[i].studyCommentMemberNumber == window.sessionStorage.getItem("memberNumber")) {
-                            comment += "        <section class=\"comment-button-wrap\">";
-                            comment += "            <button type=\"button\" class=\"comment-button comment-modify\">수정</button>";
-                            comment += "            <button type=\"button\" class=\"comment-button comment-remove\">삭제</button>";
-                            comment += "        </section>";
-                        }
-                        comment += "    </section>";
-                        comment += "    <section class=\"comment-content-wrap\">";
-                        comment += "        <p class=\"comment-content\">" + result[i].studyCommentContent + "</p>";
-                        comment += "        <div class=\"comment-revise\">";
-                        comment += "            <input type=\"hidden\" name=\"studyCommentNumber\" value=\"" + result[i].studyCommentNumber + "\">";
-                        comment += "            <input type=\"hidden\" name=\"studyCommentStudyNumber\" value=\"" + result[i].studyCommentStudyNumber + "\">";
-                        comment += "            <input type=\"text\" value=\"" + result[i].studyCommentContent + "\" placeholder=\"" + result[i].studyCommentContent +"\" name=\"commentRevise\">";
-                        comment += "            <div class=\"comment-revise-buttons\">";
-                        comment += "                <button class=\"comment-revise-button cancel\">취소</button>";
-                        comment += "                <button class=\"comment-revise-button register\">완료</button>";
-                        comment += "            </div>";
-                        comment += "        </div>";
-                        comment += "    </section>";
-                        comment += "</li>";
-                        $commentContent.append(comment);
-                    }
-                }
-            });
+            getCommentList();
         }
     });
 });
