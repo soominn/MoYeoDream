@@ -100,7 +100,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="/js/header.js"></script>
-<!--<script src="/js/login.js"></script>-->
+<script src="/js/login.js"></script>
 <script src="/js/boardDetail.js"></script>
 <script th:inline="javascript">
     let params = [[${criteria.listLink}]];
@@ -123,11 +123,11 @@
     }
 
     $("#goModify").on("click",function(){
-        location.href = "/post/modify" + params + "&postNumber=" + postNum;
+        location.href = "/member/myPostModifyRead" + params + "&postNumber=" + postNum;
     });
 
     goList.addEventListener("click",function(){
-        location.href="/member/myPost" + params + "&memberNumber=" + memberNum;
+        location.href="/member/myPost";
     });
 
     // 게시글 삭제

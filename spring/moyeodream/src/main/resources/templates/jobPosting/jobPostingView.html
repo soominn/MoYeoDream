@@ -31,65 +31,11 @@
                 <div class="study-registered-date" th:text="*{jobpostingRegisterDate}"></div>
             </div>
             <section class="change-buttons">
-                <button class="change-button"><a th:href="@{/jobPosting/modifyRead(jobpostingNumber=*{jobpostingNumber}, jobpostingMemberNumber=*{jobpostingMemberNumber})}">수정</a></button>
-                <button class="change-button delete-button"><a th:href="@{/jobPosting/remove(jobpostingNumber=*{jobpostingNumber})}">삭제</a></button>
-            </section>
-
-
-            <!--<div class="recommend-wrap">
-                <div class="recommend-post">
-                    <div class="recommend-for">
-                        <div class="line">
-                            
-                        </div>
-                        <div class="recommend-who">
-                            <span class="visitant">방문자</span>님이<br>좋아하실 글을 모아봤어요!
-                        </div>
-                    </div>
-                    <ul class="recommend-post">
-                        <li class="recommend">
-                            <div class="recommend-index">1.</div>
-                            <div class="recommend-title">카페24의 스토어 플랫폼을 활용한 사이드 프로젝트(서울 관악)</div>
-                        </li>
-                        <li class="recommend">
-                            <div class="recommend-index">2.</div>
-                            <div class="recommend-title">카페24의 스토어 플랫폼을 활용한 사이드 프로젝트(서울 관악)</div>
-                        </li>
-                        <li class="recommend">
-                            <div class="recommend-index">3.</div>
-                            <div class="recommend-title">카페24의 스토어 플랫폼을 활용한 사이드 프로젝트(서울 관악)</div>
-                        </li>
-                        <li class="recommend">
-                            <div class="recommend-index">4.</div>
-                            <div class="recommend-title">카페24의 스토어 플랫폼을 활용한 사이드 프로젝트(서울 관악)</div>
-                        </li>
-                        <li class="recommend">
-                            <div class="recommend-index">5.</div>
-                            <div class="recommend-title">카페24의 스토어 플랫폼을 활용한 사이드 프로젝트(서울 관악)</div>
-                        </li>
-                        <li class="recommend">
-                            <div class="recommend-index">6.</div>
-                            <div class="recommend-title">카페24의 스토어 플랫폼을 활용한 사이드 프로젝트(서울 관악)</div>
-                        </li>
-                        <li class="recommend">
-                            <div class="recommend-index">7.</div>
-                            <div class="recommend-title">카페24의 스토어 플랫폼을 활용한 사이드 프로젝트(서울 관악)</div>
-                        </li>
-                        <li class="recommend">
-                            <div class="recommend-index">8.</div>
-                            <div class="recommend-title">카페24의 스토어 플랫폼을 활용한 사이드 프로젝트(서울 관악)</div>
-                        </li>
-                        <li class="recommend">
-                            <div class="recommend-index">9.</div>
-                            <div class="recommend-title">카페24의 스토어 플랫폼을 활용한 사이드 프로젝트(서울 관악)</div>
-                        </li>
-                        <li class="recommend">
-                            <div class="recommend-index">10.</div>
-                            <div class="recommend-title">카페24의 스토어 플랫폼을 활용한 사이드 프로젝트(서울 관악)</div>
-                        </li>
-                    </ul>
+                <div th:if="*{jobpostingMemberNumber} == ${session.memberNumber}">
+                    <button class="change-button"><a th:href="@{/jobPosting/modifyRead(jobpostingNumber=*{jobpostingNumber})}">수정</a></button>
+                    <button class="change-button delete-button"><a th:href="@{/jobPosting/remove(jobpostingNumber=*{jobpostingNumber})}">삭제</a></button>
                 </div>
-            </div>-->
+            </section>
 
 
             <ul class="study-info-wrap">
