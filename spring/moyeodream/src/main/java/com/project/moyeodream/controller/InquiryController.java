@@ -6,9 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.RedirectView;
@@ -159,18 +157,36 @@ public class InquiryController {
                 model.addAttribute("inquiryList",inquiryService.getInqList(criteria));
                 log.info("list.............................. : "+ inquiryService.getInqList(criteria));
                 model.addAttribute("pageDTO", new PageDTO(criteria, inquiryService.getTotalAdmin(criteria)));
-                return "admin/adminQnaManage";
+                return "/admin/adminQnaManage";
+
         }
 
         // 관리자 채용 공고 세부 조회
         @GetMapping("adInqRead")
-        public String adInqRead(Integer inquiryNumber,Criteria criteria, Model model){
+        public String adInqRead(Integer inquiryNumber, Criteria criteria, Model model){
                 log.info("----------------------------");
                 log.info("inquiryListRead............. : " + inquiryNumber);
                 log.info("----------------------------");
-                log.info("승인여부----------------------------"+inquiryService.adInqRead(inquiryNumber).getInquiryAnswerBool());
                 model.addAttribute("inquiry", inquiryService.adInqRead(inquiryNumber));
-                return "admin/adminQnaView";
+                return "/admin/adminQnaView";
         }
-
+        
+        // 답변 작성
+        @GetMapping("answer")
+        public String answer(int inquiryNumber, Criteria criteria, String inquiryAnswer, Model model){
+                InquiryDTO inquiryDTO = new InquiryDTO();
+                inquiryDTO.setInquiryNumber((long) inquiryNumber);
+                inquiryDTO.setInquiryAnswer(inquiryAnswer);
+                inquiryService.answer(inquiryDTO);
+                model.addAttribute("inquiry", inquiryService.adInqRead(inquiryNumber));
+                return "/admin/adminQnaView";
+        }
+        
+        // 답변 삭제
+        @GetMapping("deleteAnswer")
+        public String deleteAnswer(int inquiryNumber, Criteria criteria, Model model){
+                inquiryService.deleteAnswer(inquiryNumber);
+                model.addAttribute("inquiry", inquiryService.adInqRead(inquiryNumber));
+                return "/admin/adminQnaView";
+        }
 }
