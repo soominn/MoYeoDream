@@ -91,7 +91,7 @@
 
                     <div class="interest-content">
                         <img src="https://holaworld.io/images/info/arrow-left.png" class="interest">
-                        <h1>님, 반가워요.<br>어떤 분야에 관심이 있는지 알려주세요!</h1>
+                        <h1><span class="nickname"></span>님, 반가워요.<br>어떤 분야에 관심이 있는지 알려주세요!</h1>
                         <div>관심 분야를 기반으로 소식을 추천해드려요.</div>
                         <div class="set-interest">
                             <h3>관심 분야 태그</h3>
@@ -263,14 +263,15 @@
 
                     <div class="img-content">
                         <img src="https://holaworld.io/images/info/arrow-left.png" class="img">
-                        <h1>님만의 특별한 이미지를 설정해 보세요.<br>물론, 언제든지 변경할 수 있어요!</h1>
+                        <h1><span class="nickname"></span>님만의 특별한 이미지를 설정해 보세요.<br>물론, 언제든지 변경할 수 있어요!</h1>
                         <div>미 업로드시 기본 이미지로 자동 설정됩니다.</div>
                         <div class="img-input">
                             <img src="https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG" class="img-example">
                             <div class="img-controller">
                                 <label for="img-choose">
                                     이미지 선택
-                                    <input type="file" name="userImg" id="img-choose" accept="image/*">
+                                    <input type="file" name="file" id="img-choose" accept="image/*">
+                                    <input type="hidden" name="memberProfile" id="profile-name">
                                 </label>
                                 <button type="button" class="img-delete">이미지 제거</button>
                             </div>
@@ -281,7 +282,7 @@
                 <div class="join-ok">
                     <h1>축하드려요! 가입되었습니다.<br>MoYeDream에서 당신의 꿈을 코딩하세요!</h1>
                     <img src="/img/logo.png">
-                    <button type="button" onclick="re()">시작하기</button>
+                    <button type="button">시작하기</button>
                 </div>
             </div>
         </div>

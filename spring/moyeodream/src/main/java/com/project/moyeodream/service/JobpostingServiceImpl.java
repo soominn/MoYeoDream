@@ -17,8 +17,18 @@ public class JobpostingServiceImpl implements JobpostingService{
     private final JobpostingDAO jobpostingDAO;
 
     @Override
-    public List<JobpostingVO> getList() {
-        return jobpostingDAO.getList();
+    public List<JobpostingDTO> getList(Criteria criteria) {
+        return jobpostingDAO.getList(criteria);
+    }
+
+    @Override
+    public List<JobpostingDTO> getListView(Criteria criteria) {
+        return jobpostingDAO.getListView(criteria);
+    }
+
+    @Override
+    public List<JobpostingDTO> getListLatest(Criteria criteria) {
+        return jobpostingDAO.getListLatest(criteria);
     }
 
     @Override

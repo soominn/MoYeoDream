@@ -33,7 +33,9 @@ public class StudyController {
 
     // 모든 스터디 목록
     @GetMapping("list")
-    public void studyList(){}
+    public void studyList(){
+
+    }
 
     // 승인된 스터디 목록
     @GetMapping("approveList")

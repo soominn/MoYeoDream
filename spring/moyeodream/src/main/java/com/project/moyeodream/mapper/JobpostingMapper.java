@@ -10,7 +10,11 @@ import java.util.List;
 @Mapper //스프링 마이바티스에서 xml파일과 연결될 Mapper 인터페이스임을 알려준다.
 public interface JobpostingMapper {
     // 전체 채용 공고 목록
-    public List<JobpostingVO> getList();
+    public List<JobpostingDTO> getList(Criteria criteria);
+    // 전체 채용 공고 목록 - 인기
+    public List<JobpostingDTO> getListView(Criteria criteria);
+    // 전체 채용 공고 목록 - 최신
+    public List<JobpostingDTO> getListLatest(Criteria criteria);
     // 승인된 채용 공고 목록
     public List<JobpostingVO> getApproveList();
     // 채용 공고 상세 조회
