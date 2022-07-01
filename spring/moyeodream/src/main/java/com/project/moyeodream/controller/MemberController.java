@@ -75,11 +75,16 @@ public class MemberController {
 
     // 내 정보 불러오기
     @GetMapping("read")
-    public String myPageRead(Integer memberNumber, Model model){
+    public String myPageRead(Model model, HttpServletRequest req){
+        HttpSession session = req.getSession();
+        Integer memberNumber = (Integer)session.getAttribute("memberNumber");
+
         log.info("----------------------------");
         log.info("memberRead............. : " + memberNumber);
         log.info("----------------------------");
+
         model.addAttribute("member", memberService.myPageView(memberNumber));
+        model.addAttribute("session", memberNumber);
         return "/myPage/myPage";
     }
 
@@ -92,18 +97,18 @@ public class MemberController {
 
         memberService.memberModify(memberVO);
 
-        return new RedirectView("/member/read?memberNumber=" + memberVO.getMemberNumber());
+        return new RedirectView("/member/read");
     }
 
     // 탈퇴
     @GetMapping("remove")
-    public RedirectView memberRemove(Integer memberNumber, RedirectAttributes rttr){
+    public RedirectView memberRemove(Integer memberNumber){
         log.info("----------------------------");
         log.info("remove............. : " + memberNumber);
         log.info("----------------------------");
 
         memberService.memberDelete(memberNumber);
-        return new RedirectView("/main");
+        return new RedirectView("/main/index");
     }
 
     // ----- 프론트 -----
@@ -120,7 +125,10 @@ public class MemberController {
 
     // 내 정보수정 이동
     @GetMapping("myProfile")
-    public String myProfile(Integer memberNumber, Model model){
+    public String myProfile(Model model, HttpServletRequest req){
+        HttpSession session = req.getSession();
+        Integer memberNumber = (Integer)session.getAttribute("memberNumber");
+
         log.info("----------------------------");
         log.info("memberRead............. : " + memberNumber);
         log.info("----------------------------");
@@ -130,10 +138,14 @@ public class MemberController {
 
     // 내 스터디 이동
     @GetMapping("myStudy")
-    public String myStudy(Integer memberNumber, Model model){
+    public String myStudy(Model model, HttpServletRequest req){
+        HttpSession session = req.getSession();
+        Integer memberNumber = (Integer)session.getAttribute("memberNumber");
+
         log.info("----------------------------");
         log.info("memberRead............. : " + memberNumber);
         log.info("----------------------------");
+
 
         model.addAttribute("memberNumber", memberNumber);
         model.addAttribute("myStudyList", memberService.getMyStudyList(memberNumber));
@@ -145,19 +157,36 @@ public class MemberController {
 
     // 내 스터디 상세 조회
     @GetMapping("myStudyRead")
-    public String read(int studyNumber, Model model) {
+    public String read(int studyNumber, Model model, HttpServletRequest req) {
         log.info("----------------------------");
         log.info("read : " + studyNumber);
         log.info("----------------------------");
 
+        HttpSession session = req.getSession();
+        Integer memberNumber = (Integer)session.getAttribute("memberNumber");
 
         model.addAttribute("study", studyService.read(studyNumber));
+        model.addAttribute("session", memberNumber);
+
         return "/myPage/myStudyDetail";
+    }
+
+    // 내 스터디 수정 이동
+    @GetMapping("myStudyModify")
+    public String modify(Integer studyNumber, Model model) {
+        log.info("----------------------------");
+        log.info("modify : " + studyNumber);
+        log.info("----------------------------");
+        model.addAttribute("study", studyService.modify(studyNumber));
+        return "myPage/myStudyModify";
     }
 
     //내 게시글 이동
     @GetMapping("myPost")
-    public String myPost(Integer memberNumber, Model model, Criteria criteria){
+    public String myPost(Model model, Criteria criteria, HttpServletRequest req){
+        HttpSession session = req.getSession();
+        Integer memberNumber = (Integer)session.getAttribute("memberNumber");
+
         log.info("----------------------------");
         log.info("list.............");
         log.info("Criteria............." + criteria);
@@ -185,23 +214,29 @@ public class MemberController {
         log.info("Criteria............." + criteria);
         log.info("--------------------------------------------------");
 
-        int memberNum = 0;
         HttpSession session = req.getSession();
-
-        if(session.getAttribute("memberNumber") != null){
-            log.info("세션 있음");
-            memberNum = (Integer)session.getAttribute("memberNumber");
-        } else{
-            log.info("세션 없음");
-            memberNum = -1;
-        }
+        Integer memberNumber = (Integer)session.getAttribute("memberNumber");
 
         // 상세보기 들어오면 조회수 1 UP
         model.addAttribute("post",postService.postRead(postNumber));
         model.addAttribute("criteria",criteria);
-        model.addAttribute("session", memberNum);
+        model.addAttribute("session", memberNumber);
 
         return "/myPage/myPostDetail";
+    }
+
+    // 내 게시글 수정 이동
+    @GetMapping("myPostModifyRead")
+    public String goModify(Criteria criteria, Integer postNumber, Model model){
+        log.info("-----------------------------------------------");
+        log.info("go Modify Controller........................");
+        log.info("criteria ........" + criteria);
+        log.info("-----------------------------------------------");
+
+        model.addAttribute("post",postService.postRead(postNumber));
+        model.addAttribute("criteria",criteria);
+
+        return "/myPage/myPostModify";
     }
 
     // 선택된 게시글 삭제
@@ -214,9 +249,12 @@ public class MemberController {
         return boardIdxArray;
     }
 
-    //내 댓글
+    //내 댓글 이동
     @GetMapping("myComment")
-    public String myComment(Integer memberNumber, Model model, Criteria criteria){
+    public String myComment(Model model, Criteria criteria, HttpServletRequest req){
+        HttpSession session = req.getSession();
+        Integer memberNumber = (Integer)session.getAttribute("memberNumber");
+
         log.info("----------------------------");
         log.info("list.............");
         log.info("Criteria............." + criteria);
@@ -236,7 +274,7 @@ public class MemberController {
         return "myPage/myComment";
     }
 
-    // 내 게시글 상세 조회
+    // 내 댓글 상세 조회
     @GetMapping("myCommentRead")
     public String commentRead(Integer postNumber, Criteria criteria, Model model, HttpServletRequest req){
         log.info("--------------------------------------------------");
@@ -244,21 +282,13 @@ public class MemberController {
         log.info("Criteria............." + criteria);
         log.info("--------------------------------------------------");
 
-        int memberNum = 0;
         HttpSession session = req.getSession();
-
-        if(session.getAttribute("memberNumber") != null){
-            log.info("세션 있음");
-            memberNum = (Integer)session.getAttribute("memberNumber");
-        } else{
-            log.info("세션 없음");
-            memberNum = -1;
-        }
+        Integer memberNumber = (Integer)session.getAttribute("memberNumber");
 
         // 상세보기 들어오면 조회수 1 UP
         model.addAttribute("post",postService.postRead(postNumber));
         model.addAttribute("criteria",criteria);
-        model.addAttribute("session", memberNum);
+        model.addAttribute("session", memberNumber);
 
         return "/myPage/myCommentDetail";
     }
