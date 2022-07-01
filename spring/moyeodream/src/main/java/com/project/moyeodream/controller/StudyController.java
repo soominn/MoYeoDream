@@ -43,10 +43,13 @@ public class StudyController {
 
     // 스터디 조회
     @GetMapping("read")
-    public String read(int studyNumber, Model model) {
+    public String read(int studyNumber, Model model, HttpServletRequest request) {
         log.info("----------------------------");
         log.info("read : " + studyNumber);
         log.info("----------------------------");
+
+        HttpSession session = request.getSession();
+
         model.addAttribute("study", studyService.read(studyNumber));
         return "/study/studyView";
     }
@@ -76,12 +79,9 @@ public class StudyController {
         log.info("register : " + studyVO);
         log.info("----------------------------");
 
-        // 원래
-//        HttpSession session = req.getSession();
-//        Integer memberNumber = (Integer)session.getAttribute("memberNumber");
-//        studyVO.setStudyMemberNumber(memberNumber);
-
-        studyVO.setStudyMemberNumber(1); // 테스트용
+        HttpSession session = req.getSession();
+        Integer memberNumber = (Integer)session.getAttribute("memberNumber");
+        studyVO.setStudyMemberNumber(memberNumber);
 
         studyService.register(studyVO);
 
@@ -95,12 +95,9 @@ public class StudyController {
         log.info("modify : " + studyVO);
         log.info("----------------------------");
 
-        // 원래
-//        HttpSession session = req.getSession();
-//        Integer memberNumber = (Integer)session.getAttribute("memberNumber");
-//        studyVO.setStudyMemberNumber(memberNumber);
-
-        studyVO.setStudyMemberNumber(1); // 테스트용
+        HttpSession session = req.getSession();
+        Integer memberNumber = (Integer)session.getAttribute("memberNumber");
+        studyVO.setStudyMemberNumber(memberNumber);
 
         studyService.modify(studyVO);
 
