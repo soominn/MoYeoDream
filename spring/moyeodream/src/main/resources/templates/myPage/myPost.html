@@ -54,7 +54,7 @@
 
                                 <li class="question-container" th:object="${myPost}">
                                     <!--상세보기는 PostDetail.html완성되면 이후에 myPostDetail.html 파일 생성해서 연결해야 함.-->
-                                    <a th:href="@{/post/read(postNumber=*{postNumber}, criteria = ${pageDTO.criteria.listLink})}">
+                                    <a th:href="@{/member/myPostRead(postNumber=*{postNumber}, criteria = ${pageDTO.criteria.listLink})}">
                                         <div class="question">
                                             <div class="question__info">
                                                 <div class="question__title">
@@ -73,8 +73,8 @@
                                             </div>
                                             <div class="question__additional-info">
                                                 <div class="question__comment">
-                                                    <span class="comment__count">0</span>
-                                                    <span class="comment__description">답변</span>
+                                                    <span class="comment__count" th:text="*{postCommentCount}"></span>
+                                                    <span class="comment__description">댓글</span>
                                                 </div>
                                                 <button class="ac-button is-md is-text question__like e-like ">
                                                     <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" color="#999999" height="28" width="28" xmlns="http://www.w3.org/2000/svg" style="color: rgb(153, 153, 153);">

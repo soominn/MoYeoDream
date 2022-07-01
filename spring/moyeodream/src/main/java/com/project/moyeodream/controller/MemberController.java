@@ -4,6 +4,8 @@ import com.project.moyeodream.domain.vo.Criteria;
 import com.project.moyeodream.domain.vo.MemberVO;
 import com.project.moyeodream.domain.vo.PageDTO;
 import com.project.moyeodream.service.MemberService;
+import com.project.moyeodream.service.PostService;
+import com.project.moyeodream.service.StudyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,8 @@ import java.util.List;
 @RequestMapping("/member/*")
 public class MemberController {
     private final MemberService memberService;
+    private final StudyService studyService;
+    private final PostService postService;
 
     // 회원가입
     @ResponseBody
@@ -159,6 +163,18 @@ public class MemberController {
         return "myPage/myStudy";
     }
 
+    // 내 스터디 상세 조회
+    @GetMapping("myStudyRead")
+    public String read(int studyNumber, Model model) {
+        log.info("----------------------------");
+        log.info("read : " + studyNumber);
+        log.info("----------------------------");
+
+
+        model.addAttribute("study", studyService.read(studyNumber));
+        return "/myPage/myStudyDetail";
+    }
+
     //내 게시글 이동
     @GetMapping("myPost")
     public String myPost(Integer memberNumber, Model model, Criteria criteria){
@@ -179,6 +195,33 @@ public class MemberController {
         log.info(pageDTO.toString());
 
         return "myPage/myPost";
+    }
+
+    // 내 게시글 상세 조회
+    @GetMapping("myPostRead")
+    public String postRead(Integer postNumber, Criteria criteria, Model model, HttpServletRequest req){
+        log.info("--------------------------------------------------");
+        log.info("read Controller...............");
+        log.info("Criteria............." + criteria);
+        log.info("--------------------------------------------------");
+
+        int memberNum = 0;
+        HttpSession session = req.getSession();
+
+        if(session.getAttribute("memberNumber") != null){
+            log.info("세션 있음");
+            memberNum = (Integer)session.getAttribute("memberNumber");
+        } else{
+            log.info("세션 없음");
+            memberNum = -1;
+        }
+
+        // 상세보기 들어오면 조회수 1 UP
+        model.addAttribute("post",postService.postRead(postNumber));
+        model.addAttribute("criteria",criteria);
+        model.addAttribute("session", memberNum);
+
+        return "/myPage/myPostDetail";
     }
 
     // 선택된 게시글 삭제
