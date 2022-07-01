@@ -15,7 +15,7 @@
   <link rel="stylesheet" type="text/css" href="/css/login.css">
 </head>
 <body>
-<!--  <header th:replace="~{/fragments/header::header}"></header>-->
+  <header th:replace="~{/fragments/header::header}"></header>
   <!-- 헤더 부분 ↑ -->
 
   <section class="category-box" style="border-bottom: 2px solid #d1d1d1">
@@ -71,7 +71,7 @@
                 </div>
                 <div class="board_addInfo">
                   <div class="board_comment">
-                    <span class="comment_count">3</span>
+                    <span class="comment_count" th:text="*{postCommentCount}"></span>
                     <span class="comment_description">댓글</span>
                   </div>
                   <div class="board-infoItem">
@@ -199,7 +199,7 @@
                 <div class="keywordBox">
                   <input type="text" name="keywordText" placeholder="댓글이나 포함 단어를 검색하세요.">
                 </div>
-                <button type="button" class="searchBtn">검색</button>
+                <button type="button" class="searchReplyBtn">검색</button>
               </form>
             </div>
             </div>
@@ -212,7 +212,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="/js/header.js"></script>
-<!--<script src="/js/login.js"></script>-->
+<script src="/js/login.js"></script>
 <script src="/js/board.js"></script>
 <script th:inline="javascript">
   let postNumber = [[${postNumber}]];
@@ -288,6 +288,19 @@
       $pageForm.submit();
     });
   });
+
+  $(".searchReplyBtn").on("click",function(){
+    let $keywordText = $(this).closest("form").find("input[name='keywordText']");
+
+    if(!$keywordText.val()){
+      alert("검색어를 입력하세요!");
+      return;
+    }
+
+    $inputKeyword.val($keywordText.val());
+
+
+  })
 
   // 게시판 글쓰기
   $(".postReg").on("click",function(e){

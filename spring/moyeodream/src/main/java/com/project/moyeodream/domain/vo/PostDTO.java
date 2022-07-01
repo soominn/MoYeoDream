@@ -16,4 +16,5 @@ public class PostDTO {
     private Integer postMemberNumber;             // 게시글 멤버 넘버(FK)  -   게시글 작성자 정보 가져오기 위해
     private String memberNickname;              // 게시글 작성자 닉네임
     private String postCommentContent;                   // 내 댓글 내용
+    private Integer postCommentCount;               // 게시글 내 댓글 개수
 }

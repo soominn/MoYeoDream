@@ -27,5 +27,45 @@ let postCommentService = (function(){
         });
     }
 
-return {getList: getList, register: register};
+    // 댓글 수정
+    function modify(param, callback){
+        console.log("js.modify,....");
+        $.ajax({
+            url : "/postReply/modify",
+            type : "post",
+            data : JSON.stringify(param),
+            contentType : "application/json",
+            success : function(comment){
+                if(callback){
+                    callback(comment);
+                };
+            }
+        });
+    }
+
+    // 댓글 삭제 
+    function remove(postCommentNumber, callback){
+        console.log("js remove.......");
+        $.ajax({
+            url : "/postReply/remove/"+postCommentNumber ,
+            type : "delete",
+            success : function(){
+                if(callback){
+                    callback();
+                }
+            }
+        })
+    };
+
+    // 게시물의 댓글 개수 가져오기
+    function getTotal(postNumber, callback){
+        console.log("js getTotal......");
+        $.getJSON("/postReply/total/" + postNumber, function(result){
+            if(callback){
+                callback(result);
+            }
+        })
+    };
+
+return {getList: getList, register: register, modify: modify, remove: remove, getTotal:getTotal };
 })();

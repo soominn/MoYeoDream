@@ -22,7 +22,7 @@
                 <button class="qnaBtn">문의하기</button>
             </div>
             <div class="header-post">
-                <button class="postBtn">자유게시판</button>
+                <button class="postBtn" onclick="location.href='/post/list'">자유게시판</button>
             </div>
             <!-- 로그인되기 전 -->
             <div class="login" th:if="${session.memberNumber} eq null">

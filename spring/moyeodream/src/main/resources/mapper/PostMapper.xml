@@ -37,7 +37,7 @@
         </selectKey>
         INSERT INTO TBL_POST
         (POST_NUMBER, POST_CATEGORY, POST_TITLE, POST_CONTENT, POST_MEMBER_NUMBER)
-        VALUES(#{postNumber}, #{postCategory}, #{postTitle}, #{postContent}, '21')
+        VALUES(#{postNumber}, #{postCategory}, #{postTitle}, #{postContent}, #{postMemberNumber})
     </insert>
 
     <!-- 게시글 목록 불러오기 -->
@@ -45,7 +45,7 @@
         SELECT RN, POST_NUMBER, POST_CATEGORY, POST_TITLE, POST_CONTENT, POST_VIEWS, MEMBER_NICKNAME, POST_UPDATE_DATE
         FROM
         (
-            SELECT /*+ INDEX_DESC(TBL_POST PK_POST) */
+            SELECT /*+ INDEX_DESC(tp PK_POST) */
             ROWNUM RN, POST_NUMBER, POST_CATEGORY, POST_TITLE, POST_CONTENT, POST_VIEWS, tm.MEMBER_NICKNAME, POST_UPDATE_DATE
             FROM TBL_POST tp JOIN TBL_MEMBER tm
             ON tp.POST_MEMBER_NUMBER = tm.MEMBER_NUMBER
@@ -60,7 +60,8 @@
 
     <!-- 게시글 전체 개수 -->
     <select id="getTotal" resultType="_int">
-        SELECT COUNT(POST_NUMBER) FROM TBL_POST
+        SELECT COUNT(POST_NUMBER) FROM TBL_POST tp JOIN TBL_MEMBER tm
+        ON tp.POST_MEMBER_NUMBER = tm.MEMBER_NUMBER
         <where>
             <trim suffixOverrides="AND">
                 <include refid="search"/>
@@ -79,7 +80,7 @@
 
     <!-- 게시글 조회 -->
     <select id="read" resultType="postDTO">
-        SELECT POST_NUMBER, POST_CATEGORY, POST_TITLE, POST_CONTENT, POST_VIEWS, tm.MEMBER_NICKNAME, POST_REGISTER_DATE, POST_UPDATE_DATE
+        SELECT POST_NUMBER, POST_CATEGORY, POST_TITLE, POST_CONTENT, POST_VIEWS, tm.MEMBER_NICKNAME, POST_REGISTER_DATE, POST_UPDATE_DATE, POST_MEMBER_NUMBER
         FROM TBL_POST tp JOIN TBL_MEMBER tm
         ON tp.POST_MEMBER_NUMBER = tm.MEMBER_NUMBER
         WHERE POST_NUMBER = #{postNumber}

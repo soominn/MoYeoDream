@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -20,10 +22,15 @@ public class PostCommentController {
 
     // 댓글 작성
     @PostMapping("register")
-    public void register(@RequestBody PostCommentVO postCommentVO){
+    public void register(@RequestBody PostCommentVO postCommentVO, HttpServletRequest req){
         log.info("---------------------------------------");
         log.info("reply register Controller......");
         log.info("---------------------------------------");
+
+        // 세션에서 작성자 정보 받아오기
+        HttpSession session = req.getSession();
+        postCommentVO.setPostCommentMemberNumber((Integer)session.getAttribute("memberNumber"));
+        log.info("작성자 memberNum : "+postCommentVO.getPostCommentMemberNumber());
 
         postCommentService.registerReply(postCommentVO);
         log.info(postCommentVO.getPostCommentNumber() + "번 댓글 등록 성공");
@@ -41,7 +48,7 @@ public class PostCommentController {
     }
 
     // 댓글 삭제
-    @GetMapping("remove/{postCommentNumber}")
+    @DeleteMapping("remove/{postCommentNumber}")
     public boolean remove(@PathVariable Integer postCommentNumber){
         log.info("---------------------------------------");
         log.info("reply remove Controller......");
@@ -53,7 +60,7 @@ public class PostCommentController {
 
     // 전체 댓글 목록 조회
     @GetMapping("list/{postNumber}")
-    public List<PostCommentVO> getList(@PathVariable Integer postNumber){
+    public List<PostCommentVO> getList(@PathVariable Integer postNumber, HttpServletRequest req){
         log.info("---------------------------------------");
         log.info("reply getList Controller......");
         log.info("---------------------------------------");
@@ -63,6 +70,19 @@ public class PostCommentController {
 
         return postCommentService.getReplyList(postNumber);
     }
+
+//    // 댓글 내용 검색
+//    @GetMapping("list/{keyword}")
+//    public List<PostCommentVO> getList(@PathVariable String keyword){
+//        log.info("---------------------------------------");
+//        log.info("reply getList Controller......");
+//        log.info("---------------------------------------");
+//
+//        log.info("가져온 list : " +
+//                postCommentService.getReplyList(postNumber));
+//
+//        return postCommentService.getReplyList(postNumber);
+//    }
 
     // 전체 댓글 개수
     @GetMapping("total/{postNumber}")
