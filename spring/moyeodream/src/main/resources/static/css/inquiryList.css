@@ -195,3 +195,8 @@ button.new-inquiry {
   color: #000;
   font-weight: 600;
 }
+
+.board-container:hover{
+  transform: scale(1.03);
+  transition: transform 0.3s;
+}

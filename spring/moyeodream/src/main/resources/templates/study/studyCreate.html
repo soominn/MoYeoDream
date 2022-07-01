@@ -140,4 +140,13 @@
 <script src="/js/studyCreate.js"></script>
 <script src="/js/header.js"></script>
 <script src="/js/login.js"></script>
+<script th:inline="javascript">
+    // 세션에 있는 memberNumber
+    let memberNumber = [[${session.memberNumber}]];
+    if(memberNumber == null) {
+        alert("로그인 후 이용해주세요");
+        // 이후 메인으로 보내기(추후에 index로 바꿔줘야함)
+        location.href = "http://localhost:11111/member/main";
+    }
+</script>
 </html>

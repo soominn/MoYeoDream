@@ -25,22 +25,22 @@
 							<aside class="ipCzuu">
 								<section class="LaCvk cgWehN">
 									<h4 class="jdPAHA dyWeXC">내 정보</h4>
-									<a class="eYKbXT" th:href="@{/member/myProfile(memberNumber=*{memberNumber})}">
+									<a class="eYKbXT" th:href="@{/member/myProfile}">
 										<div class="cqZvVN gkiCmL">프로필 수정</div>
 									</a>
-                                    <a class="eYKbXT" href="Logout.us">
+                                    <a class="eYKbXT" th:href="@{/member/logout}">
 										<div class="cqZvVN gkiCmL">로그아웃</div>
 									</a>
 								</section>
 								<section class="LaCvk cgWehN fXhCUc">
 									<h4 class="jdPAHA dyWeXC">메뉴</h4>
-									<a class="eYKbXT" th:href="@{/member/myStudy(memberNumber=*{memberNumber})}">
+									<a class="eYKbXT" th:href="@{/member/myStudy}">
 										<div class="cqZvVN gkiCmL">내 스터디</div>
 									</a>
-									<a class="eYKbXT" th:href="@{/member/myPost(memberNumber=*{memberNumber})}">
+									<a class="eYKbXT" th:href="@{/member/myPost}">
 										<div class="cqZvVN gkiCmL">내 게시글</div>
 									</a>
-									<a class="eYKbXT" th:href="@{/member/myComment(memberNumber=*{memberNumber})}">
+									<a class="eYKbXT" th:href="@{/member/myComment}">
 										<div class="cqZvVN gkiCmL">내 댓글</div>
 									</a>
 									
@@ -188,7 +188,7 @@
             for (let i in memberInterestsArr){
                 if(memberInterestsArr[i] == 'culture'){
                     $(".culture").show();
-                }else if(memberInterestsArr[i] == 'sports'){
+                }else if(memberInterestsArr[i] == 'sport'){
                     $(".sports").show();
                 }else if(memberInterestsArr[i] == 'programming'){
                     $(".programming").show();

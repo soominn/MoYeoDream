@@ -13,6 +13,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,9 +34,11 @@ public class InquiryController {
                 log.info("Criteria............." + criteria);
                 log.info("----------------------------");
 
+                criteria.setAmount(10);
                 PageDTO pageDTO = new PageDTO(criteria, inquiryService.getTotal());
-                model.addAttribute("pageDTO", pageDTO );
                 model.addAttribute("inquiryList", inquiryService.getTotalList(criteria));
+                model.addAttribute("pageDTO", pageDTO );
+                model.addAttribute("criteria", criteria);
 
                 log.info("-------------------------------------------------");
                 log.info(pageDTO.getCriteria().getListLink());
@@ -46,69 +49,89 @@ public class InquiryController {
 
         //    문의 작성
         @PostMapping("register")
-        public RedirectView inquiryRegister(InquiryVO inquiryVO, RedirectAttributes rttr){
+        public RedirectView inquiryRegister(InquiryVO inquiryVO, HttpServletRequest req){
                 log.info("----------------------------");
                 log.info("register............. : " + inquiryVO);
                 log.info("----------------------------");
 
                 // 세션에서 넘어온 유저 정보가 있어야 사용할 수 있음
-                // HttpSession session = req.getSession();
-                // Integer memberNumber = (Integer)session.getAttribute("memberNumber");
-                // inquiryVO.setInquiryMemberNumber(memberNumber);
+                 HttpSession session = req.getSession();
+                 Integer memberNumber = (Integer)session.getAttribute("memberNumber");
+                 inquiryVO.setInquiryMemberNumber(memberNumber);
 
                 // 유저 정보 받아오는테스트
-                inquiryVO.setInquiryMemberNumber(1);
+                // inquiryVO.setInquiryMemberNumber(1);
                 //-----------------------------------
 
 
                 inquiryService.inquiryInsert(inquiryVO);
-
-                rttr.addFlashAttribute("inquiryNumber", inquiryVO.getInquiryNumber());
 
                 return new RedirectView("/inquiry/list");
         }
 
         //    문의 조회
         @GetMapping("read")
-        public String inquiryRead(Integer inquiryNumber, Model model){
+        public String inquiryRead(Integer inquiryNumber, Model model, HttpServletRequest req){
                 log.info("----------------------------");
                 log.info("inquiryRead............. : " + inquiryNumber);
                 log.info("----------------------------");
+
+                int memberNum = 0;
+                HttpSession session = req.getSession();
+
+                if(session.getAttribute("memberNumber") != null){
+                        log.info("세션 있음");
+                        memberNum = (Integer)session.getAttribute("memberNumber");
+                } else{
+                        log.info("세션 없음");
+                        memberNum = -1;
+                }
+
                 inquiryService.inquiryVisit(inquiryNumber);
                 model.addAttribute("inquiry", inquiryService.getList(inquiryNumber));
+                model.addAttribute("session", memberNum);
                 return "/inquiry/inquiryView";
         }
 
         //    수정 페이지에서 문의 내용 가져오기
         @GetMapping("modifyRead")
-        public String inquiryModifyRead(Integer inquiryNumber, Model model){
+        public String inquiryModifyRead(Integer inquiryNumber, Model model, HttpServletRequest req){
                 log.info("----------------------------");
                 log.info("inquiryRead............. : " + inquiryNumber);
                 log.info("----------------------------");
+
+                int memberNum = 0;
+                HttpSession session = req.getSession();
+
+                if(session.getAttribute("memberNumber") != null){
+                        log.info("세션 있음");
+                        memberNum = (Integer)session.getAttribute("memberNumber");
+                } else{
+                        log.info("세션 없음");
+                        memberNum = -1;
+                }
+
                 model.addAttribute("inquiry", inquiryService.getList(inquiryNumber));
+                model.addAttribute("session", memberNum);
                 return "/inquiry/inquiryModify";
         }
 
         //    문의 수정
         @PostMapping("modify")
-        public RedirectView inquiryModify(InquiryVO inquiryVO, RedirectAttributes rttr){
+        public RedirectView inquiryModify(InquiryVO inquiryVO, RedirectAttributes rttr, HttpServletRequest req){
                 log.info("----------------------------");
                 log.info("modify............. : " + inquiryVO);
                 log.info("----------------------------");
 
                 // 세션에서 넘어온 유저 정보가 있어야 사용할 수 있음
-                // HttpSession session = req.getSession();
-                // Integer memberNumber = (Integer)session.getAttribute("memberNumber");
-                // inquiryVO.setInquiryMemberNumber(memberNumber);
 
-                // 유저 정보 받아오는테스트
-                inquiryVO.setInquiryMemberNumber(1);
-                //-----------------------------------
+                HttpSession session = req.getSession();
+                Integer memberNumber = (Integer)session.getAttribute("memberNumber");
+                inquiryVO.setInquiryMemberNumber(memberNumber);
 
                 inquiryService.inquiryModify(inquiryVO);
 
                 rttr.addAttribute("inquiryNumber", inquiryVO.getInquiryNumber());
-                rttr.addAttribute("inquiryMemberNumber", inquiryVO.getInquiryMemberNumber());
 
                 return new RedirectView("/inquiry/read");
         }
