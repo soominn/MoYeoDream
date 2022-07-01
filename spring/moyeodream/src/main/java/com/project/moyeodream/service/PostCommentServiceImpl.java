@@ -19,7 +19,8 @@ public class PostCommentServiceImpl implements PostCommentService {
     // 댓글 전체목록 가져오기
     @Override
     public List<PostCommentVO> getReplyList(Integer postNumber) {
-        return postCommentDAO.getReplyList(postNumber);
+        List<PostCommentVO> commentList = postCommentDAO.getReplyList(postNumber);
+        return commentList;
     }
 
     // 댓글 개수 가져오기

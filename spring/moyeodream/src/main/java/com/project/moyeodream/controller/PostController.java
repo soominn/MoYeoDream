@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @Slf4j
@@ -45,15 +46,27 @@ public class PostController {
 
     // 게시글 상세 조회
     @GetMapping("read")
-    public String postRead(Integer postNumber, Criteria criteria, Model model){
+    public String postRead(Integer postNumber, Criteria criteria, Model model, HttpServletRequest req){
         log.info("--------------------------------------------------");
         log.info("read Controller...............");
         log.info("Criteria............." + criteria);
         log.info("--------------------------------------------------");
 
+        int memberNum = 0;
+        HttpSession session = req.getSession();
+
+        if(session.getAttribute("memberNumber") != null){
+            log.info("세션 있음");
+            memberNum = (Integer)session.getAttribute("memberNumber");
+        } else{
+            log.info("세션 없음");
+            memberNum = -1;
+        }
+
         // 상세보기 들어오면 조회수 1 UP
         model.addAttribute("post",postService.postRead(postNumber));
         model.addAttribute("criteria",criteria);
+        model.addAttribute("session", memberNum);
 
         return "/board/boardDetail";
     }
@@ -131,10 +144,15 @@ public class PostController {
 
     /* 게시판 등록 완료*/
     @PostMapping("postRegister")
-    public String register(PostVO postVO, Model model, Criteria criteria){
+    public String register(PostVO postVO, Model model, Criteria criteria, HttpServletRequest req){
         log.info("--------------------------------------------------");
         log.info("post Register ........" + postVO);
         log.info("--------------------------------------------------");
+
+        // 세션에 저장된 memberNumber 가져오기
+        HttpSession session = req.getSession();
+        postVO.setPostMemberNumber((Integer)session.getAttribute("memberNumber"));
+        log.info("작성자 memberNum : "+postVO.getPostMemberNumber());
 
         postService.postRegister(postVO);
         log.info("새로 등록한 게시글 번호" + postVO.getPostNumber());

@@ -72,6 +72,7 @@ span {
   display: flex;
   padding: 20px;
 }
+
 .board .board_info {
   flex: 1 1 590px;
   max-width: 590px;
@@ -474,4 +475,8 @@ form[name="searchForm"]{
   font-size: 18px;
   font-weight: 600;
   margin: 0px 15px;
+}
+
+.board-title{
+  height: 30px;
 }

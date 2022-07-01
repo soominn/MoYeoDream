@@ -2,6 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.moyeodream.mapper.PostCommentMapper">
 
+    <!--댓글 내용 검색-->
+    <sql id="search">
+        <if test="keyword != null">
+            <trim suffix="AND">
+                WHERE POST_COMMENT_CONTENT LIKE '%'||#{keyword}||'%'
+            </trim>
+        </if>
+    </sql>
+
     <!--게시글의 전체 댓글 개수 -->
     <select id="getReplyTotal" resultType="_int">
         SELECT COUNT(POST_COMMENT_NUMBER) FROM TBL_POST_COMMENT
@@ -10,9 +19,20 @@
 
     <!-- 게시글 내 전체 댓글 가져오기 -->
     <select id="getReplyList" resultType="postCommentVO">
-        SELECT /*+ INDEX_DESC(TBL_POST_COMMENT PK_POST_COMMENT) */
-        POST_COMMENT_NUMBER, POST_COMMENT_CONTENT, POST_COMMENT_REGISTER_DATE, POST_COMMENT_UPDATE_DATE, POST_COMMENT_MEMBER_NUMBER, POST_COMMENT_POST_NUMBER
-        FROM TBL_POST_COMMENT  WHERE POST_COMMENT_POST_NUMBER = #{postNumber}
+        SELECT /*+ INDEX_DESC(tpc PK_POST_COMMENT) */
+        POST_COMMENT_NUMBER, POST_COMMENT_CONTENT, POST_COMMENT_REGISTER_DATE, POST_COMMENT_UPDATE_DATE, POST_COMMENT_MEMBER_NUMBER, POST_COMMENT_POST_NUMBER, MEMBER_NICKNAME as POST_COMMENT_NICKNAME
+        FROM TBL_POST_COMMENT tpc JOIN TBL_MEMBER tm
+        ON tpc.POST_COMMENT_MEMBER_NUMBER = tm.MEMBER_NUMBER
+        WHERE POST_COMMENT_POST_NUMBER = #{postNumber}
+    </select>
+
+    <!-- 댓글 내용 검색 -->
+    <select id="getReplyKeyword" resultType="postCommentVO">
+        SELECT /*+ INDEX_DESC(tpc PK_POST_COMMENT) */
+        POST_COMMENT_NUMBER, POST_COMMENT_CONTENT, POST_COMMENT_REGISTER_DATE, POST_COMMENT_UPDATE_DATE, POST_COMMENT_MEMBER_NUMBER, POST_COMMENT_POST_NUMBER, MEMBER_NICKNAME as POST_COMMENT_NICKNAME
+        FROM TBL_POST_COMMENT tpc JOIN TBL_MEMBER tm
+        ON tpc.POST_COMMENT_MEMBER_NUMBER = tm.MEMBER_NUMBER
+        WHERE POST_COMMENT_CONTENT LIKE '%'||#{keyword}||'%'
     </select>
 
     <!-- 댓글 한개 가져오기 -->
@@ -34,7 +54,8 @@
     <!-- 댓글 수정 -->
     <update id="updateReply">
         UPDATE TBL_POST_COMMENT
-        SET POST_COMMENT_CONTENT = #{postCommentContent}
+        SET POST_COMMENT_CONTENT = #{postCommentContent},
+            POST_COMMENT_UPDATE_DATE = SYSDATE
         WHERE POST_COMMENT_NUMBER = #{postCommentNumber}
     </update>
 
