@@ -25,11 +25,21 @@ public class PostController {
 
     // 모든 자유 게시판 목록
     @GetMapping("list")
-    public String postList(Model model, Criteria criteria){
+    public String postList(Model model, Criteria criteria, HttpServletRequest req){
         log.info("--------------------------------------------------");
         log.info("getList Controller...............");
         log.info("Criteria............." + criteria);
         log.info("--------------------------------------------------");
+
+        int memberNum = 0;
+        HttpSession session = req.getSession();
+
+        if(session.getAttribute("memberNumber") != null){
+            memberNum = (Integer)session.getAttribute("memberNumber");
+        } else{
+            memberNum = -1;
+        }
+        model.addAttribute("session", memberNum);
 
         criteria.setAmount(5);
         PageDTO pageDTO = new PageDTO(criteria, postService.getTotal(criteria));
@@ -56,10 +66,8 @@ public class PostController {
         HttpSession session = req.getSession();
 
         if(session.getAttribute("memberNumber") != null){
-            log.info("세션 있음");
             memberNum = (Integer)session.getAttribute("memberNumber");
         } else{
-            log.info("세션 없음");
             memberNum = -1;
         }
 
@@ -85,11 +93,21 @@ public class PostController {
 
     // 자유게시판 수정화면 불러오기
     @GetMapping("modify")
-    public String goModify(Criteria criteria, Integer postNumber, Model model){
+    public String goModify(Criteria criteria, Integer postNumber, Model model, HttpServletRequest req){
         log.info("-----------------------------------------------");
         log.info("go Modify Controller........................");
         log.info("criteria ........" + criteria);
         log.info("-----------------------------------------------");
+
+        int memberNum = 0;
+        HttpSession session = req.getSession();
+
+        if(session.getAttribute("memberNumber") != null){
+            memberNum = (Integer)session.getAttribute("memberNumber");
+        } else{
+            memberNum = -1;
+        }
+        model.addAttribute("session", memberNum);
 
         model.addAttribute("post",postService.postRead(postNumber));
         model.addAttribute("criteria",criteria);
@@ -99,7 +117,7 @@ public class PostController {
 
     // 자유게시판 수정 완료
     @PostMapping("modify")
-    public RedirectView postModify(PostVO postVO, Criteria criteria, RedirectAttributes rttr){
+    public RedirectView postModify(PostVO postVO, Criteria criteria, RedirectAttributes rttr, HttpServletRequest req){
         log.info("---------------------------------------------------");
         log.info("modifyOk controller..................");
         log.info("criteria..........................."+ criteria);
@@ -107,6 +125,17 @@ public class PostController {
 
         log.info(" 받아온 컨텐츠 내용 : " + postVO.getPostContent());
         postService.postUpdate(postVO);
+
+        int memberNum = 0;
+        HttpSession session = req.getSession();
+
+        if(session.getAttribute("memberNumber") != null){
+            memberNum = (Integer)session.getAttribute("memberNumber");
+        } else{
+            memberNum = -1;
+        }
+        rttr.addAttribute("session", memberNum);
+
 
         rttr.addAttribute("postNumber", postVO.getPostNumber());
         rttr.addFlashAttribute("criteria", criteria);
@@ -159,6 +188,6 @@ public class PostController {
         model.addAttribute("postNumber", postVO.getPostNumber());
         model.addAttribute(criteria);
 
-        return postList(model, criteria);
+        return postList(model, criteria, req);
     }
 }

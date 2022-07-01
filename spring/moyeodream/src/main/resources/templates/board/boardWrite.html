@@ -78,6 +78,8 @@
 <script src="/js/boardWrite.js"></script>
 <script th:inline="javascript">
   //------------board Modify 공통 내용-------------------------//
+  let memberNum = [[${session.memberNumber}]];
+
   let inputContent = document.querySelector("input[name=postContent]");
   // 값을 넣어줄 input
   let $postForm = $("form[name= postForm]");
@@ -87,6 +89,9 @@
     inputContent.value = $value;
     $postForm.submit();
   }
+
   //----------------------------------------------------------//
+
+
 </script>
 </html>
