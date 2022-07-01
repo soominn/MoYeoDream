@@ -179,9 +179,19 @@
   let postNum = [[${post.postNumber}]];
   let goList = document.querySelector("svg#goList");
   let memberNum = [[${session.memberNumber}]];
+  let postMemberNum = [[${post.postMemberNumber}]];
 
   console.log(postNum);
+  console.log(memberNum);
+  console.log(postMemberNum);
+
   showList(postNum);
+
+  if(memberNum == postMemberNum){
+    $(".change-button").show();
+  }else{
+    $(".change-button").hide();
+  }
 
   $("#goModify").on("click",function(){
     location.href = "/post/modify" + params + "&postNumber=" + postNum;
@@ -198,12 +208,6 @@
       location.href = "/post/remove" + params + "&postNumber=" + postNum;
     }
   });
-
-  for(let key in window.sessionStorage){
-
-  }
-
-  console.log(memberNum);
 
   // 댓글 목록 가져오기
   function showList(postNumber){
@@ -236,6 +240,7 @@
           str += "<button class='comment-button cancelBtn "+ commentNum + "'>취소</button>";
           str += "</section>";
         }
+
         str += "</section>";
         str += "<section class='comment-content-wrap'>";
         str += "<p class='comment-content'>"+ comment.postCommentContent +"</p>";
@@ -261,6 +266,10 @@
   $(".comment-input-button").on("click",function(e){
     e.preventDefault();
 
+    if(!memberNum){
+      alert("로그인 후 이용해주세요.");
+      return;
+    }
     if(!$(".comment-input").val()){
       alert("내용을 입력해주세요.");
       return;

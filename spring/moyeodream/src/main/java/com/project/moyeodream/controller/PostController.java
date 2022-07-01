@@ -52,8 +52,16 @@ public class PostController {
         log.info("Criteria............." + criteria);
         log.info("--------------------------------------------------");
 
+        int memberNum = 0;
         HttpSession session = req.getSession();
-        int memberNum = (Integer)session.getAttribute("memberNumber");
+
+        if(session.getAttribute("memberNumber") != null){
+            log.info("세션 있음");
+            memberNum = (Integer)session.getAttribute("memberNumber");
+        } else{
+            log.info("세션 없음");
+            memberNum = -1;
+        }
 
         // 상세보기 들어오면 조회수 1 UP
         model.addAttribute("post",postService.postRead(postNumber));
