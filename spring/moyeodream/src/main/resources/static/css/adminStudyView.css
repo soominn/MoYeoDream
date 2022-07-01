@@ -11,6 +11,7 @@ body {
 
 a {
     text-decoration: none;
+    color: #ffe579;
 }
 
 .sectionWrap{
@@ -109,7 +110,6 @@ div.openLink{
     padding : 10px;
     width : 180px;
     height : 30px;
-    background: #f2f4f8;
     border-radius: 10px;
     text-decoration-color: #4a5e75;
     text-decoration: underline;

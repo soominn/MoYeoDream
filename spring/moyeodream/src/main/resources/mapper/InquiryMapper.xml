@@ -28,8 +28,8 @@
         VALUES (SEQ_INQUIRY.NEXTVAL, #{inquiryTitle}, #{inquiryContent}, #{inquiryMemberNumber})
     </insert>
 
-    <select id="getList" resultType="com.project.moyeodream.domain.vo.InquiryDTO">
-        SELECT INQUIRY_NUMBER, INQUIRY_TITLE, INQUIRY_CONTENT, INQUIRY_ANSWER_BOOL, INQUIRY_VIEWS, INQUIRY_REGISTER_DATE, INQUIRY_UPDATE_DATE, INQUIRY_MEMBER_NUMBER, tm.MEMBER_NICKNAME, tm.MEMBER_PROFILE
+    <select id="getList" resultType="inquiryDTO">
+        SELECT INQUIRY_NUMBER, INQUIRY_TITLE, INQUIRY_CONTENT, INQUIRY_ANSWER, INQUIRY_ANSWER_BOOL, INQUIRY_VIEWS, INQUIRY_REGISTER_DATE, INQUIRY_UPDATE_DATE, INQUIRY_MEMBER_NUMBER, tm.MEMBER_NICKNAME, tm.MEMBER_PROFILE
         FROM TBL_INQUIRY ti JOIN TBL_MEMBER tm
         ON ti.INQUIRY_MEMBER_NUMBER = tm.MEMBER_NUMBER
         WHERE INQUIRY_NUMBER = #{inquiryNumber}
@@ -122,4 +122,17 @@
             </trim>
         </where>
     </select>
+
+    <update id="answer">
+        UPDATE TBL_INQUIRY
+        SET INQUIRY_ANSWER = #{inquiryAnswer}, INQUIRY_ANSWER_BOOL = 1
+        WHERE INQUIRY_NUMBER = #{inquiryNumber}
+    </update>
+
+    <update id="deleteAnswer">
+        UPDATE TBL_INQUIRY
+        SET INQUIRY_ANSWER = NULL, INQUIRY_ANSWER_BOOL = 0
+        WHERE INQUIRY_NUMBER = #{inquiryNumber}
+    </update>
+
 </mapper>

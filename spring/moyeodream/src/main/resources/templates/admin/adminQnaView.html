@@ -106,22 +106,19 @@
                     <li>
                         <form>
                             <th:block th:if="*{inquiryAnswerBool == 0}">
-                                <p style="padding-left: 45px; color: mediumblue">답변 대기 중 입니다.</p>
+                                <p style="padding-left: 45px;">답변 대기 중 입니다.</p>
+                                <button class="answer">답변 하기</button>
                             </th:block>
-                            <th:block th:unless="*{inquiryAnswerBool == 0}">
-                                <p th:text="*{inquiryAnswerBool}"/>
+                            <th:block class="bool" th:unless="*{inquiryAnswerBool == 0}">
+                                <p th:text="*{inquiryAnswer}"/>
                                 <div class="commentPrint">
-                                    <p th:text="*{inquiryAnswer}"/>
                                     <div class="commentModify">
                                         <textarea class="modifyInput" cols="30" rows="10" th:text="*{inquiryAnswer}"/>
-                                        <div>
-                                            <button type="button" class="modifyOk">수정</button>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="commentManageBtn">
                                     <div>
-                                        <button type="button" class="modifyBtn">수정</button>
+                                        <button type="button" class="answer">수정</button>
                                         <button type="button" class="deleteBtn">삭제</button>
                                     </div>
                                 </div>
@@ -133,12 +130,12 @@
         </div>
 
 
-        <div class="qnaCommentWrap">
+        <div class="qnaCommentWrap" style="display: none">
             <div>
                 <div class="commentInputTitle"><p>답변 입력</p></div>
                 <form>
                     <div class="commentInput">
-                        <textarea name="" id="" cols="30" rows="10"></textarea>
+                        <textarea name="modifyInput" id="" cols="30" rows="10"></textarea>
                     </div>
                     <div class="btnWrap">
                         <div>
@@ -155,12 +152,38 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/js/adminNav.js"></script>
-<script src="/js/adminQnaView.js"></script>
+<!--<script src="/js/adminQnaView.js"></script>-->
 <script th:inline="javascript">;
 let inquiryNumber = [[${inquiry.inquiryNumber}]];
 let params = [[${criteria.listLink}]];
 function goList(){
     location.href = "/inquiry/getInqList"+params+"&inquiryNumber="+inquiryNumber;
 }
+
+
+$('button.answer').on("click", function (e) {
+    e.preventDefault();
+    $('div.qnaCommentWrap').css({'display':'block'});
+});
+
+
+$('button.confirm').on("click", function (e) {
+    e.preventDefault();
+
+    const modifyInput = $("textarea[name='modifyInput']").val();
+
+    if(!modifyInput){
+        alert("내용을 입력해주세요.");
+        return;
+    }
+
+    location.href="/inquiry/answer?inquiryNumber="+inquiryNumber+"&inquiryAnswer="+modifyInput;
+});
+
+$('button.deleteBtn').on("click", function (e) {
+    e.preventDefault();
+
+    location.href="/inquiry/deleteAnswer?inquiryNumber="+inquiryNumber;
+});
 </script>
 </html>
