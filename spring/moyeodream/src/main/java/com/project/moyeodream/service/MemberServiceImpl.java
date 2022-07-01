@@ -1,6 +1,9 @@
 package com.project.moyeodream.service;
 
+import com.project.moyeodream.domain.dao.FileDAO;
 import com.project.moyeodream.domain.dao.MemberDAO;
+import com.project.moyeodream.domain.dao.PostCommentDAO;
+import com.project.moyeodream.domain.dao.StudyCommentDAO;
 import com.project.moyeodream.domain.vo.Criteria;
 import com.project.moyeodream.domain.vo.MemberVO;
 import com.project.moyeodream.domain.vo.PostDTO;
@@ -18,6 +21,8 @@ import java.util.List;
 public class MemberServiceImpl implements MemberService{
 
     private final MemberDAO memberDAO;
+    private final PostCommentDAO postCommentDAO;
+    private final StudyCommentDAO studyCommentDAO;
 
     @Override
     public void join(MemberVO memberVO) {
@@ -46,7 +51,15 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public List<StudyDTO> getMyStudyList(int memberNumber) { return memberDAO.getMyStudyList(memberNumber); }
+    public List<StudyDTO> getMyStudyList(int memberNumber) {
+        List<StudyDTO> studyList = memberDAO.getMyStudyList(memberNumber);
+        studyList.forEach( study -> {
+            // 댓글 개수 구하기
+            int commentCount = studyCommentDAO.getTotal(study.getStudyNumber());
+            study.setStudyCommentTotal(commentCount);
+        });
+        return studyList;
+    }
 
     @Override
     public int selectMyStudy1(int memberNumber) { return memberDAO.selectMyStudy1(memberNumber); }
@@ -56,7 +69,15 @@ public class MemberServiceImpl implements MemberService{
 
     // 내 게시글 목록
     @Override
-    public List<PostDTO> getMyPostList(int memberNumber, Criteria criteria) { return memberDAO.getMyPostList(memberNumber, criteria); }
+    public List<PostDTO> getMyPostList(int memberNumber, Criteria criteria) {
+        List<PostDTO> postList = memberDAO.getMyPostList(memberNumber, criteria);
+        postList.forEach( post -> {
+            // 댓글 개수 구하기
+            int commentCount = postCommentDAO.getReplyTotal(post.getPostNumber());
+            post.setPostCommentCount(commentCount);
+        });
+        return postList;
+    }
 
     // 내 게시글 개수
     @Override
@@ -70,7 +91,15 @@ public class MemberServiceImpl implements MemberService{
 
     // 내 댓글 목록
     @Override
-    public List<PostDTO> getMyCommentList(int memberNumber, Criteria criteria) { return memberDAO.getMyCommentList(memberNumber, criteria); }
+    public List<PostDTO> getMyCommentList(int memberNumber, Criteria criteria) {
+        List<PostDTO> postList = memberDAO.getMyCommentList(memberNumber, criteria);
+        postList.forEach( post -> {
+            // 댓글 개수 구하기
+            int commentCount = postCommentDAO.getReplyTotal(post.getPostNumber());
+            post.setPostCommentCount(commentCount);
+        });
+        return postList;
+    }
 
     // 내 댓글 개수
     @Override
