@@ -201,7 +201,7 @@
             <div class="filter2nd replyFilter"> <!-- 검색조건 : 댓글내용 -->
               <form class="filter2ndForm">
                 <div class="keywordBox">
-                  <input type="text" name="keywordText" placeholder="댓글이나 포함 단어를 검색하세요.">
+                  <input type="text" name="keywordText" placeholder="댓글 포함 단어를 검색하세요.">
                 </div>
                 <button type="button" class="searchBtn">검색</button>
               </form>
@@ -310,12 +310,17 @@
     let $periodEnd = $(this).closest("form").find("input[class='periodEnd']").val();
 
     if(!$periodStart || !$periodEnd){
-      alert("작성기간을 입력해주세요");
+      alert("작성기간을 입력해주세요.");
       return;
     }
 
     let $inputStart = $periodStart.replace(/-/g, "");
     let $inputEnd = $periodEnd.replace(/-/g, "");
+
+    if(Number($inputStart)>=Number($inputEnd)){
+      alert("작성기간 형식이 올바르지 않습니다.");
+      return;
+    }
 
     let $keyword = $inputStart + " " + $inputEnd;
     $inputKeyword.val($keyword);
