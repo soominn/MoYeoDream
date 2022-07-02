@@ -55,6 +55,10 @@
           <li class="board-container" id ="goRead" th:object="${post}" th:href="${post.postNumber}">
             <a href="">
               <div class="board">
+                <div class="boardNumber">
+                  <!--<p class="textNO">NO .</p>-->
+                  <p th:text="*{postNumber}"/>
+                </div>
                 <div class="board_info">
                   <div class="board-title">
                     <h3 class="title_text" th:text="*{postTitle}"></h3>
