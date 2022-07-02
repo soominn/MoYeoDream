@@ -29,8 +29,9 @@
                             <input type="text" name="jobpostingCompanyName" id="enterprise-input" placeholder="기업 이름을 입력해주세요!">
                             <label for="enterprise-img">
                                 <img src="/img/fileImg.png">
+                                <input type="hidden" name="jobpostingCompanyLogo" id="job-logo-name">
                             </label>
-                            <input type="file" name="jobpostingCompanyLogo" id="enterprise-img">
+                            <input type="file" name="file" id="enterprise-img" accept="image/*">
                         </div>
                     </li>
                     <li class="study-info-item">
@@ -88,7 +89,7 @@
                     <input type="hidden" class="jobposting-content" name="jobpostingContent">
                 </section>
                 <section class="study-button">
-                    <button class="cancel" th:href="@{/main}">취소</button>
+                    <button class="cancel" th:href="@{/main/index}">취소</button>
                     <button type="button" class="register">등록</button>
                 </section>
             </section>

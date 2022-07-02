@@ -29,9 +29,10 @@
                     <div class="input">
                         <input type="text" name="jobpostingCompanyName" id="enterprise-input" th:value="*{jobpostingCompanyName}" placeholder="기업 이름을 입력해주세요!">
                         <label for="enterprise-img">
-                            <img src="/img/fileImg.png">
+                            <!--<img src="/img/fileImg.png">-->
+                            <input type="hidden" name="jobpostingCompanyLogo" id="job-logo-name">
                         </label>
-                        <input type="file" name="jobpostingCompanyLogo" id="enterprise-img">
+                        <input type="file" name="file" id="enterprise-img" accept="image/*">
                     </div>
                 </li>
                 <li class="study-info-item">
@@ -116,6 +117,56 @@
             minHeight: 523,
             lang: "ko-KR",
             placeholder: '내용을 작성해주세요!'
+        });
+    });
+
+    let files = [[${jobPosting.jobpostingCompanyLogo}]];
+    const $result = $("label[for='enterprise-img']");
+
+    //첨부파일
+    if(files != null) {
+        $result.prepend("<img src='/file/displayCompanyLogo?path=" + files + "'>");
+    }
+    else {
+        $result.prepend("<img src='/img/fileImg.png'>");
+    }
+
+    const imgThumbnail2 = document.querySelector("label[for='enterprise-img'] img");
+    const imgFile2 = document.querySelector("input[id='enterprise-img']");
+
+    let logoName2;
+
+    imgFile2.addEventListener("change", function(event) {
+        let reader = new FileReader();
+        reader.readAsDataURL(event.target.files[0]);
+        reader.onload = function(event) {
+            let url = event.target.result;
+            if(url.includes("image")) {
+                imgThumbnail2.src = url;
+            }
+            else {
+                imgThumbnail2.src = "https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG";
+            }
+        }
+
+        let formData2 = new FormData();
+        let logoInput2 = $("input[type='file']");
+        let logoFiles2 = logoInput2[1].files;
+        console.log(logoFiles2[0]);
+
+        logoName2 = $("input[type='file']")[1].files[0].name;
+
+        formData2.append("file", logoFiles2[0]);
+
+        $.ajax({
+            url: "/file/uploadCompanyLogo",
+            type: "POST",
+            data: formData2,
+            processData: false,
+            contentType: false,
+            success: function(fileName) {
+                $("#job-logo-name").val(fileName);
+            }
         });
     });
 </script>
