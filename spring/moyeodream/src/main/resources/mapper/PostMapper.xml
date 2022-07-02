@@ -25,6 +25,9 @@
                     <when test="type == 'R'.toString()">
                         OR ( POST_COMMENT_CONTENT LIKE '%'||#{keyword}||'%')
                     </when>
+                    <when test="type == 'M'.toString()">
+                        OR ( POST_MEMBER_NUMBER = #{keyword})
+                    </when>
                 </choose>
             </trim>
         </if>
