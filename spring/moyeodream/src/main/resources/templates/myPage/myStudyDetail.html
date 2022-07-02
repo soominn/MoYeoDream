@@ -31,7 +31,7 @@
             <div class="study-registered-date"></div>
         </div>
         <section class="change-buttons" th:if="${study.studyMemberNumber == session.memberNumber}">
-            <button type="button" class="change-button" ><a th:href="@{/member/myStudyModify(studyNumber = *{studyNumber})}">수정</a></button>
+            <button type="button" class="change-button" ><a th:href="@{/member/myStudyModifyRead(studyNumber = *{studyNumber})}">수정</a></button>
             <button type="button" class="change-button" onclick="clickRemove()">삭제</button>
         </section>
 

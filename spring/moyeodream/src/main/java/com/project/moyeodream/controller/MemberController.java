@@ -1,8 +1,6 @@
 package com.project.moyeodream.controller;
 
-import com.project.moyeodream.domain.vo.Criteria;
-import com.project.moyeodream.domain.vo.MemberVO;
-import com.project.moyeodream.domain.vo.PageDTO;
+import com.project.moyeodream.domain.vo.*;
 import com.project.moyeodream.service.MemberService;
 import com.project.moyeodream.service.PostService;
 import com.project.moyeodream.service.StudyService;
@@ -172,13 +170,29 @@ public class MemberController {
     }
 
     // 내 스터디 수정 이동
-    @GetMapping("myStudyModify")
+    @GetMapping("myStudyModifyRead")
     public String modify(Integer studyNumber, Model model) {
         log.info("----------------------------");
         log.info("modify : " + studyNumber);
         log.info("----------------------------");
         model.addAttribute("study", studyService.modify(studyNumber));
         return "myPage/myStudyModify";
+    }
+
+    // 내 스터디 수정 완료
+    @PostMapping("myStudyModify")
+    public RedirectView modify(StudyVO studyVO, HttpServletRequest req) {
+        log.info("----------------------------");
+        log.info("modify : " + studyVO);
+        log.info("----------------------------");
+
+        HttpSession session = req.getSession();
+        Integer memberNumber = (Integer)session.getAttribute("memberNumber");
+        studyVO.setStudyMemberNumber(memberNumber);
+
+        studyService.modify(studyVO);
+
+        return new RedirectView("/member/myStudyRead?studyNumber=" + studyVO.getStudyNumber());
     }
 
     //내 게시글 이동
@@ -237,6 +251,27 @@ public class MemberController {
         model.addAttribute("criteria",criteria);
 
         return "/myPage/myPostModify";
+    }
+
+    // 내 게시글 수정 완료
+    @PostMapping("myPostModify")
+    public RedirectView postModify(PostVO postVO, Criteria criteria, RedirectAttributes rttr, HttpServletRequest req){
+        log.info("---------------------------------------------------");
+        log.info("modifyOk controller..................");
+        log.info("criteria..........................."+ criteria);
+        log.info("---------------------------------------------------");
+
+        log.info(" 받아온 컨텐츠 내용 : " + postVO.getPostContent());
+        postService.postUpdate(postVO);
+
+        HttpSession session = req.getSession();
+        Integer memberNumber = (Integer)session.getAttribute("memberNumber");
+
+        rttr.addAttribute("session", memberNumber);
+        rttr.addAttribute("postNumber", postVO.getPostNumber());
+        rttr.addFlashAttribute("criteria", criteria);
+
+        return new RedirectView("/member/myPostRead");
     }
 
     // 선택된 게시글 삭제

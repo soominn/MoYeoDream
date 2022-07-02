@@ -16,7 +16,7 @@
 <header th:replace="~{/fragments/header::header}"></header>
 <!-- 헤더 부분 ↑ -->
 <div class="main-container" th:object="${study}">
-    <form action="/study/modify" method="post" id="studyForm">
+    <form action="/member/myStudyModify" method="post" id="studyForm">
         <section class="top">
             <input type="hidden" th:field="*{studyNumber}">
             <div class="study-info-title">
