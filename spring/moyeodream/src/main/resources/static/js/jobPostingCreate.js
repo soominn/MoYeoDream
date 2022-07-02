@@ -1,18 +1,40 @@
-const imgThumbnail = document.querySelector("label[for='enterprise-img'] img");
-const imgFile = document.querySelector("input[id='enterprise-img']");
+const imgThumbnail2 = document.querySelector("label[for='enterprise-img'] img");
+const imgFile2 = document.querySelector("input[id='enterprise-img']");
 
-imgFile.addEventListener("change", function(event) {
+let logoName2;
+
+imgFile2.addEventListener("change", function(event) {
 	let reader = new FileReader();
 	reader.readAsDataURL(event.target.files[0]);
 	reader.onload = function(event) {
 		let url = event.target.result;
 		if(url.includes("image")) {
-			imgThumbnail.src = url;
+			imgThumbnail2.src = url;
 		}
 		else {
-			imgThumbnail.src = "https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG";
+			imgThumbnail2.src = "https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG";
 		}
 	}
+
+	let formData2 = new FormData();
+	let logoInput2 = $("input[type='file']");
+	let logoFiles2 = logoInput2[1].files;
+	console.log(logoFiles2[0]);
+
+	logoName2 = $("input[type='file']")[1].files[0].name;
+
+	formData2.append("file", logoFiles2[0]);
+
+	$.ajax({
+		url: "/file/uploadCompanyLogo",
+		type: "POST",
+		data: formData2,
+		processData: false,
+		contentType: false,
+		success: function(fileName) {
+			$("#job-logo-name").val(fileName);
+		}
+	});
 });
 
 $(document).ready(function () {
