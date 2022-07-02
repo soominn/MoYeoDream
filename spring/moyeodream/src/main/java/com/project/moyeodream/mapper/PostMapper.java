@@ -25,4 +25,8 @@ public interface PostMapper {
     public int update(PostVO postVO);
     // 자유 게시판 삭제
     public int delete(int postNumber);
+    // 자유게시판 댓글 검색
+    public List<PostDTO> getReplyKeyword(Criteria criteria);
+    // 자유게시판 글 개수 (댓글 검색)
+    public int getReplyTotal(Criteria criteria);
 }

@@ -1,6 +1,7 @@
 package com.project.moyeodream.controller;
 
 import com.project.moyeodream.domain.vo.*;
+import com.project.moyeodream.mapper.PostMapper;
 import com.project.moyeodream.service.PostService;
 import com.project.moyeodream.service.PostServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/post/*")
 public class PostController {
     private final PostServiceImpl postService;
+    private final PostMapper postMapper;
 
     // 모든 자유 게시판 목록
     @GetMapping("list")
@@ -42,8 +44,22 @@ public class PostController {
         model.addAttribute("session", memberNum);
 
         criteria.setAmount(5);
-        PageDTO pageDTO = new PageDTO(criteria, postService.getTotal(criteria));
-        model.addAttribute("postList",postService.getList(criteria));
+        PageDTO pageDTO;
+
+        log.info("여기까지 옴");
+        if(criteria.getType() == null){
+            criteria.setType("default");
+        }
+        log.info(criteria.getType());
+
+        if(criteria.getType().equals("R")){
+            pageDTO = new PageDTO(criteria, postMapper.getReplyTotal(criteria));
+            model.addAttribute("postList",postMapper.getReplyKeyword(criteria));
+        }else{
+            pageDTO = new PageDTO(criteria, postService.getTotal(criteria));
+            model.addAttribute("postList",postService.getList(criteria));
+        }
+
         model.addAttribute("pageDTO", pageDTO );
         model.addAttribute("criteria", criteria);
 
