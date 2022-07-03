@@ -13,5 +13,5 @@ public class PostCommentVO {
     private Integer postCommentMemberNumber;             // 댓글 멤버 넘버(FK)    -   댓글 작성자 정보 가져오기 위해
     private Integer postCommentPostNumber;               // 댓글 멤버 넘버(FK)    -   댓글의 게시글 정보 가져오기 위해
     private String postCommentNickname;                 // 작성자 닉네임
-
+    private String memberProfile;                 // 작성자 프로필 이미지
 }

@@ -28,7 +28,7 @@
 
     <select id="getMyStudyList" resultType="studyDTO">
         SELECT /*+ INDEX_DESC(ts PK_STUDY) */
-        STUDY_NUMBER, STUDY_CATEGORY, STUDY_START, STUDY_PERSONNEL, STUDY_TITLE, STUDY_APPROVE, STUDY_VIEWS, ts.STUDY_MEMBER_NUMBER, tm.MEMBER_NICKNAME
+        STUDY_NUMBER, STUDY_CATEGORY, STUDY_START, STUDY_PERSONNEL, STUDY_TITLE, STUDY_APPROVE, STUDY_VIEWS, ts.STUDY_MEMBER_NUMBER, tm.MEMBER_NICKNAME, tm.MEMBER_PROFILE
         FROM TBL_STUDY ts JOIN TBL_MEMBER tm
         ON ts.STUDY_MEMBER_NUMBER = tm.MEMBER_NUMBER
         WHERE tm.MEMBER_NUMBER = #{memberNumber}
@@ -42,7 +42,7 @@
 
     <update id="update">
         UPDATE TBL_MEMBER
-        SET MEMBER_NICKNAME = #{memberNickname}, MEMBER_INTERESTS = #{memberInterests}
+        SET MEMBER_NICKNAME = #{memberNickname}, MEMBER_INTERESTS = #{memberInterests}, MEMBER_PROFILE = #{memberProfile}
         WHERE MEMBER_NUMBER = #{memberNumber}
     </update>
 
@@ -84,6 +84,7 @@
             AND <![CDATA[ ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
         )
         WHERE RN > ((#{criteria.pageNum} -1) * #{criteria.amount})
+        ORDER BY RN
         ]]>
     </select>
 
@@ -116,6 +117,7 @@
             AND <![CDATA[ ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
         )
         WHERE RN > ((#{criteria.pageNum} -1) * #{criteria.amount})
+        ORDER BY RN
         ]]>
     </select>
 

@@ -1,27 +1,3 @@
-/*
-const imgThumbnail2 = document.querySelector("img.img-example");
-const imgFile2 = document.querySelector("input[id='imageUpload']");
-const imgDelete2 = document.querySelector("button.img-delete");
-
-imgFile2.addEventListener("change", function(event) {
-	let reader = new FileReader();
-	reader.readAsDataURL(event.target.files[0]);
-	reader.onload = function(event) {
-		let url = event.target.result;
-		if(url.includes("image")) {
-			imgThumbnail2.src = url;
-		}
-		else {
-			imgThumbnail2.src = "https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG";
-		}
-	}
-});
-
-imgDelete2.addEventListener("click", function() {
-	imgFile2.value = "";
-	imgThumbnail2.src = "https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG";
-});*/
-
 
 $(function() {
 	$(".open-selectt").click(function() {
