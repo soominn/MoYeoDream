@@ -27,7 +27,7 @@
                 <div class="study-title" th:text="*{inquiryTitle}"></div>
                 <div class="study-user">
                     <div class="user-profile">
-                        <img src="https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG">
+                        <!--<img src="https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG">-->
                         <div class="user-nickname" th:text="*{memberNickname}"></div>
                     </div>
                     <div class="study-registered-date" th:if="*{inquiryRegisterDate == inquiryUpdateDate}" th:text="*{inquiryRegisterDate}"></div>
@@ -65,6 +65,18 @@
 <script src="/js/header.js"></script>
 <script src="/js/login.js"></script>
 <script th:inline="javascript">
+
+    let filesWriterProfile = [[${inquiry.memberProfile}]];
+    const $resultWriterProfile = $(".user-profile");
+
+
+    //첨부파일
+    if(filesWriterProfile != null) {
+        $resultWriterProfile.prepend("<img src='/file/displayProfile?path=" + filesWriterProfile + "'>");
+    }
+    else {
+        $resultWriterProfile.prepend("<img src='https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG'>");
+    }
 
     let inquiryContent = [[${inquiry.inquiryContent}]];
 

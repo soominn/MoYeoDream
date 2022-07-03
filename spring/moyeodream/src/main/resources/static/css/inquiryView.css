@@ -85,9 +85,9 @@ div.user-profile {
 div.user-profile img {
     cursor: pointer;
     display: block;
-    height: 3rem;
-    width: 3rem;
-    margin-right: 16px;
+    height: 4rem;
+    width: 4rem;
+    margin-right: 9px;
     border-radius: 50%;
     object-fit: cover;
 }
