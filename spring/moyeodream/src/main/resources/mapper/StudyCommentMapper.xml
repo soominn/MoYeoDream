@@ -15,8 +15,8 @@
         WHERE STUDY_COMMENT_STUDY_NUMBER = #{studyCommentStudyNumber}
     </select>
 
-    <select id="selectNickname" resultType="string">
-        SELECT MEMBER_NICKNAME FROM TBL_MEMBER
+    <select id="selectMemberInfo" resultType="memberVO">
+        SELECT MEMBER_EMAIL, MEMBER_NICKNAME, MEMBER_INTERESTS, MEMBER_PROFILE FROM TBL_MEMBER
         WHERE MEMBER_NUMBER = #{studyCommentMemberNumber}
     </select>
 

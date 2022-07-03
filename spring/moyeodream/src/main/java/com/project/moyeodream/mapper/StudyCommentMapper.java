@@ -1,5 +1,6 @@
 package com.project.moyeodream.mapper;
 
+import com.project.moyeodream.domain.vo.MemberVO;
 import com.project.moyeodream.domain.vo.StudyCommentDTO;
 import com.project.moyeodream.domain.vo.StudyCommentVO;
 import org.apache.ibatis.annotations.Mapper;
@@ -12,8 +13,8 @@ public interface StudyCommentMapper {
     public void insert(StudyCommentVO studyCommentVO);
     // 전체 댓글 목록
     public List<StudyCommentDTO> getList(int studyCommentStudyNumber);
-    // 댓글 작성한 멤버의 닉네임
-    public String selectNickname(int studyCommentMemberNumber);
+    // 댓글 작성한 멤버의 정보
+    public MemberVO selectMemberInfo(int studyCommentMemberNumber);
     // 댓글 수정
     public void update(StudyCommentVO studyCommentVO);
     // 댓글 삭제

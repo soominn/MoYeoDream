@@ -1,9 +1,6 @@
 package com.project.moyeodream.domain.dao;
 
-import com.project.moyeodream.domain.vo.Criteria;
-import com.project.moyeodream.domain.vo.JobpostingVO;
-import com.project.moyeodream.domain.vo.StudyDTO;
-import com.project.moyeodream.domain.vo.StudyVO;
+import com.project.moyeodream.domain.vo.*;
 import com.project.moyeodream.mapper.StudyMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -39,8 +36,8 @@ public class StudyDAO {
     }
 
     // 스터디 만든 회원의 닉네임 찾기
-    public String findNickname(int studyMemberNumber) {
-        return studyMapper.selectNickname(studyMemberNumber);
+    public MemberVO findMemberInfo(int studyMemberNumber) {
+        return studyMapper.selectMemberInfo(studyMemberNumber);
     }
 
     // 내가 만든 스터디 목록
