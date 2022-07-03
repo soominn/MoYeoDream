@@ -16,6 +16,7 @@
         )
         WHERE RN > ((#{pageNum} -1) * #{amount})
         ]]>
+        ORDER BY RN
     </select>
 
     <!-- 게시글 전체 개수 -->

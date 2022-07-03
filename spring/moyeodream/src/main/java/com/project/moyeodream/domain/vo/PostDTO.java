@@ -17,4 +17,5 @@ public class PostDTO {
     private String memberNickname;              // 게시글 작성자 닉네임
     private String postCommentContent;                   // 내 댓글 내용
     private Integer postCommentCount;               // 게시글 내 댓글 개수
+    private String memberProfile;                 // 멤버 프로필 이미지
 }

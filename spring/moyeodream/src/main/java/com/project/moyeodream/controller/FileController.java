@@ -40,10 +40,16 @@ public class FileController {
         return fileName;
     }
 
+    @GetMapping("displayProfile")
+    @ResponseBody
+    public byte[] getProfile(String path) throws IOException {
+        return FileCopyUtils.copyToByteArray(new File("C:/upload/profile/" + path));
+    }
+
     @DeleteMapping("/deleteProfile")
     @ResponseBody
     public void deleteProfile(String path){
-        File file = new File("C:/upload", path);
+        File file = new File("C:/upload/profile", path);
         if(file.exists()) {file.delete();}
     }
 

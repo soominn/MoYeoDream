@@ -79,11 +79,11 @@ button{
     padding-bottom: 5rem;
 }
 
-.img-input{
+.img-input2{
     display: flex;
 }
 
-.img-example{
+.img-example2{
     display: block;
     height: 10rem;
     width: 10rem;
@@ -120,7 +120,7 @@ button{
     display: none;
 }
 
-.img-delete{
+.img-delete2{
     width: 7.5rem;
     height: 2rem;
     font-size: 1rem;
