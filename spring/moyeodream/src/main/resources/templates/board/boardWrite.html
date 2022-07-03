@@ -84,13 +84,28 @@
   // 값을 넣어줄 input
   let $postForm = $("form[name= postForm]");
 
+  // 게시글 등록 (DB)
   function saveContent(){
     let $value = $("#summernote").summernote('code');
+    console.log($value);
     inputContent.value = $value;
-    $postForm.submit();
+    // $postForm.submit();
   }
 
   //----------------------------------------------------------//
+
+  //---------------- 첨부파일 ajax ---------------------------//
+
+
+  $("#summernote").on("change", function(){
+    console.log("입력됨");
+    let formData = new FormData();
+    let input = $(".panel-body");
+    let files = input.files;
+
+    console.log(files);
+
+  });
 
 
 </script>

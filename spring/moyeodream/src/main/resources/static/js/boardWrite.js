@@ -28,12 +28,14 @@ $(document).ready(function () {
         lang: "ko-KR",
         placeholder: '내용을 작성해 주세요!',
         callbacks: {
-            onImageUpload: function (files, editor, welEditable) {
-                // 들어온 파일 한개씩 반복
-                for (var i = files.length - 1; i >= 0; i--) {
-                    sendFile(files[i], this);
-                }
-
+            // onImageUpload: function (fileList, editor, welEditable) {
+            //     for(let i = 0; i < fileList.length; i++){
+            //         sendFile(fileList[i]);
+            //         // sendFile(fileList[i], $('#summernote'), '/board/boardWrite.html');
+            //     }
+            // }
+            onImageUpload: function(files){
+                sendFile(files, $('#summernote'), '/board/boardWrite.html');
             }
         }
     };
@@ -59,12 +61,17 @@ $(document).ready(function () {
       )
 });
 
-function sendFile(files, el){
+// sendFile(file, el, uploadURL)
+function sendFile(fileList, el, uploadURL){
     let formData = new FormData;
-    formData.append("file",files);
+    // formData.append("file",file);
 
-    for (var i = files.length - 1; i >= 0; i--) {
-        sendFile(files[i], this);
+    let files = fileList;
+
+    for(let i = 0; i < files.length; i++){
+        formData.append("files", files[i]);
+        console.log(files[i]);
+        console.log(formData);
     }
 
     $.ajax({
@@ -73,10 +80,19 @@ function sendFile(files, el){
         data : formData,
         contentType : false,
         processData : false,
-        enctype : 'multipard/form-data',
-        success : function(fileList){
-            $(el).summernote('editor.insertImage', formData.url);
-            console.log($(el).summernote('editor.insertImage', formData.url));
+        enctype : 'multipart/form-data',
+        success : function(){
+            console.log("업로드 성공");
+            // location.href= '/upload/displayPost?path=2022/07/04/c5fff81b-8089-4c70-9c74-50cc3ced5c31_09.jpg';
+            $(el).summernote('editor.insertImage', 'https://t1.daumcdn.net/cfile/tistory/24283C3858F778CA2E.jpg');
         }
     })
+}
+
+function showUploadFiles(fileList,el) {
+    let str = "";
+    $.each(fileList,function(i, file){
+        str += "<img src='/upload/displayPost?path="+ file.uploadDirectory + "/" + file.filename + "/>";
+    })
+    $(el).summernote('editor.insertImage', str);
 }
