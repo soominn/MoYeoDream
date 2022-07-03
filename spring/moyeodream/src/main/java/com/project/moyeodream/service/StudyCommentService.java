@@ -1,6 +1,7 @@
 package com.project.moyeodream.service;
 
 import com.project.moyeodream.domain.dao.StudyCommentDAO;
+import com.project.moyeodream.domain.vo.MemberVO;
 import com.project.moyeodream.domain.vo.StudyCommentDTO;
 import com.project.moyeodream.domain.vo.StudyCommentVO;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +29,9 @@ public class StudyCommentService {
     public List<StudyCommentDTO> getList(int studyCommentStudyNumber) {
         List<StudyCommentDTO> studyCommentDTOS = studyCommentDAO.getList(studyCommentStudyNumber);
         studyCommentDTOS.forEach(DTO -> {
-            DTO.setMemberNickname(studyCommentDAO.selectNickname(DTO.getStudyCommentMemberNumber()));
+            MemberVO memberVO = studyCommentDAO.selectNickname(DTO.getStudyCommentMemberNumber());
+            DTO.setMemberNickname(memberVO.getMemberNickname());
+            DTO.setMemberProfile(memberVO.getMemberProfile());
             DTO.setCommentTotal(studyCommentDAO.getTotal(studyCommentStudyNumber));
         });
         return studyCommentDTOS;

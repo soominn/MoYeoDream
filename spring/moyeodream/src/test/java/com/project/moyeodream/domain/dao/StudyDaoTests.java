@@ -36,11 +36,4 @@ public class StudyDaoTests {
         log.info("찾아낸 스터디 제목 : " + studyDAO.read(1).getStudyTitle());
         log.info("---------------------------------------------------------");
     }
-
-    @Test
-    public void selectNicknameTest() {
-        log.info("---------------------------------------------------------");
-        log.info("member의 nickname : " + studyDAO.findNickname(1));
-        log.info("---------------------------------------------------------");
-    }
 }
