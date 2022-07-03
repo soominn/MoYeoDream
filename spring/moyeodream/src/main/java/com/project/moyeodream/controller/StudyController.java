@@ -113,7 +113,7 @@ public class StudyController {
 
         studyService.remove(studyNumber);
 
-        return register();
+        return "redirect:http://localhost:11111/member/main";
     }
 
 
