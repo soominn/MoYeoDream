@@ -2,4 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.moyeodream.mapper.FileMapper">
 
+    <!-- 게시판 파일 등록 -->
+    <insert id="insertPost">
+        INSERT INTO TBL_FILE
+        (FILE_NAME, UPLOAD_DIRECTORY, POST_NUMBER)
+        VALUES(#{fileName}, #{uploadDirectory}, #{postVO.postNumber})
+    </insert>
 </mapper>

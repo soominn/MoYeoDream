@@ -76,24 +76,75 @@
 <script th:inline="javascript">
   let memberNumber = [[${session.memberNumber}]];
 </script>
+<script>
+  // 값을 넣어줄 input
+  let $postForm = $("form[name= postForm]");
+</script>
 <script src="/js/header.js"></script>
 <script src="/js/login.js"></script>
 <script src="/js/boardWrite.js"></script>
 <script th:inline="javascript">
   //------------board Modify 공통 내용-------------------------//
-  let memberNum = [[${session.memberNumber}]];
+  // let memberNum = [[${session.memberNumber}]];
+  let memberNum = 42;
 
   let inputContent = document.querySelector("input[name=postContent]");
-  // 값을 넣어줄 input
-  let $postForm = $("form[name= postForm]");
 
+  // 게시글 등록 (DB)
   function saveContent(){
     let $value = $("#summernote").summernote('code');
+    console.log($value);
     inputContent.value = $value;
+
+    // 이미지파일 유무 검사
+    if($value.indexOf("<img") != -1){
+      console.log("이미지 태그 있음");
+      // 썸머노트에 삽입된 img 태그
+      // let noteImg = $(".panel-body").find("img").attr("src");
+      // let noteName = noteImg.substr(noteImg.lastIndexOf("t_")+2);
+      // DB 입력을 위한 img input hidden
+      let hiddenInput = $("input[class='imgFile']");
+      // let hiddenName = $("input[class='imgFile']").attr("value");
+
+      // 실제 입력된 이미지 태그의 개수
+      // let noteImgCount = $value.split("<img").length -1;
+
+      $.each(hiddenInput, function(i, input){
+        if($value.indexOf($(this).attr("value"))== -1){
+          let valueStr = $(this).attr("value");
+          let removeStr = $postForm.find("input[value='"+valueStr+"']").attr("name");
+          let removeName = removeStr.substr(0,removeStr.indexOf("."));
+          console.log(removeName);
+          let removeTag = $('input[id=removeName]');
+          console.log(removeTag.length);
+
+          $('input[id=removeName]').remove();
+
+        }
+      });
+
+
+    }else{
+      console.log("이미지 태그 없음");
+      $("input[class='imgFile']").remove();
+    }
     $postForm.submit();
   }
 
   //----------------------------------------------------------//
+
+  //---------------- 첨부파일 ajax ---------------------------//
+
+
+  $("#summernote").on("change", function(){
+    console.log("입력됨");
+    let formData = new FormData();
+    let input = $(".panel-body");
+    let files = input.files;
+
+    console.log(files);
+
+  });
 
 
 </script>
