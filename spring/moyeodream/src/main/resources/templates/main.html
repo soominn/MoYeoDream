@@ -52,45 +52,92 @@
 
         <!-- 카테고리 필터 -->
         <div class="cateFilterWrap">
-            <div class="cateBottomWrap">
-                <ul>
-                    <li class="cateChildLi" value="culture"><p>문화 • 예술</p></li>
-                    <li class="cateChildLi" value="sports"><p>스포츠 • 레저</p></li>
-                    <li class="cateChildLi" value="programming"><p>컴퓨터 • 프로그래밍</p></li>
-                    <li class="cateChildLi" value="foreign"><p>외국어 • 토익 • 토플</p></li>
-                    <li class="cateChildLi" value="science"><p>인문 • 과학</p></li>
-                    <li class="cateChildLi" value="finance"><p>경제 • 금융</p></li>
-                    <li class="cateChildLi" value="politics"><p>정치 • 사회</p></li>
-                    <li class="cateChildLi" value="certificate"><p>자격증</p></li>
-                    <li class="cateChildLi" value="officiary"><p>공무원</p></li>
-                    <li class="cateChildLi" value="employment"><p>취업 • 면접</p></li>
-                </ul>
-            </div>
-            <div class="cateBlockWrap">
-                <ul>
-                    <li class="cateBlock" value="culture"><div>문화 • 예술</div>
-                        <img class="filterXbtn" src="/img/delete.svg"></li>
-                    <li class="cateBlock" value="sports"><div>스포츠 • 레저</div>
-                        <img class="filterXbtn" src="/img/delete.svg"></li>
-                    <li class="cateBlock" value="programming"><div>컴퓨터 • 프로그래밍</div>
-                        <img class="filterXbtn" src="/img/delete.svg"></li>
-                    <li class="cateBlock" value="foreign"><div>외국어 • 토익 • 토플</div>
-                        <img class="filterXbtn" src="/img/delete.svg"></li>
-                    <li class="cateBlock" value="science"><div>인문 • 과학</div>
-                        <img class="filterXbtn" src="/img/delete.svg"></li>
-                    <li class="cateBlock" value="finance"><div>경제 • 금융</div>
-                        <img class="filterXbtn" src="/img/delete.svg"></li>
-                    <li class="cateBlock" value="politics"><div>정치 • 사회</div>
-                        <img class="filterXbtn" src="/img/delete.svg"></li>
-                    <li class="cateBlock" value="certificate"><div>자격증</div>
-                        <img class="filterXbtn" src="/img/delete.svg"></li>
-                    <li class="cateBlock" value="officiary"><div>공무원</div>
-                        <img class="filterXbtn" src="/img/delete.svg"></li>
-                    <li class="cateBlock" value="employment"><div>취업 • 면접</div>
-                        <img class="filterXbtn" src="/img/delete.svg"></li>
-                    <span class="filterClear">필터 초기화</span>
-                </ul>
-            </div>
+            <th:block th:if="${check == 0}">
+                <form method="get" action="/main/categoryView" id="searchForm" th:object="${pageDTO}">
+                    <div class="cateBottomWrap" th:object="${critetia}">
+                        <ul>
+                            <li class="cateChildLi" value="C"><p>문화 • 예술</p></li>
+                            <li class="cateChildLi" value="S"><p>스포츠 • 레저</p></li>
+                            <li class="cateChildLi" value="P"><p>컴퓨터 • 프로그래밍</p></li>
+                            <li class="cateChildLi" value="F"><p>외국어 • 토익 • 토플</p></li>
+                            <li class="cateChildLi" value="I"><p>인문 • 과학</p></li>
+                            <li class="cateChildLi" value="N"><p>경제 • 금융</p></li>
+                            <li class="cateChildLi" value="O"><p>정치 • 사회</p></li>
+                            <li class="cateChildLi" value="E"><p>자격증</p></li>
+                            <li class="cateChildLi" value="A"><p>공무원</p></li>
+                            <li class="cateChildLi" value="M"><p>취업 • 면접</p></li>
+                        </ul>
+                    </div>
+                    <div class="cateBlockWrap">
+                        <ul>
+                            <li class="cateBlock" value="culture"><div>문화 • 예술</div>
+                                <img class="filterXbtn" src="/img/delete.svg"></li>
+                            <li class="cateBlock" value="sports"><div>스포츠 • 레저</div>
+                                <img class="filterXbtn" src="/img/delete.svg"></li>
+                            <li class="cateBlock" value="programming"><div>컴퓨터 • 프로그래밍</div>
+                                <img class="filterXbtn" src="/img/delete.svg"></li>
+                            <li class="cateBlock" value="foreign"><div>외국어 • 토익 • 토플</div>
+                                <img class="filterXbtn" src="/img/delete.svg"></li>
+                            <li class="cateBlock" value="science"><div>인문 • 과학</div>
+                                <img class="filterXbtn" src="/img/delete.svg"></li>
+                            <li class="cateBlock" value="finance"><div>경제 • 금융</div>
+                                <img class="filterXbtn" src="/img/delete.svg"></li>
+                            <li class="cateBlock" value="politics"><div>정치 • 사회</div>
+                                <img class="filterXbtn" src="/img/delete.svg"></li>
+                            <li class="cateBlock" value="certificate"><div>자격증</div>
+                                <img class="filterXbtn" src="/img/delete.svg"></li>
+                            <li class="cateBlock" value="officiary"><div>공무원</div>
+                                <img class="filterXbtn" src="/img/delete.svg"></li>
+                            <li class="cateBlock" value="employment"><div>취업 • 면접</div>
+                                <img class="filterXbtn" src="/img/delete.svg"></li>
+                            <span class="filterClear">필터 초기화</span>
+                        </ul>
+                    </div>
+                </form>
+            </th:block>
+            <th:block th:unless="${check == 0}">
+                <form method="get" action="/main/categoryLatest" class="searchForm" th:object="${pageDTO}">
+                    <div class="cateBottomWrap" th:object="${critetia}">
+                        <ul>
+                            <li class="cateChildLi" value="culture" th:selected="*{type == 'culture'}"><p>문화 • 예술</p></li>
+                            <li class="cateChildLi" value="sports" th:selected="*{type == 'sports'}"><p>스포츠 • 레저</p></li>
+                            <li class="cateChildLi" value="programming" th:selected="*{type == 'programming'}"><p>컴퓨터 • 프로그래밍</p></li>
+                            <li class="cateChildLi" value="foreign" th:selected="*{type == 'foreign'}"><p>외국어 • 토익 • 토플</p></li>
+                            <li class="cateChildLi" value="science" th:selected="*{type == 'science'}"><p>인문 • 과학</p></li>
+                            <li class="cateChildLi" value="finance" th:selected="*{type == 'finance'}"><p>경제 • 금융</p></li>
+                            <li class="cateChildLi" value="politics" th:selected="*{type == 'politics'}"><p>정치 • 사회</p></li>
+                            <li class="cateChildLi" value="certificate" th:selected="*{type == 'certificate'}"><p>자격증</p></li>
+                            <li class="cateChildLi" value="officiary" th:selected="*{type == 'officiary'}"><p>공무원</p></li>
+                            <li class="cateChildLi" value="employment" th:selected="*{type == 'employment'}"><p>취업 • 면접</p></li>
+                        </ul>
+                    </div>
+                    <div class="cateBlockWrap">
+                        <ul>
+                            <li class="cateBlock" value="culture"><div>문화 • 예술</div>
+                                <img class="filterXbtn" src="/img/delete.svg"></li>
+                            <li class="cateBlock" value="sports"><div>스포츠 • 레저</div>
+                                <img class="filterXbtn" src="/img/delete.svg"></li>
+                            <li class="cateBlock" value="programming"><div>컴퓨터 • 프로그래밍</div>
+                                <img class="filterXbtn" src="/img/delete.svg"></li>
+                            <li class="cateBlock" value="foreign"><div>외국어 • 토익 • 토플</div>
+                                <img class="filterXbtn" src="/img/delete.svg"></li>
+                            <li class="cateBlock" value="science"><div>인문 • 과학</div>
+                                <img class="filterXbtn" src="/img/delete.svg"></li>
+                            <li class="cateBlock" value="finance"><div>경제 • 금융</div>
+                                <img class="filterXbtn" src="/img/delete.svg"></li>
+                            <li class="cateBlock" value="politics"><div>정치 • 사회</div>
+                                <img class="filterXbtn" src="/img/delete.svg"></li>
+                            <li class="cateBlock" value="certificate"><div>자격증</div>
+                                <img class="filterXbtn" src="/img/delete.svg"></li>
+                            <li class="cateBlock" value="officiary"><div>공무원</div>
+                                <img class="filterXbtn" src="/img/delete.svg"></li>
+                            <li class="cateBlock" value="employment"><div>취업 • 면접</div>
+                                <img class="filterXbtn" src="/img/delete.svg"></li>
+                            <span class="filterClear">필터 초기화</span>
+                        </ul>
+                    </div>
+                </form>
+            </th:block>
         </div>
 
 
@@ -194,11 +241,10 @@
                     </ul>
                 </div>
             </th:block>
-<!--            <form action="/main/changeList" th:object="${criteria}" name="pageForm">-->
+<!--            <form action="/main/category" th:object="${criteria}" name="pageForm">-->
 <!--                <input type="hidden" th:field="*{pageNum}">-->
 <!--                <input type="hidden" th:field="*{amount}">-->
 <!--                <input type="hidden" th:field="*{type}">-->
-<!--                <input type="hidden" th:field="*{keyword}">-->
 <!--            </form>-->
         </div>
     </section>
@@ -209,12 +255,55 @@
 <script src="/js/login.js"></script>
 <script src="/js/main.js"></script>
 <script th:inline="javascript">;
+let $serachForm = $(searchForm);
+let category = [];
     function changeView(){
         location.href="/main/changeView";
     }
     function changeLatest(){
         location.href="/main/changeLatest";
     }
+
+
+    // 카테고리 클릭 시
+    $('.cateBottomWrap li.cateChildLi').on("click",function (e) {
+        e.preventDefault();
+        cosole.log($("li.cateChildLi option:selected").val().toString());
+        category.push($("li.cateChildLi option:selected").val().toString());
+        if($('.cateBlock').attr("value") == $("li.cateChildLi option:selected").val().toString()){
+            $(this).css('display','block');
+        }
+
+        $serachForm.submit(category);
+    });
+
+    // x버튼 클릭 시
+    $('.cateBlockWrap img.filterXbtn').on("click",function (e) {
+        e.preventDefault();
+        for(var i = 0; i < category.length; i++){
+            if(category[i] == $('li.cateBlock').attr("value")){
+                $(this).css('display','none');
+                category.splice(i,1);
+                i--;
+            }
+        }
+
+        $serachForm.submit(category);
+    });
+
+    // 필터 초기화 클릭 시
+    $('.cateBlockWrap .filterClear').on("click",function (e) {
+        e.preventDefault();
+        category.forEach( c => {
+            if(c == $('li.cateBlock').attr("value")){
+                $(this).css('display','none');
+            }
+        });
+
+        category = [];
+        $serachForm.submit(category);
+    });
+
 
     $("li.studyList").on("click", function(e) {
         e.preventDefault();

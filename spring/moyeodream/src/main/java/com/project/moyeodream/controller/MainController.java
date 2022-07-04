@@ -34,32 +34,73 @@ public class MainController {
     @GetMapping("index")
     public String index(Model model, Criteria criteria){
         // 인기순
-        for (StudyDTO list: studyService.getListView(criteria)) {
+        List<StudyDTO> studyList = studyService.getListView(criteria);
+
+        for (StudyDTO list: studyList) {
             list.setStudyCommentTotal(studyCommentService.getTotal(list.getStudyNumber()));
+            log.info("getTotal comment___________ : "+list.getStudyCommentTotal());
         }
-        model.addAttribute("studyList",studyService.getListView(criteria));
+        model.addAttribute("studyList",studyList);
         model.addAttribute("jobpostingList",jobpostingService.getList(criteria));
+        model.addAttribute("check", 0);
         return "/main";
     }
 
     // 최신순
     @GetMapping("changeLatest")
     public String changeLatest(Model model, Criteria criteria){
-        for (StudyDTO list: studyService.getListLatest(criteria)) {
+        List<StudyDTO> studyList = studyService.getListLatest(criteria);
+
+        for (StudyDTO list: studyList) {
             list.setStudyCommentTotal(studyCommentService.getTotal(list.getStudyNumber()));
+            log.info("getTotal comment___________ : "+list.getStudyCommentTotal());
         }
-        model.addAttribute("studyList",studyService.getListLatest(criteria));
+        model.addAttribute("studyList",studyList);
         model.addAttribute("jobpostingList",jobpostingService.getListLatest(criteria));
+        model.addAttribute("check", 1);
         return "/main";
     }
     // 인기순
     @GetMapping("changeView")
     public String changeView(Model model, Criteria criteria){
-        for (StudyDTO list: studyService.getListView(criteria)) {
+        List<StudyDTO> studyList = studyService.getListView(criteria);
+
+        for (StudyDTO list: studyList) {
             list.setStudyCommentTotal(studyCommentService.getTotal(list.getStudyNumber()));
+            log.info("getTotal comment___________ : "+list.getStudyCommentTotal());
         }
-        model.addAttribute("studyList",studyService.getListView(criteria));
+        model.addAttribute("studyList",studyList);
         model.addAttribute("jobpostingList",jobpostingService.getListView(criteria));
+        model.addAttribute("check", 0);
+        return "/main";
+    }
+    
+    // 카테고리 검색 - 인기순
+    @GetMapping("categoryView")
+    public String categoryView(Model model, Criteria criteria){
+        List<StudyDTO> studyList = studyService.getListView(criteria);
+
+        for (StudyDTO list: studyList) {
+            list.setStudyCommentTotal(studyCommentService.getTotal(list.getStudyNumber()));
+            log.info("getTotal comment___________ : "+list.getStudyCommentTotal());
+        }
+        model.addAttribute("studyList",studyList);
+        model.addAttribute("jobpostingList",jobpostingService.getListView(criteria));
+        model.addAttribute("check", 0);
+        return "/main";
+    }
+    // 카테고리 검색 - 최신순
+    @GetMapping("categoryLatest")
+    public String categoryLatest(Model model, Criteria criteria){
+        List<StudyDTO> studyList = studyService.getListLatest(criteria);
+
+        for (StudyDTO list: studyList) {
+            list.setStudyCommentTotal(studyCommentService.getTotal(list.getStudyNumber()));
+            log.info("getTotal comment___________ : "+list.getStudyCommentTotal());
+        }
+        model.addAttribute("studyList",studyList);
+        model.addAttribute("jobpostingList",jobpostingService.getListLatest(criteria));
+        model.addAttribute("check", 1);
         return "/main";
     }
 
