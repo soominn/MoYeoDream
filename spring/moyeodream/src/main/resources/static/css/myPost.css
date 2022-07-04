@@ -125,7 +125,6 @@ p{
 .question .question__title{
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
 }
 
 .question .title__text{

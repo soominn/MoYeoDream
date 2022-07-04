@@ -242,19 +242,21 @@ $(document).on("click", ".register", function() {
 
 // 댓글 삭제
 $(document).on("click", ".comment-remove", function() {
-    if(modifyCheck) {
-        alert("수정 중인 댓글이 있습니다.");
-        return;
-    }
-    modifyCheck = false;
-
-    $.ajax({
-        url: "/studyComment/remove/" + $(this).parent().parent().next().children(1).children(0).val(),
-        type: "GET",
-        success: function() {
-            getCommentList();
+    if (window.confirm("삭제하시겠습니까?")) {
+        if(modifyCheck) {
+            alert("수정 중인 댓글이 있습니다.");
+            return;
         }
-    });
+        modifyCheck = false;
+
+        $.ajax({
+            url: "/studyComment/remove/" + $(this).parent().parent().next().children(1).children(0).val(),
+            type: "GET",
+            success: function() {
+                getCommentList();
+            }
+        });
+    }
 });
 
 $("a.kakao-openchatting").click(function() {
@@ -268,7 +270,9 @@ function clickModify() {
 
 // 글 삭제
 function clickRemove() {
-    location.href = "/study/remove?studyNumber=" + studyNumber;
+    if (window.confirm("삭제하시겠습니까?")) {
+        location.href = "/study/remove?studyNumber=" + studyNumber;
+    }
 }
 
 function dateFormat(format) {

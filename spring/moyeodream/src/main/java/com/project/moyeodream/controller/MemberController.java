@@ -175,6 +175,7 @@ public class MemberController {
         HttpSession session = req.getSession();
         Integer memberNumber = (Integer)session.getAttribute("memberNumber");
 
+        studyService.views(studyNumber);
         model.addAttribute("study", studyService.read(studyNumber));
         model.addAttribute("session", memberNumber);
 
