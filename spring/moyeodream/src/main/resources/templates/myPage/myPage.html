@@ -28,7 +28,7 @@
 									<a class="eYKbXT" th:href="@{/member/myProfile}">
 										<div class="cqZvVN gkiCmL">프로필 수정</div>
 									</a>
-                                    <a class="eYKbXT" th:href="@{/member/logout}">
+                                    <a class="eYKbXT" onclick="logout()">
 										<div class="cqZvVN gkiCmL">로그아웃</div>
 									</a>
 								</section>
@@ -53,7 +53,7 @@
 								<div class="profile-img">
                                     <div>  
                                         <div class="profile-img2">
-                                            <img class="profile-img3" src="https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG">
+                                            <!--<img class="profile-img3" src="https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG">-->
                                         </div>
                                     </div>
                                 </div>
@@ -174,6 +174,9 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script th:inline="javascript">
+    let memberNumber = [[${session.memberNumber}]];
+</script>
 <script src="/js/header.js"></script>
 <script src="/js/login.js"></script>
 <script th:inline="javascript">
@@ -188,7 +191,7 @@
             for (let i in memberInterestsArr){
                 if(memberInterestsArr[i] == 'culture'){
                     $(".culture").show();
-                }else if(memberInterestsArr[i] == 'sport'){
+                }else if(memberInterestsArr[i] == 'sports'){
                     $(".sports").show();
                 }else if(memberInterestsArr[i] == 'programming'){
                     $(".programming").show();
@@ -208,6 +211,18 @@
                     $(".employment").show();
                 }
             }
+        }
+    });
+
+    let filesLeaderProfile = [[${member.memberProfile}]];
+    const $resultLocation = $(".profile-img2");
+
+    $(document).ready(function() {
+        //첨부파일
+        if (filesLeaderProfile != null) {
+            $resultLocation.prepend("<img class=\"profile-img3\" src='/file/displayProfile?path=" + filesLeaderProfile + "'>");
+        } else {
+            $resultLocation.prepend("<img class=\"profile-img3\" src='https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG'>");
         }
     });
 

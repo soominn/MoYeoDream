@@ -25,13 +25,13 @@
         <div class="study-title" th:text="*{studyTitle}"></div>
         <div class="study-user">
             <div class="user-profile">
-                <img src="https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG">
+                <!--<img src="https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG">-->
                 <div class="user-nickname" th:text="*{memberNickname}"></div>
             </div>
             <div class="study-registered-date"></div>
         </div>
         <section class="change-buttons" th:if="${study.studyMemberNumber == session.memberNumber}">
-            <button type="button" class="change-button" ><a th:href="@{/member/myStudyModify(studyNumber = *{studyNumber})}">수정</a></button>
+            <button type="button" class="change-button" ><a th:href="@{/member/myStudyModifyRead(studyNumber = *{studyNumber})}">수정</a></button>
             <button type="button" class="change-button" onclick="clickRemove()">삭제</button>
         </section>
 
@@ -106,6 +106,20 @@
     let studyNumber = [[${study.studyNumber}]];
     // 세션에 있는 memberNumber
     let memberNumber = [[${session.memberNumber}]];
+
+
+    let filesLeaderProfile = [[${study.memberProfile}]];
+    const $resultLocation = $(".user-profile");
+
+    $(document).ready(function() {
+        //첨부파일
+        if (filesLeaderProfile != null) {
+            $resultLocation.prepend("<img src='/file/displayProfile?path=" + filesLeaderProfile + "'>");
+        } else {
+            $resultLocation.prepend("<img src='https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG'>");
+        }
+    });
+
 </script>
 <script src="/js/studyView.js"></script>
 <script src="/js/header.js"></script>

@@ -27,7 +27,7 @@
     <!--    <header th:replace="~{/fragments/header::header}"></header>-->
     <!-- 헤더 부분 ↑ -->
     <div class="board_Post">
-        <form action="/post/modify" method="post" name="postForm">
+        <form action="/member/myPostModify" method="post" name="postForm">
             <input type="hidden" th:field="${criteria.pageNum}">
             <input type="hidden" th:field="${criteria.amount}">
             <input type="hidden" th:filed="${criteria.type}">
@@ -78,9 +78,12 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+<script th:inline="javascript">
+    let memberNumber = [[${session.memberNumber}]];
+</script>
 <script src="/js/header.js"></script>
 <script src="/js/login.js"></script>
-<script src="/js/boardWrite.js"></script>
+<script src="/js/myPostModify.js"></script>
 <script th:inline="javascript">
     let content = [[${post.postContent}]];
     // 불러온 postContent

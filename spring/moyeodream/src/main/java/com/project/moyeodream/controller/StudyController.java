@@ -10,10 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.RedirectView;
@@ -50,6 +47,7 @@ public class StudyController {
 
         HttpSession session = request.getSession();
 
+        studyService.views(studyNumber);
         model.addAttribute("study", studyService.read(studyNumber));
         return "/study/studyView";
     }
@@ -113,9 +111,19 @@ public class StudyController {
 
         studyService.remove(studyNumber);
 
-        return register();
+        return "redirect:http://localhost:11111/main/index";
     }
 
+//    // 조회수
+//    @ResponseBody
+//    @GetMapping("views/{studyNumber}")
+//    public void views(@PathVariable("studyNumber") Integer studyNumber) {
+//        log.info("----------------------------");
+//        log.info("views : " + studyNumber);
+//        log.info("----------------------------");
+//
+//        studyService.views(studyNumber);
+//    }
 
     // 카테고리별 스터디
     @GetMapping("categoryList")

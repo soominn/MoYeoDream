@@ -17,13 +17,16 @@
                         OR (tm.MEMBER_NICKNAME LIKE '%'||#{keyword}||'%')
                     </when>
                     <when test="type == 'P'.toString()">
-                        (OR POST_UPDATE_DATE BETWEEN TO_DATE('20220622') AND TO_DATE('20220624')
+                        OR (POST_UPDATE_DATE) BETWEEN TO_DATE (SUBSTR(#{keyword},1,8)) AND TO_DATE (SUBSTR(#{keyword},10,8) +1)
                     </when>
                     <when test="type == 'B'.toString()">
                         OR ( POST_CONTENT LIKE '%'||#{keyword}||'%')
                     </when>
                     <when test="type == 'R'.toString()">
-                        OR ( LIKE '%'||#{keyword}||'%')
+                        OR ( POST_COMMENT_CONTENT LIKE '%'||#{keyword}||'%')
+                    </when>
+                    <when test="type == 'M'.toString()">
+                        OR ( POST_MEMBER_NUMBER = #{keyword})
                     </when>
                 </choose>
             </trim>
@@ -58,10 +61,39 @@
         ]]>
     </select>
 
+    <!-- 댓글 내용 검색 -->
+    <select id="getReplyKeyword" resultType="postDTO">
+        SELECT RN, POST_NUMBER, POST_CATEGORY, POST_TITLE, POST_CONTENT, POST_VIEWS, tm.MEMBER_NICKNAME, POST_UPDATE_DATE, POST_MEMBER_NUMBER
+        FROM
+        (
+            SELECT /*+ INDEX_DESC(tp PK_POST) INDEX_DESC(tpc PK_POST_COMMENT) */
+            ROWNUM RN, POST_NUMBER, POST_CATEGORY, POST_TITLE, POST_CONTENT, POST_VIEWS, POST_UPDATE_DATE, POST_MEMBER_NUMBER
+            FROM TBL_POST tp JOIN TBL_POST_COMMENT tpc
+            ON tpc.POST_COMMENT_POST_NUMBER = tp.POST_NUMBER
+            WHERE
+            <include refid="search"/>
+        <![CDATA[
+            ROWNUM <= #{pageNum} * #{amount}
+        ) JOIN TBL_MEMBER tm ON POST_MEMBER_NUMBER = tm.MEMBER_NUMBER
+        WHERE RN > ((#{pageNum} -1) * #{amount})
+        ]]>
+    </select>
+
     <!-- 게시글 전체 개수 -->
     <select id="getTotal" resultType="_int">
         SELECT COUNT(POST_NUMBER) FROM TBL_POST tp JOIN TBL_MEMBER tm
         ON tp.POST_MEMBER_NUMBER = tm.MEMBER_NUMBER
+        <where>
+            <trim suffixOverrides="AND">
+                <include refid="search"/>
+            </trim>
+        </where>
+    </select>
+
+    <!-- 게시글 전체 개수(댓글 검색시) -->
+    <select id="getReplyTotal" resultType="_int">
+        SELECT COUNT(POST_NUMBER) FROM TBL_POST tp JOIN TBL_POST_COMMENT tpC
+        ON tpc.POST_COMMENT_POST_NUMBER = tp.POST_NUMBER
         <where>
             <trim suffixOverrides="AND">
                 <include refid="search"/>
@@ -80,7 +112,7 @@
 
     <!-- 게시글 조회 -->
     <select id="read" resultType="postDTO">
-        SELECT POST_NUMBER, POST_CATEGORY, POST_TITLE, POST_CONTENT, POST_VIEWS, tm.MEMBER_NICKNAME, POST_REGISTER_DATE, POST_UPDATE_DATE, POST_MEMBER_NUMBER
+        SELECT POST_NUMBER, POST_CATEGORY, POST_TITLE, POST_CONTENT, POST_VIEWS, tm.MEMBER_NICKNAME, POST_REGISTER_DATE, POST_UPDATE_DATE, POST_MEMBER_NUMBER, tm.MEMBER_PROFILE
         FROM TBL_POST tp JOIN TBL_MEMBER tm
         ON tp.POST_MEMBER_NUMBER = tm.MEMBER_NUMBER
         WHERE POST_NUMBER = #{postNumber}

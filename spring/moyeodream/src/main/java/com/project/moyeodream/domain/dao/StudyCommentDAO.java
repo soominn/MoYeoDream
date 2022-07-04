@@ -1,5 +1,6 @@
 package com.project.moyeodream.domain.dao;
 
+import com.project.moyeodream.domain.vo.MemberVO;
 import com.project.moyeodream.domain.vo.StudyCommentDTO;
 import com.project.moyeodream.domain.vo.StudyCommentVO;
 import com.project.moyeodream.mapper.StudyCommentMapper;
@@ -24,8 +25,8 @@ public class StudyCommentDAO {
     }
 
     // 댓글 작성한 멤버의 닉네임
-    public String selectNickname(int studyCommentMemberNumber) {
-        return studyCommentMapper.selectNickname(studyCommentMemberNumber);
+    public MemberVO selectNickname(int studyCommentMemberNumber) {
+        return studyCommentMapper.selectMemberInfo(studyCommentMemberNumber);
     }
 
     // 댓글 수정

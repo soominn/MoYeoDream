@@ -1,3 +1,32 @@
+$(document).ready(function() {
+	if(memberNumber != null) {
+		console.log("들어옴")
+		let jsonMemberNumber = {
+			memberNumber : memberNumber
+		};
+
+		$.ajax({
+			url: "/member/checkProfile",
+			type: "POST",
+			contentType: "application/json; charset=utf-8",
+			data: JSON.stringify(jsonMemberNumber),
+			success: function(result) {
+				if(result) {
+					// 절대경로 어떻게 작성해야 하는지 여쭤보고 이후에 작성
+					// 임시
+					$("div.headerIcon img").attr("src", "https://phinf.pstatic.net/contact/20210507_26/1620383947175eS4aG_JPEG/%B1%CD%BF%E4%BF%C0.JPG");
+				}
+				else {
+					$("div.headerIcon img").attr("src", "https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG");
+				}
+			}
+		});
+	}
+	else {
+		$("div.headerIcon img").attr("src", "https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG");
+	}
+});
+
 const loginContent = document.querySelector("div.login-content");
 const nicknameNext = document.querySelector("button.nickname-next");
 const interestNext = document.querySelector("button.interest-next");
@@ -9,7 +38,6 @@ const joinOk = document.querySelector("div.join-ok");
 const nicknameImg = document.querySelector("img.nickname");
 const interestImg = document.querySelector("img.interest");
 const imgImg = document.querySelector("img.img");
-const kakaoBtn = document.querySelector("button.kakao");
 
 const imgThumbnail = document.querySelector("img.img-example");
 const imgFile = document.querySelector("input[id='img-choose']");
@@ -159,7 +187,7 @@ function kakaoLogin() {
 				url: '/v2/user/me',
 				success: function (response) {
 					let memberEmail = {
-						memberEmail:response.kakao_account.email
+						memberEmail : response.kakao_account.email
 					}
 
 					$.ajax({
@@ -167,8 +195,8 @@ function kakaoLogin() {
 						type:"post",
 						contentType: "application/json; charset=utf-8",
 						data: JSON.stringify(memberEmail),
-						success: function (result) {
-							if(result){
+						success: function(result) {
+							if(result) {
 								// 로그인
 								$("input[name='memberEmail']").val(response.kakao_account.email);
 								$("form#loginForm").submit();
@@ -259,12 +287,12 @@ function kakaoLogin() {
 						}
 					});
 				},
-				fail: function (error) {
+				fail: function(error) {
 					console.log(error);
 				},
 			});
 		},
-		fail: function (error) {
+		fail: function(error) {
 			console.log(error);
 		},
 	});
@@ -272,7 +300,7 @@ function kakaoLogin() {
 
 // 카카오 로그아웃
 function kakaoLogout() {
-	if (Kakao.Auth.getAccessToken()) {
+	if(Kakao.Auth.getAccessToken()) {
 		Kakao.API.request({
 			url: '/v1/user/unlink',
 			success: function() {

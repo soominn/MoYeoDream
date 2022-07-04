@@ -27,14 +27,15 @@
                         </div>
                     </a>
                     <h1>내 정보 수정</h1>
-                    <div class="img-input">
-                        <img class="img-example" src="https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG" alt="user avatar">
+                    <div class="img-input2">
+                        <!--<img class="img-example" src="https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG" alt="user avatar">-->
                         <div class="img-controller">
                             <label class="img-choose">
                                 이미지 선택
-                                <input id="imageUpload" name="memberProfile" type="file" accept="image/*">
+                                <input id="imageUpload2" name="file" type="file" accept="image/*">
                             </label>
-                            <button class="img-delete">이미지 제거</button>
+                            <input type="hidden" name="memberProfile" id="member-profile-name">
+                            <button type="button" class="img-delete2">이미지 제거</button>
                         </div>
                     </div>
                     <div class="user-info-box">
@@ -252,6 +253,9 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script th:inline="javascript">
+    let memberNumber = [[${session.memberNumber}]];
+</script>
 <script src="/js/header.js"></script>
 <script src="/js/login.js"></script>
 <script src="/js/myProfile.js"></script>
@@ -280,11 +284,80 @@
             }
             interestsList = interest.join(",");
             $("#memberInterests").attr('value',interestsList);
+
+            $.ajax({
+                url: "/file/deleteProfile",
+                type: "delete",
+                data: {path: filesLeaderProfile},
+            });
             $("#memberForm").submit();
         }
     });
 
 
+    let filesLeaderProfile = [[${member.memberProfile}]];
+    const $resultLocation = $(".img-input2");
+
+    //첨부파일
+    if (filesLeaderProfile != null) {
+        $resultLocation.prepend("<img class=\"img-example2\" src='/file/displayProfile?path=" + filesLeaderProfile + "'>");
+    } else {
+        $resultLocation.prepend("<img class=\"img-example2\" src='https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG'>");
+    }
+
+    const imgThumbnail2 = document.querySelector(".img-example2");
+    const imgFile2 = document.querySelector("input[id='imageUpload2']");
+    const imgDelete2 = document.querySelector("button.img-delete2");
+
+    let logoName2;
+
+    imgFile2.addEventListener("change", function(event) {
+        let reader = new FileReader();
+        reader.readAsDataURL(event.target.files[0]);
+        reader.onload = function(event) {
+            let url = event.target.result;
+            if(url.includes("image")) {
+                imgThumbnail2.src = url;
+            }
+            else {
+                imgThumbnail2.src = "https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG";
+            }
+        }
+
+        let formData2 = new FormData();
+        let logoInput2 = $("input[type='file']");
+        let profileFiles2 = logoInput2[1].files;
+        console.log(profileFiles2[0]);
+
+        logoName2 = $("input[type='file']")[1].files[0].name;
+
+        formData2.append("file", profileFiles2[0]);
+
+        $.ajax({
+            url: "/file/uploadProfile",
+            type: "POST",
+            data: formData2,
+            processData: false,
+            contentType: false,
+            success: function(fileName) {
+                $("#member-profile-name").val(fileName);
+            }
+        });
+    });
+
+    imgDelete2.addEventListener("click", function() {
+        imgFile2.value = "";
+        imgThumbnail2.src = "https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG";
+
+        let path = dateFormat(new Date()) + $("#member-profile-name").val();
+        console.log(path);
+
+        $.ajax({
+            url: "/file/deleteProfile",
+            type: "DELETE",
+            data: {path: path}
+        });
+    });
 
 </script>
 </html>

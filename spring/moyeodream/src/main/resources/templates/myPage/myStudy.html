@@ -67,7 +67,7 @@
                         <a th:href="@{/member/myStudyRead(studyNumber=*{studyNumber})}">
                             <div class="study-schedule">
                                 <p class="study-scheduleTitle">시작 예정일 |</p>
-                                <p th:text="*{studyStart}"></p>
+                                <p class="study-start"></p>
                             </div>
                             <h1 class="study-title" th:text="*{studyTitle}"></h1>
                             <div class="study-detail">
@@ -80,7 +80,6 @@
 
                             <section class="study-info">
                                 <div class="avatar-user">
-                                    <img class="avatar-userImg avatar-small" src="https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG" alt="avatar">
                                     <div class="avatar-userName" th:text="*{memberNickname}"></div>
                                 </div>
                                 <div class="study-viewsAndComment">
@@ -127,7 +126,7 @@
                             <a th:href="@{/member/myStudyRead(studyNumber=*{studyNumber})}">
                                 <div class="study-schedule">
                                     <p class="study-scheduleTitle">시작 예정일 |</p>
-                                    <p th:text="*{studyStart}"></p>
+                                    <p class="study-start"></p>
                                 </div>
                                 <h1 class="study-title" th:text="*{studyTitle}"></h1>
                                 <div class="study-detail">
@@ -140,7 +139,6 @@
 
                                 <section class="study-info">
                                     <div class="avatar-user">
-                                        <img class="avatar-userImg avatar-small" src="https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG" alt="avatar">
                                         <div class="avatar-userName" th:text="*{memberNickname}"></div>
                                     </div>
                                     <div class="study-viewsAndComment">
@@ -210,6 +208,9 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script th:inline="javascript">
+    let memberNumber = [[${session.memberNumber}]];
+</script>
 <script src="/js/header.js"></script>
 <script src="/js/login.js"></script>
 <script th:inline="javascript">
@@ -268,10 +269,27 @@
             }
         }
 
+        const $result = $(".avatar-user");
 
+        for(let i in myStudyList) {
+            $(this).find($("p.study-start").eq(i)).text(dateFormat(myStudyList[i].studyStart));
+
+            //첨부파일
+            if(myStudyList[i].memberProfile != null) {
+                $(this).find($(".avatar-user").eq(i)).prepend("<img class=\"avatar-userImg avatar-small\" src='/file/displayProfile?path=" + myStudyList[i].memberProfile + "'>");
+            }
+            else {
+                $(this).find($(".avatar-user").eq(i)).prepend("<img class=\"avatar-userImg avatar-small\" src='https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG'>");
+            }
+        }
 
 
     });
+
+    function dateFormat(format) {
+        let date = new Date(format);
+        return date.getFullYear() + "-" + ((date.getMonth() + 1) > 9 ? (date.getMonth() + 1).toString() : "0" + (date.getMonth() + 1)) + "-" + (date.getDate() > 9 ? date.getDate().toString() : "0" + date.getDate().toString());
+    }
 
 </script>
 <script src="/js/myStudy.js"></script>

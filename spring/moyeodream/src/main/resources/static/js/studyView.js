@@ -1,4 +1,9 @@
 $(document).ready(function() {
+    $.ajax({
+        url: "/study/views/" + studyNumber,
+        type: "GET"
+    });
+
     $("div.study-registered-date").text(dateFormat(studyRegisterDate));
     $("span.study-start").text(dateFormat(studyStartDate));
 
@@ -105,6 +110,8 @@ $(document).ready(function() {
     getCommentList();
 });
 
+let modifyCheck = false;
+
 // 댓글 불러오기
 function getCommentList() {
     $.ajax({
@@ -128,7 +135,12 @@ function getCommentList() {
                 comment += "<li class=\"comment\">";
                 comment += "    <section class=\"comment-info-wrap\">";
                 comment += "        <div class=\"comment-info\">";
-                comment += "            <img src=\"https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG\">";
+                if(result[i].memberProfile == null) {
+                    comment += "                <img src=\"https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG\">";
+                }
+                else {
+                    comment += "                <img src='/file/displayProfile?path=" + result[i].memberProfile + "'>";
+                }
                 comment += "            <div class=\"comment-title-wrap\">";
                 comment += "                <div class=\"comment-title\">";
                 comment += "                    <div class=\"comment-user\">" + result[i].memberNickname + "</div>";
@@ -163,17 +175,28 @@ function getCommentList() {
 }
 
 $(document).on("click", ".comment-modify", function() {
+    if(modifyCheck) {
+        alert("이미 수정 중인 댓글이 있습니다.");
+        return;
+    }
+    modifyCheck = true;
     $(this).parent().parent().next().children("p").css("display", "none");
     $(this).parent().parent().next().children("div").css("display", "block");
 });
 
 $(document).on("click", ".cancel", function() {
+    modifyCheck = false;
     $(this).parent().parent().prev().css("display", "block");
     $(this).parent().parent().css("display", "none");
 });
 
 // 댓글 등록
 function clickCommentRegister() {
+    if(!memberNumber) {
+        alert("로그인 후에 댓글을 작성해주세요.");
+        return;
+    }
+
     let jsonComment = {
         studyCommentContent : $("textarea.comment-input").val(),
         studyCommentMemberNumber : memberNumber,
@@ -199,6 +222,8 @@ function clickCommentRegister() {
 
 // 댓글 수정
 $(document).on("click", ".register", function() {
+    modifyCheck = false;
+
     let commentJSON = {
         studyCommentNumber : $(this).parent().prev().prev().prev().val(),
         studyCommentContent : $(this).parent().prev().val()
@@ -217,6 +242,12 @@ $(document).on("click", ".register", function() {
 
 // 댓글 삭제
 $(document).on("click", ".comment-remove", function() {
+    if(modifyCheck) {
+        alert("수정 중인 댓글이 있습니다.");
+        return;
+    }
+    modifyCheck = false;
+
     $.ajax({
         url: "/studyComment/remove/" + $(this).parent().parent().next().children(1).children(0).val(),
         type: "GET",

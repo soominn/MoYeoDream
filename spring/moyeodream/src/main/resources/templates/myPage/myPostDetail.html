@@ -48,9 +48,7 @@
         <div class="study-user">
             <div class="memberInfoWrap">
                 <div class="user-profile">
-                    <img
-                            src="https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG"
-                    />
+                    <!--<img src="https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG"/>-->
                     <div class="user-nickname" th:text="*{memberNickname}"></div>
                 </div>
                 <div class="study-registered-date" th:text="*{postRegisterDate}"></div>
@@ -99,6 +97,9 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script th:inline="javascript">
+    let memberNumber = [[${session.memberNumber}]];
+</script>
 <script src="/js/header.js"></script>
 <script src="/js/login.js"></script>
 <script src="/js/boardDetail.js"></script>
@@ -151,7 +152,11 @@
                 str += "<li class='comment'>";
                 str += "<section class='comment-info-wrap'>";
                 str += "<div class='comment-info'>";
-                str += "<img src='https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG'/>";
+                if (comment.memberProfile != null) {
+                    str += "<img src='/file/displayProfile?path=" + comment.memberProfile + "'>";
+                } else {
+                    str += "<img src='https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG'>";
+                }
                 str += "<div class='comment-title-wrap'>";
                 str += "<div class='comment-title'>";
                 str += "<div class='comment-user'>" + comment.postCommentNickname + "</div>";
@@ -303,7 +308,17 @@
         });
     });
 
+    let filesLeaderProfile = [[${post.memberProfile}]];
+    const $resultLocation = $(".user-profile");
 
+    $(document).ready(function() {
+        //첨부파일
+        if (filesLeaderProfile != null) {
+            $resultLocation.prepend("<img src='/file/displayProfile?path=" + filesLeaderProfile + "'>");
+        } else {
+            $resultLocation.prepend("<img src='https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG'>");
+        }
+    });
 
 </script>
 </html>

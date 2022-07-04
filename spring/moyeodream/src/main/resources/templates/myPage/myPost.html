@@ -60,7 +60,7 @@
                                                 <div class="question__title">
                                                     <h3 class="title__text" th:text="*{postTitle}"></h3>
                                                 </div>
-                                                <p class="question__body" th:text="*{postContent}"></p>
+                                                <p class="question__body" th:inline="none"></p>[(*{postContent})]
                                                 <div class="question__tags"></div>
                                                 <div class="question__info-footer">
                                                     <span th:text="*{memberNickname}"></span>
@@ -126,6 +126,9 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script th:inline="javascript">
+    let memberNumber = [[${session.memberNumber}]];
+</script>
 <script src="/js/header.js"></script>
 <script src="/js/login.js"></script>
 <script th:inline="javascript">
@@ -133,7 +136,7 @@
     let pageNum = [[${criteria.pageNum}]];
     let $pageNums = $(".pagination-link"); /* css 변화를 위함 */
     let myPostList = [[${myPostList}]];
-    let memberNumber = [[${memberNumber}]];
+    let memberNumber2 = [[${memberNumber}]];
 
     /* 페이징버튼 css : 해당 페이지 번호가 is-current */
     $(document).ready(function(){
@@ -190,7 +193,7 @@
                 ,contentType: 'application/json'
                 ,success : function(result) {
                     alert("해당글이 정상적으로 삭제되었습니다.");
-                    location.href="/member/myPost" + "?memberNumber=" + memberNumber;
+                    location.href="/member/myPost" + "?memberNumber=" + memberNumber2;
                 },
                 error: function(request, status, error) {
 
