@@ -96,13 +96,39 @@
     console.log($value);
     inputContent.value = $value;
 
-    if($("#summernote").find("img") != null){
+    // 이미지파일 유무 검사
+    if($value.indexOf("<img") != -1){
       console.log("이미지 태그 있음");
+      // 썸머노트에 삽입된 img 태그
+      // let noteImg = $(".panel-body").find("img").attr("src");
+      // let noteName = noteImg.substr(noteImg.lastIndexOf("t_")+2);
+      // DB 입력을 위한 img input hidden
+      let hiddenInput = $("input[class='imgFile']");
+      // let hiddenName = $("input[class='imgFile']").attr("value");
+
+      // 실제 입력된 이미지 태그의 개수
+      // let noteImgCount = $value.split("<img").length -1;
+
+      $.each(hiddenInput, function(i, input){
+        if($value.indexOf($(this).attr("value"))== -1){
+          let valueStr = $(this).attr("value");
+          let removeStr = $postForm.find("input[value='"+valueStr+"']").attr("name");
+          let removeName = removeStr.substr(0,removeStr.indexOf("."));
+          console.log(removeName);
+          let removeTag = $('input[id=removeName]');
+          console.log(removeTag.length);
+
+          $('input[id=removeName]').remove();
+
+        }
+      });
+
+
     }else{
       console.log("이미지 태그 없음");
+      $("input[class='imgFile']").remove();
     }
-
-    // $postForm.submit();
+    $postForm.submit();
   }
 
   //----------------------------------------------------------//

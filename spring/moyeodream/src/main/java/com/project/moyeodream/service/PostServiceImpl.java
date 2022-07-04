@@ -1,23 +1,28 @@
 package com.project.moyeodream.service;
 
+import com.project.moyeodream.domain.dao.FileDAO;
 import com.project.moyeodream.domain.dao.PostCommentDAO;
 import com.project.moyeodream.domain.dao.PostDAO;
 import com.project.moyeodream.domain.vo.Criteria;
 import com.project.moyeodream.domain.vo.PostDTO;
 import com.project.moyeodream.domain.vo.PostVO;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 @Qualifier("post")
+@Slf4j
 public class PostServiceImpl implements PostService{
 
     private final PostDAO postDAO;
     private final PostCommentDAO postCommentDAO;
+    private final FileDAO fileDAO;
 
     // 게시판 전체 목록
     @Override
@@ -57,8 +62,18 @@ public class PostServiceImpl implements PostService{
 
     // 게시글 등록 완료
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void postRegister(PostVO postVO) {
+
         postDAO.postRegister(postVO);
+        log.info(postVO.getFileList().toString());
+        if(postVO.getFileList() != null){
+            log.info("여긴 안들어오나");
+            postVO.getFileList().forEach(fileVO -> {
+                fileVO.setPostVO(postVO);
+                fileDAO.save(fileVO);
+            });
+        }
     }
 
     @Override

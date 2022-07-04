@@ -49,7 +49,8 @@ $(document).ready(function () {
       let $registerBtn = $(".write_register");
 
       // 저장버튼 클릭
-      $registerBtn.on("click",function(){
+      $registerBtn.on("click",function(e){
+            e.preventDefault();
             saveContent();
           }
       )
@@ -94,8 +95,8 @@ function showUploadFiles(fileList,el) {
         str += "/file/displayPostFile?path=" +file.uploadDirectory + "/t_" +  file.fileName;
         $(el).summernote('editor.insertImage', str);
 
-        inputStr+= "<input type='hidden' name='fileList["+ i +"].fileName' value='"+file.fileName+"'>";
-        inputStr+= "<input type='hidden' name='fileList["+ i +"].uploadDirectory' value='"+file.uploadDirectory+"'>";
+        inputStr+= "<input type='hidden' class='imgFile' id= fileList["+ i +"] name='fileList["+ i +"].fileName' value='"+file.fileName+"'>";
+        inputStr+= "<input type='hidden' class='imgFile' id= fileList["+ i +"] name='fileList["+ i +"].uploadDirectory' value='"+file.uploadDirectory+"'>";
 
     })
     $postForm.append(inputStr);
