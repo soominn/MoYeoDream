@@ -47,6 +47,7 @@ public class StudyController {
 
         HttpSession session = request.getSession();
 
+        studyService.views(studyNumber);
         model.addAttribute("study", studyService.read(studyNumber));
         return "/study/studyView";
     }
@@ -113,16 +114,16 @@ public class StudyController {
         return "redirect:http://localhost:11111/main/index";
     }
 
-    // 조회수
-    @ResponseBody
-    @GetMapping("views/{studyNumber}")
-    public void views(@PathVariable("studyNumber") Integer studyNumber) {
-        log.info("----------------------------");
-        log.info("views : " + studyNumber);
-        log.info("----------------------------");
-
-        studyService.views(studyNumber);
-    }
+//    // 조회수
+//    @ResponseBody
+//    @GetMapping("views/{studyNumber}")
+//    public void views(@PathVariable("studyNumber") Integer studyNumber) {
+//        log.info("----------------------------");
+//        log.info("views : " + studyNumber);
+//        log.info("----------------------------");
+//
+//        studyService.views(studyNumber);
+//    }
 
     // 카테고리별 스터디
     @GetMapping("categoryList")

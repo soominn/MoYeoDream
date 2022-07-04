@@ -65,7 +65,7 @@
                                                     <span th:if="*{postRegisterDate == postUpdateDate}" th:text="*{postRegisterDate}"></span>
                                                     <span th:unless="*{postRegisterDate == postUpdateDate}" th:text="*{postUpdateDate} + ' (수정)'"></span>
                                                     <span>&nbsp;·&nbsp;</span>
-                                                    <span id="postCategory"></span>
+                                                    <span class="postCategory"></span>
                                                     <span style="display: none" id="postCategory-sample" th:text="*{postCategory}"></span>
                                                 </div>
                                             </div>
@@ -133,7 +133,7 @@
     let pageNum = [[${criteria.pageNum}]];
     let $pageNums = $(".pagination-link"); /* css 변화를 위함 */
     let myPostList = [[${myCommentList}]];
-    let memberNumber = [[${memberNumber}]]
+    let memberNumber2 = [[${memberNumber}]]
 
     /* 페이징버튼 css : 해당 페이지 번호가 is-current */
     $(document).ready(function(){

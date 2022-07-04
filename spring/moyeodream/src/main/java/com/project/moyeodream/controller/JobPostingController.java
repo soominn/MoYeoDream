@@ -144,9 +144,11 @@ public class JobPostingController {
 
     // ----- 프론트 -----
 
-    // 채용 공고 작성
+    // 채용 공고 작성 이동
     @GetMapping("jobPostingCreate")
-    public void jobPostingCreate() {}
+    public String jobPostingCreate() {
+        return "/jobPosting/jobPostingCreate";
+    }
 
     // 채용 공고 상세 보기
     @GetMapping("jobPostingView")
