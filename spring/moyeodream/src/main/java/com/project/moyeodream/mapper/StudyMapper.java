@@ -3,6 +3,7 @@ package com.project.moyeodream.mapper;
 import com.project.moyeodream.domain.vo.*;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.security.PublicKey;
 import java.util.List;
 
 @Mapper //스프링 마이바티스에서 xml파일과 연결될 Mapper 인터페이스임을 알려준다.
@@ -17,8 +18,10 @@ public interface StudyMapper {
     public List<StudyVO> getApproveList();
     // 스터디 상세 조회
     public StudyDTO select(int studyNumber);
-    // 스터디 만든 회원의 닉네임 찾기
+    // 스터디 만든 회원 정보
     public MemberVO selectMemberInfo(int studyMemberNumber);
+    // 조회수 올리기
+    public void views(int studyNumber);
     // 내가 만든 스터디 목록
     public List<StudyVO> CratedList(int studyMemberNumber);
     // 내가 참여중인 스터디 목록

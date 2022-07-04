@@ -1,4 +1,9 @@
 $(document).ready(function() {
+    $.ajax({
+        url: "/study/views/" + studyNumber,
+        type: "GET"
+    });
+
     $("div.study-registered-date").text(dateFormat(studyRegisterDate));
     $("span.study-start").text(dateFormat(studyStartDate));
 

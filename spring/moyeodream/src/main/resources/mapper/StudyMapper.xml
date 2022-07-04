@@ -52,6 +52,12 @@
         WHERE MEMBER_NUMBER = #{studyMemberNumber}
     </select>
 
+    <update id="views">
+        UPDATE TBL_STUDY
+        SET STUDY_VIEWS = STUDY_VIEWS + 1
+        WHERE STUDY_NUMBER = #{studyNumber}
+    </update>
+
     <update id="update">
         UPDATE TBL_STUDY
         SET STUDY_CATEGORY = #{studyCategory}, STUDY_PROCESS = #{studyProcess}, STUDY_PERSONNEL = #{studyPersonnel}, STUDY_START = #{studyStart}, STUDY_COMMUNICATION = #{studyCommunication}, STUDY_PERIOD = #{studyPeriod}, STUDY_CHIEF = #{studyChief}, STUDY_TITLE = #{studyTitle}, STUDY_CONTENT = #{studyContent}

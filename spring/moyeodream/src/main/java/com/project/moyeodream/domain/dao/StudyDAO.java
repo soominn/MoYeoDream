@@ -61,6 +61,11 @@ public class StudyDAO {
         studyMapper.delete(studyNumber);
     }
 
+    // 조회수 올리기
+    public void views(int studyNumber) {
+        studyMapper.views(studyNumber);
+    }
+
     // 카테고리 별 스터디
     public List<StudyVO> getCategoryList(String studyCategory){
         return studyMapper.getCategoryList(studyCategory);
