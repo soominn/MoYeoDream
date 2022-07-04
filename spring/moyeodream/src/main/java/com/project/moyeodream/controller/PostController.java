@@ -46,11 +46,9 @@ public class PostController {
         criteria.setAmount(5);
         PageDTO pageDTO;
 
-        log.info("여기까지 옴");
         if(criteria.getType() == null){
             criteria.setType("default");
         }
-        log.info(criteria.getType());
 
         if(criteria.getType().equals("R")){
             pageDTO = new PageDTO(criteria, postMapper.getReplyTotal(criteria));
@@ -196,7 +194,8 @@ public class PostController {
 
         // 세션에 저장된 memberNumber 가져오기
         HttpSession session = req.getSession();
-        postVO.setPostMemberNumber((Integer)session.getAttribute("memberNumber"));
+//        postVO.setPostMemberNumber((Integer)session.getAttribute("memberNumber"));
+        postVO.setPostMemberNumber(42);
         log.info("작성자 memberNum : "+postVO.getPostMemberNumber());
 
         postService.postRegister(postVO);

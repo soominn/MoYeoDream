@@ -8,4 +8,5 @@ import org.springframework.stereotype.Component;
 public class FileVO {
     private String fileName;
     private String uploadDirectory;
+    private PostVO postVO;
 }
