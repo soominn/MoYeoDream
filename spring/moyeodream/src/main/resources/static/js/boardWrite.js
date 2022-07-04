@@ -28,12 +28,6 @@ $(document).ready(function () {
         lang: "ko-KR",
         placeholder: '내용을 작성해 주세요!',
         callbacks: {
-            // onImageUpload: function (fileList, editor, welEditable) {
-            //     for(let i = 0; i < fileList.length; i++){
-            //         sendFile(fileList[i]);
-            //         // sendFile(fileList[i], $('#summernote'), '/board/boardWrite.html');
-            //     }
-            // }
             onImageUpload: function(files){
                 sendFile(files, $('#summernote'), '/board/boardWrite.html');
             }
@@ -61,16 +55,15 @@ $(document).ready(function () {
       )
 });
 
-// sendFile(file, el, uploadURL)
+// 저장소에 사진 업로드 후 썸네일 출력
 function sendFile(fileList, el, uploadURL){
     let formData = new FormData;
-    // formData.append("file",file);
 
     let files = fileList;
 
     for(let i = 0; i < files.length; i++){
         formData.append("files", files[i]);
-        console.log(files[i]);
+        console.log("files["+i+"] : " +  files[i]);
         console.log(formData);
     }
 
@@ -82,17 +75,28 @@ function sendFile(fileList, el, uploadURL){
         processData : false,
         enctype : 'multipart/form-data',
         success : function(fileList){
-            console.log("업로드 성공");
-            // location.href= '/upload/displayPostFile?path=2022/07/04/c5fff81b-8089-4c70-9c74-50cc3ced5c31_09.jpg';
+            console.log("받아온 fileList : ");
+            console.log(fileList[0]);
+            console.log(fileList[1]);
            showUploadFiles(fileList, el);
         }
     })
 }
 
 function showUploadFiles(fileList,el) {
-    let str = "";
-    $.each(fileList,function(i, file){
-        str += "<img src='/upload/displayPostFile?path="+ file.uploadDirectory + "/t_" + file.fileName + "'/>";
+    // 파일정보를 담기 위함
+    let inputStr ="";
+
+    $.each(fileList, function(i, file){
+        // 썸네일 노출을 위함
+        let str = "";
+
+        str += "/file/displayPostFile?path=" +file.uploadDirectory + "/t_" +  file.fileName;
+        $(el).summernote('editor.insertImage', str);
+
+        inputStr+= "<input type='hidden' name='fileList["+ i +"].fileName' value='"+file.fileName+"'>";
+        inputStr+= "<input type='hidden' name='fileList["+ i +"].uploadDirectory' value='"+file.uploadDirectory+"'>";
+
     })
-    $(el).summernote('editor.insertImage', str);
+    $postForm.append(inputStr);
 }

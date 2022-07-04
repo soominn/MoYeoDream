@@ -136,7 +136,7 @@ public class FileController {
 
             FileOutputStream thumbnail = new FileOutputStream(new File(uploadDirectory, "t_" + fileName));
 
-            Thumbnailator.createThumbnail(file.getInputStream(), thumbnail, 100, 100);
+            Thumbnailator.createThumbnail(file.getInputStream(), thumbnail, 300, 300);
             thumbnail.close();
 
             fileList.add(fileVO);
@@ -144,9 +144,10 @@ public class FileController {
         return fileList;
     }
 
+    // 자유게시판 - 썸네일 주소 전달
     @GetMapping("/displayPostFile")
     @ResponseBody
     public byte[] getFile(String path) throws IOException {
-        return FileCopyUtils.copyToByteArray(new File("C:/upload/post" + path));
+        return FileCopyUtils.copyToByteArray(new File("C:/upload/post/" + path));
     }
 }

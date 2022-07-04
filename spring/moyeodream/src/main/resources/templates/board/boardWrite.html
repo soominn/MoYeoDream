@@ -76,22 +76,32 @@
 <script th:inline="javascript">
   let memberNumber = [[${session.memberNumber}]];
 </script>
+<script>
+  // 값을 넣어줄 input
+  let $postForm = $("form[name= postForm]");
+</script>
 <script src="/js/header.js"></script>
 <script src="/js/login.js"></script>
 <script src="/js/boardWrite.js"></script>
 <script th:inline="javascript">
   //------------board Modify 공통 내용-------------------------//
-  let memberNum = [[${session.memberNumber}]];
+  // let memberNum = [[${session.memberNumber}]];
+  let memberNum = 42;
 
   let inputContent = document.querySelector("input[name=postContent]");
-  // 값을 넣어줄 input
-  let $postForm = $("form[name= postForm]");
 
   // 게시글 등록 (DB)
   function saveContent(){
     let $value = $("#summernote").summernote('code');
     console.log($value);
     inputContent.value = $value;
+
+    if($("#summernote").find("img") != null){
+      console.log("이미지 태그 있음");
+    }else{
+      console.log("이미지 태그 없음");
+    }
+
     // $postForm.submit();
   }
 
