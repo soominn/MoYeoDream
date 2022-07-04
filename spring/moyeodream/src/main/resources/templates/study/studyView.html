@@ -23,14 +23,7 @@
             <div class="study-title" th:text="*{studyTitle}"></div>
             <div class="study-user">
                 <div class="user-profile">
-                    <th:block th:if="*{memberProfile != null}">
-                        <!-- 절대경로에서 이미지 가져와야함 -->
-                        <!-- 임시 -->
-                        <img src="https://phinf.pstatic.net/contact/20210507_26/1620383947175eS4aG_JPEG/%B1%CD%BF%E4%BF%C0.JPG?type=f130_130">
-                    </th:block>
-                    <th:block th:unless="*{memberProfile != null}">
-                        <img src="https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG">
-                    </th:block>
+                    <img src="https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG">
                     <div class="user-nickname" th:text="*{memberNickname}"></div>
                 </div>
                 <div class="study-registered-date"></div>
@@ -161,6 +154,7 @@
 
     let studyNumber = [[${study.studyNumber}]];
     let memberNumber = [[${session.memberNumber}]];
+    let memberProfile = [[${study.memberProfile}]];
 </script>
 <script src="/js/studyView.js"></script>
 <script src="/js/header.js"></script>
