@@ -81,10 +81,10 @@ function sendFile(fileList, el, uploadURL){
         contentType : false,
         processData : false,
         enctype : 'multipart/form-data',
-        success : function(){
+        success : function(fileList){
             console.log("업로드 성공");
-            // location.href= '/upload/displayPost?path=2022/07/04/c5fff81b-8089-4c70-9c74-50cc3ced5c31_09.jpg';
-            $(el).summernote('editor.insertImage', 'https://t1.daumcdn.net/cfile/tistory/24283C3858F778CA2E.jpg');
+            // location.href= '/upload/displayPostFile?path=2022/07/04/c5fff81b-8089-4c70-9c74-50cc3ced5c31_09.jpg';
+           showUploadFiles(fileList, el);
         }
     })
 }
@@ -92,7 +92,7 @@ function sendFile(fileList, el, uploadURL){
 function showUploadFiles(fileList,el) {
     let str = "";
     $.each(fileList,function(i, file){
-        str += "<img src='/upload/displayPost?path="+ file.uploadDirectory + "/" + file.filename + "/>";
+        str += "<img src='/upload/displayPostFile?path="+ file.uploadDirectory + "/t_" + file.fileName + "'/>";
     })
     $(el).summernote('editor.insertImage', str);
 }

@@ -4,12 +4,14 @@ import com.project.moyeodream.domain.dao.FileDAO;
 import com.project.moyeodream.domain.vo.FileVO;
 import com.project.moyeodream.domain.vo.JobpostingDTO;
 import lombok.extern.slf4j.Slf4j;
+import net.coobird.thumbnailator.Thumbnailator;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -29,7 +31,9 @@ public class FileController {
         String rootDirectory = "C:/upload";
 
         File uploadDirectory = new File(rootDirectory, "profile");
-        if(!uploadDirectory.exists()) {uploadDirectory.mkdirs();}
+        if (!uploadDirectory.exists()) {
+            uploadDirectory.mkdirs();
+        }
 
         UUID uuid = UUID.randomUUID();
         String fileName = uuid.toString() + "_" + file.getOriginalFilename();
@@ -48,12 +52,14 @@ public class FileController {
 
     @DeleteMapping("/deleteProfile")
     @ResponseBody
-    public void deleteProfile(String path){
+    public void deleteProfile(String path) {
         File file = new File("C:/upload/profile", path);
-        if(file.exists()) {file.delete();}
+        if (file.exists()) {
+            file.delete();
+        }
     }
 
-    private String getDateDirectory(){
+    private String getDateDirectory() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         Date date = new Date();
         String directory = sdf.format(date);
@@ -67,7 +73,9 @@ public class FileController {
         String rootDirectory = "C:/upload";
 
         File uploadDirectory = new File(rootDirectory, "logo");
-        if(!uploadDirectory.exists()) {uploadDirectory.mkdirs();}
+        if (!uploadDirectory.exists()) {
+            uploadDirectory.mkdirs();
+        }
 
         UUID uuid = UUID.randomUUID();
         String fileName = uuid.toString() + "_" + file.getOriginalFilename();
@@ -86,15 +94,17 @@ public class FileController {
 
     @DeleteMapping("/deleteCompanyLogo")
     @ResponseBody
-    public void deleteCompanyLogo(String path){
+    public void deleteCompanyLogo(String path) {
         File file = new File("C:/upload/logo/", path);
-        if(file.exists()) {file.delete();}
+        if (file.exists()) {
+            file.delete();
+        }
     }
 
     // 자유게시판 이미지 업로드
     @PostMapping("/uploadPostFile")
     @ResponseBody
-    public void uploadPostImage(MultipartFile[] files) throws Exception {
+    public List<FileVO> uploadPostImage(MultipartFile[] files) throws Exception {
         log.info("--------------------------------------------");
         log.info(files.toString());
 
@@ -108,10 +118,10 @@ public class FileController {
 
         UUID uuid = UUID.randomUUID();
 
-        for(MultipartFile file : files){
+        for (MultipartFile file : files) {
             log.info("--------------------------------------------");
-            log.info("upload file name : "+ file.getOriginalFilename());
-            log.info("upload.file size : " + file.getSize() );
+            log.info("upload file name : " + file.getOriginalFilename());
+            log.info("upload.file size : " + file.getSize());
 
             // 뷰로 보낼 파일객체
             FileVO fileVO = new FileVO();
@@ -123,6 +133,20 @@ public class FileController {
             file.transferTo(saveFile);
             fileVO.setUploadDirectory(getDateDirectory());
             log.info("여기까지 완료");
+
+            FileOutputStream thumbnail = new FileOutputStream(new File(uploadDirectory, "t_" + fileName));
+
+            Thumbnailator.createThumbnail(file.getInputStream(), thumbnail, 100, 100);
+            thumbnail.close();
+
+            fileList.add(fileVO);
         }
+        return fileList;
+    }
+
+    @GetMapping("/displayPostFile")
+    @ResponseBody
+    public byte[] getFile(String path) throws IOException {
+        return FileCopyUtils.copyToByteArray(new File("C:/upload/post" + path));
     }
 }
