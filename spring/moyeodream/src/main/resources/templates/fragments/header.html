@@ -12,14 +12,14 @@
                 <button class="writeBtn">새 글 쓰기</button>
                 <div class="writeHidden">
                     <div onclick="location.href = '/study/register'"><p>스터디</p></div>
-                    <div><p>채용 공고</p></div>
+                    <div><p><a th:href="@{/jobPosting/jobPostingCreate}">채용 공고</a></p></div>
                     <a href="/post/postRegister">
                         <div><p>자유 게시판</p></div>
                     </a>
                 </div>
             </div>
             <div class="qna">
-                <button class="qnaBtn">문의하기</button>
+                <button class="qnaBtn"><a th:href="@{/inquiry/list}">문의하기</a></button>
             </div>
             <div class="header-post">
                 <button class="postBtn" onclick="location.href='/post/list'">자유게시판</button>
@@ -37,8 +37,8 @@
                     <img src="/img/mainicon.png">
                     <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"></path></svg>
                     <div class="iconHidden">
-                        <div><p>내 작성글</p></div>
-                        <div><p>마이페이지</p></div>
+                        <div><p><a th:href="@{/member/myPost}">내 작성글</a></p></div>
+                        <div><p><a th:href="@{/member/read}">마이페이지</a></p></div>
                         <div onclick="logout()"><p>로그아웃</p></div>
                         <form action="/member/logout" id="logoutForm" method="post"></form>
                     </div>
