@@ -4,6 +4,10 @@ $(document).ready(function() {
         type: "GET"
     });
 
+    if(memberProfile) {
+        $("div.user-profile img").attr("src", "/file/displayProfile?path=" + memberProfile);
+    }
+
     $("div.study-registered-date").text(dateFormat(studyRegisterDate));
     $("span.study-start").text(dateFormat(studyStartDate));
 
