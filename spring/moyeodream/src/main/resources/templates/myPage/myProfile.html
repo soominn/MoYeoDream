@@ -271,28 +271,9 @@
     let interestsList = "";
     let interest = new Array();
 
-    $registerButton.on("click", function () {
 
-        if($inputNickName.val() == "") {
-            alert("닉네임을 입력해주세요.");
-        }
-        else {
-            for(let i = 0; i < $('li.cateBlockk').length; i++) {
-                if ($($('li.cateBlockk')[i]).css("display") == "list-item") {
-                    interest.push($($('li.cateBlockk')[i]).attr("value"));
-                }
-            }
-            interestsList = interest.join(",");
-            $("#memberInterests").attr('value',interestsList);
 
-            $.ajax({
-                url: "/file/deleteProfile",
-                type: "delete",
-                data: {path: filesLeaderProfile},
-            });
-            $("#memberForm").submit();
-        }
-    });
+    let uploadBoolean = 0;
 
 
     let filesLeaderProfile = [[${member.memberProfile}]];
@@ -341,15 +322,20 @@
             contentType: false,
             success: function(fileName) {
                 $("#member-profile-name").val(fileName);
+                uploadBoolean = 1;
             }
         });
     });
+
+    if(uploadBoolean == 0){
+        $("#member-profile-name").val([[${member.memberProfile}]]);
+    }
 
     imgDelete2.addEventListener("click", function() {
         imgFile2.value = "";
         imgThumbnail2.src = "https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG";
 
-        let path = dateFormat(new Date()) + $("#member-profile-name").val();
+        let path = $("#member-profile-name").val();
         console.log(path);
 
         $.ajax({
@@ -357,6 +343,32 @@
             type: "DELETE",
             data: {path: path}
         });
+        $("#member-profile-name").val('');
+    });
+
+    $registerButton.on("click", function () {
+
+        if($inputNickName.val() == "") {
+            alert("닉네임을 입력해주세요.");
+        }
+        else {
+            for(let i = 0; i < $('li.cateBlockk').length; i++) {
+                if ($($('li.cateBlockk')[i]).css("display") == "list-item") {
+                    interest.push($($('li.cateBlockk')[i]).attr("value"));
+                }
+            }
+            interestsList = interest.join(",");
+            $("#memberInterests").attr('value',interestsList);
+
+            if(uploadBoolean != 0) {
+                $.ajax({
+                    url: "/file/deleteProfile",
+                    type: "delete",
+                    data: {path: filesLeaderProfile},
+                });
+            }
+            $("#memberForm").submit();
+        }
     });
 
 </script>
