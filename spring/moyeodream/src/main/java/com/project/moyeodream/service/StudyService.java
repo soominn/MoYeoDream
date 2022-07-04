@@ -18,6 +18,7 @@ public interface StudyService {
     public StudyDTO modify(int studyNumber);
     public void modify(StudyVO studyVO);
     public void remove(int studyNumber);
+    public void views(int studyNumber);
     public List<StudyVO> getCategoryList(String studyCategory);
     public boolean approve(int studyNumber);
     public int refuse(int studyNumber);

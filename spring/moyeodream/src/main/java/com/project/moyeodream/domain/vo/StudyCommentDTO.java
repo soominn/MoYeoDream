@@ -13,5 +13,6 @@ public class StudyCommentDTO {
     private Integer studyCommentMemberNumber;             // 댓글 멤버 넘버(FK)    -   댓글 작성자 정보 가져오기 위해
     private Integer studyCommentStudyNumber;              // 댓글 멤버 넘버(FK)    -   댓글의 게시글 정보 가져오기 위해
     private String memberNickname;                        // 댓글 작성한 멤버 닉네임
+    private String memberProfile;                         // 댓글 작성한 멤버 프로필
     private Integer commentTotal;                         // 댓글 총개수
 }

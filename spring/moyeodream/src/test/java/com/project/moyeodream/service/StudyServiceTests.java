@@ -39,4 +39,11 @@ public class StudyServiceTests {
         log.info("추가된 스터디 Title : " + studyDAO.read(1).getStudyTitle());
         log.info("---------------------------------------------------------");
     }
+
+    @Test
+    public void viewsTest() {
+        log.info("---------------------------------------------------------");
+        studyDAO.views(1);
+        log.info("---------------------------------------------------------");
+    }
 }

@@ -30,10 +30,19 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public int login(String memberEmail){return memberDAO.login(memberEmail);}
+    public int login(String memberEmail) {
+        return memberDAO.login(memberEmail);
+    }
 
     @Override
-    public boolean checkEmail(String memberEmail){return memberDAO.checkEmail(memberEmail);}
+    public boolean checkEmail(String memberEmail) {
+        return memberDAO.checkEmail(memberEmail);
+    }
+
+    @Override
+    public String checkProfile(int memberNumber) {
+        return memberDAO.checkProfile(memberNumber);
+    }
 
     @Override
     public MemberVO myPageView(int memberNumber) {

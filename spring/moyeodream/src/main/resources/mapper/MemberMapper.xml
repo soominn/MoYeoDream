@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.moyeodream.mapper.MemberMapper">
 
-    <!-- 회원가입 -->
     <insert id="insert">
         <selectKey keyProperty="memberNumber" order="BEFORE" resultType="_int">
             SELECT SEQ_MEMBER.NEXTVAL FROM DUAL
@@ -12,18 +11,21 @@
         VALUES (#{memberNumber}, #{memberEmail}, #{memberNickname}, #{memberProfile}, #{memberInterests})
     </insert>
 
-    <!-- 로그인 -->
     <select id="login" resultType="_int">
         SELECT MEMBER_NUMBER
         FROM TBL_MEMBER
         WHERE MEMBER_EMAIL = #{memberEmail}
     </select>
 
-    <!-- 중복 이메일 체크 -->
     <select id="checkEmail" resultType="_int">
         SELECT COUNT(MEMBER_EMAIL)
         FROM TBL_MEMBER
         WHERE MEMBER_EMAIL = #{memberEmail}
+    </select>
+
+    <select id="checkProfile" resultType="string">
+        SELECT MEMBER_PROFILE FROM TBL_MEMBER
+        WHERE MEMBER_NUMBER = #{memberNumber}
     </select>
 
     <select id="getMyStudyList" resultType="studyDTO">

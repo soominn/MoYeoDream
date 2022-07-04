@@ -15,9 +15,4 @@ public class StudyCommentMapperTests {
     public void getListTest(){
         studyCommentMapper.getList(1).stream().map(comment -> comment.getStudyCommentNumber()).forEach(i -> log.info(i + ""));
     }
-
-    @Test
-    public void selectNicknameTest() {
-        log.info("nickname : " + studyCommentMapper.selectNickname(1));
-    }
 }

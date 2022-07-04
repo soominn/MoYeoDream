@@ -28,7 +28,7 @@
 									<a class="eYKbXT" th:href="@{/member/myProfile}">
 										<div class="cqZvVN gkiCmL">프로필 수정</div>
 									</a>
-                                    <a class="eYKbXT" th:href="@{/member/logout}">
+                                    <a class="eYKbXT" onclick="logout()">
 										<div class="cqZvVN gkiCmL">로그아웃</div>
 									</a>
 								</section>
@@ -174,6 +174,9 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script th:inline="javascript">
+    let memberNumber = [[${session.memberNumber}]];
+</script>
 <script src="/js/header.js"></script>
 <script src="/js/login.js"></script>
 <script th:inline="javascript">

@@ -100,6 +100,9 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+<script th:inline="javascript">
+    let memberNumber = [[${session.memberNumber}]];
+</script>
 <script src="/js/jobPostingCreate.js"></script>
 <script src="/js/header.js"></script>
 <script src="/js/login.js"></script>
