@@ -144,6 +144,19 @@ section.study-title-input input {
     color: #333;
 }
 
+section.study-chief-summernote input {
+    width: 100%;
+    height: 56px;
+    min-height: 56px;
+    line-height: 44px;
+    box-shadow: none;
+    padding-left: 16px;
+    padding-right: 52px;
+    border: 1px solid #e1e3e8;
+    border-radius: 5px;
+    color: #333;
+}
+
 section.study-button {
     display: flex;
     justify-content: flex-end;
