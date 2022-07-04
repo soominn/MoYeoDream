@@ -83,7 +83,6 @@ function sendFile(fileList, el, uploadURL){
 
 function showUploadFiles(fileList,el) {
     // 파일정보를 담기 위함
-    let inputStr ="";
 
     $.each(fileList, function(i, file){
         // 썸네일 노출을 위함
@@ -92,9 +91,5 @@ function showUploadFiles(fileList,el) {
         str += "/file/displayPostFile?path=" +file.uploadDirectory + "/t_" +  file.fileName;
         $(el).summernote('editor.insertImage', str);
 
-        inputStr+= "<input type='hidden' class='imgFile' id= 'fileList["+ i+ "]' name='fileList["+ i +"].fileName' value='"+file.fileName+"'>";
-        inputStr+= "<input type='hidden' class='imgFile' id= 'fileList["+ i +"]' name='fileList["+ i +"].uploadDirectory' value='"+file.uploadDirectory+"'>";
-
     })
-    $postForm.append(inputStr);
 }
