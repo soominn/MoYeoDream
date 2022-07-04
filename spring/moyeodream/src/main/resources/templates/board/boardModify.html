@@ -81,9 +81,17 @@
 <script th:inline="javascript">
     let memberNumber = [[${session.memberNumber}]];
 </script>
+<script th:inline="javascript">
+    // 값을 넣어줄 input
+    let $postForm = $("form[name= postForm]");
+
+    let fileArr = [[${post.fileList}]];
+    let fileArrLen = fileArr == null? 0 :fileArr.length;
+
+</script>
 <script src="/js/header.js"></script>
 <script src="/js/login.js"></script>
-<script src="/js/boardWrite.js"></script>
+<script src="/js/boardModify.js"></script>
 <script th:inline="javascript">
     let content = [[${post.postContent}]];
     // 불러온 postContent
@@ -101,14 +109,61 @@
         e.preventDefault();
     });
 
+    // // fileList 가져오기
+    // if(fileArr != null){
+    //     $.each(fileArr, function(i, file){
+    //         let str = '';
+    //         str += "<input type='hidden' class='imgFile' id='fileList[" + i +"]' name='fileList[" + i + "].fileName' value='"+ file.fileName +"' >";
+    //         str += "<input type='hidden' class='imgFile' id='fileList[" + i +"]' name='fileList[" + i + "].uploadDirectory' value='"+ file.uploadDirectory +"' >";
+    //
+    //         $postForm.append(str);
+    //     })
+    //
+    // }
+
     //------------board Write 공통 내용------------------------------//
     let inputContent = document.querySelector("input[name=postContent]");
-    // 값을 넣어줄 input
-    let $postForm = $("form[name= postForm]");
 
     function saveContent(){
         let $value = $("#summernote").summernote('code');
         inputContent.value = $value;
+
+        // 이미지 파일 유무 검사
+        if($value.indexOf("<img") != -1){
+            console.log("이미지 태그 있음");
+            // 썸머노트에 삽입된 img 태그
+            // let noteImg = $(".panel-body").find("img").attr("src");
+            // let noteName = noteImg.substr(noteImg.lastIndexOf("t_")+2);
+
+            // DB 입력을 위한 img input hidden
+            let hiddenInput = $("input[class='imgFile']");
+            // let hiddenName = $("input[class='imgFile']").attr("value");
+
+            // 실제 입력된 이미지 태그의 개수
+            let noteImgArr = $(".panel-body").find("img");
+            let noteImgCount = noteImgArr.length;
+            console.log(noteImgCount);
+
+            if($(".panel-body").find("img") != null){
+                $.each(noteImgArr, function(i, noteImg){
+                    let path = $(this).attr("src");
+                    let uploadDirectory = path.substr(path.indexOf("=")+1,10);
+                    console.log(uploadDirectory);
+                    let fileName = path.substr(path.lastIndexOf("t_")+2);
+                    console.log(fileName);
+
+                    let str = '';
+                    str += "<input type='hidden' class='imgFile' id= 'fileList["+ i +"]' name='fileList["+ i +"].fileName' value='"+ fileName +"'>";
+                    str += "<input type='hidden' class='imgFile' id= 'fileList["+ i +"]' name='fileList["+ i +"].uploadDirectory' value='"+ uploadDirectory +"'>";
+
+                    $postForm.append(str);
+                })
+            };
+
+        }else{
+            console.log("이미지 태그 없음");
+            $("input[class='imgFile']").remove();
+        }
         $postForm.submit();
     }
     //-------------------------------------------------------------//

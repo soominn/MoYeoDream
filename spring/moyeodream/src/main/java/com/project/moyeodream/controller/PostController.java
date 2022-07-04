@@ -194,8 +194,8 @@ public class PostController {
 
         // 세션에 저장된 memberNumber 가져오기
         HttpSession session = req.getSession();
-//        postVO.setPostMemberNumber((Integer)session.getAttribute("memberNumber"));
-        postVO.setPostMemberNumber(42);
+        log.info("세션에 저장된 번호 : " + (Integer)session.getAttribute("memberNumber"));
+        postVO.setPostMemberNumber((Integer)session.getAttribute("memberNumber"));
         log.info("작성자 memberNum : "+postVO.getPostMemberNumber());
 
         postService.postRegister(postVO);
