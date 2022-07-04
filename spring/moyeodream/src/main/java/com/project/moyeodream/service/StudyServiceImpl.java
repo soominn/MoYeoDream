@@ -49,6 +49,11 @@ public class StudyServiceImpl implements StudyService{
     };
 
     @Override
+    public void views(int studyNumber) {
+        studyDAO.views(studyNumber);
+    };
+
+    @Override
     public List<StudyVO> CratedList(int userNumber) {
         return studyDAO.CratedList(userNumber);
     }
