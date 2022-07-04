@@ -64,8 +64,6 @@ function sendFile(fileList, el, uploadURL){
 
     for(let i = 0; i < files.length; i++){
         formData.append("files", files[i]);
-        console.log("files["+i+"] : " +  files[i]);
-        console.log(formData);
     }
 
     $.ajax({
