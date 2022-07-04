@@ -109,18 +109,6 @@
         e.preventDefault();
     });
 
-    // // fileList 가져오기
-    // if(fileArr != null){
-    //     $.each(fileArr, function(i, file){
-    //         let str = '';
-    //         str += "<input type='hidden' class='imgFile' id='fileList[" + i +"]' name='fileList[" + i + "].fileName' value='"+ file.fileName +"' >";
-    //         str += "<input type='hidden' class='imgFile' id='fileList[" + i +"]' name='fileList[" + i + "].uploadDirectory' value='"+ file.uploadDirectory +"' >";
-    //
-    //         $postForm.append(str);
-    //     })
-    //
-    // }
-
     //------------board Write 공통 내용------------------------------//
     let inputContent = document.querySelector("input[name=postContent]");
 
@@ -131,9 +119,6 @@
         // 이미지 파일 유무 검사
         if($value.indexOf("<img") != -1){
             console.log("이미지 태그 있음");
-            // 썸머노트에 삽입된 img 태그
-            // let noteImg = $(".panel-body").find("img").attr("src");
-            // let noteName = noteImg.substr(noteImg.lastIndexOf("t_")+2);
 
             // DB 입력을 위한 img input hidden
             let hiddenInput = $("input[class='imgFile']");
