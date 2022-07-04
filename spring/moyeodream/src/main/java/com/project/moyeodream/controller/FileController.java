@@ -47,9 +47,6 @@ public class FileController {
             File saveFile = new File(uploadDirectory, fileName);
             file.transferTo(saveFile);
 
-            FileOutputStream thumbnail = new FileOutputStream(new File(uploadDirectory, "t_" + fileName));
-            Thumbnailator.createThumbnail(file.getInputStream(), thumbnail, 100, 100);
-            thumbnail.close();
             fileList.add(fileVO);
         }
         return fileList;
