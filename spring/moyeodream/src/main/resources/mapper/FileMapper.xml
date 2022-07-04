@@ -8,4 +8,16 @@
         (FILE_NAME, UPLOAD_DIRECTORY, POST_NUMBER)
         VALUES(#{fileName}, #{uploadDirectory}, #{postVO.postNumber})
     </insert>
+
+    <!-- 게시판 파일 불러오기-->
+    <select id="selectPost" resultType="fileVO">
+        SELECT FILE_NAME, UPLOAD_DIRECTORY, POST_NUMBER FROM TBL_FILE
+        WHERE POST_NUMBER = #{postNumber}
+    </select>
+
+    <!-- 게시판 파일 삭제 -->
+    <delete id="deletePost">
+        DELETE FROM TBL_FILE
+        WHERE POST_NUMBER = #{postNumber}
+    </delete>
 </mapper>

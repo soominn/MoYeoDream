@@ -25,7 +25,7 @@ public interface PostService {
     // 게시판 글 등록
     public void postRegister(PostVO postVO);
 
-    public boolean postUpdate(PostVO postVO);
+    public void postUpdate(PostVO postVO);
 
-    public boolean postDelete(int postNumber);
+    public void postDelete(int postNumber);
 }

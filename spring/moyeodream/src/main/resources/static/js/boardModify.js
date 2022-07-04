@@ -88,5 +88,6 @@ function showUploadFiles(fileList,el) {
 
         str += "/file/displayPostFile?path=" +file.uploadDirectory + "/t_" +  file.fileName;
         $(el).summernote('editor.insertImage', str);
+
     })
 }

@@ -23,7 +23,40 @@ import java.util.UUID;
 @Slf4j
 @RequestMapping("/file/*")
 public class FileController {
-    FileDAO fileDAO;
+    @ResponseBody
+    @PostMapping("/uploadStudy")
+    public List<FileVO> uploadStudy(MultipartFile[] files) throws IOException {
+        List<FileVO> fileList = new ArrayList<>();
+        String rootDirectory = "C:/upload";
+
+        File uploadDirectory = new File(rootDirectory, getDateDirectory());
+        if(!uploadDirectory.exists()) {uploadDirectory.mkdirs();}
+
+        for(MultipartFile file : files) {
+            log.info("------------------------------------");
+            log.info("upload file name : " + file.getOriginalFilename());
+            log.info("upload file size : " + file.getSize());
+            FileVO fileVO = new FileVO();
+
+            UUID uuid = UUID.randomUUID();
+            String fileName = uuid.toString() + "_" + file.getOriginalFilename();
+
+            fileVO.setFileName(fileName);
+            fileVO.setUploadDirectory(getDateDirectory());
+
+            File saveFile = new File(uploadDirectory, fileName);
+            file.transferTo(saveFile);
+
+            fileList.add(fileVO);
+        }
+        return fileList;
+    }
+
+    @ResponseBody
+    @GetMapping("/displayStudy")
+    public byte[] displayStudy(String path) throws IOException {
+        return FileCopyUtils.copyToByteArray(new File("C:/upload/" + path));
+    }
 
     @ResponseBody
     @PostMapping("/uploadProfile")
@@ -50,8 +83,8 @@ public class FileController {
         return FileCopyUtils.copyToByteArray(new File("C:/upload/profile/" + path));
     }
 
-    @DeleteMapping("/deleteProfile")
     @ResponseBody
+    @DeleteMapping("/deleteProfile")
     public void deleteProfile(String path) {
         File file = new File("C:/upload/profile", path);
         if (file.exists()) {

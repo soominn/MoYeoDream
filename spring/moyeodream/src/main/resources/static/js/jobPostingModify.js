@@ -39,11 +39,13 @@ $registerButton.on("click", function () {
     else {
         $input.val(note);
 
-        $.ajax({
-            url: "/file/deleteCompanyLogo",
-            type: "delete",
-            data: {path: files},
-        });
+        if(uploadBoolean != 0) {
+            $.ajax({
+                url: "/file/deleteCompanyLogo",
+                type: "delete",
+                data: {path: files},
+            });
+        }
 
         $("#createForm").submit();
     }

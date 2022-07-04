@@ -1,6 +1,5 @@
 $(document).ready(function() {
 	if(memberNumber != null) {
-		console.log("들어옴")
 		let jsonMemberNumber = {
 			memberNumber : memberNumber
 		};
@@ -12,9 +11,7 @@ $(document).ready(function() {
 			data: JSON.stringify(jsonMemberNumber),
 			success: function(result) {
 				if(result) {
-					// 절대경로 어떻게 작성해야 하는지 여쭤보고 이후에 작성
-					// 임시
-					$("div.headerIcon img").attr("src", "https://phinf.pstatic.net/contact/20210507_26/1620383947175eS4aG_JPEG/%B1%CD%BF%E4%BF%C0.JPG");
+					$("div.headerIcon img").attr("src", "/file/displayProfile?path=" + result);
 				}
 				else {
 					$("div.headerIcon img").attr("src", "https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG");
@@ -178,7 +175,7 @@ $xDiv.on("click", function () {
 // 카카오 로그인 API
 // 참고 사이트 : https://tyrannocoding.tistory.com/49
 Kakao.init('9410b8b853e1b1969a33820e597a5af6');
-console.log(Kakao.isInitialized());
+// console.log(Kakao.isInitialized());
 
 function kakaoLogin() {
 	Kakao.Auth.login({

@@ -3,6 +3,8 @@ package com.project.moyeodream.domain.vo;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @Data
 public class PostDTO {
@@ -18,4 +20,5 @@ public class PostDTO {
     private String postCommentContent;                   // 내 댓글 내용
     private Integer postCommentCount;               // 게시글 내 댓글 개수
     private String memberProfile;                 // 멤버 프로필 이미지
+    private List<FileVO> fileList;                // 첨부파일 가져오기 위함
 }
