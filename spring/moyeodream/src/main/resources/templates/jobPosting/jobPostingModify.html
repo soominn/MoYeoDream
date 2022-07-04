@@ -111,6 +111,7 @@
 
     let jobpostingContent = [[${jobPosting.jobpostingContent}]];
 
+    let uploadBoolean = 0;
 
     $(document).ready(function () {
         $(".summernote").append(jobpostingContent);
@@ -169,8 +170,13 @@
             contentType: false,
             success: function(fileName) {
                 $("#job-logo-name").val(fileName);
+                uploadBoolean = 1;
             }
         });
     });
+
+    if(uploadBoolean == 0){
+        $("#job-logo-name").val([[${jobPosting.jobpostingCompanyLogo}]]);
+    }
 </script>
 </html>
