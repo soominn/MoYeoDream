@@ -44,7 +44,8 @@ public class MemberController {
 
         HttpSession session = request.getSession();
         session.setAttribute("memberNumber", memberService.login(memberEmail));
-        return "redirect:http://localhost:11111/member/main";
+
+        return "redirect:http://localhost:11111/main/index";
     }
 
     // 로그아웃
@@ -57,7 +58,7 @@ public class MemberController {
         HttpSession session = request.getSession();
         session.removeAttribute("memberNumber");
 
-        return "redirect:http://localhost:11111/member/main";
+        return "redirect:http://localhost:11111/main/index";
     }
 
     // 중복 이메일 체크
@@ -69,6 +70,17 @@ public class MemberController {
         log.info("----------------------------");
 
         return memberService.checkEmail(memberVO.getMemberEmail());
+    }
+
+    // 프로필 가져오기
+    @ResponseBody
+    @PostMapping("/checkProfile")
+    public String checkProfile(@RequestBody MemberVO memberVO){
+        log.info("----------------------------");
+        log.info("checkProfile............. memberNumber : " + memberVO.getMemberNumber());
+        log.info("----------------------------");
+
+        return memberService.checkProfile(memberVO.getMemberNumber());
     }
 
     // 내 정보 불러오기

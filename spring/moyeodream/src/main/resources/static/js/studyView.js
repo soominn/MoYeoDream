@@ -134,9 +134,7 @@ function getCommentList() {
                     comment += "                <img src=\"https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG\">";
                 }
                 else {
-                    // 절대경로에서 이미지 가져와야함
-                    // 임시
-                    comment += "                <img src=\"https://phinf.pstatic.net/contact/20210507_26/1620383947175eS4aG_JPEG/%B1%CD%BF%E4%BF%C0.JPG?type=f130_130\">";
+                    comment += "                <img src='/file/displayProfile?path=" + result[i].memberProfile + "'>";
                 }
                 comment += "            <div class=\"comment-title-wrap\">";
                 comment += "                <div class=\"comment-title\">";

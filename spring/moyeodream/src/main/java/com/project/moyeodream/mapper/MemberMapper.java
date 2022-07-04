@@ -17,6 +17,8 @@ public interface MemberMapper {
     public int login(String memberEmail);
     // 중복된 이메일 검사
     public int checkEmail(String memberEmail);
+    // 프로필 가져오기
+    public String checkProfile(int memberNumber);
     // 내 정보 보기
     public MemberVO select(int memberNumber);
     // 내 정보 수정
