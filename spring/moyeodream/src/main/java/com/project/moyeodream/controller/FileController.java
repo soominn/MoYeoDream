@@ -150,4 +150,9 @@ public class FileController {
     public byte[] getFile(String path) throws IOException {
         return FileCopyUtils.copyToByteArray(new File("C:/upload/post/" + path));
     }
+
+    @ResponseBody
+    public void deletePostImage(){
+
+    }
 }
