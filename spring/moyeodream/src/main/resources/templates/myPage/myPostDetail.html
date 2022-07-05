@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="/css/login.css">
 </head>
 <body>
-<!--  <header th:replace="~{/fragments/header::header}"></header>-->
+<header th:replace="~{/fragments/header::header}"></header>
 <!-- 헤더 부분 ↑ -->
 <form action="/post/list" name="pageForm" th:object="${criteria}">
     <input type="hidden" th:field="*{pageNum}">
