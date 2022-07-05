@@ -60,6 +60,7 @@ public class PostController {
 
         model.addAttribute("pageDTO", pageDTO );
         model.addAttribute("criteria", criteria);
+        log.info("criteria......"+criteria);
 
         log.info("-------------------------------------------------");
         log.info(pageDTO.getCriteria().getListLink());
