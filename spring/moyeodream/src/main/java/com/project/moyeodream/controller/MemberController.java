@@ -347,10 +347,4 @@ public class MemberController {
 
         return "/myPage/myCommentDetail";
     }
-
-    // 내 정보 불러오기
-    @GetMapping("loginRequiredError")
-    public String loginRequiredError(){
-        return "/error/loginRequiredError";
-    }
 }
