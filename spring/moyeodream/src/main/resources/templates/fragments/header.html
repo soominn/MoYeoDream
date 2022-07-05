@@ -11,9 +11,14 @@
             <div class="write">
                 <button class="writeBtn">새 글 쓰기</button>
                 <div class="writeHidden">
-                    <div onclick="location.href = '/study/register'"><p>스터디</p></div>
-                    <div><p><a th:href="@{/jobPosting/jobPostingCreate}">채용 공고</a></p></div>
-                    <a href="/post/postRegister">
+                    <div th:if="${session.memberNumber} == null" onclick="location.href = '/error/loginRequiredError'"><p>스터디</p></div>
+                    <div th:unless="${session.memberNumber} == null" onclick="location.href = '/study/register'"><p>스터디</p></div>
+                    <div th:if="${session.memberNumber} == null"><p><a th:href="@{/error/loginRequiredError}">채용 공고</a></p></div>
+                    <div th:unless="${session.memberNumber} == null"><p><a th:href="@{/jobPosting/jobPostingCreate}">채용 공고</a></p></div>
+                    <a th:if="${session.memberNumber} == null" href="/error/loginRequiredError">
+                        <div><p>자유 게시판</p></div>
+                    </a>
+                    <a th:unless="${session.memberNumber} == null" href="/post/postRegister">
                         <div><p>자유 게시판</p></div>
                     </a>
                 </div>

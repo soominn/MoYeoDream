@@ -89,13 +89,20 @@ public class MemberController {
         HttpSession session = req.getSession();
         Integer memberNumber = (Integer)session.getAttribute("memberNumber");
 
-        log.info("----------------------------");
-        log.info("memberRead............. : " + memberNumber);
-        log.info("----------------------------");
+        String root = "";
+        if(memberNumber == null){
+            root += "/error/loginRequiredError";
+        }else{
+            log.info("----------------------------");
+            log.info("memberRead............. : " + memberNumber);
+            log.info("----------------------------");
 
-        model.addAttribute("member", memberService.myPageView(memberNumber));
-        model.addAttribute("session", memberNumber);
-        return "/myPage/myPage";
+            model.addAttribute("member", memberService.myPageView(memberNumber));
+            model.addAttribute("session", memberNumber);
+
+            root += "/myPage/myPage";
+        }
+        return root;
     }
 
     // 내 정보 수정(post)

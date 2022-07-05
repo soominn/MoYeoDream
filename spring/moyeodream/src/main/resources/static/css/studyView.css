@@ -423,3 +423,7 @@ button.change-button {
     font-size: 16px;
     color: #444;
 }
+
+div.user-introduction img, div.study-introduction img {
+    max-width: 100%;
+}

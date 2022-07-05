@@ -43,7 +43,7 @@
                 </li>-->
             </ul>
         </section>
-        
+
         <main class="main-box my-create-box" > <!-- 내가 만든 -->
             <!-- 승인목록 -->
             <div class="myCreateChildren">
@@ -64,7 +64,7 @@
                     <th:block th:each="myStudy:${myStudyList}">
 
                     <li class="study-box study-box2"  th:if="${myStudy.studyApprove == 1}" th:object="${myStudy}">
-                        <a th:href="@{/member/myStudyRead(studyNumber=*{studyNumber})}">
+                        <a th:href="@{/study/read(studyNumber=*{studyNumber})}">
                             <div class="study-schedule">
                                 <p class="study-scheduleTitle">시작 예정일 |</p>
                                 <p class="study-start"></p>
@@ -123,7 +123,7 @@
                     <th:block th:each="myStudy:${myStudyList}">
 
                         <li class="study-box study-box2" th:unless="${myStudy.studyApprove == 1}" th:object="${myStudy}">
-                            <a th:href="@{/member/myStudyRead(studyNumber=*{studyNumber})}">
+                            <a th:href="@{/study/read(studyNumber=*{studyNumber})}">
                                 <div class="study-schedule">
                                     <p class="study-scheduleTitle">시작 예정일 |</p>
                                     <p class="study-start"></p>
@@ -165,45 +165,36 @@
             </div>
 
         </main>
+<!--        <main class="main-box my-activity-box"> &lt;!&ndash; 참여 중인-->
+<!--        <div class="main-box2">-->
+<!--            <ul class="main-box3">-->
+<!--                <div class="empty-study">-->
+<!--                    <h4>해당 스터디가 없습니다.</h4>-->
+<!--                </div>-->
 
-        <!--<main class="main-box my-activity-box"> &lt;!&ndash; 참여 중인 &ndash;&gt;
-            <div class="main-box2">
-                <ul class="main-box3">
-                
-                    &lt;!&ndash; 스터디가 없을 때 사용 &ndash;&gt;
-                    &lt;!&ndash;<div class="empty-study">
-                        <h4>해당 스터디가 없습니다.</h4>
-                    </div>&ndash;&gt;
+<!--            </ul>-->
+<!--        </div>-->
+<!--        </main>-->
+<!--        <main class="main-box my-favorite-box"> &lt;!&ndash; 찜 스터디-->
+<!--        <div class="main-box2">-->
+<!--            <ul class="main-box3">-->
+<!--                <div class="empty-study">-->
+<!--                    <h4>해당 스터디가 없습니다.</h4>-->
+<!--                </div>-->
 
-                </ul>
-            </div>
-        </main>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--        </main>-->
+<!--        <main class="main-box my-waiting-box"> &lt;!&ndash; 신청 대기-->
+<!--        <div class="main-box2">-->
+<!--            <ul class="main-box3">-->
+<!--                <div class="empty-study">-->
+<!--                    <h4>해당 스터디가 없습니다.</h4>-->
+<!--                </div>-->
 
-       <!-- <main class="main-box my-favorite-box"> &lt;!&ndash; 찜 스터디 &ndash;&gt;
-            <div class="main-box2">
-                <ul class="main-box3">
-                
-                    &lt;!&ndash; 스터디가 없을 때 사용 &ndash;&gt;
-                    <div class="empty-study">
-                        <h4>해당 스터디가 없습니다.</h4>
-                    </div>
-
-                </ul>
-            </div>
-        </main>-->
-
-       <!-- <main class="main-box my-waiting-box"> &lt;!&ndash; 신청 대기 &ndash;&gt;
-            <div class="main-box2">
-                <ul class="main-box3">
-                
-                    &lt;!&ndash; 스터디가 없을 때 사용 &ndash;&gt;
-                    <div class="empty-study">
-                        <h4>해당 스터디가 없습니다.</h4>
-                    </div>
-
-                </ul>
-            </div>
-        </main>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--        </main>-->
     </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

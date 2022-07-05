@@ -1,3 +1,13 @@
+let preUrl = document.referrer;
+$("div.back").on("click", function() {
+    if(preUrl == "http://localhost:11111/member/myStudy") {
+        location.href = "/member/myStudy";
+    }
+    else {
+        location.href = "/main/index";
+    }
+});
+
 $(document).ready(function() {
     $.ajax({
         url: "/study/views/" + studyNumber,

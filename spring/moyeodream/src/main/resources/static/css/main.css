@@ -405,6 +405,7 @@ input[type="checkbox"]{
 }
 
 .contentReaction div p{
+    margin-left: 5px;
     color: #999;
 }
 

@@ -16,7 +16,7 @@
   <div class="main-container">
     <section class="category-box" style="border-bottom: 2px solid #d1d1d1">
       <h2 class="page-title">문의하기</h2>
-      <button class="new-inquiry" ><a href="/inquiry/inquiryCreate">새 글 쓰기</a></button>
+      <button class="new-inquiry" th:if="${session.memberNumber} != null"><a href="/inquiry/inquiryCreate">새 글 쓰기</a></button>
     </section>
     <section class="board-list-container">
 

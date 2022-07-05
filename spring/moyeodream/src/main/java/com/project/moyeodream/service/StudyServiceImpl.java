@@ -109,6 +109,11 @@ public class StudyServiceImpl implements StudyService{
     }
 
     @Override
+    public int getTotalC(Criteria criteria) {
+        return studyDAO.getTotalC(criteria);
+    }
+
+    @Override
     public StudyDTO adStudyRead(int studyNumber) {
         StudyDTO studyDTO = studyDAO.read(studyNumber);
         return studyDTO;

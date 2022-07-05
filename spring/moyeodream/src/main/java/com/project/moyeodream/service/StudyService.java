@@ -25,6 +25,7 @@ public interface StudyService {
     public List<StudyVO> getApproveWait();
     public List<StudyDTO> getStudyList(Criteria criteria);
     public int getTotal(Criteria criteria);
+    public int getTotalC(Criteria criteria);
     public StudyDTO adStudyRead(int studyNumber);
     public int getApprove(int studyNumber);
     public void check(int studyNumber);

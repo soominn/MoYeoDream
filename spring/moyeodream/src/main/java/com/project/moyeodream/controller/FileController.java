@@ -47,9 +47,6 @@ public class FileController {
             File saveFile = new File(uploadDirectory, fileName);
             file.transferTo(saveFile);
 
-            FileOutputStream thumbnail = new FileOutputStream(new File(uploadDirectory, "t_" + fileName));
-            Thumbnailator.createThumbnail(file.getInputStream(), thumbnail, 100, 100);
-            thumbnail.close();
             fileList.add(fileVO);
         }
         return fileList;
@@ -191,4 +188,77 @@ public class FileController {
     public void deletePostImage(){
 
     }
+
+
+    @ResponseBody
+    @PostMapping("/uploadInquiry")
+    public List<FileVO> uploadInquiry(MultipartFile[] files) throws IOException {
+        List<FileVO> fileList = new ArrayList<>();
+        String rootDirectory = "C:/upload";
+
+        File uploadDirectory = new File(rootDirectory, getDateDirectory());
+        if(!uploadDirectory.exists()) {uploadDirectory.mkdirs();}
+
+        for(MultipartFile file : files) {
+            log.info("------------------------------------");
+            log.info("upload file name : " + file.getOriginalFilename());
+            log.info("upload file size : " + file.getSize());
+            FileVO fileVO = new FileVO();
+
+            UUID uuid = UUID.randomUUID();
+            String fileName = uuid.toString() + "_" + file.getOriginalFilename();
+
+            fileVO.setFileName(fileName);
+            fileVO.setUploadDirectory(getDateDirectory());
+
+            File saveFile = new File(uploadDirectory, fileName);
+            file.transferTo(saveFile);
+
+            fileList.add(fileVO);
+        }
+        return fileList;
+    }
+
+    @ResponseBody
+    @GetMapping("/displayInquiry")
+    public byte[] displayInquiry(String path) throws IOException {
+        return FileCopyUtils.copyToByteArray(new File("C:/upload/" + path));
+    }
+
+
+    @ResponseBody
+    @PostMapping("/uploadJobposting")
+    public List<FileVO> uploadJobposting(MultipartFile[] files) throws IOException {
+        List<FileVO> fileList = new ArrayList<>();
+        String rootDirectory = "C:/upload";
+
+        File uploadDirectory = new File(rootDirectory, getDateDirectory());
+        if(!uploadDirectory.exists()) {uploadDirectory.mkdirs();}
+
+        for(MultipartFile file : files) {
+            log.info("------------------------------------");
+            log.info("upload file name : " + file.getOriginalFilename());
+            log.info("upload file size : " + file.getSize());
+            FileVO fileVO = new FileVO();
+
+            UUID uuid = UUID.randomUUID();
+            String fileName = uuid.toString() + "_" + file.getOriginalFilename();
+
+            fileVO.setFileName(fileName);
+            fileVO.setUploadDirectory(getDateDirectory());
+
+            File saveFile = new File(uploadDirectory, fileName);
+            file.transferTo(saveFile);
+
+            fileList.add(fileVO);
+        }
+        return fileList;
+    }
+
+    @ResponseBody
+    @GetMapping("/displayJobposting")
+    public byte[] displayJobposting(String path) throws IOException {
+        return FileCopyUtils.copyToByteArray(new File("C:/upload/" + path));
+    }
+
 }
