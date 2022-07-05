@@ -50,3 +50,27 @@ $registerButton.on("click", function () {
         $("#createForm").submit();
     }
 });
+
+function uploadImage(files, editor) {
+    let data = new FormData();
+    data.append("files", files);
+    $.ajax({
+        url: '/file/uploadJobposting',
+        type: "post",
+        data: data,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(fileList) {
+            let keys = Object.keys(fileList[0]);
+            let fileName = fileList[0][keys[0]];
+            let uploadPath = fileList[0][keys[1]];
+
+            let url = "/file/displayJobposting?path=" + uploadPath + "/" + fileName;
+            $(editor).summernote('insertImage', url);
+        },
+        error: function(e) {
+            console.log(e);
+        }
+    });
+}

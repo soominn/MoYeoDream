@@ -431,3 +431,7 @@ button.delete-button:hover{
     margin: 70px;
     font-size: 16px;
 }
+
+div.user-introduction img {
+    max-width: 100%;
+}

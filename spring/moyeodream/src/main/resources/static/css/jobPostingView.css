@@ -431,3 +431,7 @@ button.delete-button:hover{
 .study-info-content{
     cursor: pointer;
 }
+
+div.detail-info img {
+    max-width: 100%;
+}

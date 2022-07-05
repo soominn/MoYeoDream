@@ -188,7 +188,11 @@ button.register {
     color: #fff;
 }
 
-input[type="file"] {
+/*input[type="file"] {
+    display: none;
+}*/
+
+input#enterprise-img{
     display: none;
 }
 
