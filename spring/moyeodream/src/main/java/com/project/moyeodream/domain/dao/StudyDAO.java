@@ -89,9 +89,14 @@ public class StudyDAO {
     // 스터디 가져오기 admin
     public List<StudyDTO> getStudyList(Criteria criteria) { return studyMapper.getStudyList(criteria); }
 
-    // 스터디 전체 개수
+    // 스터디 전체 개수(댓글에서 사용)
     public int getTotal(Criteria criteria){
         return studyMapper.getTotal(criteria);
+    }
+
+    // 스터디 전체 개수
+    public int getTotalC(Criteria criteria){
+        return studyMapper.getTotalC(criteria);
     }
 
     // 승인 여부 확인

@@ -44,8 +44,10 @@ public interface StudyMapper {
     public List<StudyVO> getApproveWait();
     // 스터디 가져오기 admin
     public List<StudyDTO> getStudyList(Criteria criteria);
-    // 스터디 전체 개수
+    // 스터디 전체 개수(댓글 정보 가져올때 사용)
     public int getTotal(Criteria criteria);
+    // 스터디 전체 개수
+    public int getTotalC(Criteria criteria);
     // 승인 여부 확인
     public int getApprove(int studyNumber);
     // 체크한 스터디
