@@ -30,13 +30,13 @@ public class MainController {
 
     // 메인페이지
     @GetMapping("index")
-    public String index(Model model, Criteria criteria){
+    public String index(Criteria criteria, Model model){
+        criteria.setAmount(9);
         // 인기순
         List<StudyDTO> studyList = studyService.getListView(criteria);
 
         for (StudyDTO list: studyList) {
             list.setStudyCommentTotal(studyCommentService.getTotal(list.getStudyNumber()));
-            log.info("getTotal comment___________ : "+list.getStudyCommentTotal());
         }
         model.addAttribute("studyList",studyList);
         model.addAttribute("jobpostingList",jobpostingService.getList(criteria));
@@ -46,12 +46,12 @@ public class MainController {
 
     // 최신순
     @GetMapping("changeLatest")
-    public String changeLatest(Model model, Criteria criteria){
+    public String changeLatest(Criteria criteria, Model model){
+        criteria.setAmount(9);
         List<StudyDTO> studyList = studyService.getListLatest(criteria);
 
         for (StudyDTO list: studyList) {
             list.setStudyCommentTotal(studyCommentService.getTotal(list.getStudyNumber()));
-            log.info("getTotal comment___________ : "+list.getStudyCommentTotal());
         }
         model.addAttribute("studyList",studyList);
         model.addAttribute("jobpostingList",jobpostingService.getListLatest(criteria));
@@ -60,12 +60,12 @@ public class MainController {
     }
     // 인기순
     @GetMapping("changeView")
-    public String changeView(Model model, Criteria criteria){
+    public String changeView(Criteria criteria, Model model){
+        criteria.setAmount(9);
         List<StudyDTO> studyList = studyService.getListView(criteria);
 
         for (StudyDTO list: studyList) {
             list.setStudyCommentTotal(studyCommentService.getTotal(list.getStudyNumber()));
-            log.info("getTotal comment___________ : "+list.getStudyCommentTotal());
         }
         model.addAttribute("studyList",studyList);
         model.addAttribute("jobpostingList",jobpostingService.getListView(criteria));
@@ -76,22 +76,25 @@ public class MainController {
     // 카테고리 검색 - 인기순
     @GetMapping("categoryView")
     @ResponseBody
-    public List<StudyDTO> categoryView(Criteria criteria, Model model){
-        log.info("==============================================================================================================================");
-        log.info("겟카테고리" + criteria.getCategory());
+    public List<StudyDTO> categoryView(Criteria criteria){
+        log.info("======================================");
+        log.info(criteria.toString());
+        criteria.setAmount(9);
         List<StudyDTO> studyList = studyService.getListView(criteria);
         for (StudyDTO list: studyList) {
             list.setStudyCommentTotal(studyCommentService.getTotal(list.getStudyNumber()));
         }
-
+        log.info("======================================");
+        for (StudyDTO i : studyList) {
+            log.info("가져온 스터디 목록 컨트롤러 : "+i);
+        }
         return studyList;
     }
     // 카테고리 검색 - 최신순
     @GetMapping("categoryLatest")
     @ResponseBody
-    public List<StudyDTO> categoryLatest(Criteria criteria, Model model){
-        log.info("==============================================================================================================================");
-        log.info("겟카테고리" + criteria.getCategory());
+    public List<StudyDTO> categoryLatest(Criteria criteria){
+        criteria.setAmount(9);
         List<StudyDTO> studyList = studyService.getListView(criteria);
         for (StudyDTO list: studyList) {
             list.setStudyCommentTotal(studyCommentService.getTotal(list.getStudyNumber()));
@@ -103,24 +106,24 @@ public class MainController {
     @GetMapping("jobList")
     @ResponseBody
     public List<JobpostingDTO> jobList(Criteria criteria){
+//        criteria.setAmount(9);
+        log.info("==============================================================================================================================");
+        log.info("크리테리아 : "+criteria.toString());
         List<JobpostingDTO> jobpostingList = jobpostingService.getListView(criteria);
         log.info("==============================================================================================================================");
-        log.info("- 가져온 채용공고 : " + jobpostingList);
+        for (JobpostingDTO i: jobpostingList) {
+            log.info("- 가져온 채용공고 : " + i);
+        }
         return jobpostingList;
     }
+
     // 채용공고 최신
     @GetMapping("jobListLatest")
     @ResponseBody
     public List<JobpostingDTO> jobListLatest(Criteria criteria){
+        criteria.setAmount(9);
         List<JobpostingDTO> jobpostingList = jobpostingService.getListLatest(criteria);
         return jobpostingList;
     }
 
-    // 스크롤
-    @GetMapping("scroll")
-    @ResponseBody
-    public List<JobpostingDTO> scroll(Criteria criteria){
-        List<JobpostingDTO> jobpostingList = jobpostingService.getListLatest(criteria);
-        return jobpostingList;
-    }
 }

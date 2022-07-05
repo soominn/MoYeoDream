@@ -27,13 +27,18 @@ public class Criteria {
         this.amount = amount;
     }
 
+    public Criteria(Integer pageNum, Integer amount, String category) {
+        this.pageNum = pageNum;
+        this.amount = amount;
+        this.category = category;
+    }
+
     public String[] getTypes(){
         return type == null? new String[]{} : type.split("");
                             // null 일 경우 빈 문자열 return
     }
 
     public String[] getCategories(){
-        log.info("겟 카데고리 크리테리아 : " + category);
         return category == null? new String[]{} : category.split("");
         // null 일 경우 빈 문자열 return
     }
