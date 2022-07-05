@@ -10,8 +10,6 @@
     <link rel="stylesheet" type="text/css" href="/css/loginRequiredError.css">
 </head>
 <body>
-    <header th:replace="~{/fragments/header::header}"></header>
-
     <div class="mainSession">
         <div class="errorLogo" onclick="location.href = '/main/index'">
             <img src="/img/logo.png">
@@ -24,7 +22,6 @@
         </div>
         <div class="goMainBox">
             <span class="goMain"><a onclick="location.href = '/main/index'">메인화면으로 이동하기</a></span>
-            <span class="goLogin"><button class="loginBtn">로그인하기</button></span>
         </div>
     </div>
 </body>
