@@ -3,9 +3,9 @@
 <mapper namespace="com.project.moyeodream.mapper.StudyMapper">
     <!-- 카테고리 검색-->
     <sql id="categorySearch">
-        <if test="type != null and keyword != null">
+        <if test="categories != null">
             <trim prefix="(" suffix=") AND " prefixOverrides="OR">
-                <foreach item="type" collection="types">
+                <foreach item="type" collection="categories">
                     <trim prefix="OR">
                         <choose>
                             <when test="type == 'C'.toString()">

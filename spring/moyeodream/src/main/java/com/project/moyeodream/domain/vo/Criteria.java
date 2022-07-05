@@ -16,6 +16,7 @@ public class Criteria {
     private Integer amount;         // 한 페이지당 출력되는 데이터 개수
     private String type;            // 검색필터 > 검색기준
     private String keyword;         // 검색필터 > 검색어
+    private String category;
 
     public Criteria(){
         this(1, 10);
@@ -29,6 +30,12 @@ public class Criteria {
     public String[] getTypes(){
         return type == null? new String[]{} : type.split("");
                             // null 일 경우 빈 문자열 return
+    }
+
+    public String[] getCategories(){
+        log.info("겟 카데고리 크리테리아 : " + category);
+        return category == null? new String[]{} : category.split("");
+        // null 일 경우 빈 문자열 return
     }
 
     public String getListLink() {

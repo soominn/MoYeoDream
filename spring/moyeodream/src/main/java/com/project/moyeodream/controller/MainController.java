@@ -1,9 +1,6 @@
 package com.project.moyeodream.controller;
 
-import com.project.moyeodream.domain.vo.AdminVO;
-import com.project.moyeodream.domain.vo.Criteria;
-import com.project.moyeodream.domain.vo.StudyCommentDTO;
-import com.project.moyeodream.domain.vo.StudyDTO;
+import com.project.moyeodream.domain.vo.*;
 import com.project.moyeodream.service.AdminService;
 import com.project.moyeodream.service.JobpostingService;
 import com.project.moyeodream.service.StudyCommentService;
@@ -15,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -77,32 +75,45 @@ public class MainController {
     
     // 카테고리 검색 - 인기순
     @GetMapping("categoryView")
-    public String categoryView(Model model, Criteria criteria){
+    @ResponseBody
+    public List<StudyDTO> categoryView(Criteria criteria, Model model){
+        log.info("==============================================================================================================================");
+        log.info("겟카테고리" + criteria.getCategory());
         List<StudyDTO> studyList = studyService.getListView(criteria);
-
         for (StudyDTO list: studyList) {
             list.setStudyCommentTotal(studyCommentService.getTotal(list.getStudyNumber()));
-            log.info("getTotal comment___________ : "+list.getStudyCommentTotal());
         }
-        model.addAttribute("studyList",studyList);
-        model.addAttribute("jobpostingList",jobpostingService.getListView(criteria));
-        model.addAttribute("check", 0);
-        return "/main";
+
+        return studyList;
     }
     // 카테고리 검색 - 최신순
     @GetMapping("categoryLatest")
-    public String categoryLatest(Model model, Criteria criteria){
-        List<StudyDTO> studyList = studyService.getListLatest(criteria);
-
+    @ResponseBody
+    public List<StudyDTO> categoryLatest(Criteria criteria, Model model){
+        log.info("==============================================================================================================================");
+        log.info("겟카테고리" + criteria.getCategory());
+        List<StudyDTO> studyList = studyService.getListView(criteria);
         for (StudyDTO list: studyList) {
             list.setStudyCommentTotal(studyCommentService.getTotal(list.getStudyNumber()));
-            log.info("getTotal comment___________ : "+list.getStudyCommentTotal());
         }
-        model.addAttribute("studyList",studyList);
-        model.addAttribute("jobpostingList",jobpostingService.getListLatest(criteria));
-        model.addAttribute("check", 1);
-        return "/main";
+        return studyList;
     }
-
+    
+    // 채용공고
+    @GetMapping("jobList")
+    @ResponseBody
+    public List<JobpostingDTO> jobList(Criteria criteria){
+        List<JobpostingDTO> jobpostingList = jobpostingService.getListView(criteria);
+        log.info("==============================================================================================================================");
+        log.info("- 가져온 채용공고 : " + jobpostingList);
+        return jobpostingList;
+    }
+    // 채용공고 최신
+    @GetMapping("jobListLatest")
+    @ResponseBody
+    public List<JobpostingDTO> jobListLatest(Criteria criteria){
+        List<JobpostingDTO> jobpostingList = jobpostingService.getListLatest(criteria);
+        return jobpostingList;
+    }
 
 }
