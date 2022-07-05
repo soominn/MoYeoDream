@@ -119,7 +119,7 @@ public class MainController {
     // 스크롤
     @GetMapping("scroll")
     @ResponseBody
-    public String scroll(Criteria criteria){
+    public List<JobpostingDTO> scroll(Criteria criteria){
         List<JobpostingDTO> jobpostingList = jobpostingService.getListLatest(criteria);
         return jobpostingList;
     }
