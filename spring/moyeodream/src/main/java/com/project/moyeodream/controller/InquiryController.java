@@ -28,11 +28,14 @@ public class InquiryController {
 
         // 모든 문의 목록
         @GetMapping("list")
-        public String list(Model model, Criteria criteria){
+        public String list(Model model, Criteria criteria, HttpServletRequest req){
                 log.info("----------------------------");
                 log.info("list.............");
                 log.info("Criteria............." + criteria);
                 log.info("----------------------------");
+
+                HttpSession session = req.getSession();
+                Integer memberNumber = (Integer)session.getAttribute("memberNumber");
 
                 criteria.setAmount(10);
                 PageDTO pageDTO = new PageDTO(criteria, inquiryService.getTotal());
@@ -44,6 +47,7 @@ public class InquiryController {
                 log.info(pageDTO.getCriteria().getListLink());
                 log.info(pageDTO.toString());
 
+                model.addAttribute("session", memberNumber);
                 return "/inquiry/inquiryList";
         }
 
