@@ -3,7 +3,7 @@
 }
 
 .errorLogo{
-    margin-top: 60px;
+    margin-top: 150px;
 }
 
 .errorLogo img{
@@ -29,7 +29,7 @@
 }
 
 span.goMain{
-    margin-right: 116px;
+    margin: 0 auto;
 }
 
 span.goMain a:hover{
