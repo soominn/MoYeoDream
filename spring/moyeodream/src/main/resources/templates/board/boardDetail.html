@@ -233,7 +233,13 @@
         str += "<li class='comment'>";
         str += "<section class='comment-info-wrap'>";
         str += "<div class='comment-info'>";
-        str += "<img src='https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG'/>";
+
+        if(comment.memberProfile != null){
+          str += "<img src='/file/displayProfile?path=" + profileImg + "'>";
+        }else{
+          str += "<img src='https://hola-post-image.s3.ap-northeast-2.amazonaws.com/default.PNG'/>";
+        }
+
         str += "<div class='comment-title-wrap'>";
         str += "<div class='comment-title'>";
         str += "<div class='comment-user'>" + comment.postCommentNickname + "</div>";
