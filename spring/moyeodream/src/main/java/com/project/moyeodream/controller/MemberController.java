@@ -91,7 +91,7 @@ public class MemberController {
 
         String root = "";
         if(memberNumber == null){
-            root += "/myPage/myPageError";
+            root += "/error/loginRequiredError";
         }else{
             log.info("----------------------------");
             log.info("memberRead............. : " + memberNumber);
