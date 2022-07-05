@@ -181,6 +181,17 @@
     ]]>
     </select>
 
+    <select id="getTotalC" resultType="_int">
+        SELECT COUNT(STUDY_NUMBER)
+        FROM TBL_STUDY ts JOIN TBL_MEMBER tm
+        ON ts.STUDY_MEMBER_NUMBER = tm.MEMBER_NUMBER
+        <where >
+            <trim suffixOverrides="AND">
+                <include refid="adminSearch"/>
+            </trim>
+        </where>
+    </select>
+
     <select id="getTotal" resultType="_int">
         SELECT COUNT(STUDY_NUMBER)
         FROM TBL_STUDY ts JOIN TBL_STUDY_COMMENT tc

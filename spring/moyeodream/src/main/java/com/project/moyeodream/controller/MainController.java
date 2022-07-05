@@ -116,4 +116,12 @@ public class MainController {
         return jobpostingList;
     }
 
+    // 스크롤
+    @GetMapping("scroll")
+    @ResponseBody
+    public String scroll(Criteria criteria){
+        List<JobpostingDTO> jobpostingList = jobpostingService.getListLatest(criteria);
+        return jobpostingList;
+    }
+
 }
