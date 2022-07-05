@@ -120,7 +120,21 @@
             maxHeight: 523,
             minHeight: 523,
             lang: "ko-KR",
-            placeholder: '내용을 작성해주세요!'
+            placeholder: '내용을 작성해주세요!',
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview', 'help']]
+            ],
+            callbacks: {
+                onImageUpload: function(files) {
+                    uploadImage(files[0], this);
+                }
+            }
         });
     });
 
