@@ -23,7 +23,6 @@ import java.util.List;
 @RequestMapping("/admin/*")
 public class AdminController {
     private final AdminService adminService;
-//    private final JobpostingService jobpostingService;
 
     // 관리자 로그인
     @PostMapping("login")
@@ -46,51 +45,6 @@ public class AdminController {
     public String adminLogin(){
         return "/admin/adminLogin";
     }
-
-//    @GetMapping("approveWait")
-//    public String approveWait(Model model){
-//        List<JobpostingVO> list = jobpostingService.approveWait();
-//        model.addAttribute("jobposting",list);
-//        return "admin/adminMain";
-//    }
-//    @PostMapping("id")
-//    public String id(String id){
-//        return adminService.id(id);
-//    }
-
-    // ---- 프론트 ----
-
-    // admin 메인
-    @GetMapping("adminMain")
-    public void adminMain(){}
-
-    // admin 관리자
-    @GetMapping("adminNav")
-    public void adminNav(){}
-
-    // admin 채용공고 관리
-    @GetMapping("adminPostManage")
-    public void adminPostManage(){}
-
-    // admin 채용공고 상세보기
-    @GetMapping("adminPostView")
-    public void adminPostView(){}
-
-    // admin QnA 관리
-    @GetMapping("adminQnaManage")
-    public void adminQnaManage(){}
-
-    // admin QnA 상세보기
-    @GetMapping("adminQnaView")
-    public void adminQnaView(){}
-
-    // admin 스터디 관리
-    @GetMapping("adminStudyManage")
-    public void adminStudyManage(){}
-
-    // admin 스터디 상세보기
-    @GetMapping("adminStudyView")
-    public void adminStudyView(){}
 
 
 }

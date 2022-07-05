@@ -171,7 +171,7 @@ public class StudyController {
     public String getStudyList(Model model, Criteria criteria){
         model.addAttribute("studyList",studyService.getStudyList(criteria));
         log.info("list.............................. : "+ studyService.getStudyList(criteria));
-        model.addAttribute("pageDTO", new PageDTO(criteria, studyService.getTotal(criteria)));
+        model.addAttribute("pageDTO", new PageDTO(criteria, studyService.getTotalC(criteria)));
         return "admin/adminStudyManage";
     }
 
