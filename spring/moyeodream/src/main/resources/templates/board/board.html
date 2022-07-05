@@ -20,7 +20,7 @@
 
   <section class="category-box" style="border-bottom: 2px solid #d1d1d1">
     <h2 class="page-title">자유 게시판</h2>
-    <div class="postReg">
+    <div class="postReg" th:if="${session.memberNumber} != null">
       <button type="button" class="postRegBtn">+</button>
       <p class="postRegText">글쓰기</p>
     </div>
@@ -233,7 +233,6 @@
   let $searchBtn = $(".searchBtn");
   let $inputKeyword = $pageForm.find("input[name=keyword]");
   let memberNum = [[${session.memberNumber}]];
-  memberNum = 42;
 
   if(postNumber != null){
     alert(postNumber + "번 게시글이 등록되었습니다.");
