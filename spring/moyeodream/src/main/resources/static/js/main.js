@@ -19,14 +19,14 @@ const $jobContent = $(".job-content");
 
 $studyClick.on("click", function () {
     $studyContent.show();
-    $jobContent.hide();
+    // $jobContent.hide();
     $jobClick.removeClass('typeSelect');
     $studyClick.addClass('typeSelect');
 });
 
 $jobClick.on("click", function () {
-    $jobContent.show();
-    $studyContent.hide();
+    // $jobContent.show();
+    $studyContent.show();
     $studyClick.removeClass('typeSelect');
     $jobClick.addClass('typeSelect');
 });
