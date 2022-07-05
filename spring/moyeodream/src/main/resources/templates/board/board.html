@@ -134,8 +134,8 @@
         <form action="/post/list" name="pageForm" th:object="${criteria}">
           <input type="hidden" th:field="*{pageNum}">
           <input type="hidden" th:field="*{amount}">
-          <input type="hidden" name="type" th:filed="*{type}">
-          <input type="hidden" name="keyword" th:fleld="*{keyword}">
+          <input type="hidden" name="type" th:value="*{type}">
+          <input type="hidden" name="keyword" th:value="*{keyword}">
         </form>
       </nav>
       <!-- 검색 필터 -->
@@ -252,6 +252,8 @@
   $(".changePage").on("click", function(e){
     e.preventDefault();
     $pageForm.find("input[name=pageNum]").val($(this).attr("href"));
+    console.log($pageForm.find("input[name=type]").val());
+    console.log($pageForm.find("input[name=keyword]").val());
     $pageForm.submit();
   });
 
