@@ -183,8 +183,8 @@
   let postNum = [[${post.postNumber}]];
   let goList = document.querySelector("svg#goList");
   let memberNum = [[${session.memberNumber}]];
-  // let memberNum = 41;
   let postMemberNum = [[${post.postMemberNumber}]];
+  let profileImg = [[${post.memberProfile}]];
 
   console.log(postNum);
   console.log(memberNum);
@@ -205,6 +205,11 @@
   goList.addEventListener("click",function(){
     location.href="/post/list" + params;
   });
+
+  // 프로필 이미지 적용
+  if(profileImg != null){
+    $("div.user-profile").find("img").prop("src","/file/displayProfile?path="+profileImg);
+  }
 
 
   // 게시글 삭제
@@ -379,6 +384,7 @@
       showList(postNum);
     });
   });
+
 
 
 
