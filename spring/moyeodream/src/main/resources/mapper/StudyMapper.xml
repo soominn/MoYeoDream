@@ -1,6 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.moyeodream.mapper.StudyMapper">
+    <!-- 카테고리 검색-->
+    <sql id="categorySearch">
+        <if test="categories != null">
+            <trim prefix="(" suffix=") AND " prefixOverrides="OR">
+                <foreach item="type" collection="categories">
+                    <trim prefix="OR">
+                        <choose>
+                            <when test="type == 'C'.toString()">
+                                (STUDY_CATEGORY = 'culture')
+                            </when>
+                            <when test="type == 'S'.toString()">
+                                (STUDY_CATEGORY = 'sports')
+                            </when>
+                            <when test="type == 'P'.toString()">
+                                (STUDY_CATEGORY = 'programming')
+                            </when>
+                            <when test="type == 'F'.toString()">
+                                (STUDY_CATEGORY = 'foreign')
+                            </when>
+                            <when test="type == 'I'.toString()">
+                                (STUDY_CATEGORY = 'science')
+                            </when>
+                            <when test="type == 'N'.toString()">
+                                (STUDY_CATEGORY = 'finance')
+                            </when>
+                            <when test="type == 'O'.toString()">
+                                (STUDY_CATEGORY = 'politics')
+                            </when>
+                            <when test="type == 'E'.toString()">
+                                (STUDY_CATEGORY = 'certificate')
+                            </when>
+                            <when test="type == 'A'.toString()">
+                                (STUDY_CATEGORY = 'officiary')
+                            </when>
+                            <when test="type == 'M'.toString()">
+                                (STUDY_CATEGORY = 'employment')
+                            </when>
+                        </choose>
+                    </trim>
+                </foreach>
+            </trim>
+        </if>
+    </sql>
+
     <select id="getList" resultType="studyDTO">
         SELECT STUDY_NUMBER, STUDY_CATEGORY, STUDY_PROCESS, STUDY_START, STUDY_PERIOD, STUDY_PERSONNEL, STUDY_COMMUNICATION, STUDY_TITLE, STUDY_CONTENT, STUDY_APPROVE, STUDY_VIEWS, STUDY_REGISTER_DATE, STUDY_UPDATE_DATE, STUDY_MEMBER_NUMBER, STUDY_CHIEF, STUDY_COMMENT_NUMBER, STUDY_COMMENT_STUDY_NUMBER, MEMBER_NICKNAME
         FROM TBL_STUDY ts LEFT OUTER JOIN TBL_STUDY_COMMENT tc
@@ -17,7 +61,9 @@
         ON ts.STUDY_NUMBER = tc.STUDY_COMMENT_STUDY_NUMBER
         LEFT OUTER JOIN TBL_MEMBER tm
         ON STUDY_MEMBER_NUMBER = tm.MEMBER_NUMBER
-        WHERE STUDY_APPROVE = 1
+        WHERE
+        <include refid="categorySearch"/>
+        STUDY_APPROVE = 1
         ORDER BY STUDY_VIEWS DESC
     </select>
 
@@ -28,7 +74,9 @@
         ON ts.STUDY_NUMBER = tc.STUDY_COMMENT_STUDY_NUMBER
         LEFT OUTER JOIN TBL_MEMBER tm
         ON STUDY_MEMBER_NUMBER = tm.MEMBER_NUMBER
-        WHERE STUDY_APPROVE = 1
+        WHERE
+        <include refid="categorySearch"/>
+        STUDY_APPROVE = 1
         ORDER BY STUDY_UPDATE_DATE DESC
     </select>
 
@@ -135,18 +183,14 @@
 
     <select id="getTotal" resultType="_int">
         SELECT COUNT(STUDY_NUMBER)
-        FROM TBL_STUDY ts JOIN TBL_MEMBER tm
-        ON ts.STUDY_MEMBER_NUMBER = tm.MEMBER_NUMBER
-        <where>
-            <trim suffixOverrides="AND">
-                <include refid="adminSearch"/>
-            </trim>
-        </where>
+        FROM TBL_STUDY ts JOIN TBL_STUDY_COMMENT tc
+        ON ts.STUDY_NUMBER = tc.STUDY_COMMENT_STUDY_NUMBER
+        WHERE STUDY_NUMBER = #{studyCommentStudyNumber}
     </select>
 
     <update id="approve">
         UPDATE TBL_STUDY
-            SET STUDY_APPROVE = 1, STUDY_CHECK = 0
+        SET STUDY_APPROVE = 1, STUDY_CHECK = 0
         WHERE STUDY_NUMBER = #{studyNumber}
     </update>
 
