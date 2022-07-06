@@ -15,16 +15,16 @@
                                 (STUDY_CATEGORY = 'sports')
                             </when>
                             <when test="type == 'P'.toString()">
-                                (STUDY_CATEGORY = 'programming')
+                                (STUDY_CATEGORY = 'computer')
                             </when>
                             <when test="type == 'F'.toString()">
-                                (STUDY_CATEGORY = 'foreign')
+                                (STUDY_CATEGORY = 'language')
                             </when>
                             <when test="type == 'I'.toString()">
-                                (STUDY_CATEGORY = 'science')
+                                (STUDY_CATEGORY = 'humanities')
                             </when>
                             <when test="type == 'N'.toString()">
-                                (STUDY_CATEGORY = 'finance')
+                                (STUDY_CATEGORY = 'economy')
                             </when>
                             <when test="type == 'O'.toString()">
                                 (STUDY_CATEGORY = 'politics')
@@ -33,7 +33,7 @@
                                 (STUDY_CATEGORY = 'certificate')
                             </when>
                             <when test="type == 'A'.toString()">
-                                (STUDY_CATEGORY = 'officiary')
+                                (STUDY_CATEGORY = 'publicOfficial')
                             </when>
                             <when test="type == 'M'.toString()">
                                 (STUDY_CATEGORY = 'employment')
@@ -57,27 +57,44 @@
     <select id="getListView" resultType="studyDTO">
         SELECT
         STUDY_NUMBER, STUDY_CATEGORY, STUDY_PROCESS, STUDY_START, STUDY_PERIOD, STUDY_PERSONNEL, STUDY_COMMUNICATION, STUDY_TITLE, STUDY_CONTENT, STUDY_APPROVE, STUDY_VIEWS, STUDY_REGISTER_DATE, STUDY_UPDATE_DATE, STUDY_MEMBER_NUMBER, STUDY_CHIEF, STUDY_COMMENT_NUMBER, STUDY_COMMENT_STUDY_NUMBER, MEMBER_NICKNAME
+        FROM
+        (
+        SELECT
+        ROWNUM RN, STUDY_NUMBER, STUDY_CATEGORY, STUDY_PROCESS, STUDY_START, STUDY_PERIOD, STUDY_PERSONNEL, STUDY_COMMUNICATION, STUDY_TITLE, STUDY_CONTENT, STUDY_APPROVE, STUDY_VIEWS, STUDY_REGISTER_DATE, STUDY_UPDATE_DATE, STUDY_MEMBER_NUMBER, STUDY_CHIEF, STUDY_COMMENT_NUMBER, STUDY_COMMENT_STUDY_NUMBER, MEMBER_NICKNAME
         FROM TBL_STUDY ts LEFT OUTER JOIN TBL_STUDY_COMMENT tc
         ON ts.STUDY_NUMBER = tc.STUDY_COMMENT_STUDY_NUMBER
         LEFT OUTER JOIN TBL_MEMBER tm
         ON STUDY_MEMBER_NUMBER = tm.MEMBER_NUMBER
         WHERE
         <include refid="categorySearch"/>
-        STUDY_APPROVE = 1
+        <![CDATA[
+        STUDY_APPROVE = 1 AND ROWNUM <= #{pageNum} * #{amount}
         ORDER BY STUDY_VIEWS DESC
+        )
+        WHERE RN > (#{pageNum} - 1) * #{amount}
+    ]]>
     </select>
 
     <select id="getListLatest" resultType="studyDTO">
         SELECT
         STUDY_NUMBER, STUDY_CATEGORY, STUDY_PROCESS, STUDY_START, STUDY_PERIOD, STUDY_PERSONNEL, STUDY_COMMUNICATION, STUDY_TITLE, STUDY_CONTENT, STUDY_APPROVE, STUDY_VIEWS, STUDY_REGISTER_DATE, STUDY_UPDATE_DATE, STUDY_MEMBER_NUMBER, STUDY_CHIEF, STUDY_COMMENT_NUMBER, STUDY_COMMENT_STUDY_NUMBER, MEMBER_NICKNAME
+        FROM
+        (
+        SELECT
+        ROWNUM RN, STUDY_NUMBER, STUDY_CATEGORY, STUDY_PROCESS, STUDY_START, STUDY_PERIOD, STUDY_PERSONNEL, STUDY_COMMUNICATION, STUDY_TITLE, STUDY_CONTENT, STUDY_APPROVE, STUDY_VIEWS, STUDY_REGISTER_DATE, STUDY_UPDATE_DATE, STUDY_MEMBER_NUMBER, STUDY_CHIEF, STUDY_COMMENT_NUMBER, STUDY_COMMENT_STUDY_NUMBER, MEMBER_NICKNAME
         FROM TBL_STUDY ts LEFT OUTER JOIN TBL_STUDY_COMMENT tc
         ON ts.STUDY_NUMBER = tc.STUDY_COMMENT_STUDY_NUMBER
         LEFT OUTER JOIN TBL_MEMBER tm
         ON STUDY_MEMBER_NUMBER = tm.MEMBER_NUMBER
         WHERE
         <include refid="categorySearch"/>
-        STUDY_APPROVE = 1
-        ORDER BY STUDY_UPDATE_DATE DESC
+        <![CDATA[
+        STUDY_APPROVE = 1 AND ROWNUM <= #{pageNum} * #{amount}
+        ORDER BY STUDY_VIEWS DESC
+        )
+        WHERE RN > (#{pageNum} - 1) * #{amount}
+    ]]>
+
     </select>
 
     <insert id="insert">
